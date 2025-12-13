@@ -1,0 +1,118 @@
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+    @tailwind base;
+    @tailwind components;
+    @tailwind utilities;
+
+    @layer base {
+    :root {
+        /* Background Colors */
+        --color-background: #000000; /* black - Maximum focus elimination of distractions */
+        --color-foreground: rgba(255, 255, 255, 0.95); /* white with 95% opacity - High contrast scanning optimization */
+        
+        /* Surface Colors */
+        --color-surface: rgba(255, 255, 255, 0.05); /* white with 5% opacity - Translucent card separation */
+        --color-surface-foreground: rgba(255, 255, 255, 0.95); /* white with 95% opacity */
+        
+        /* Card Colors */
+        --color-card: rgba(255, 255, 255, 0.05); /* white with 5% opacity - Translucent card separation */
+        --color-card-foreground: rgba(255, 255, 255, 0.95); /* white with 95% opacity */
+        
+        /* Popover Colors */
+        --color-popover: #0B0B0F; /* gray-950 - Section depth without harsh contrast */
+        --color-popover-foreground: rgba(255, 255, 255, 0.95); /* white with 95% opacity */
+        
+        /* Primary Colors */
+        --color-primary: #000000; /* black - Brand authority + clean canvas for content focus */
+        --color-primary-foreground: rgba(255, 255, 255, 0.95); /* white with 95% opacity */
+        
+        /* Secondary Colors */
+        --color-secondary: #0B0B0F; /* gray-950 - Section depth without harsh contrast */
+        --color-secondary-foreground: rgba(255, 255, 255, 0.95); /* white with 95% opacity */
+        
+        /* Muted Colors */
+        --color-muted: rgba(255, 255, 255, 0.1); /* white with 10% opacity */
+        --color-muted-foreground: rgba(255, 255, 255, 0.70); /* white with 70% opacity - Supporting hierarchy without distraction */
+        
+        /* Accent Colors */
+        --color-accent: #06B6D4; /* cyan-500 - Consultation CTA power + cyan gradient highlights */
+        --color-accent-foreground: #000000; /* black */
+        --color-accent-secondary: #EC4899; /* fuchsia-500 - Gradient accent complement */
+        
+        /* Destructive/Error Colors */
+        --color-destructive: #EF4444; /* red-500 - Form validation feedback only */
+        --color-destructive-foreground: rgba(255, 255, 255, 0.95); /* white with 95% opacity */
+        --color-error: #EF4444; /* red-500 */
+        --color-error-foreground: rgba(255, 255, 255, 0.95); /* white with 95% opacity */
+        
+        /* Success Colors */
+        --color-success: #10B981; /* green-500 - Form completion + positive metrics */
+        --color-success-foreground: #000000; /* black */
+        
+        /* Warning Colors */
+        --color-warning: #F59E0B; /* amber-500 - Scarcity indicators for consultation slots */
+        --color-warning-foreground: #000000; /* black */
+        
+        /* Border Colors */
+        --color-border: rgba(255, 255, 255, 0.1); /* white with 10% opacity - Form fields and card separations */
+        --color-border-gradient-start: rgba(6, 182, 212, 0.3); /* cyan with 30% opacity - Gradient borders for hover states */
+        --color-border-gradient-end: rgba(236, 72, 153, 0.3); /* fuchsia with 30% opacity */
+        
+        /* Input Colors */
+        --color-input: rgba(255, 255, 255, 0.1); /* white with 10% opacity */
+        
+        /* Ring Colors */
+        --color-ring: #06B6D4; /* cyan-500 */
+        
+        /* Radius */
+        --radius: 0.5rem;
+    }
+    }
+
+    @layer base {
+    * {
+        @apply border-border;
+    }
+    
+    body {
+        @apply bg-background text-foreground;
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+        font-feature-settings: "rlig" 1, "calt" 1;
+    }
+    
+    h1, h2, h3, h4, h5, h6 {
+        font-family: 'Inter', sans-serif;
+        font-weight: 700;
+    }
+    }
+
+    @layer utilities {
+    /* Custom gradient utilities for CTA buttons */
+    .gradient-accent {
+        background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-secondary) 100%);
+    }
+    
+    .gradient-border {
+        border-image: linear-gradient(135deg, var(--color-border-gradient-start) 0%, var(--color-border-gradient-end) 100%) 1;
+    }
+    
+    /* Custom shadow for CTA buttons and interactive cards */
+    .shadow-cta {
+        box-shadow: 0 20px 25px -5px rgba(6, 182, 212, 0.1), 0 10px 10px -5px rgba(6, 182, 212, 0.04);
+    }
+    
+    /* Backdrop blur for navigation */
+    .backdrop-blur-nav {
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+    }
+    
+    /* Smooth transitions */
+    .transition-smooth {
+        transition: all 250ms ease-out;
+    }
+    
+    .transition-accordion {
+        transition: all 300ms ease-out;
+    }
+    }
