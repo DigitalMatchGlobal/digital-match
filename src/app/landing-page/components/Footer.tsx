@@ -2,6 +2,8 @@
 
     import { useState, useEffect } from 'react';
     import Link from 'next/link';
+
+    // NOTA: Asumo que el componente Icon puede manejar los nombres de íconos de redes sociales
     import Icon from '@/components/ui/AppIcon';
 
     interface FooterLink {
@@ -32,16 +34,32 @@
     ];
 
     const legalLinks: FooterLink[] = [
-        { label: 'Privacy Policy', href: '#privacy' },
-        { label: 'Terms of Service', href: '#terms' },
-        { label: 'Cookie Policy', href: '#cookies' }
+        // Se mantienen los placeholders de hash #, pero deben reemplazarse con las URLs reales.
+        { label: 'Privacy Policy', href: 'https://ejemplo.com/privacy' },
+        { label: 'Terms of Service', href: 'https://ejemplo.com/terms' },
+        { label: 'Cookie Policy', href: 'https://ejemplo.com/cookies' }
     ];
 
+    // CORRECCIÓN: Lista de iconos sociales actualizada a WhatsApp, LinkedIn e Instagram
     const socialLinks: SocialLink[] = [
-        { name: 'LinkedIn', icon: 'LinkIcon', href: '#linkedin' },
-        { name: 'Twitter', icon: 'AtSymbolIcon', href: '#twitter' },
-        { name: 'GitHub', icon: 'CodeBracketIcon', href: '#github' }
+        { name: 'WhatsApp', icon: 'WhatsappIcon', href: 'https://wa.me/numerodetelefono' },
+        { name: 'LinkedIn', icon: 'LinkedInIcon', href: 'https://linkedin.com/company/digitalmatchglobal' },
+        { name: 'Instagram', icon: 'InstagramIcon', href: 'https://instagram.com/digitalmatchglobal' }
     ];
+
+    // Función para renderizar un enlace legal, asegurando que se abra en una nueva pestaña
+    const renderLegalLink = (link: FooterLink) => (
+        <a
+        href={link.href}
+        target="_blank" // Abre en una nueva pestaña
+        rel="noopener noreferrer" // Seguridad recomendada
+        className="text-muted-foreground hover:text-foreground transition-smooth"
+        >
+        {link.label}
+        </a>
+    );
+
+    // El componente se renderiza en dos bloques (isHydrated), por lo que debemos aplicar las correcciones en ambos.
 
     if (!isHydrated) {
         return (
@@ -83,12 +101,8 @@
                 <ul className="space-y-3">
                     {legalLinks.map((link) => (
                     <li key={link.label}>
-                        <Link
-                        href={link.href}
-                        className="text-muted-foreground hover:text-foreground transition-smooth"
-                        >
-                        {link.label}
-                        </Link>
+                        {/* APLICACIÓN DE CORRECCIÓN (NO HIDRATADO) */}
+                        {renderLegalLink(link)} 
                     </li>
                     ))}
                 </ul>
@@ -124,13 +138,17 @@
                 Building systems that scale your business through automation, AI, and web development
                 </p>
                 <div className="flex items-center space-x-4">
+                {/* APLICACIÓN DE CORRECCIÓN: Renderizar los nuevos iconos sociales */}
                 {socialLinks.map((social) => (
                     <a
                     key={social.name}
                     href={social.href}
+                    target="_blank" // Abre en nueva pestaña
+                    rel="noopener noreferrer" // Seguridad
                     className="w-10 h-10 rounded-full bg-surface border border-border flex items-center justify-center transition-smooth hover:border-accent hover:bg-accent/10"
                     aria-label={social.name}
                     >
+                    {/* Se asume que el componente Icon existe y maneja los nombres */}
                     <Icon name={social.icon as any} size={20} />
                     </a>
                 ))}
@@ -158,12 +176,8 @@
                 <ul className="space-y-3 mb-6">
                 {legalLinks.map((link) => (
                     <li key={link.label}>
-                    <Link
-                        href={link.href}
-                        className="text-muted-foreground hover:text-foreground transition-smooth"
-                    >
-                        {link.label}
-                    </Link>
+                    {/* APLICACIÓN DE CORRECCIÓN (HIDRATADO): Usar la función renderLegalLink */}
+                    {renderLegalLink(link)}
                     </li>
                 ))}
                 </ul>
