@@ -1,7 +1,8 @@
     'use client';
 
-    import { useState, useEffect } from 'react';
+    import { useState, useEffect, useMemo } from 'react';
     import Icon from '@/components/ui/AppIcon';
+    import { useLanguage } from '@/contexts/LanguageContext'; // 1. Importar el hook
 
     interface FAQItem {
     id: string;
@@ -13,43 +14,46 @@
     const FAQSection = () => {
     const [isHydrated, setIsHydrated] = useState(false);
     const [openItems, setOpenItems] = useState<Set<string>>(new Set());
+    const { t } = useLanguage(); // 2. Usar el hook
 
     useEffect(() => {
         setIsHydrated(true);
     }, []);
 
-    const faqs: FAQItem[] = [
+    // 3. Crear el array de FAQs usando useMemo y t()
+    // Esto asegura que el contenido se actualice cuando cambia el idioma
+    const faqs: FAQItem[] = useMemo(() => [
         {
         id: '1',
-        question: 'How long does it take to deliver a project?',
-        answer: 'Most projects are delivered within 7-14 days from kickoff. We follow an agile methodology with daily updates and iterative releases. For larger projects, we break them into phases with the first working version delivered within 2 weeks.',
-        stats: 'Average delivery: 10 days'
+        question: t('faq.q1.question'),
+        answer: t('faq.q1.answer'),
+        stats: t('faq.q1.stats')
         },
         {
         id: '2',
-        question: 'What is your work process?',
-        answer: 'We start with a strategy call to understand your needs, then create a detailed technical specification. Development happens in sprints with daily updates via Slack/WhatsApp. You get access to a staging environment to test features as they are built. Final delivery includes complete documentation, training, and 30 days of support.',
-        stats: '100% client satisfaction rate'
+        question: t('faq.q2.question'),
+        answer: t('faq.q2.answer'),
+        stats: t('faq.q2.stats')
         },
         {
         id: '3',
-        question: 'Do you provide post-delivery support?',
-        answer: 'Yes! Every project includes 30 days of free support and bug fixes. After that, we offer flexible maintenance plans starting at $500/month. We also provide training for your team and comprehensive documentation so you can manage the system independently if needed.',
-        stats: '95% client retention rate'
+        question: t('faq.q3.question'),
+        answer: t('faq.q3.answer'),
+        stats: t('faq.q3.stats')
         },
         {
         id: '4',
-        question: 'What do I need to get started?',
-        answer: 'Just three things: a clear business problem you want to solve, access to any existing systems we need to integrate with, and availability for a 1-hour kickoff call. We handle everything else including project management, design, development, testing, and deployment.',
-        stats: 'Start in 24-48 hours'
+        question: t('faq.q4.question'),
+        answer: t('faq.q4.answer'),
+        stats: t('faq.q4.stats')
         },
         {
         id: '5',
-        question: 'Who are your typical clients?',
-        answer: 'We work with ambitious startups and SMEs in LATAM and US markets with $5K-50K budgets. Our clients are typically experiencing operational bottlenecks, looking to scale efficiently, and value technical expertise over cheap alternatives. They need fast implementation with documented, maintainable systems.',
-        stats: '50+ startups scaled'
+        question: t('faq.q5.question'),
+        answer: t('faq.q5.answer'),
+        stats: t('faq.q5.stats')
         }
-    ];
+    ], [t]);
 
     const toggleItem = (id: string) => {
         setOpenItems((current) => {
@@ -69,28 +73,14 @@
             <div className="max-w-4xl mx-auto px-6 lg:px-8">
             <div className="text-center mb-16">
                 <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
-                Frequently Asked Questions
+                {/* Fallback para server-side rendering o carga inicial */}
+                Frequently Asked Questions 
                 </h2>
                 <p className="text-xl text-muted-foreground">
                 Everything you need to know about working with us
                 </p>
             </div>
-
-            <div className="space-y-4">
-                {faqs.map((faq) => (
-                <div
-                    key={faq.id}
-                    className="bg-surface border border-border rounded-xl p-6"
-                >
-                    <div className="flex items-center justify-between">
-                    <h3 className="text-lg font-semibold text-foreground pr-8">
-                        {faq.question}
-                    </h3>
-                    <div className="w-6 h-6 rounded-full bg-accent/20 flex items-center justify-center flex-shrink-0" />
-                    </div>
-                </div>
-                ))}
-            </div>
+            {/* Renderizamos un esqueleto o lista vacía en SSR para evitar mismatch */}
             </div>
         </section>
         );
@@ -101,10 +91,10 @@
         <div className="max-w-4xl mx-auto px-6 lg:px-8">
             <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
-                Frequently Asked Questions
+                {t('faq.title')}
             </h2>
             <p className="text-xl text-muted-foreground">
-                Everything you need to know about working with us
+                {t('faq.subtitle')}
             </p>
             </div>
 

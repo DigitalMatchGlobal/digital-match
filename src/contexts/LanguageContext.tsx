@@ -55,17 +55,68 @@
         
         // FAQ Section
         'faq.title': 'Preguntas Frecuentes',
+        'faq.subtitle': 'Todo lo que necesitas saber sobre cómo trabajamos',
+        'faq.q1.question': '¿Cuánto tiempo toma entregar un proyecto?',
+        'faq.q1.answer': 'La mayoría de los proyectos se entregan en 7-14 días desde el inicio. Seguimos una metodología ágil con actualizaciones diarias. Para proyectos grandes, la primera versión funcional se entrega en 2 semanas.',
+        'faq.q1.stats': 'Entrega promedio: 10 días',
+        'faq.q2.question': '¿Cuál es su proceso de trabajo?',
+        'faq.q2.answer': 'Comenzamos con una llamada estratégica, seguida de una especificación técnica. Desarrollamos en sprints con comunicación diaria. Tendrás acceso a un entorno de pruebas y la entrega final incluye documentación y capacitación.',
+        'faq.q2.stats': '100% tasa de satisfacción',
+        'faq.q3.question': '¿Ofrecen soporte post-entrega?',
+        'faq.q3.answer': '¡Sí! Cada proyecto incluye 30 días de soporte gratuito. Después, ofrecemos planes de mantenimiento flexibles desde $500/mes. También entregamos documentación completa para que puedas gestionar el sistema independientemente.',
+        'faq.q3.stats': '95% tasa de retención',
+        'faq.q4.question': '¿Qué necesito para empezar?',
+        'faq.q4.answer': 'Solo tres cosas: un problema de negocio claro que quieras resolver, acceso a los sistemas existentes (si aplica) y disponibilidad para una llamada de inicio de 1 hora. Nosotros nos encargamos del resto.',
+        'faq.q4.stats': 'Inicio en 24-48 horas',
+        'faq.q5.question': '¿Quiénes son sus clientes típicos?',
+        'faq.q5.answer': 'Trabajamos con startups y PyMEs ambiciosas en LATAM y EE.UU. con presupuestos de $5K-50K. Clientes que buscan escalar eficientemente, valoran la experiencia técnica y necesitan sistemas documentados y mantenibles.',
+        'faq.q5.stats': '50+ startups escaladas',
         
-        // Contact Section
-        'contact.title': 'Comencemos Tu Transformación',
-        'contact.subtitle': 'Agenda una consulta gratuita de 30 minutos',
+        // Contact Section Main
+        'contact.title': '¿Listo para Escalar tu Negocio?',
+        'contact.subtitle': 'Agenda una llamada estratégica gratuita y descubre cómo podemos transformar tus operaciones en 7-14 días',
         
-        // Footer (Existentes)
+        // Contact Features
+        'contact.feat.response.title': 'Respuesta Rápida',
+        'contact.feat.response.desc': 'Te responderemos en 24 horas para agendar tu llamada.',
+        'contact.feat.commit.title': 'Sin Compromiso',
+        'contact.feat.commit.desc': 'Consulta gratuita sin obligación. Te daremos consejos honestos incluso si no somos la opción ideal.',
+        'contact.feat.start.title': 'Inicio Rápido',
+        'contact.feat.start.desc': 'Si somos compatibles, podemos iniciar tu proyecto en 24-48 horas.',
+
+        // Contact Form
+        'contact.form.name': 'Nombre Completo',
+        'contact.form.name.ph': 'Juan Pérez',
+        'contact.form.email': 'Correo Electrónico',
+        'contact.form.email.ph': 'juan@empresa.com',
+        'contact.form.company': 'Nombre de la Empresa',
+        'contact.form.company.ph': 'Tu Empresa',
+        'contact.form.phone': 'Número de Teléfono',
+        'contact.form.phone.ph': '+598 99 123 456',
+        'contact.form.message': 'Cuéntanos sobre tu proyecto',
+        'contact.form.message.ph': 'Describe el desafío de tu negocio y qué buscas lograr...',
+        'contact.form.submit': 'Agendar Llamada Estratégica',
+        'contact.form.sending': 'Enviando...',
+        'contact.form.legal': 'Al enviar este formulario, aceptas nuestra política de privacidad y términos de servicio',
+
+        // Contact Validation Errors
+        'contact.error.name': 'El nombre es requerido',
+        'contact.error.email': 'El correo es requerido',
+        'contact.error.email.invalid': 'Formato de correo inválido',
+        'contact.error.company': 'El nombre de la empresa es requerido',
+        'contact.error.phone': 'El teléfono es requerido',
+        'contact.error.message': 'El mensaje es requerido',
+        'contact.error.message.length': 'El mensaje debe tener al menos 20 caracteres',
+
+        // Contact Success
+        'contact.success.title': '¡Mensaje Enviado con Éxito!',
+        'contact.success.desc': 'Te contactaremos dentro de las próximas 24 horas para agendar tu llamada estratégica.',
+        'contact.success.button': 'Enviar Otro Mensaje',
+
+        // Footer
         'footer.rights': 'Todos los derechos reservados',
         'footer.privacy': 'Privacidad',
         'footer.terms': 'Términos',
-        
-        // Footer Extended (NUEVOS - AGREGADOS AHORA)
         'footer.description': 'Construyendo sistemas que escalan tu negocio a través de automatización, IA y desarrollo web.',
         'footer.services.title': 'Servicios',
         'footer.legal.title': 'Legal',
@@ -119,17 +170,68 @@
         
         // FAQ Section
         'faq.title': 'Frequently Asked Questions',
+        'faq.subtitle': 'Everything you need to know about working with us',
+        'faq.q1.question': 'How long does it take to deliver a project?',
+        'faq.q1.answer': 'Most projects are delivered within 7-14 days from kickoff. We follow an agile methodology with daily updates and iterative releases. For larger projects, we break them into phases with the first working version delivered within 2 weeks.',
+        'faq.q1.stats': 'Average delivery: 10 days',
+        'faq.q2.question': 'What is your work process?',
+        'faq.q2.answer': 'We start with a strategy call to understand your needs, then create a detailed technical specification. Development happens in sprints with daily updates via Slack/WhatsApp. You get access to a staging environment to test features as they are built. Final delivery includes complete documentation, training, and 30 days of support.',
+        'faq.q2.stats': '100% client satisfaction rate',
+        'faq.q3.question': 'Do you provide post-delivery support?',
+        'faq.q3.answer': 'Yes! Every project includes 30 days of free support and bug fixes. After that, we offer flexible maintenance plans starting at $500/month. We also provide training for your team and comprehensive documentation so you can manage the system independently if needed.',
+        'faq.q3.stats': '95% client retention rate',
+        'faq.q4.question': 'What do I need to get started?',
+        'faq.q4.answer': 'Just three things: a clear business problem you want to solve, access to any existing systems we need to integrate with, and availability for a 1-hour kickoff call. We handle everything else including project management, design, development, testing, and deployment.',
+        'faq.q4.stats': 'Start in 24-48 hours',
+        'faq.q5.question': 'Who are your typical clients?',
+        'faq.q5.answer': 'We work with ambitious startups and SMEs in LATAM and US markets with $5K-50K budgets. Our clients are typically experiencing operational bottlenecks, looking to scale efficiently, and value technical expertise over cheap alternatives. They need fast implementation with documented, maintainable systems.',
+        'faq.q5.stats': '50+ startups scaled',
         
-        // Contact Section
-        'contact.title': "Let's Start Your Transformation",
-        'contact.subtitle': 'Schedule a free 30-minute consultation',
+        // Contact Section Main
+        'contact.title': "Ready to Scale Your Business?",
+        'contact.subtitle': 'Book a free strategy call and discover how we can transform your operations in 7-14 days',
+
+        // Contact Features
+        'contact.feat.response.title': 'Fast Response',
+        'contact.feat.response.desc': "We'll get back to you within 24 hours to schedule your strategy call",
+        'contact.feat.commit.title': 'No Commitment',
+        'contact.feat.commit.desc': "Free consultation with no obligation. We'll provide honest advice even if we're not the right fit",
+        'contact.feat.start.title': 'Quick Start',
+        'contact.feat.start.desc': "If we're a good match, we can start your project within 24-48 hours",
+
+        // Contact Form
+        'contact.form.name': 'Full Name',
+        'contact.form.name.ph': 'John Doe',
+        'contact.form.email': 'Email',
+        'contact.form.email.ph': 'john@company.com',
+        'contact.form.company': 'Company Name',
+        'contact.form.company.ph': 'Your Company',
+        'contact.form.phone': 'Phone Number',
+        'contact.form.phone.ph': '+1 (555) 000-0000',
+        'contact.form.message': 'Tell us about your project',
+        'contact.form.message.ph': "Describe your business challenge and what you're looking to achieve...",
+        'contact.form.submit': 'Book Strategy Call',
+        'contact.form.sending': 'Sending...',
+        'contact.form.legal': 'By submitting this form, you agree to our privacy policy and terms of service',
+
+        // Contact Validation Errors
+        'contact.error.name': 'Name is required',
+        'contact.error.email': 'Email is required',
+        'contact.error.email.invalid': 'Invalid email format',
+        'contact.error.company': 'Company name is required',
+        'contact.error.phone': 'Phone number is required',
+        'contact.error.message': 'Message is required',
+        'contact.error.message.length': 'Message must be at least 20 characters',
+
+        // Contact Success
+        'contact.success.title': 'Message Sent Successfully!',
+        'contact.success.desc': "We'll get back to you within 24 hours to schedule your strategy call",
+        'contact.success.button': 'Send Another Message',
         
         // Footer
         'footer.rights': 'All rights reserved',
         'footer.privacy': 'Privacy',
         'footer.terms': 'Terms',
-
-        // Footer Extended (NUEVOS - AGREGADOS AHORA)
         'footer.description': 'Building systems that scale your business through automation, AI, and web development',
         'footer.services.title': 'Services',
         'footer.legal.title': 'Legal',

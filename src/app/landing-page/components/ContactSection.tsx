@@ -2,6 +2,7 @@
 
     import { useState, useEffect } from 'react';
     import Icon from '@/components/ui/AppIcon';
+    import { useLanguage } from '@/contexts/LanguageContext'; // <--- Importamos
 
     interface FormData {
     name: string;
@@ -31,6 +32,7 @@
     const [errors, setErrors] = useState<FormErrors>({});
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [showSuccess, setShowSuccess] = useState(false);
+    const { t } = useLanguage(); // <--- Usamos el hook
 
     useEffect(() => {
         setIsHydrated(true);
@@ -39,28 +41,29 @@
     const validateForm = (): boolean => {
         const newErrors: FormErrors = {};
 
+        // Usamos t() para los mensajes de error
         if (!formData.name.trim()) {
-        newErrors.name = 'Name is required';
+        newErrors.name = t('contact.error.name');
         }
 
         if (!formData.email.trim()) {
-        newErrors.email = 'Email is required';
+        newErrors.email = t('contact.error.email');
         } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-        newErrors.email = 'Invalid email format';
+        newErrors.email = t('contact.error.email.invalid');
         }
 
         if (!formData.company.trim()) {
-        newErrors.company = 'Company name is required';
+        newErrors.company = t('contact.error.company');
         }
 
         if (!formData.phone.trim()) {
-        newErrors.phone = 'Phone number is required';
+        newErrors.phone = t('contact.error.phone');
         }
 
         if (!formData.message.trim()) {
-        newErrors.message = 'Message is required';
+        newErrors.message = t('contact.error.message');
         } else if (formData.message.trim().length < 20) {
-        newErrors.message = 'Message must be at least 20 characters';
+        newErrors.message = t('contact.error.message.length');
         }
 
         setErrors(newErrors);
@@ -76,6 +79,7 @@
 
         setIsSubmitting(true);
 
+        // Simulación de envío
         setTimeout(() => {
         setIsSubmitting(false);
         setShowSuccess(true);
@@ -87,9 +91,10 @@
             message: ''
         });
 
-        setTimeout(() => {
+        // Opcional: Ocultar éxito después de 5 segs
+        /* setTimeout(() => {
             setShowSuccess(false);
-        }, 5000);
+        }, 5000); */
         }, 1500);
     };
 
@@ -105,44 +110,10 @@
         return (
         <section id="contact" className="py-24 bg-secondary/30">
             <div className="max-w-7xl mx-auto px-6 lg:px-8">
-            <div className="grid md:grid-cols-2 gap-12">
-                <div>
+                {/* Fallback en servidor */}
                 <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
                     Ready to Scale Your Business?
                 </h2>
-                <p className="text-xl text-muted-foreground mb-8">
-                    Book a free strategy call and discover how we can transform your operations in 7-14 days
-                </p>
-                </div>
-                <div className="bg-surface border border-border rounded-2xl p-8">
-                <form className="space-y-6">
-                    <div>
-                    <label className="block text-sm font-semibold text-foreground mb-2">
-                        Full Name
-                    </label>
-                    <input
-                        type="text"
-                        className="w-full px-4 py-3 bg-background border border-border rounded-lg text-foreground"
-                    />
-                    </div>
-                    <div>
-                    <label className="block text-sm font-semibold text-foreground mb-2">
-                        Email
-                    </label>
-                    <input
-                        type="email"
-                        className="w-full px-4 py-3 bg-background border border-border rounded-lg text-foreground"
-                    />
-                    </div>
-                    <button
-                    type="submit"
-                    className="w-full px-8 py-4 text-lg font-semibold bg-gradient-accent text-accent-foreground rounded-lg shadow-cta"
-                    >
-                    Book Strategy Call
-                    </button>
-                </form>
-                </div>
-            </div>
             </div>
         </section>
         );
@@ -154,10 +125,10 @@
             <div className="grid md:grid-cols-2 gap-12">
             <div>
                 <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
-                Ready to Scale Your Business?
+                {t('contact.title')}
                 </h2>
                 <p className="text-xl text-muted-foreground mb-8">
-                Book a free strategy call and discover how we can transform your operations in 7-14 days
+                {t('contact.subtitle')}
                 </p>
 
                 <div className="space-y-6">
@@ -167,10 +138,10 @@
                     </div>
                     <div>
                     <h3 className="text-lg font-bold text-foreground mb-2">
-                        Fast Response
+                        {t('contact.feat.response.title')}
                     </h3>
                     <p className="text-muted-foreground">
-                        We'll get back to you within 24 hours to schedule your strategy call
+                        {t('contact.feat.response.desc')}
                     </p>
                     </div>
                 </div>
@@ -181,10 +152,10 @@
                     </div>
                     <div>
                     <h3 className="text-lg font-bold text-foreground mb-2">
-                        No Commitment
+                        {t('contact.feat.commit.title')}
                     </h3>
                     <p className="text-muted-foreground">
-                        Free consultation with no obligation. We'll provide honest advice even if we're not the right fit
+                        {t('contact.feat.commit.desc')}
                     </p>
                     </div>
                 </div>
@@ -195,10 +166,10 @@
                     </div>
                     <div>
                     <h3 className="text-lg font-bold text-foreground mb-2">
-                        Quick Start
+                        {t('contact.feat.start.title')}
                     </h3>
                     <p className="text-muted-foreground">
-                        If we're a good match, we can start your project within 24-48 hours
+                        {t('contact.feat.start.desc')}
                     </p>
                     </div>
                 </div>
@@ -212,23 +183,23 @@
                     <Icon name="CheckCircleIcon" size={32} className="text-success" />
                     </div>
                     <h3 className="text-2xl font-bold text-foreground mb-4">
-                    Message Sent Successfully!
+                    {t('contact.success.title')}
                     </h3>
                     <p className="text-muted-foreground mb-6">
-                    We'll get back to you within 24 hours to schedule your strategy call
+                    {t('contact.success.desc')}
                     </p>
                     <button
                     onClick={() => setShowSuccess(false)}
                     className="px-6 py-3 text-sm font-semibold text-accent border border-accent rounded-lg transition-smooth hover:bg-accent/10"
                     >
-                    Send Another Message
+                    {t('contact.success.button')}
                     </button>
                 </div>
                 ) : (
                 <form onSubmit={handleSubmit} className="space-y-6">
                     <div>
                     <label htmlFor="name" className="block text-sm font-semibold text-foreground mb-2">
-                        Full Name *
+                        {t('contact.form.name')} *
                     </label>
                     <input
                         type="text"
@@ -239,7 +210,7 @@
                         className={`w-full px-4 py-3 bg-background border rounded-lg text-foreground transition-smooth focus:outline-none focus:ring-2 focus:ring-accent ${
                         errors.name ? 'border-error' : 'border-border'
                         }`}
-                        placeholder="John Doe"
+                        placeholder={t('contact.form.name.ph')}
                     />
                     {errors.name && (
                         <p className="mt-1 text-sm text-error">{errors.name}</p>
@@ -248,7 +219,7 @@
 
                     <div>
                     <label htmlFor="email" className="block text-sm font-semibold text-foreground mb-2">
-                        Email *
+                        {t('contact.form.email')} *
                     </label>
                     <input
                         type="email"
@@ -259,7 +230,7 @@
                         className={`w-full px-4 py-3 bg-background border rounded-lg text-foreground transition-smooth focus:outline-none focus:ring-2 focus:ring-accent ${
                         errors.email ? 'border-error' : 'border-border'
                         }`}
-                        placeholder="john@company.com"
+                        placeholder={t('contact.form.email.ph')}
                     />
                     {errors.email && (
                         <p className="mt-1 text-sm text-error">{errors.email}</p>
@@ -268,7 +239,7 @@
 
                     <div>
                     <label htmlFor="company" className="block text-sm font-semibold text-foreground mb-2">
-                        Company Name *
+                        {t('contact.form.company')} *
                     </label>
                     <input
                         type="text"
@@ -279,7 +250,7 @@
                         className={`w-full px-4 py-3 bg-background border rounded-lg text-foreground transition-smooth focus:outline-none focus:ring-2 focus:ring-accent ${
                         errors.company ? 'border-error' : 'border-border'
                         }`}
-                        placeholder="Your Company"
+                        placeholder={t('contact.form.company.ph')}
                     />
                     {errors.company && (
                         <p className="mt-1 text-sm text-error">{errors.company}</p>
@@ -288,7 +259,7 @@
 
                     <div>
                     <label htmlFor="phone" className="block text-sm font-semibold text-foreground mb-2">
-                        Phone Number *
+                        {t('contact.form.phone')} *
                     </label>
                     <input
                         type="tel"
@@ -299,7 +270,7 @@
                         className={`w-full px-4 py-3 bg-background border rounded-lg text-foreground transition-smooth focus:outline-none focus:ring-2 focus:ring-accent ${
                         errors.phone ? 'border-error' : 'border-border'
                         }`}
-                        placeholder="+1 (555) 000-0000"
+                        placeholder={t('contact.form.phone.ph')}
                     />
                     {errors.phone && (
                         <p className="mt-1 text-sm text-error">{errors.phone}</p>
@@ -308,7 +279,7 @@
 
                     <div>
                     <label htmlFor="message" className="block text-sm font-semibold text-foreground mb-2">
-                        Tell us about your project *
+                        {t('contact.form.message')} *
                     </label>
                     <textarea
                         id="message"
@@ -319,7 +290,7 @@
                         className={`w-full px-4 py-3 bg-background border rounded-lg text-foreground transition-smooth focus:outline-none focus:ring-2 focus:ring-accent resize-none ${
                         errors.message ? 'border-error' : 'border-border'
                         }`}
-                        placeholder="Describe your business challenge and what you're looking to achieve..."
+                        placeholder={t('contact.form.message.ph')}
                     />
                     {errors.message && (
                         <p className="mt-1 text-sm text-error">{errors.message}</p>
@@ -334,15 +305,15 @@
                     {isSubmitting ? (
                         <span className="flex items-center justify-center space-x-2">
                         <Icon name="ArrowPathIcon" size={20} className="animate-spin" />
-                        <span>Sending...</span>
+                        <span>{t('contact.form.sending')}</span>
                         </span>
                     ) : (
-                        'Book Strategy Call'
+                        t('contact.form.submit')
                     )}
                     </button>
 
                     <p className="text-xs text-muted-foreground text-center">
-                    By submitting this form, you agree to our privacy policy and terms of service
+                    {t('contact.form.legal')}
                     </p>
                 </form>
                 )}
