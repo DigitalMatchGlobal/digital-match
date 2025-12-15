@@ -1,7 +1,7 @@
     'use client';
 
     import { useState, useEffect } from 'react';
-    import { LanguageProvider } from '@/contexts/LanguageContext';
+    // Quitamos la importación de LanguageProvider porque ya está en el layout
     import Header from '@/components/common/Header';
     import ScrollProgressIndicator from '@/components/common/ScrollProgressIndicator';
     import CTAFloatingButton from '@/components/common/CTAFloatingButton';
@@ -49,44 +49,15 @@
         window.open('https://wa.me/+59893892924', '_blank');
     };
 
-    if (!isHydrated) {
-        return (
-        <LanguageProvider>
-            <div className="min-h-screen bg-background">
-            <Header />
-            <ScrollProgressIndicator />
-            <main>
-                <HeroSection
-                onBookingClick={handleBookingClick}
-                onViewWorkClick={handleViewWorkClick}
-                />
-                <ProofStrip />
-                <TechnicalShowcase />
-                <ServicesSection onCaseStudyClick={handleCaseStudyClick} />
-                <TestimonialsSection />
-                <FAQSection />
-                <TrustIndicators />
-                <ContactSection />
-            </main>
-            <Footer />
-            <CTAFloatingButton
-                onBookingClick={handleBookingClick}
-                onWhatsAppClick={handleWhatsAppClick}
-            />
-            </div>
-        </LanguageProvider>
-        );
-    }
-
-    return (
-        <LanguageProvider>
+    // Contenido principal (reutilizable para hidratado y no hidratado)
+    const content = (
         <div className="min-h-screen bg-background">
-            <Header />
-            <ScrollProgressIndicator />
-            <main>
+        <Header />
+        <ScrollProgressIndicator />
+        <main>
             <HeroSection
-                onBookingClick={handleBookingClick}
-                onViewWorkClick={handleViewWorkClick}
+            onBookingClick={handleBookingClick}
+            onViewWorkClick={handleViewWorkClick}
             />
             <ProofStrip />
             <TechnicalShowcase />
@@ -95,15 +66,17 @@
             <FAQSection />
             <TrustIndicators />
             <ContactSection />
-            </main>
-            <Footer />
-            <CTAFloatingButton
+        </main>
+        <Footer />
+        <CTAFloatingButton
             onBookingClick={handleBookingClick}
             onWhatsAppClick={handleWhatsAppClick}
-            />
+        />
         </div>
-        </LanguageProvider>
     );
+
+    // NOTA: Ya no envolvemos en <LanguageProvider> porque está en el RootLayout
+    return content;
     };
 
     export default LandingPageInteractive;

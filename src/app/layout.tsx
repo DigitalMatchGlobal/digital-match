@@ -1,5 +1,6 @@
     import React from 'react';
-    import '../styles/index.css';
+    import '../styles/index.css'; // Mantenemos tu importación de estilos original
+    import { LanguageProvider } from '@/contexts/LanguageContext'; // <--- IMPORTANTE
 
     export const viewport = {
     width: 'device-width',
@@ -7,8 +8,8 @@
     };
 
     export const metadata = {
-    title: 'Next.js with Tailwind CSS',
-    description: 'A boilerplate project with Next.js and Tailwind CSS',
+    title: 'Digital Match Global',
+    description: 'Scale Your Business with Automation & AI',
     icons: {
         icon: [
         { url: '/favicon.ico', type: 'image/x-icon' }
@@ -23,10 +24,15 @@
     }>) {
     return (
         <html lang="en">
-        <body>{children}
+        <body>
+            {/* Envolvemos TODO en el LanguageProvider */}
+            <LanguageProvider>
+            {children}
+            </LanguageProvider>
 
             <script type="module" async src="https://static.rocket.new/rocket-web.js?_cfg=https%3A%2F%2Fdigitalma8609back.builtwithrocket.new&_be=https%3A%2F%2Fapplication.rocket.new&_v=0.1.11" />
-            <script type="module" defer src="https://static.rocket.new/rocket-shot.js?v=0.0.1" /></body>
+            <script type="module" defer src="https://static.rocket.new/rocket-shot.js?v=0.0.1" />
+        </body>
         </html>
     );
     }
