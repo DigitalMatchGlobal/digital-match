@@ -16,20 +16,12 @@
         setIsHydrated(true);
     }, []);
 
-    const floatingKeywords = [
-        { textKey: 'keywords.ml', delay: '0s', duration: '20s' },
-        { textKey: 'keywords.automation', delay: '2s', duration: '25s' },
-        { textKey: 'keywords.api', delay: '4s', duration: '22s' },
-        { textKey: 'keywords.cloud', delay: '1s', duration: '24s' },
-        { textKey: 'keywords.analytics', delay: '3s', duration: '23s' },
-        { textKey: 'keywords.ai', delay: '5s', duration: '21s' }
-    ];
+
 
     if (!isHydrated) {
         return (
         <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden bg-background pt-16">
             <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                {/* Loading state simple para evitar saltos */}
                 <h1 className="text-4xl font-bold opacity-0">Loading...</h1>
             </div>
         </section>
@@ -38,33 +30,29 @@
 
     return (
         <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden bg-background pt-16">
-        {/* FONDO ANIMADO Y PALABRAS FLOTANTES */}
-        <div className="absolute inset-0 overflow-hidden">
-            <div className="absolute inset-0 bg-gradient-to-br from-accent/10 via-transparent to-accent-secondary/10 animate-pulse" style={{ animationDuration: '8s' }} />
-            <div className="absolute inset-0 bg-gradient-to-tl from-accent-secondary/5 via-transparent to-accent/5 animate-pulse" style={{ animationDuration: '10s', animationDelay: '2s' }} />
+        
+        {/* --- NUEVO FONDO ANIMADO (Orbes de Luz) --- */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+            {/* Orbe 1 (Color principal) */}
+            <div 
+            className="absolute top-1/4 -left-1/4 w-[500px] h-[500px] bg-accent/20 rounded-full mix-blend-screen filter blur-[100px] opacity-70 animate-blob"
+            />
             
-            {floatingKeywords.map((keyword, index) => (
-            <div
-                key={index}
-                // --- CORRECCIÓN DE VISIBILIDAD ---
-                // 1. text-foreground/40: Color principal al 40% (antes era muted al 20%)
-                // 2. font-bold: Letra más gruesa
-                // 3. text-sm sm:text-base: Un poco más grande
-                // 4. Eliminado 'blur-sm': Ahora el texto es nítido
-                className="absolute text-foreground/40 text-sm sm:text-base font-bold whitespace-nowrap hidden md:block select-none"
-                style={{
-                top: `${Math.random() * 80 + 10}%`,
-                left: `${Math.random() * 80 + 10}%`,
-                animation: `float ${keyword.duration} ease-in-out infinite`,
-                animationDelay: keyword.delay
-                }}
-            >
-                {t(keyword.textKey)}
-            </div>
-            ))}
+            {/* Orbe 2 (Color secundario) */}
+            <div 
+            className="absolute top-1/3 -right-1/4 w-[400px] h-[400px] bg-accent-secondary/20 rounded-full mix-blend-screen filter blur-[100px] opacity-70 animate-blob animation-delay-2000"
+            />
+            
+            {/* Orbe 3 (Color principal, más abajo) */}
+            <div 
+            className="absolute -bottom-1/4 left-1/3 w-[600px] h-[600px] bg-accent/20 rounded-full mix-blend-screen filter blur-[100px] opacity-60 animate-blob animation-delay-4000"
+            />
+            
+            {/* Capa sutil de ruido/trama para dar textura tech (opcional) */}
+            <div className="absolute inset-0 bg-grid-white/[0.02] bg-[length:30px_30px]" />
         </div>
-
-        {/* CONTENIDO PRINCIPAL */}
+        
+        {/* CONTENIDO PRINCIPAL (Sin cambios, solo asegurando que esté encima con z-10) */}
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <div className="inline-flex items-center space-x-2 px-3 sm:px-4 py-2 rounded-full bg-surface border border-border mb-6 sm:mb-8 shadow-lg backdrop-blur-sm">
             <div className="w-2 h-2 rounded-full bg-accent animate-pulse" />
@@ -102,20 +90,30 @@
             </div>
         </div>
 
+        {/* Nuevas animaciones CSS para los orbes */}
         <style jsx>{`
-            @keyframes float {
-            0%, 100% {
-                transform: translate(0, 0) rotate(0deg);
+            @keyframes blob {
+            0% {
+                transform: translate(0px, 0px) scale(1);
             }
-            25% {
-                transform: translate(20px, -20px) rotate(5deg);
+            33% {
+                transform: translate(30px, -50px) scale(1.1);
             }
-            50% {
-                transform: translate(-15px, 15px) rotate(-5deg);
+            66% {
+                transform: translate(-20px, 20px) scale(0.9);
             }
-            75% {
-                transform: translate(15px, 10px) rotate(3deg);
+            100% {
+                transform: translate(0px, 0px) scale(1);
             }
+            }
+            .animate-blob {
+            animation: blob 15s infinite ease-in-out;
+            }
+            .animation-delay-2000 {
+            animation-delay: 2s;
+            }
+            .animation-delay-4000 {
+            animation-delay: 4s;
             }
         `}</style>
         </section>
