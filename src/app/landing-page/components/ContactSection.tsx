@@ -2,7 +2,7 @@
 
     import { useState, useEffect } from 'react';
     import Icon from '@/components/ui/AppIcon';
-    import { useLanguage } from '@/contexts/LanguageContext'; // <--- Importamos
+    import { useLanguage } from '@/contexts/LanguageContext';
 
     interface FormData {
     name: string;
@@ -32,7 +32,11 @@
     const [errors, setErrors] = useState<FormErrors>({});
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [showSuccess, setShowSuccess] = useState(false);
-    const { t } = useLanguage(); // <--- Usamos el hook
+    const { t } = useLanguage();
+
+    // 📧 CONFIGURACIÓN GRATUITA (FormSubmit.co)
+    // Usamos el endpoint /ajax/ para que no redireccione la página, sino que responda a nuestro código.
+    const FORM_ENDPOINT = "https://formsubmit.co/ajax/info@digitalmatchglobal.com";
 
     useEffect(() => {
         setIsHydrated(true);
@@ -41,7 +45,6 @@
     const validateForm = (): boolean => {
         const newErrors: FormErrors = {};
 
-        // Usamos t() para los mensajes de error
         if (!formData.name.trim()) {
         newErrors.name = t('contact.error.name');
         }
@@ -60,12 +63,9 @@
         newErrors.phone = t('contact.error.phone');
         }
 
-        if (!formData.message.trim()) {
-        newErrors.message = t('contact.error.message');
-        } else if (formData.message.trim().length < 20) {
-        newErrors.message = t('contact.error.message.length');
-        }
-
+        // ✅ MODIFICACIÓN: Validaciones de mensaje ELIMINADAS.
+        // El campo puede ir vacío y no requiere longitud mínima.
+        
         setErrors(newErrors);
         return Object.keys(newErrors).length === 0;
     };
@@ -79,23 +79,38 @@
 
         setIsSubmitting(true);
 
-        // Simulación de envío
-        setTimeout(() => {
-        setIsSubmitting(false);
-        setShowSuccess(true);
-        setFormData({
+        try {
+        const response = await fetch(FORM_ENDPOINT, {
+            method: 'POST',
+            headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+            },
+            body: JSON.stringify({
+            ...formData,
+            _subject: `Nuevo Lead: ${formData.company}`, // Asunto del correo
+            _template: 'table' // Formato bonito en tabla
+            })
+        });
+
+        if (response.ok) {
+            setShowSuccess(true);
+            setFormData({
             name: '',
             email: '',
             company: '',
             phone: '',
             message: ''
-        });
-
-        // Opcional: Ocultar éxito después de 5 segs
-        /* setTimeout(() => {
-            setShowSuccess(false);
-        }, 5000); */
-        }, 1500);
+            });
+        } else {
+            alert("Hubo un error al enviar el mensaje. Por favor intenta nuevamente.");
+        }
+        } catch (error) {
+        console.error("Error enviando formulario:", error);
+        alert("Error de conexión. Verifica tu internet.");
+        } finally {
+        setIsSubmitting(false);
+        }
     };
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -110,10 +125,7 @@
         return (
         <section id="contact" className="py-24 bg-secondary/30">
             <div className="max-w-7xl mx-auto px-6 lg:px-8">
-                {/* Fallback en servidor */}
-                <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
-                    Ready to Scale Your Business?
-                </h2>
+                {/* Skeleton loading simple */}
             </div>
         </section>
         );
@@ -278,8 +290,9 @@
                     </div>
 
                     <div>
+                    {/* OPCIONAL: Sin asterisco y sin validación de longitud */}
                     <label htmlFor="message" className="block text-sm font-semibold text-foreground mb-2">
-                        {t('contact.form.message')} *
+                        {t('contact.form.message')} 
                     </label>
                     <textarea
                         id="message"
@@ -287,14 +300,10 @@
                         value={formData.message}
                         onChange={handleChange}
                         rows={4}
-                        className={`w-full px-4 py-3 bg-background border rounded-lg text-foreground transition-smooth focus:outline-none focus:ring-2 focus:ring-accent resize-none ${
-                        errors.message ? 'border-error' : 'border-border'
-                        }`}
+                        className="w-full px-4 py-3 bg-background border border-border rounded-lg text-foreground transition-smooth focus:outline-none focus:ring-2 focus:ring-accent resize-none"
                         placeholder={t('contact.form.message.ph')}
                     />
-                    {errors.message && (
-                        <p className="mt-1 text-sm text-error">{errors.message}</p>
-                    )}
+                    {/* Se elimina el mensaje de error de mensaje */}
                     </div>
 
                     <button
