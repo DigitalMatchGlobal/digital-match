@@ -75,8 +75,6 @@
         // Contact Section Main
         'contact.title': '¿Listo para Escalar tu Negocio?',
         'contact.subtitle': 'Agenda una llamada estratégica gratuita y descubre cómo podemos transformar tus operaciones en 7-14 días',
-        
-        // Contact Features
         'contact.feat.response.title': 'Respuesta Rápida',
         'contact.feat.response.desc': 'Te responderemos en 24 horas para agendar tu llamada.',
         'contact.feat.commit.title': 'Sin Compromiso',
@@ -98,29 +96,23 @@
         'contact.form.submit': 'Agendar Llamada Estratégica',
         'contact.form.sending': 'Enviando...',
         'contact.form.legal': 'Al enviar este formulario, aceptas nuestra política de privacidad y términos de servicio',
-
-        // Contact Validation Errors
         'contact.error.name': 'El nombre es requerido',
         'contact.error.email': 'El correo es requerido',
         'contact.error.email.invalid': 'Formato de correo inválido',
         'contact.error.company': 'El nombre de la empresa es requerido',
         'contact.error.phone': 'El teléfono es requerido',
-        'contact.error.message': 'El mensaje es requerido',
-        'contact.error.message.length': 'El mensaje debe tener al menos 20 caracteres',
-
-        // Contact Success
         'contact.success.title': '¡Mensaje Enviado con Éxito!',
         'contact.success.desc': 'Te contactaremos dentro de las próximas 24 horas para agendar tu llamada estratégica.',
         'contact.success.button': 'Enviar Otro Mensaje',
 
         // Footer
         'footer.rights': 'Todos los derechos reservados',
-        'footer.privacy': 'Privacidad',
-        'footer.terms': 'Términos',
+        'footer.privacy': 'Política de Privacidad',
+        'footer.terms': 'Términos de Servicio',
+        'footer.data_deletion': 'Eliminación de Datos', // <--- NUEVO
         'footer.description': 'Construyendo sistemas que escalan tu negocio a través de automatización, IA y desarrollo web.',
         'footer.services.title': 'Servicios',
         'footer.legal.title': 'Legal',
-        'footer.cookies': 'Política de Cookies',
         'footer.location': 'Con base en Uruguay',
         'footer.security': 'Seguridad primero • Documentado • Mantenible',
         'footer.links.automation': 'Automatización de Procesos',
@@ -190,8 +182,6 @@
         // Contact Section Main
         'contact.title': "Ready to Scale Your Business?",
         'contact.subtitle': 'Book a free strategy call and discover how we can transform your operations in 7-14 days',
-
-        // Contact Features
         'contact.feat.response.title': 'Fast Response',
         'contact.feat.response.desc': "We'll get back to you within 24 hours to schedule your strategy call",
         'contact.feat.commit.title': 'No Commitment',
@@ -213,29 +203,23 @@
         'contact.form.submit': 'Book Strategy Call',
         'contact.form.sending': 'Sending...',
         'contact.form.legal': 'By submitting this form, you agree to our privacy policy and terms of service',
-
-        // Contact Validation Errors
         'contact.error.name': 'Name is required',
         'contact.error.email': 'Email is required',
         'contact.error.email.invalid': 'Invalid email format',
         'contact.error.company': 'Company name is required',
         'contact.error.phone': 'Phone number is required',
-        'contact.error.message': 'Message is required',
-        'contact.error.message.length': 'Message must be at least 20 characters',
-
-        // Contact Success
         'contact.success.title': 'Message Sent Successfully!',
         'contact.success.desc': "We'll get back to you within 24 hours to schedule your strategy call",
         'contact.success.button': 'Send Another Message',
         
         // Footer
         'footer.rights': 'All rights reserved',
-        'footer.privacy': 'Privacy',
-        'footer.terms': 'Terms',
+        'footer.privacy': 'Privacy Policy',
+        'footer.terms': 'Terms of Service',
+        'footer.data_deletion': 'Data Deletion', // <--- NUEVO
         'footer.description': 'Building systems that scale your business through automation, AI, and web development',
         'footer.services.title': 'Services',
         'footer.legal.title': 'Legal',
-        'footer.cookies': 'Cookie Policy',
         'footer.location': 'Based in Uruguay',
         'footer.security': 'Security-first • Documented • Maintainable',
         'footer.links.automation': 'Process Automation',
