@@ -14,44 +14,66 @@
 
     const translations = {
     es: {
-        // ... (MANTENER LO ANTERIOR: nav, hero, keywords, proof, services, faq, contact, footer) ...
-        // Solo pego aquí lo nuevo o lo que necesitamos que contexto tenga para no borrarte lo otro si copias todo
-        // ASEGÚRATE DE MANTENER LAS OTRAS SECCIONES QUE YA TENÍAS (nav, hero, etc.)
+        // ... (MANTENER TUS OTRAS SECCIONES: nav, hero, technical, etc.) ...
         
-        // --- PEGAR ESTO DENTRO DE 'es' ---
+        // --- SECCIÓN SERVICIOS (NUEVO) ---
+        'services.main_title': 'Nuestros Servicios',
+        'services.main_subtitle': 'Soluciones integrales para escalar las operaciones de tu negocio',
+        'services.cta_button': 'Ver Caso de Éxito',
+
+        // Servicio 1: Automation
+        'services.auto.title': 'Automatización de Procesos',
+        'services.auto.headline': 'Elimina el 80% de tareas manuales',
+        'services.auto.desc': 'Transforma flujos de trabajo repetitivos en sistemas automatizados que funcionan 24/7 sin intervención humana.',
+        'services.auto.f1': 'Automatización de flujos a medida',
+        'services.auto.f2': 'Sincronización e integración de datos',
+        'services.auto.f3': 'Notificaciones y correos automáticos',
+        'services.auto.f4': 'Sistemas de generación de reportes',
+
+        // Servicio 2: AI Assistants
+        'services.ai.title': 'Asistentes IA',
+        'services.ai.headline': 'Soporte al cliente automatizado 24/7',
+        'services.ai.desc': 'Implementa chatbots inteligentes que manejan consultas, reservas y tickets de soporte automáticamente.',
+        'services.ai.f1': 'Procesamiento de lenguaje natural (NLP)',
+        'services.ai.f2': 'Integración multicanal (WhatsApp/Web)',
+        'services.ai.f3': 'Entrenamiento personalizado con tus datos',
+        'services.ai.f4': 'Panel de análisis y métricas',
+
+        // Servicio 3: Web Products
+        'services.web.title': 'Productos Web',
+        'services.web.headline': 'Plataformas que generan ingresos',
+        'services.web.desc': 'Construye aplicaciones web escalables y herramientas internas que impulsan el crecimiento y la eficiencia.',
+        'services.web.f1': 'Desarrollo de MVP (7-14 días)',
+        'services.web.f2': 'Diseño adaptable a móviles',
+        'services.web.f3': 'Integraciones API y de terceros',
+        'services.web.f4': 'Seguridad y cumplimiento integrados',
+
+        // ... (MANTENER contact, footer, etc.) ...
+        // REPETIR LAS CLAVES ANTERIORES QUE YA TENIAS EN EL ARCHIVO
         'technical.title': 'Capacidades Técnicas',
         'technical.subtitle': 'Soluciones integrales diseñadas para escalar tus operaciones',
         'technical.outcomes_title': 'Resultados Típicos',
-        
-        // Automation
         'technical.auto.title': 'Automatización de Procesos',
         'technical.auto.desc': 'Elimina tareas repetitivas y optimiza operaciones con sistemas inteligentes.',
-        'technical.auto.impact': 'Máxima Eficiencia Operativa', // Reemplazo de ROI
+        'technical.auto.impact': 'Máxima Eficiencia Operativa', 
         'technical.auto.out1': 'Reduce la entrada manual de datos en un 90%',
         'technical.auto.out2': 'Corta tiempos de proceso de horas a minutos',
         'technical.auto.out3': 'Elimina el error humano en tareas de rutina',
         'technical.auto.out4': 'Libera a tu equipo para trabajo estratégico',
-
-        // AI
         'technical.ai.title': 'Asistentes IA',
         'technical.ai.desc': 'Implementa chatbots inteligentes y asistentes virtuales para atención 24/7.',
-        'technical.ai.impact': 'Atención 24/7 Garantizada', // Reemplazo de ROI
+        'technical.ai.impact': 'Atención 24/7 Garantizada', 
         'technical.ai.out1': 'Maneja el 80% de consultas automáticamente',
         'technical.ai.out2': 'Reduce el tiempo de respuesta a segundos',
         'technical.ai.out3': 'Escala el soporte sin contratar más personal',
         'technical.ai.out4': 'Mejora la satisfacción del cliente',
-
-        // Web
         'technical.web.title': 'Productos Web',
         'technical.web.desc': 'Construye plataformas y herramientas internas que impulsan el crecimiento.',
-        'technical.web.impact': 'Alto Rendimiento y SEO', // Reemplazo de ROI
+        'technical.web.impact': 'Alto Rendimiento y SEO', 
         'technical.web.out1': 'Lanzamiento de MVP en 7-14 días',
         'technical.web.out2': 'Escalable a miles de usuarios',
         'technical.web.out3': 'Integración con sistemas existentes',
         'technical.web.out4': 'Optimizado para móviles y seguro',
-
-        // ... (Mantener contact, footer, etc.)
-        // REPETIR LAS CLAVES ANTERIORES QUE YA TENIAS EN EL ARCHIVO
         'nav.services': 'Servicios',
         'nav.results': 'Resultados',
         'nav.process': 'Proceso',
@@ -142,40 +164,66 @@
         'footer.links.consulting': 'Consultoría'
     },
     en: {
-        // --- PEGAR ESTO DENTRO DE 'en' ---
+        // ... (MANTENER TUS OTRAS SECCIONES: nav, hero, technical, etc.) ...
+        
+        // --- SECCIÓN SERVICIOS (ENGLISH) ---
+        'services.main_title': 'Our Services',
+        'services.main_subtitle': 'Comprehensive solutions to scale your business operations',
+        'services.cta_button': 'View Case Study',
+
+        // Service 1
+        'services.auto.title': 'Process Automation',
+        'services.auto.headline': 'Eliminate 80% manual tasks',
+        'services.auto.desc': 'Transform repetitive workflows into automated systems that run 24/7 without human intervention.',
+        'services.auto.f1': 'Custom workflow automation',
+        'services.auto.f2': 'Data integration & synchronization',
+        'services.auto.f3': 'Email & notification automation',
+        'services.auto.f4': 'Report generation systems',
+
+        // Service 2
+        'services.ai.title': 'AI Assistants',
+        'services.ai.headline': '24/7 customer support automation',
+        'services.ai.desc': 'Deploy intelligent chatbots that handle customer inquiries, bookings, and support tickets automatically.',
+        'services.ai.f1': 'Natural language processing',
+        'services.ai.f2': 'Multi-channel integration',
+        'services.ai.f3': 'Custom training on your data',
+        'services.ai.f4': 'Analytics & insights dashboard',
+
+        // Service 3
+        'services.web.title': 'Web Products',
+        'services.web.headline': 'Revenue-generating platforms',
+        'services.web.desc': 'Build scalable web applications and internal tools that drive business growth and efficiency.',
+        'services.web.f1': 'MVP development (7-14 days)',
+        'services.web.f2': 'Mobile-responsive design',
+        'services.web.f3': 'API & third-party integrations',
+        'services.web.f4': 'Security & compliance built-in',
+
+        // ... (MANTENER contact, footer, etc.) ...
+        // REPETIR LAS CLAVES ANTERIORES EN INGLÉS
         'technical.title': 'Technical Capabilities',
         'technical.subtitle': 'Comprehensive solutions designed to scale your business operations',
         'technical.outcomes_title': 'Typical Outcomes',
-
-        // Automation
         'technical.auto.title': 'Process Automation',
         'technical.auto.desc': 'Eliminate repetitive tasks and streamline operations with intelligent automation systems.',
-        'technical.auto.impact': 'High Operational Efficiency', // Replacement for ROI
+        'technical.auto.impact': 'High Operational Efficiency', 
         'technical.auto.out1': 'Reduce manual data entry by 90%',
         'technical.auto.out2': 'Cut processing time from hours to minutes',
         'technical.auto.out3': 'Eliminate human error in routine tasks',
         'technical.auto.out4': 'Free up team for strategic work',
-
-        // AI
         'technical.ai.title': 'AI Assistants',
         'technical.ai.desc': 'Deploy intelligent chatbots and virtual assistants for 24/7 customer engagement.',
-        'technical.ai.impact': 'Guaranteed 24/7 Support', // Replacement for ROI
+        'technical.ai.impact': 'Guaranteed 24/7 Support', 
         'technical.ai.out1': 'Handle 80% of customer inquiries automatically',
         'technical.ai.out2': 'Reduce response time from hours to seconds',
         'technical.ai.out3': 'Scale support without hiring',
         'technical.ai.out4': 'Improve customer satisfaction scores',
-
-        // Web
         'technical.web.title': 'Web Products',
         'technical.web.desc': 'Build revenue-generating platforms and internal tools that drive business growth.',
-        'technical.web.impact': 'High Performance & SEO', // Replacement for ROI
+        'technical.web.impact': 'High Performance & SEO', 
         'technical.web.out1': 'Launch MVP in 7-14 days',
         'technical.web.out2': 'Scale to thousands of users',
         'technical.web.out3': 'Integrate with existing systems',
         'technical.web.out4': 'Mobile-optimized and secure',
-
-        // ... (Mantener contact, footer, etc.)
-        // REPETIR LAS CLAVES ANTERIORES EN INGLÉS
         'nav.services': 'Services',
         'nav.results': 'Results',
         'nav.process': 'Process',
