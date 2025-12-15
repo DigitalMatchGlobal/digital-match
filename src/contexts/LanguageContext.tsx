@@ -60,10 +60,22 @@
         'contact.title': 'Comencemos Tu Transformación',
         'contact.subtitle': 'Agenda una consulta gratuita de 30 minutos',
         
-        // Footer
+        // Footer (Existentes)
         'footer.rights': 'Todos los derechos reservados',
         'footer.privacy': 'Privacidad',
         'footer.terms': 'Términos',
+        
+        // Footer Extended (NUEVOS - AGREGADOS AHORA)
+        'footer.description': 'Construyendo sistemas que escalan tu negocio a través de automatización, IA y desarrollo web.',
+        'footer.services.title': 'Servicios',
+        'footer.legal.title': 'Legal',
+        'footer.cookies': 'Política de Cookies',
+        'footer.location': 'Con base en Uruguay',
+        'footer.security': 'Seguridad primero • Documentado • Mantenible',
+        'footer.links.automation': 'Automatización de Procesos',
+        'footer.links.ai': 'Asistentes IA',
+        'footer.links.web': 'Productos Web',
+        'footer.links.consulting': 'Consultoría'
     },
     en: {
         // Header & Navigation
@@ -109,13 +121,25 @@
         'faq.title': 'Frequently Asked Questions',
         
         // Contact Section
-        'contact.title': "Let\'s Start Your Transformation",
+        'contact.title': "Let's Start Your Transformation",
         'contact.subtitle': 'Schedule a free 30-minute consultation',
         
         // Footer
         'footer.rights': 'All rights reserved',
         'footer.privacy': 'Privacy',
         'footer.terms': 'Terms',
+
+        // Footer Extended (NUEVOS - AGREGADOS AHORA)
+        'footer.description': 'Building systems that scale your business through automation, AI, and web development',
+        'footer.services.title': 'Services',
+        'footer.legal.title': 'Legal',
+        'footer.cookies': 'Cookie Policy',
+        'footer.location': 'Based in Uruguay',
+        'footer.security': 'Security-first • Documented • Maintainable',
+        'footer.links.automation': 'Process Automation',
+        'footer.links.ai': 'AI Assistants',
+        'footer.links.web': 'Web Products',
+        'footer.links.consulting': 'Consulting'
     },
     };
 
