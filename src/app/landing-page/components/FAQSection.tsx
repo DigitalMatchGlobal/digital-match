@@ -2,7 +2,7 @@
 
     import { useState, useEffect, useMemo } from 'react';
     import Icon from '@/components/ui/AppIcon';
-    import { useLanguage } from '@/contexts/LanguageContext'; // 1. Importar el hook
+    import { useLanguage } from '@/contexts/LanguageContext';
 
     interface FAQItem {
     id: string;
@@ -14,14 +14,12 @@
     const FAQSection = () => {
     const [isHydrated, setIsHydrated] = useState(false);
     const [openItems, setOpenItems] = useState<Set<string>>(new Set());
-    const { t } = useLanguage(); // 2. Usar el hook
+    const { t } = useLanguage();
 
     useEffect(() => {
         setIsHydrated(true);
     }, []);
 
-    // 3. Crear el array de FAQs usando useMemo y t()
-    // Esto asegura que el contenido se actualice cuando cambia el idioma
     const faqs: FAQItem[] = useMemo(() => [
         {
         id: '1',
@@ -69,25 +67,25 @@
 
     if (!isHydrated) {
         return (
+        // AGREGADO ID AQUI
         <section id="process" className="py-24 bg-secondary/30">
             <div className="max-w-4xl mx-auto px-6 lg:px-8">
             <div className="text-center mb-16">
                 <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
-                {/* Fallback para server-side rendering o carga inicial */}
                 Frequently Asked Questions 
                 </h2>
                 <p className="text-xl text-muted-foreground">
                 Everything you need to know about working with us
                 </p>
             </div>
-            {/* Renderizamos un esqueleto o lista vacía en SSR para evitar mismatch */}
             </div>
         </section>
         );
     }
 
     return (
-        <section className="py-24 bg-secondary/30">
+        // AGREGADO ID AQUI (Esto era lo que faltaba para que funcionara siempre)
+        <section id="process" className="py-24 bg-secondary/30">
         <div className="max-w-4xl mx-auto px-6 lg:px-8">
             <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
