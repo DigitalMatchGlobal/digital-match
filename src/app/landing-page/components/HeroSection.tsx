@@ -29,30 +29,8 @@
         return (
         <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden bg-background pt-16">
             <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <div className="inline-flex items-center space-x-2 px-3 sm:px-4 py-2 rounded-full bg-surface border border-border mb-6 sm:mb-8">
-                <span className="text-xs sm:text-sm font-semibold text-muted-foreground">
-                {t('hero.badge')}
-                </span>
-            </div>
-            <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-foreground mb-4 sm:mb-6 leading-tight px-2">
-                {t('hero.title.part1')}
-                <br />
-                <span className="bg-gradient-to-r from-accent to-accent-secondary bg-clip-text text-transparent">
-                {t('hero.title.highlight')}
-                </span>{' '}
-                {t('hero.title.part2')}
-            </h1>
-            <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-muted-foreground mb-8 sm:mb-12 max-w-3xl mx-auto px-4">
-                {t('hero.subtitle')}
-            </p>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 px-4">
-                <button className="w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg font-semibold bg-gradient-accent text-accent-foreground rounded-lg shadow-cta">
-                {t('hero.cta.book')}
-                </button>
-                <button className="w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg font-semibold text-foreground border border-border rounded-lg">
-                {t('hero.cta.work')}
-                </button>
-            </div>
+                {/* Loading state simple para evitar saltos */}
+                <h1 className="text-4xl font-bold opacity-0">Loading...</h1>
             </div>
         </section>
         );
@@ -60,6 +38,7 @@
 
     return (
         <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden bg-background pt-16">
+        {/* FONDO ANIMADO Y PALABRAS FLOTANTES */}
         <div className="absolute inset-0 overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-br from-accent/10 via-transparent to-accent-secondary/10 animate-pulse" style={{ animationDuration: '8s' }} />
             <div className="absolute inset-0 bg-gradient-to-tl from-accent-secondary/5 via-transparent to-accent/5 animate-pulse" style={{ animationDuration: '10s', animationDelay: '2s' }} />
@@ -67,7 +46,12 @@
             {floatingKeywords.map((keyword, index) => (
             <div
                 key={index}
-                className="absolute text-muted-foreground/20 text-xs sm:text-sm font-semibold whitespace-nowrap blur-sm hidden md:block"
+                // --- CORRECCIÓN DE VISIBILIDAD ---
+                // 1. text-foreground/40: Color principal al 40% (antes era muted al 20%)
+                // 2. font-bold: Letra más gruesa
+                // 3. text-sm sm:text-base: Un poco más grande
+                // 4. Eliminado 'blur-sm': Ahora el texto es nítido
+                className="absolute text-foreground/40 text-sm sm:text-base font-bold whitespace-nowrap hidden md:block select-none"
                 style={{
                 top: `${Math.random() * 80 + 10}%`,
                 left: `${Math.random() * 80 + 10}%`,
@@ -80,6 +64,7 @@
             ))}
         </div>
 
+        {/* CONTENIDO PRINCIPAL */}
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <div className="inline-flex items-center space-x-2 px-3 sm:px-4 py-2 rounded-full bg-surface border border-border mb-6 sm:mb-8 shadow-lg backdrop-blur-sm">
             <div className="w-2 h-2 rounded-full bg-accent animate-pulse" />
