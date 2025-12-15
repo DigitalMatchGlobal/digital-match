@@ -14,42 +14,14 @@
 
     const translations = {
     es: {
-        // ... (MANTENER TUS OTRAS SECCIONES: nav, hero, technical, etc.) ...
+        // ... (MANTENER TODO LO ANTERIOR: nav, hero, services, technical, contact, footer, etc.) ...
         
-        // --- SECCIÓN SERVICIOS (NUEVO) ---
-        'services.main_title': 'Nuestros Servicios',
-        'services.main_subtitle': 'Soluciones integrales para escalar las operaciones de tu negocio',
-        'services.cta_button': 'Ver Caso de Éxito',
-
-        // Servicio 1: Automation
-        'services.auto.title': 'Automatización de Procesos',
-        'services.auto.headline': 'Elimina el 80% de tareas manuales',
-        'services.auto.desc': 'Transforma flujos de trabajo repetitivos en sistemas automatizados que funcionan 24/7 sin intervención humana.',
-        'services.auto.f1': 'Automatización de flujos a medida',
-        'services.auto.f2': 'Sincronización e integración de datos',
-        'services.auto.f3': 'Notificaciones y correos automáticos',
-        'services.auto.f4': 'Sistemas de generación de reportes',
-
-        // Servicio 2: AI Assistants
-        'services.ai.title': 'Asistentes IA',
-        'services.ai.headline': 'Soporte al cliente automatizado 24/7',
-        'services.ai.desc': 'Implementa chatbots inteligentes que manejan consultas, reservas y tickets de soporte automáticamente.',
-        'services.ai.f1': 'Procesamiento de lenguaje natural (NLP)',
-        'services.ai.f2': 'Integración multicanal (WhatsApp/Web)',
-        'services.ai.f3': 'Entrenamiento personalizado con tus datos',
-        'services.ai.f4': 'Panel de análisis y métricas',
-
-        // Servicio 3: Web Products
-        'services.web.title': 'Productos Web',
-        'services.web.headline': 'Plataformas que generan ingresos',
-        'services.web.desc': 'Construye aplicaciones web escalables y herramientas internas que impulsan el crecimiento y la eficiencia.',
-        'services.web.f1': 'Desarrollo de MVP (7-14 días)',
-        'services.web.f2': 'Diseño adaptable a móviles',
-        'services.web.f3': 'Integraciones API y de terceros',
-        'services.web.f4': 'Seguridad y cumplimiento integrados',
-
-        // ... (MANTENER contact, footer, etc.) ...
-        // REPETIR LAS CLAVES ANTERIORES QUE YA TENIAS EN EL ARCHIVO
+        // --- SECCIÓN PROOF STRIP (NUEVO / ACTUALIZADO) ---
+        'proof.m1.label': 'Horas de Desarrollo',
+        'proof.m2.label': 'Compromiso con el Cliente',
+        'proof.m3.label': 'Días de Entrega Promedio',
+        
+        // REPETIR LAS CLAVES ANTERIORES QUE YA TENIAS EN EL ARCHIVO (Resumen para no perder nada)
         'technical.title': 'Capacidades Técnicas',
         'technical.subtitle': 'Soluciones integrales diseñadas para escalar tus operaciones',
         'technical.outcomes_title': 'Resultados Típicos',
@@ -74,6 +46,30 @@
         'technical.web.out2': 'Escalable a miles de usuarios',
         'technical.web.out3': 'Integración con sistemas existentes',
         'technical.web.out4': 'Optimizado para móviles y seguro',
+        'services.main_title': 'Nuestros Servicios',
+        'services.main_subtitle': 'Soluciones integrales para escalar las operaciones de tu negocio',
+        'services.cta_button': 'Ver Caso de Éxito',
+        'services.auto.title': 'Automatización de Procesos',
+        'services.auto.headline': 'Elimina el 80% de tareas manuales',
+        'services.auto.desc': 'Transforma flujos de trabajo repetitivos en sistemas automatizados que funcionan 24/7 sin intervención humana.',
+        'services.auto.f1': 'Automatización de flujos a medida',
+        'services.auto.f2': 'Sincronización e integración de datos',
+        'services.auto.f3': 'Notificaciones y correos automáticos',
+        'services.auto.f4': 'Sistemas de generación de reportes',
+        'services.ai.title': 'Asistentes IA',
+        'services.ai.headline': 'Soporte al cliente automatizado 24/7',
+        'services.ai.desc': 'Implementa chatbots inteligentes que manejan consultas, reservas y tickets de soporte automáticamente.',
+        'services.ai.f1': 'Procesamiento de lenguaje natural (NLP)',
+        'services.ai.f2': 'Integración multicanal (WhatsApp/Web)',
+        'services.ai.f3': 'Entrenamiento personalizado con tus datos',
+        'services.ai.f4': 'Panel de análisis y métricas',
+        'services.web.title': 'Productos Web',
+        'services.web.headline': 'Plataformas que generan ingresos',
+        'services.web.desc': 'Construye aplicaciones web escalables y herramientas internas que impulsan el crecimiento y la eficiencia.',
+        'services.web.f1': 'Desarrollo de MVP (7-14 días)',
+        'services.web.f2': 'Diseño adaptable a móviles',
+        'services.web.f3': 'Integraciones API y de terceros',
+        'services.web.f4': 'Seguridad y cumplimiento integrados',
         'nav.services': 'Servicios',
         'nav.results': 'Resultados',
         'nav.process': 'Proceso',
@@ -101,8 +97,6 @@
         'proof.automation': '80% reducción en tareas manuales',
         'proof.delivery': '7-14 días de entrega',
         'proof.support': 'Soporte 24/7',
-        'services.title': 'Soluciones que Transforman',
-        'services.subtitle': 'Servicios especializados para automatización y escalamiento empresarial',
         'faq.title': 'Preguntas Frecuentes',
         'faq.subtitle': 'Todo lo que necesitas saber sobre cómo trabajamos',
         'faq.q1.question': '¿Cuánto tiempo toma entregar un proyecto?',
@@ -164,41 +158,13 @@
         'footer.links.consulting': 'Consultoría'
     },
     en: {
-        // ... (MANTENER TUS OTRAS SECCIONES: nav, hero, technical, etc.) ...
+        // ... (MANTENER TODO LO ANTERIOR EN INGLÉS) ...
         
-        // --- SECCIÓN SERVICIOS (ENGLISH) ---
-        'services.main_title': 'Our Services',
-        'services.main_subtitle': 'Comprehensive solutions to scale your business operations',
-        'services.cta_button': 'View Case Study',
-
-        // Service 1
-        'services.auto.title': 'Process Automation',
-        'services.auto.headline': 'Eliminate 80% manual tasks',
-        'services.auto.desc': 'Transform repetitive workflows into automated systems that run 24/7 without human intervention.',
-        'services.auto.f1': 'Custom workflow automation',
-        'services.auto.f2': 'Data integration & synchronization',
-        'services.auto.f3': 'Email & notification automation',
-        'services.auto.f4': 'Report generation systems',
-
-        // Service 2
-        'services.ai.title': 'AI Assistants',
-        'services.ai.headline': '24/7 customer support automation',
-        'services.ai.desc': 'Deploy intelligent chatbots that handle customer inquiries, bookings, and support tickets automatically.',
-        'services.ai.f1': 'Natural language processing',
-        'services.ai.f2': 'Multi-channel integration',
-        'services.ai.f3': 'Custom training on your data',
-        'services.ai.f4': 'Analytics & insights dashboard',
-
-        // Service 3
-        'services.web.title': 'Web Products',
-        'services.web.headline': 'Revenue-generating platforms',
-        'services.web.desc': 'Build scalable web applications and internal tools that drive business growth and efficiency.',
-        'services.web.f1': 'MVP development (7-14 days)',
-        'services.web.f2': 'Mobile-responsive design',
-        'services.web.f3': 'API & third-party integrations',
-        'services.web.f4': 'Security & compliance built-in',
-
-        // ... (MANTENER contact, footer, etc.) ...
+        // --- SECCIÓN PROOF STRIP (ENGLISH) ---
+        'proof.m1.label': 'Development Hours',
+        'proof.m2.label': 'Client Commitment',
+        'proof.m3.label': 'Average Delivery Days',
+        
         // REPETIR LAS CLAVES ANTERIORES EN INGLÉS
         'technical.title': 'Technical Capabilities',
         'technical.subtitle': 'Comprehensive solutions designed to scale your business operations',
@@ -224,6 +190,30 @@
         'technical.web.out2': 'Scale to thousands of users',
         'technical.web.out3': 'Integrate with existing systems',
         'technical.web.out4': 'Mobile-optimized and secure',
+        'services.main_title': 'Our Services',
+        'services.main_subtitle': 'Comprehensive solutions to scale your business operations',
+        'services.cta_button': 'View Case Study',
+        'services.auto.title': 'Process Automation',
+        'services.auto.headline': 'Eliminate 80% manual tasks',
+        'services.auto.desc': 'Transform repetitive workflows into automated systems that run 24/7 without human intervention.',
+        'services.auto.f1': 'Custom workflow automation',
+        'services.auto.f2': 'Data integration & synchronization',
+        'services.auto.f3': 'Email & notification automation',
+        'services.auto.f4': 'Report generation systems',
+        'services.ai.title': 'AI Assistants',
+        'services.ai.headline': '24/7 customer support automation',
+        'services.ai.desc': 'Deploy intelligent chatbots that handle customer inquiries, bookings, and support tickets automatically.',
+        'services.ai.f1': 'Natural language processing',
+        'services.ai.f2': 'Multi-channel integration',
+        'services.ai.f3': 'Custom training on your data',
+        'services.ai.f4': 'Analytics & insights dashboard',
+        'services.web.title': 'Web Products',
+        'services.web.headline': 'Revenue-generating platforms',
+        'services.web.desc': 'Build scalable web applications and internal tools that drive business growth and efficiency.',
+        'services.web.f1': 'MVP development (7-14 days)',
+        'services.web.f2': 'Mobile-responsive design',
+        'services.web.f3': 'API & third-party integrations',
+        'services.web.f4': 'Security & compliance built-in',
         'nav.services': 'Services',
         'nav.results': 'Results',
         'nav.process': 'Process',
@@ -251,8 +241,6 @@
         'proof.automation': '80% reduction in manual tasks',
         'proof.delivery': '7-14 days delivery',
         'proof.support': '24/7 support',
-        'services.title': 'Solutions that Transform',
-        'services.subtitle': 'Specialized services for business automation and scaling',
         'faq.title': 'Frequently Asked Questions',
         'faq.subtitle': 'Everything you need to know about working with us',
         'faq.q1.question': 'How long does it take to deliver a project?',

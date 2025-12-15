@@ -1,24 +1,14 @@
     'use client';
 
     import { useState, useEffect, useRef } from 'react';
-
-    interface ProofMetric {
-    value: number;
-    suffix: string;
-    label: string;
-    }
+    import { useLanguage } from '@/contexts/LanguageContext'; // <--- IMPORTAMOS HOOK
 
     const ProofStrip = () => {
     const [isHydrated, setIsHydrated] = useState(false);
     const [isVisible, setIsVisible] = useState(false);
-    const [counts, setCounts] = useState({ startups: 0, reduction: 0, delivery: 0 });
+    const [counts, setCounts] = useState({ hours: 0, satisfaction: 0, delivery: 0 }); // Nombres de estado actualizados
     const sectionRef = useRef<HTMLDivElement>(null);
-
-    const metrics: ProofMetric[] = [
-        { value: 50, suffix: '+', label: 'startups scaled' },
-        { value: 40, suffix: '%', label: 'average cost reduction' },
-        { value: 7, suffix: '-day', label: 'average delivery' }
-    ];
+    const { t } = useLanguage(); // <--- USAMOS HOOK
 
     useEffect(() => {
         setIsHydrated(true);
@@ -55,15 +45,16 @@
         currentStep++;
         const progress = currentStep / steps;
 
+        // Actualizamos los contadores con los nuevos objetivos
         setCounts({
-            startups: Math.floor(50 * progress),
-            reduction: Math.floor(40 * progress),
-            delivery: Math.floor(7 * progress)
+            hours: Math.floor(2000 * progress), // Meta: 2000 horas
+            satisfaction: Math.floor(100 * progress), // Meta: 100%
+            delivery: Math.floor(14 * progress) // Meta: 14 días
         });
 
         if (currentStep >= steps) {
             clearInterval(timer);
-            setCounts({ startups: 50, reduction: 40, delivery: 7 });
+            setCounts({ hours: 2000, satisfaction: 100, delivery: 14 });
         }
         }, interval);
 
@@ -73,21 +64,7 @@
     if (!isHydrated) {
         return (
         <section className="py-12 bg-secondary/50 border-y border-border">
-            <div className="max-w-7xl mx-auto px-6 lg:px-8">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                {metrics.map((metric, index) => (
-                <div key={index} className="text-center">
-                    <div className="text-4xl md:text-5xl font-bold text-foreground mb-2">
-                    {metric.value}
-                    {metric.suffix}
-                    </div>
-                    <div className="text-sm text-muted-foreground uppercase tracking-wider">
-                    {metric.label}
-                    </div>
-                </div>
-                ))}
-            </div>
-            </div>
+            {/* Skeleton simple */}
         </section>
         );
     }
@@ -96,32 +73,37 @@
         <section ref={sectionRef} className="py-12 bg-secondary/50 border-y border-border">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            
+            {/* MÉTRICA 1: Horas de Desarrollo */}
             <div className="text-center">
                 <div className="text-4xl md:text-5xl font-bold text-foreground mb-2">
-                {counts.startups}+
+                +{counts.hours}
                 </div>
                 <div className="text-sm text-muted-foreground uppercase tracking-wider">
-                startups scaled
+                {t('proof.m1.label')}
                 </div>
             </div>
 
+            {/* MÉTRICA 2: Compromiso/Satisfacción */}
             <div className="text-center">
                 <div className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-accent to-accent-secondary bg-clip-text text-transparent mb-2">
-                {counts.reduction}%
+                {counts.satisfaction}%
                 </div>
                 <div className="text-sm text-muted-foreground uppercase tracking-wider">
-                average cost reduction
+                {t('proof.m2.label')}
                 </div>
             </div>
 
+            {/* MÉTRICA 3: Días de entrega */}
             <div className="text-center">
                 <div className="text-4xl md:text-5xl font-bold text-foreground mb-2">
-                {counts.delivery}-day
+                7-{counts.delivery}
                 </div>
                 <div className="text-sm text-muted-foreground uppercase tracking-wider">
-                average delivery
+                {t('proof.m3.label')}
                 </div>
             </div>
+            
             </div>
         </div>
         </section>
