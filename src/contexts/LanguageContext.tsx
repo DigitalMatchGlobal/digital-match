@@ -14,7 +14,44 @@
 
     const translations = {
     es: {
-        // Header & Navigation
+        // ... (MANTENER LO ANTERIOR: nav, hero, keywords, proof, services, faq, contact, footer) ...
+        // Solo pego aquí lo nuevo o lo que necesitamos que contexto tenga para no borrarte lo otro si copias todo
+        // ASEGÚRATE DE MANTENER LAS OTRAS SECCIONES QUE YA TENÍAS (nav, hero, etc.)
+        
+        // --- PEGAR ESTO DENTRO DE 'es' ---
+        'technical.title': 'Capacidades Técnicas',
+        'technical.subtitle': 'Soluciones integrales diseñadas para escalar tus operaciones',
+        'technical.outcomes_title': 'Resultados Típicos',
+        
+        // Automation
+        'technical.auto.title': 'Automatización de Procesos',
+        'technical.auto.desc': 'Elimina tareas repetitivas y optimiza operaciones con sistemas inteligentes.',
+        'technical.auto.impact': 'Máxima Eficiencia Operativa', // Reemplazo de ROI
+        'technical.auto.out1': 'Reduce la entrada manual de datos en un 90%',
+        'technical.auto.out2': 'Corta tiempos de proceso de horas a minutos',
+        'technical.auto.out3': 'Elimina el error humano en tareas de rutina',
+        'technical.auto.out4': 'Libera a tu equipo para trabajo estratégico',
+
+        // AI
+        'technical.ai.title': 'Asistentes IA',
+        'technical.ai.desc': 'Implementa chatbots inteligentes y asistentes virtuales para atención 24/7.',
+        'technical.ai.impact': 'Atención 24/7 Garantizada', // Reemplazo de ROI
+        'technical.ai.out1': 'Maneja el 80% de consultas automáticamente',
+        'technical.ai.out2': 'Reduce el tiempo de respuesta a segundos',
+        'technical.ai.out3': 'Escala el soporte sin contratar más personal',
+        'technical.ai.out4': 'Mejora la satisfacción del cliente',
+
+        // Web
+        'technical.web.title': 'Productos Web',
+        'technical.web.desc': 'Construye plataformas y herramientas internas que impulsan el crecimiento.',
+        'technical.web.impact': 'Alto Rendimiento y SEO', // Reemplazo de ROI
+        'technical.web.out1': 'Lanzamiento de MVP en 7-14 días',
+        'technical.web.out2': 'Escalable a miles de usuarios',
+        'technical.web.out3': 'Integración con sistemas existentes',
+        'technical.web.out4': 'Optimizado para móviles y seguro',
+
+        // ... (Mantener contact, footer, etc.)
+        // REPETIR LAS CLAVES ANTERIORES QUE YA TENIAS EN EL ARCHIVO
         'nav.services': 'Servicios',
         'nav.results': 'Resultados',
         'nav.process': 'Proceso',
@@ -25,8 +62,6 @@
         'nav.tooltips.results': 'Ver resultados de clientes',
         'nav.tooltips.process': 'Entender nuestra metodología',
         'nav.tooltips.contact': 'Agendar consulta',
-        
-        // Hero Section
         'hero.badge': 'Transformación digital • Automatización • IA',
         'hero.title.part1': 'Construí sistemas que',
         'hero.title.highlight': 'hacen escalar',
@@ -34,26 +69,18 @@
         'hero.subtitle': 'Del cuello de botella al crecimiento en 7-14 días',
         'hero.cta.book': 'Agendar Llamada Estratégica',
         'hero.cta.work': 'Ver Nuestro Trabajo',
-        
-        // Floating Keywords
         'keywords.ml': 'Aprendizaje Automático',
         'keywords.automation': 'Automatización de Procesos',
         'keywords.api': 'Integración de APIs',
         'keywords.cloud': 'Infraestructura en la Nube',
         'keywords.analytics': 'Análisis de Datos',
         'keywords.ai': 'Soluciones IA',
-        
-        // Proof Strip
         'proof.clients': '50+ clientes en LATAM y EE.UU.',
         'proof.automation': '80% reducción en tareas manuales',
         'proof.delivery': '7-14 días de entrega',
         'proof.support': 'Soporte 24/7',
-        
-        // Services Section
         'services.title': 'Soluciones que Transforman',
         'services.subtitle': 'Servicios especializados para automatización y escalamiento empresarial',
-        
-        // FAQ Section
         'faq.title': 'Preguntas Frecuentes',
         'faq.subtitle': 'Todo lo que necesitas saber sobre cómo trabajamos',
         'faq.q1.question': '¿Cuánto tiempo toma entregar un proyecto?',
@@ -71,8 +98,6 @@
         'faq.q5.question': '¿Quiénes son sus clientes típicos?',
         'faq.q5.answer': 'Trabajamos con startups y PyMEs ambiciosas en LATAM y EE.UU. con presupuestos de $5K-50K. Clientes que buscan escalar eficientemente, valoran la experiencia técnica y necesitan sistemas documentados y mantenibles.',
         'faq.q5.stats': '50+ startups escaladas',
-        
-        // Contact Section Main
         'contact.title': '¿Listo para Escalar tu Negocio?',
         'contact.subtitle': 'Agenda una llamada estratégica gratuita y descubre cómo podemos transformar tus operaciones en 7-14 días',
         'contact.feat.response.title': 'Respuesta Rápida',
@@ -81,8 +106,6 @@
         'contact.feat.commit.desc': 'Consulta gratuita sin obligación. Te daremos consejos honestos incluso si no somos la opción ideal.',
         'contact.feat.start.title': 'Inicio Rápido',
         'contact.feat.start.desc': 'Si somos compatibles, podemos iniciar tu proyecto en 24-48 horas.',
-
-        // Contact Form
         'contact.form.name': 'Nombre Completo',
         'contact.form.name.ph': 'Juan Pérez',
         'contact.form.email': 'Correo Electrónico',
@@ -104,12 +127,10 @@
         'contact.success.title': '¡Mensaje Enviado con Éxito!',
         'contact.success.desc': 'Te contactaremos dentro de las próximas 24 horas para agendar tu llamada estratégica.',
         'contact.success.button': 'Enviar Otro Mensaje',
-
-        // Footer
         'footer.rights': 'Todos los derechos reservados',
         'footer.privacy': 'Política de Privacidad',
         'footer.terms': 'Términos de Servicio',
-        'footer.data_deletion': 'Eliminación de Datos', // <--- NUEVO
+        'footer.data_deletion': 'Eliminación de Datos',
         'footer.description': 'Construyendo sistemas que escalan tu negocio a través de automatización, IA y desarrollo web.',
         'footer.services.title': 'Servicios',
         'footer.legal.title': 'Legal',
@@ -121,7 +142,40 @@
         'footer.links.consulting': 'Consultoría'
     },
     en: {
-        // Header & Navigation
+        // --- PEGAR ESTO DENTRO DE 'en' ---
+        'technical.title': 'Technical Capabilities',
+        'technical.subtitle': 'Comprehensive solutions designed to scale your business operations',
+        'technical.outcomes_title': 'Typical Outcomes',
+
+        // Automation
+        'technical.auto.title': 'Process Automation',
+        'technical.auto.desc': 'Eliminate repetitive tasks and streamline operations with intelligent automation systems.',
+        'technical.auto.impact': 'High Operational Efficiency', // Replacement for ROI
+        'technical.auto.out1': 'Reduce manual data entry by 90%',
+        'technical.auto.out2': 'Cut processing time from hours to minutes',
+        'technical.auto.out3': 'Eliminate human error in routine tasks',
+        'technical.auto.out4': 'Free up team for strategic work',
+
+        // AI
+        'technical.ai.title': 'AI Assistants',
+        'technical.ai.desc': 'Deploy intelligent chatbots and virtual assistants for 24/7 customer engagement.',
+        'technical.ai.impact': 'Guaranteed 24/7 Support', // Replacement for ROI
+        'technical.ai.out1': 'Handle 80% of customer inquiries automatically',
+        'technical.ai.out2': 'Reduce response time from hours to seconds',
+        'technical.ai.out3': 'Scale support without hiring',
+        'technical.ai.out4': 'Improve customer satisfaction scores',
+
+        // Web
+        'technical.web.title': 'Web Products',
+        'technical.web.desc': 'Build revenue-generating platforms and internal tools that drive business growth.',
+        'technical.web.impact': 'High Performance & SEO', // Replacement for ROI
+        'technical.web.out1': 'Launch MVP in 7-14 days',
+        'technical.web.out2': 'Scale to thousands of users',
+        'technical.web.out3': 'Integrate with existing systems',
+        'technical.web.out4': 'Mobile-optimized and secure',
+
+        // ... (Mantener contact, footer, etc.)
+        // REPETIR LAS CLAVES ANTERIORES EN INGLÉS
         'nav.services': 'Services',
         'nav.results': 'Results',
         'nav.process': 'Process',
@@ -132,8 +186,6 @@
         'nav.tooltips.results': 'See client results',
         'nav.tooltips.process': 'Understand our methodology',
         'nav.tooltips.contact': 'Book consultation',
-        
-        // Hero Section
         'hero.badge': 'Digital transformation • Automation • AI',
         'hero.title.part1': 'Build systems that',
         'hero.title.highlight': 'scale',
@@ -141,26 +193,18 @@
         'hero.subtitle': 'From bottleneck to breakthrough in 7-14 days',
         'hero.cta.book': 'Book Strategy Call',
         'hero.cta.work': 'View Our Work',
-        
-        // Floating Keywords
         'keywords.ml': 'Machine Learning',
         'keywords.automation': 'Process Automation',
         'keywords.api': 'API Integration',
         'keywords.cloud': 'Cloud Infrastructure',
         'keywords.analytics': 'Data Analytics',
         'keywords.ai': 'AI Solutions',
-        
-        // Proof Strip
         'proof.clients': '50+ clients in LATAM and US',
         'proof.automation': '80% reduction in manual tasks',
         'proof.delivery': '7-14 days delivery',
         'proof.support': '24/7 support',
-        
-        // Services Section
         'services.title': 'Solutions that Transform',
         'services.subtitle': 'Specialized services for business automation and scaling',
-        
-        // FAQ Section
         'faq.title': 'Frequently Asked Questions',
         'faq.subtitle': 'Everything you need to know about working with us',
         'faq.q1.question': 'How long does it take to deliver a project?',
@@ -178,8 +222,6 @@
         'faq.q5.question': 'Who are your typical clients?',
         'faq.q5.answer': 'We work with ambitious startups and SMEs in LATAM and US markets with $5K-50K budgets. Our clients are typically experiencing operational bottlenecks, looking to scale efficiently, and value technical expertise over cheap alternatives. They need fast implementation with documented, maintainable systems.',
         'faq.q5.stats': '50+ startups scaled',
-        
-        // Contact Section Main
         'contact.title': "Ready to Scale Your Business?",
         'contact.subtitle': 'Book a free strategy call and discover how we can transform your operations in 7-14 days',
         'contact.feat.response.title': 'Fast Response',
@@ -188,8 +230,6 @@
         'contact.feat.commit.desc': "Free consultation with no obligation. We'll provide honest advice even if we're not the right fit",
         'contact.feat.start.title': 'Quick Start',
         'contact.feat.start.desc': "If we're a good match, we can start your project within 24-48 hours",
-
-        // Contact Form
         'contact.form.name': 'Full Name',
         'contact.form.name.ph': 'John Doe',
         'contact.form.email': 'Email',
@@ -211,12 +251,10 @@
         'contact.success.title': 'Message Sent Successfully!',
         'contact.success.desc': "We'll get back to you within 24 hours to schedule your strategy call",
         'contact.success.button': 'Send Another Message',
-        
-        // Footer
         'footer.rights': 'All rights reserved',
         'footer.privacy': 'Privacy Policy',
         'footer.terms': 'Terms of Service',
-        'footer.data_deletion': 'Data Deletion', // <--- NUEVO
+        'footer.data_deletion': 'Data Deletion',
         'footer.description': 'Building systems that scale your business through automation, AI, and web development',
         'footer.services.title': 'Services',
         'footer.legal.title': 'Legal',

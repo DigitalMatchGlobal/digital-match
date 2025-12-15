@@ -1,7 +1,8 @@
     'use client';
 
-    import { useState, useEffect } from 'react';
+    import { useState, useEffect, useMemo } from 'react';
     import Icon from '@/components/ui/AppIcon';
+    import { useLanguage } from '@/contexts/LanguageContext'; // <--- Importamos el hook
 
     interface Capability {
     id: string;
@@ -9,58 +10,60 @@
     icon: string;
     description: string;
     outcomes: string[];
-    roi: string;
+    roi: string; // Mantenemos el nombre 'roi' internamente, pero el contenido será el "Impacto"
     }
 
     const TechnicalShowcase = () => {
     const [isHydrated, setIsHydrated] = useState(false);
     const [activeTab, setActiveTab] = useState('automation');
+    const { t } = useLanguage(); // <--- Usamos el hook
 
     useEffect(() => {
         setIsHydrated(true);
     }, []);
 
-    const capabilities: Capability[] = [
+    // Usamos useMemo para que las capacidades se actualicen al cambiar el idioma
+    const capabilities: Capability[] = useMemo(() => [
         {
         id: 'automation',
-        title: 'Process Automation',
+        title: t('technical.auto.title'),
         icon: 'CogIcon',
-        description: 'Eliminate repetitive tasks and streamline operations with intelligent automation systems',
+        description: t('technical.auto.desc'),
         outcomes: [
-            'Reduce manual data entry by 90%',
-            'Cut processing time from hours to minutes',
-            'Eliminate human error in routine tasks',
-            'Free up team for strategic work'
+            t('technical.auto.out1'),
+            t('technical.auto.out2'),
+            t('technical.auto.out3'),
+            t('technical.auto.out4')
         ],
-        roi: '300-500% ROI in first year'
+        roi: t('technical.auto.impact') // <--- Aquí va el nuevo texto de Impacto
         },
         {
         id: 'ai',
-        title: 'AI Assistants',
+        title: t('technical.ai.title'),
         icon: 'SparklesIcon',
-        description: 'Deploy intelligent chatbots and virtual assistants for 24/7 customer engagement',
+        description: t('technical.ai.desc'),
         outcomes: [
-            'Handle 80% of customer inquiries automatically',
-            'Reduce response time from hours to seconds',
-            'Scale support without hiring',
-            'Improve customer satisfaction scores'
+            t('technical.ai.out1'),
+            t('technical.ai.out2'),
+            t('technical.ai.out3'),
+            t('technical.ai.out4')
         ],
-        roi: '200-400% ROI in first year'
+        roi: t('technical.ai.impact')
         },
         {
         id: 'web',
-        title: 'Web Products',
+        title: t('technical.web.title'),
         icon: 'GlobeAltIcon',
-        description: 'Build revenue-generating platforms and internal tools that drive business growth',
+        description: t('technical.web.desc'),
         outcomes: [
-            'Launch MVP in 7-14 days',
-            'Scale to thousands of users',
-            'Integrate with existing systems',
-            'Mobile-optimized and secure'
+            t('technical.web.out1'),
+            t('technical.web.out2'),
+            t('technical.web.out3'),
+            t('technical.web.out4')
         ],
-        roi: '400-600% ROI in first year'
+        roi: t('technical.web.impact')
         }
-    ];
+    ], [t]);
 
     const activeCapability = capabilities.find(c => c.id === activeTab) || capabilities[0];
 
@@ -68,50 +71,7 @@
         return (
         <section className="py-24 bg-background">
             <div className="max-w-7xl mx-auto px-6 lg:px-8">
-            <div className="text-center mb-16">
-                <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
-                Technical Capabilities
-                </h2>
-                <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-                Comprehensive solutions designed to scale your business operations
-                </p>
-            </div>
-
-            <div className="bg-surface border border-border rounded-2xl p-8 md:p-12">
-                <div className="flex flex-col md:flex-row gap-4 mb-8">
-                {capabilities.map((capability) => (
-                    <button
-                    key={capability.id}
-                    className="flex-1 px-6 py-4 text-left rounded-lg bg-secondary border border-border"
-                    >
-                    <div className="text-lg font-semibold text-foreground">
-                        {capability.title}
-                    </div>
-                    </button>
-                ))}
-                </div>
-
-                <div className="grid md:grid-cols-2 gap-8">
-                <div>
-                    <h3 className="text-2xl font-bold text-foreground mb-4">
-                    {activeCapability.title}
-                    </h3>
-                    <p className="text-muted-foreground mb-6">
-                    {activeCapability.description}
-                    </p>
-                </div>
-                <div>
-                    <div className="space-y-3">
-                    {activeCapability.outcomes.map((outcome, index) => (
-                        <div key={index} className="flex items-start space-x-3">
-                        <div className="w-6 h-6 rounded-full bg-accent/20 flex items-center justify-center flex-shrink-0 mt-0.5" />
-                        <span className="text-foreground">{outcome}</span>
-                        </div>
-                    ))}
-                    </div>
-                </div>
-                </div>
-            </div>
+            {/* Skeleton loader simple */}
             </div>
         </section>
         );
@@ -122,10 +82,10 @@
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
             <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
-                Technical Capabilities
+                {t('technical.title')}
             </h2>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-                Comprehensive solutions designed to scale your business operations
+                {t('technical.subtitle')}
             </p>
             </div>
 
@@ -160,8 +120,9 @@
                     {activeCapability.description}
                 </p>
                 <div className="inline-flex items-center space-x-2 px-4 py-2 rounded-full bg-success/20 border border-success/30">
-                    <Icon name="ChartBarIcon" size={16} />
-                    <span className="text-sm font-semibold text-success-foreground">
+                    <Icon name="ChartBarIcon" size={16} className="text-emerald-400" />
+                    {/* CAMBIO AQUÍ: Usamos text-emerald-400 para asegurar visibilidad sobre fondo oscuro */}
+                    <span className="text-sm font-semibold text-emerald-400">
                     {activeCapability.roi}
                     </span>
                 </div>
@@ -169,7 +130,7 @@
 
                 <div>
                 <h4 className="text-lg font-semibold text-foreground mb-4">
-                    Typical Outcomes
+                    {t('technical.outcomes_title')}
                 </h4>
                 <div className="space-y-3">
                     {activeCapability.outcomes.map((outcome, index) => (
