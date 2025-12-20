@@ -106,12 +106,18 @@
                 Digital Match Global
                 </span>
             </Link> */}
-            <Link href="/" className="flex items-center">
+            <Link href="/" className="flex items-center space-x-2">
+                {/* 1. Tu Imagen (Logo) */}
                 <img 
-                    src="/assets/images/Logo.png"  
-                    alt="Digital Match Global" 
+                    src="/assets/images/logo.png"  
+                    alt="Logo DM" 
                     className="h-10 w-auto object-contain" 
                 />
+
+                {/* 2. El Texto del Nombre (Esto es lo que faltaba) */}
+                <span className="text-base sm:text-lg font-bold text-foreground hidden sm:inline-block">
+                    Digital Match Global
+                </span>
             </Link>
             <div className="hidden lg:flex items-center space-x-1">
                 {navigationItems.map((item) => (
