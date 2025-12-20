@@ -110,7 +110,7 @@
                 {/* 1. Tu Imagen (Logo) */}
                 <img 
                     src="/assets/images/logo.png"  
-                    alt="Logo DM" 
+                    alt="Logo DM"
                     className="h-10 w-auto object-contain" 
                 />
 
