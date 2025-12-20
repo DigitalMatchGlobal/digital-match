@@ -2,6 +2,7 @@
 
     import { useState, useEffect } from 'react';
     import Link from 'next/link';
+    import Image from 'next/image'; // Importamos el componente optimizado
     import Icon from '@/components/ui/AppIcon';
     import { useLanguage } from '@/contexts/LanguageContext';
     import LanguageToggle from './LanguageToggle';
@@ -31,12 +32,12 @@
         tooltipKey: 'nav.tooltips.services'
         },
         // SECCIÓN COMENTADA: RESULTADOS
-        //{
-        //labelKey: 'nav.results',
-        //anchor: '#results',
-        //icon: 'ChartBarIcon',
-        //tooltipKey: 'nav.tooltips.results'
-        //},
+        // {
+        //   labelKey: 'nav.results',
+        //   anchor: '#results',
+        //   icon: 'ChartBarIcon',
+        //   tooltipKey: 'nav.tooltips.results'
+        // },
         {
         labelKey: 'nav.process',
         anchor: '#process',
@@ -98,27 +99,27 @@
             } ${className}`}
         >
             <nav className="mx-auto flex h-16 items-center justify-between px-4 sm:px-6 lg:px-8">
-            {/* <Link href="/" className="flex items-center space-x-2">
-                <div className="flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-gradient-accent">
-                <span className="text-lg sm:text-xl font-bold text-black">DM</span>
-                </div>
-                <span className="text-base sm:text-lg font-bold text-foreground hidden sm:inline-block">
-                Digital Match Global
-                </span>
-            </Link> */}
-            <Link href="/" className="flex items-center space-x-2">
-                {/* 1. Tu Imagen (Logo) */}
-                <img 
-                    src="/assets/images/Logo.png"  
-                    alt="Logo DM"
-                    className="h-10 w-auto object-contain" 
+            
+            {/* LOGO + TEXTO CON DEGRADADO */}
+            <Link href="/" className="flex items-center gap-3">
+                <Image 
+                src="/assets/images/Logo.png" // Asegúrate de que el nombre del archivo coincida (mayúscula/minúscula)
+                alt="Logo DM"
+                width={0}
+                height={0}
+                sizes="100vw"
+                className="h-10 w-auto object-contain" // Mantiene la proporción correcta
+                priority
                 />
 
-                {/* 2. El Texto del Nombre (Esto es lo que faltaba) */}
-                <span className="text-base sm:text-lg font-bold text-foreground hidden sm:inline-block">
-                    Digital Match Global
+                <span 
+                className="text-base sm:text-lg font-bold hidden sm:inline-block bg-gradient-to-r from-[#2563EB] to-[#6D5DFE] bg-clip-text text-transparent"
+                >
+                Digital Match Global
                 </span>
             </Link>
+            {/* FIN LOGO */}
+
             <div className="hidden lg:flex items-center space-x-1">
                 {navigationItems.map((item) => (
                 <button
