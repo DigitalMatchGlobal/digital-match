@@ -98,15 +98,21 @@
             } ${className}`}
         >
             <nav className="mx-auto flex h-16 items-center justify-between px-4 sm:px-6 lg:px-8">
-            <Link href="/" className="flex items-center space-x-2">
+            {/* <Link href="/" className="flex items-center space-x-2">
                 <div className="flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-gradient-accent">
                 <span className="text-lg sm:text-xl font-bold text-black">DM</span>
                 </div>
                 <span className="text-base sm:text-lg font-bold text-foreground hidden sm:inline-block">
                 Digital Match Global
                 </span>
+            </Link> */}
+            <Link href="/" className="flex items-center">
+                <img 
+                    src="/assets/images/logo.png"  
+                    alt="Digital Match Global" 
+                    className="h-10 w-auto object-contain" 
+                />
             </Link>
-
             <div className="hidden lg:flex items-center space-x-1">
                 {navigationItems.map((item) => (
                 <button
