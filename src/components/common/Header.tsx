@@ -108,7 +108,7 @@
             </Link> */}
             <Link href="/" className="flex items-center">
                 <img 
-                    src="/assets/images/logo.png"  
+                    src="/assets/images/Logo.png"  
                     alt="Digital Match Global" 
                     className="h-10 w-auto object-contain" 
                 />
