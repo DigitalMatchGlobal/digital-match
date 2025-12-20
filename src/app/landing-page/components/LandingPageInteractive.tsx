@@ -1,7 +1,6 @@
     'use client';
 
     import { useState, useEffect } from 'react';
-    // Quitamos la importación de LanguageProvider porque ya está en el layout
     import Header from '@/components/common/Header';
     import ScrollProgressIndicator from '@/components/common/ScrollProgressIndicator';
     import CTAFloatingButton from '@/components/common/CTAFloatingButton';
@@ -9,9 +8,9 @@
     import ProofStrip from './ProofStrip';
     import TechnicalShowcase from './TechnicalShowcase';
     import ServicesSection from './ServicesSection';
-    import TestimonialsSection from './TestimonialsSection';
+    //import TestimonialsSection from './TestimonialsSection';
     import FAQSection from './FAQSection';
-    import TrustIndicators from './TrustIndicators';
+    //import TrustIndicators from './TrustIndicators';*/}
     import ContactSection from './ContactSection';
     import Footer from './Footer';
 
@@ -62,9 +61,9 @@
             <ProofStrip />
             <TechnicalShowcase />
             <ServicesSection onCaseStudyClick={handleCaseStudyClick} />
-            <TestimonialsSection />
+            {/*<TestimonialsSection />*/}
             <FAQSection />
-            <TrustIndicators />
+            {/*<TrustIndicators />*/}
             <ContactSection />
         </main>
         <Footer />
