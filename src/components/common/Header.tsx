@@ -109,7 +109,7 @@
             <Link href="/" className="flex items-center space-x-2">
                 {/* 1. Tu Imagen (Logo) */}
                 <img 
-                    src="/assets/images/logo.png"  
+                    src="/assets/images/Logo.png"  
                     alt="Logo DM"
                     className="h-10 w-auto object-contain" 
                 />
