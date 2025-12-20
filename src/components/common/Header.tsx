@@ -30,12 +30,13 @@
         icon: 'CogIcon',
         tooltipKey: 'nav.tooltips.services'
         },
-        {
-        labelKey: 'nav.results',
-        anchor: '#results',
-        icon: 'ChartBarIcon',
-        tooltipKey: 'nav.tooltips.results'
-        },
+        // SECCIÓN COMENTADA: RESULTADOS
+        //{
+        //labelKey: 'nav.results',
+        //anchor: '#results',
+        //icon: 'ChartBarIcon',
+        //tooltipKey: 'nav.tooltips.results'
+        //},
         {
         labelKey: 'nav.process',
         anchor: '#process',
