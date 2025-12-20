@@ -100,9 +100,8 @@
         >
             <nav className="mx-auto flex h-16 items-center justify-between px-4 sm:px-6 lg:px-8">
             
-            {/* LOGO + TEXTO MODIFICADO PARA MÓVIL */}
+            {/* LOGO + TEXTO CON ANIMACIÓN DINÁMICA */}
             <Link href="/" className="flex items-center gap-3">
-                {/* Imagen: Oculta en móvil (hidden), Visible en PC (sm:block) */}
                 <Image 
                 src="/assets/images/Logo.png" 
                 alt="Logo DM"
@@ -113,9 +112,8 @@
                 priority
                 />
 
-                {/* Texto: Siempre visible (quitamos el 'hidden' anterior) */}
                 <span 
-                className="text-base sm:text-lg font-bold bg-gradient-to-r from-[#2563EB] to-[#6D5DFE] bg-clip-text text-transparent"
+                className="text-base sm:text-lg font-bold bg-gradient-to-r from-[#2563EB] via-[#6D5DFE] to-[#2563EB] bg-clip-text text-transparent animate-gradient-x-header"
                 >
                 Digital Match Global
                 </span>
@@ -222,6 +220,19 @@
             </div>
             </div>
         )}
+
+        {/* --- ESTILOS DE LA ANIMACIÓN --- */}
+        <style jsx>{`
+            @keyframes gradient-x-header {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+            }
+            .animate-gradient-x-header {
+            background-size: 200% auto;
+            animation: gradient-x-header 3s linear infinite;
+            }
+        `}</style>
         </>
     );
     };
