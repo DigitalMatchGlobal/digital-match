@@ -2,7 +2,7 @@
 
     import { useState, useEffect } from 'react';
     import Link from 'next/link';
-    import Image from 'next/image'; // Importamos el componente optimizado
+    import Image from 'next/image';
     import Icon from '@/components/ui/AppIcon';
     import { useLanguage } from '@/contexts/LanguageContext';
     import LanguageToggle from './LanguageToggle';
@@ -100,20 +100,22 @@
         >
             <nav className="mx-auto flex h-16 items-center justify-between px-4 sm:px-6 lg:px-8">
             
-            {/* LOGO + TEXTO CON DEGRADADO */}
+            {/* LOGO + TEXTO MODIFICADO PARA MÓVIL */}
             <Link href="/" className="flex items-center gap-3">
+                {/* Imagen: Oculta en móvil (hidden), Visible en PC (sm:block) */}
                 <Image 
-                src="/assets/images/Logo.png" // Asegúrate de que el nombre del archivo coincida (mayúscula/minúscula)
+                src="/assets/images/Logo.png" 
                 alt="Logo DM"
                 width={0}
                 height={0}
                 sizes="100vw"
-                className="h-10 w-auto object-contain" // Mantiene la proporción correcta
+                className="hidden sm:block h-10 w-auto object-contain" 
                 priority
                 />
 
+                {/* Texto: Siempre visible (quitamos el 'hidden' anterior) */}
                 <span 
-                className="text-base sm:text-lg font-bold hidden sm:inline-block bg-gradient-to-r from-[#2563EB] to-[#6D5DFE] bg-clip-text text-transparent"
+                className="text-base sm:text-lg font-bold bg-gradient-to-r from-[#2563EB] to-[#6D5DFE] bg-clip-text text-transparent"
                 >
                 Digital Match Global
                 </span>
