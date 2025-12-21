@@ -2,7 +2,7 @@
 
     import { useState, useEffect, useMemo } from 'react';
     import Link from 'next/link';
-    import Image from 'next/image'; // <--- Importante: Importamos Image
+    import Image from 'next/image';
     import Icon from '@/components/ui/AppIcon';
     import { useLanguage } from '@/contexts/LanguageContext';
 
@@ -45,11 +45,11 @@
         { label: t('nav.contact'), href: '#contact' },
     ];
 
-    // Enlaces legales
+    // Enlaces legales - CORREGIDOS PARA COINCIDIR CON TU LanguageContext
     const legalLinks: FooterLink[] = [
-        { label: t('footer.legal.privacy'), href: '/privacy' },
-        { label: t('footer.legal.terms'), href: '/terms' },
-        { label: t('footer.legal.deletion'), href: '/data-deletion' },
+        { label: t('footer.privacy'), href: '/privacy' },        // Antes: footer.legal.privacy
+        { label: t('footer.terms'), href: '/terms' },            // Antes: footer.legal.terms
+        { label: t('footer.data_deletion'), href: '/data-deletion' }, // Antes: footer.legal.deletion
     ];
 
     // Redes sociales

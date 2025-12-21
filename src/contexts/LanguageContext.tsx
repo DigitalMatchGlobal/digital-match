@@ -26,10 +26,9 @@
         'nav.tooltips.process': 'Entender nuestra metodología',
         'nav.tooltips.contact': 'Agendar consulta',
 
-        // --- CAMBIO AQUÍ (Hero Badge) ---
-        'hero.badge': 'Desarrollo Web • Automatización • IA', 
+        // --- CAMBIO  (Hero Badge) ---
         // Antes decía: 'Transformación digital • Automatización • IA'
-
+        'hero.badge': 'Automatización • IA • Desarrollo Web', 
         'hero.title.part1': 'Construí sistemas que',
         'hero.title.highlight': 'hacen escalar',
         'hero.title.part2': 'tu negocio',
@@ -38,8 +37,6 @@
         'hero.cta.work': 'Ver Nuestro Trabajo',
         
         // ... MANTENER RESTO DE CLAVES (keywords, proof, services, technical, etc) ...
-        // Para no hacer el mensaje eterno, asumo que mantienes el resto del archivo igual.
-        // Solo asegúrate de copiar y pegar todo lo que tenías antes abajo de esto.
         'keywords.ml': 'Aprendizaje Automático',
         'keywords.automation': 'Automatización de Procesos',
         'keywords.api': 'Integración de APIs',
@@ -175,7 +172,7 @@
         'nav.tooltips.contact': 'Book consultation',
 
         // --- CAMBIO AQUÍ (Hero Badge) ---
-        'hero.badge': 'Web Development • Automation • AI',
+        'hero.badge': 'Automation • AI • Web Development',
         // Antes decía: 'Digital transformation • Automation • AI'
 
         'hero.title.part1': 'Build systems that',
