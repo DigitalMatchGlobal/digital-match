@@ -41,15 +41,15 @@
         { label: t('nav.services'), href: '#services' },
         { label: t('nav.process'), href: '#process' },
         // { label: t('nav.results'), href: '#results' }, // COMENTADO COMO EN EL HEADER
-        { label: t('nav.faq'), href: '#faq' },
+        { label: t('faq.title'), href: '#faq' }, // <--- CAMBIO AQUÍ: Usamos 'faq.title' que ya existe
         { label: t('nav.contact'), href: '#contact' },
     ];
 
-    // Enlaces legales - CORREGIDOS PARA COINCIDIR CON TU LanguageContext
+    // Enlaces legales
     const legalLinks: FooterLink[] = [
-        { label: t('footer.privacy'), href: '/privacy' },        // Antes: footer.legal.privacy
-        { label: t('footer.terms'), href: '/terms' },            // Antes: footer.legal.terms
-        { label: t('footer.data_deletion'), href: '/data-deletion' }, // Antes: footer.legal.deletion
+        { label: t('footer.privacy'), href: '/privacy' }, // <--- CAMBIO: Usamos las claves que ya tienes
+        { label: t('footer.terms'), href: '/terms' },
+        { label: t('footer.data_deletion'), href: '/data-deletion' },
     ];
 
     // Redes sociales
