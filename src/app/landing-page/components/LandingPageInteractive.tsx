@@ -6,6 +6,7 @@
     import CTAFloatingButton from '@/components/common/CTAFloatingButton';
     import HeroSection from './HeroSection';
     import ProofStrip from './ProofStrip';
+    import AboutSection from './AboutSection';
     import TechnicalShowcase from './TechnicalShowcase';
     import ServicesSection from './ServicesSection';
     //import TestimonialsSection from './TestimonialsSection';
@@ -59,6 +60,7 @@
             onViewWorkClick={handleViewWorkClick}
             />
             <ProofStrip />
+            <AboutSection />
             <TechnicalShowcase />
             <ServicesSection onCaseStudyClick={handleCaseStudyClick} />
             {/*<TestimonialsSection />*/}

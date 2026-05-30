@@ -6,7 +6,7 @@
     const ProofStrip = () => {
     const [isHydrated, setIsHydrated] = useState(false);
     const [isVisible, setIsVisible] = useState(false);
-    const [counts, setCounts] = useState({ hours: 0, satisfaction: 0, delivery: 0 }); // Nombres de estado actualizados
+    const [counts, setCounts] = useState({ years: 0, projects: 0, delivery: 0 }); // Métricas reales
     const sectionRef = useRef<HTMLDivElement>(null);
     const { t } = useLanguage(); // <--- USAMOS HOOK
 
@@ -47,14 +47,14 @@
 
         // Actualizamos los contadores con los nuevos objetivos
         setCounts({
-            hours: Math.floor(2000 * progress), // Meta: 2000 horas
-            satisfaction: Math.floor(100 * progress), // Meta: 100%
+            years: Math.floor(14 * progress), // Meta: 14 años combinados
+            projects: Math.floor(5 * progress), // Meta: 5 proyectos entregados
             delivery: Math.floor(14 * progress) // Meta: 14 días
         });
 
         if (currentStep >= steps) {
             clearInterval(timer);
-            setCounts({ hours: 2000, satisfaction: 100, delivery: 14 });
+            setCounts({ years: 14, projects: 5, delivery: 14 });
         }
         }, interval);
 
@@ -74,20 +74,20 @@
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             
-            {/* MÉTRICA 1: Horas de Desarrollo */}
+            {/* MÉTRICA 1: Años de experiencia combinada */}
             <div className="text-center">
                 <div className="text-4xl md:text-5xl font-bold text-foreground mb-2">
-                +{counts.hours}
+                +{counts.years}
                 </div>
                 <div className="text-sm text-muted-foreground uppercase tracking-wider">
                 {t('proof.m1.label')}
                 </div>
             </div>
 
-            {/* MÉTRICA 2: Compromiso/Satisfacción */}
+            {/* MÉTRICA 2: Proyectos entregados */}
             <div className="text-center">
                 <div className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-accent to-accent-secondary bg-clip-text text-transparent mb-2">
-                {counts.satisfaction}%
+                +{counts.projects}
                 </div>
                 <div className="text-sm text-muted-foreground uppercase tracking-wider">
                 {t('proof.m2.label')}

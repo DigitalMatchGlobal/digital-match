@@ -26,6 +26,12 @@
 
     const navigationItems: NavigationItem[] = [
         {
+        labelKey: 'nav.about',
+        anchor: '#about',
+        icon: 'UserGroupIcon',
+        tooltipKey: 'nav.tooltips.about'
+        },
+        {
         labelKey: 'nav.services',
         anchor: '#services',
         icon: 'CogIcon',
