@@ -11,8 +11,9 @@ Landing page de **Digital Match Global**, una consultora de automatización, IA 
 Público objetivo: **startups y PYMEs en LATAM (Uruguay/Argentina) y EE.UU.**
 Objetivo del sitio: que el visitante **agende una llamada** (CTA principal → sección Contacto / Calendly / WhatsApp).
 
-> ⚠️ **Repo correcto:** este repo (`contisola/digital-match`) es el sitio REAL y en producción.
-> Existe una carpeta vieja `DIGITAL-MATCH-GLOBAL/public_html` (HTML estático + Bootstrap) que está **obsoleta — NO usar**.
+> ⚠️ **Repo correcto:** `DigitalMatchGlobal/digital-match` (org de la empresa) es el sitio REAL y en producción.
+> Migrado en 2026-05 desde `contisola/digital-match` (cuenta personal); ese repo queda como `contisola-backup`.
+> Está OBSOLETO y NO se usa: `DigitalMatchGlobal/digitalmatchglobal-web` (sitio viejo estático/Hostinger) y la carpeta `DIGITAL-MATCH-GLOBAL/public_html`.
 
 ---
 
@@ -111,7 +112,7 @@ Cada sección responde **una** pregunta distinta. No repetir contenido entre ell
 ## 9. Deploy (IMPORTANTE)
 
 - **Producción:** `digitalmatchglobal.com` se sirve desde **Vercel** (verificado: headers `server: Vercel`).
-- Vercel está conectado **directo a este repo** (`contisola/digital-match`) por su integración de GitHub — no hay `vercel.json` ni GitHub Actions.
+- Vercel está conectado **directo a este repo** (`DigitalMatchGlobal/digital-match`) por su integración de GitHub — no hay `vercel.json` ni GitHub Actions.
 - ⚠️ **Push a `main` = deploy a producción automático.** Para cambios no triviales: trabajar en una **rama** y abrir **PR** (Vercel crea un *preview deploy* por rama/PR); recién mergear a `main` cuando esté aprobado.
 - **Ojo con la confusión Hostinger vs Vercel** (son capas distintas):
   - **Dominio** (registro de `digitalmatchglobal.com`) → sigue en **Hostinger**.
