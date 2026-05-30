@@ -24,11 +24,12 @@
     }, []);
 
     // Diferenciales (POR QUÉ confiar) — NO servicios (eso está en Servicios/Capacidades)
+    // Los 4 comparten el mismo estilo destacado (tile con degradado + título en acento).
     const differentiators = useMemo(() => [
-        { icon: 'ClockIcon', title: t('about.diff1.title'), desc: t('about.diff1.desc'), highlight: true },
-        { icon: 'BuildingOffice2Icon', title: t('about.diff2.title'), desc: t('about.diff2.desc'), highlight: false },
-        { icon: 'ShieldCheckIcon', title: t('about.diff3.title'), desc: t('about.diff3.desc'), highlight: false },
-        { icon: 'CheckBadgeIcon', title: t('about.diff4.title'), desc: t('about.diff4.desc'), highlight: false }
+        { icon: 'ClockIcon', title: t('about.diff1.title'), desc: t('about.diff1.desc') },
+        { icon: 'BuildingOffice2Icon', title: t('about.diff2.title'), desc: t('about.diff2.desc') },
+        { icon: 'ShieldCheckIcon', title: t('about.diff3.title'), desc: t('about.diff3.desc') },
+        { icon: 'CheckBadgeIcon', title: t('about.diff4.title'), desc: t('about.diff4.desc') }
     ], [t]);
 
     if (!isHydrated) {
@@ -57,12 +58,10 @@
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-10 mt-14">
             {differentiators.map((diff, index) => (
                 <div key={index} className="reveal px-2 text-center" data-delay={index}>
-                <div className={`w-14 h-14 rounded-2xl flex items-center justify-center mx-auto mb-4 ${
-                    diff.highlight ? 'bg-gradient-accent shadow-cta' : 'bg-accent/10'
-                }`}>
-                    <Icon name={diff.icon} size={26} className={diff.highlight ? 'text-accent-foreground' : 'text-accent'} />
+                <div className="w-14 h-14 rounded-2xl flex items-center justify-center mx-auto mb-4 bg-gradient-accent shadow-cta">
+                    <Icon name={diff.icon} size={26} className="text-accent-foreground" />
                 </div>
-                <h3 className={`font-bold text-lg mb-2 leading-tight ${diff.highlight ? 'text-accent' : 'text-foreground'}`}>
+                <h3 className="font-bold text-lg mb-2 leading-tight text-accent">
                     {diff.title}
                 </h3>
                 <p className="text-sm text-muted-foreground leading-relaxed">
