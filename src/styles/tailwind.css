@@ -169,6 +169,22 @@
         to { opacity: 1; transform: none; }
     }
     .tab-fade { animation: tab-fade 0.35s cubic-bezier(0.16, 1, 0.3, 1); }
+
+    /* Marquee: banner infinito de logos (ver Certifications). El track se renderiza
+       DUPLICADO (dos copias idénticas); -50% desplaza exactamente una copia → loop sin saltos. */
+    @keyframes marquee {
+        from { transform: translateX(0); }
+        to { transform: translateX(-50%); }
+    }
+    .animate-marquee {
+        animation: marquee var(--marquee-duration, 30s) linear infinite;
+        will-change: transform;
+    }
+    /* Fundido en los bordes para que los logos entren/salgan suaves */
+    .marquee-mask {
+        -webkit-mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+        mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+    }
     }
 
     /* Guard global: respeta prefers-reduced-motion (neutraliza TODA animación nueva) */
@@ -176,5 +192,6 @@
         .reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
         .tab-fade { animation: none !important; }
         .animate-blob, .animate-gradient-x, .animate-gradient-x-header { animation: none !important; }
+        .animate-marquee { animation: none !important; }
     }
 
