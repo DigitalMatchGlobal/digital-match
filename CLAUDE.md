@@ -2,6 +2,7 @@
 
 Guía para trabajar en el sitio de **Digital Match Global**. Léela completa antes de tocar contenido o código.
 Para el detalle de estrategia, auditoría y hallazgos, ver [`docs/ESTRATEGIA-Y-HALLAZGOS.md`](docs/ESTRATEGIA-Y-HALLAZGOS.md).
+**Estado del trabajo y próximos pasos (leer al retomar): [`docs/ROADMAP.md`](docs/ROADMAP.md).**
 
 ---
 
