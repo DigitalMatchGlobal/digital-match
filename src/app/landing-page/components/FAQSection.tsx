@@ -3,6 +3,7 @@
     import { useState, useEffect, useMemo } from 'react';
     import Icon from '@/components/ui/AppIcon';
     import { useLanguage } from '@/contexts/LanguageContext';
+    import CircuitFlow from './CircuitFlow';
 
     interface FAQItem {
     id: string;
@@ -74,7 +75,7 @@
     if (!isHydrated) {
         return (
         // AGREGADO ID AQUI
-        <section id="process" className="py-24 bg-secondary/30">
+        <section id="process" className="py-24 section-raised">
             <div className="max-w-4xl mx-auto px-6 lg:px-8">
             <div className="text-center mb-16">
                 <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
@@ -91,8 +92,9 @@
 
     return (
         // AGREGADO ID AQUI (Esto era lo que faltaba para que funcionara siempre)
-        <section id="process" className="py-24 bg-secondary/30">
-        <div className="max-w-4xl mx-auto px-6 lg:px-8">
+        <section id="process" className="relative overflow-hidden py-24 section-raised">
+        <CircuitFlow className="[transform:scaleX(-1)]" />
+        <div className="relative z-10 max-w-4xl mx-auto px-6 lg:px-8">
             <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
                 {t('faq.title')}

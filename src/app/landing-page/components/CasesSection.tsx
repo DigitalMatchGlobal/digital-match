@@ -6,6 +6,7 @@
     import { useLanguage } from '@/contexts/LanguageContext';
     import { casesByComplexity } from '@/data/cases';
     import CaseCard from '@/app/portfolio/components/CaseCard';
+    import CircuitFlow from './CircuitFlow';
 
     const CasesSection = () => {
     const [isHydrated, setIsHydrated] = useState(false);
@@ -29,6 +30,7 @@
 
     return (
         <section id="cases" className="relative overflow-hidden py-24">
+        <CircuitFlow />
         <div className="glow-violet pointer-events-none absolute inset-0" />
         <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
             <div className="text-center mb-16 reveal">

@@ -3,6 +3,7 @@
     import { useState, useEffect, useMemo } from 'react';
     import Icon from '@/components/ui/AppIcon';
     import { useLanguage } from '@/contexts/LanguageContext';
+    import CircuitFlow from './CircuitFlow';
 
     // Stack tecnológico agrupado por disciplina (muestra cobertura full-stack,
     // que es el diferencial). Microsoft/IBM viven en la franja de Certificaciones.
@@ -38,6 +39,7 @@
 
     return (
         <section id="about" className="relative overflow-hidden py-24 bg-background">
+        <CircuitFlow className="[transform:scaleX(-1)]" />
         <div className="glow-radial pointer-events-none absolute inset-x-0 top-0 h-2/3" />
         <div className="relative z-10 max-w-6xl mx-auto px-6 lg:px-8 text-center">
 

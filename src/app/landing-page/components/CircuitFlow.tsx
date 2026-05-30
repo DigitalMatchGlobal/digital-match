@@ -156,21 +156,31 @@
         raf = requestAnimationFrame(draw);
         };
 
+        const start = () => { if (!reduced && !raf) raf = requestAnimationFrame(draw); };
+        const stop = () => { if (raf) { cancelAnimationFrame(raf); raf = 0; } };
+
         build();
         if (reduced) {
         ctx.clearRect(0, 0, width, height);
         drawStatic();
         drawNodes(0);
-        } else {
-        raf = requestAnimationFrame(draw);
         }
 
         const ro = new ResizeObserver(build);
         ro.observe(parent);
 
+        // Anima SOLO cuando la sección está (cerca de) visible: con varias instancias
+        // en la página, evita N loops de RAF corriendo fuera de pantalla.
+        const io = new IntersectionObserver(
+        (entries) => { if (entries[0].isIntersecting) start(); else stop(); },
+        { rootMargin: '200px' },
+        );
+        io.observe(parent);
+
         return () => {
-        cancelAnimationFrame(raf);
+        stop();
         ro.disconnect();
+        io.disconnect();
         };
     }, []);
 

@@ -6,6 +6,7 @@
     import { useLanguage } from '@/contexts/LanguageContext';
     import { featuredCases, restCases } from '@/data/cases';
     import CaseCard from './CaseCard';
+    import CircuitFlow from '@/app/landing-page/components/CircuitFlow';
 
     const PortfolioListInteractive = () => {
     const { t } = useLanguage();
@@ -22,8 +23,12 @@
         <div className="min-h-screen bg-background">
         <Header />
         <main>
-            <section className="pt-32 pb-24 px-4 sm:px-6 lg:px-8">
-            <div className="max-w-7xl mx-auto">
+            <section className="relative overflow-hidden pt-32 pb-24 px-4 sm:px-6 lg:px-8">
+            {/* Circuito acotado a la zona superior (no estirado por toda la lista) */}
+            <div className="pointer-events-none absolute inset-x-0 top-0 h-[640px]">
+                <CircuitFlow />
+            </div>
+            <div className="relative z-10 max-w-7xl mx-auto">
                 <div className="text-center mb-16">
                 <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
                     {t('portfolio.title')}

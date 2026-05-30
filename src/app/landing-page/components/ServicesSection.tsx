@@ -92,7 +92,7 @@
 
     if (!isHydrated) {
         return (
-        <section id="services" className="py-24 bg-secondary/30">
+        <section id="services" className="py-24 section-raised">
             <div className="max-w-7xl mx-auto px-6 lg:px-8">
             {/* Skeleton simple */}
             </div>
@@ -101,7 +101,7 @@
     }
 
     return (
-        <section id="services" className="relative py-24 bg-secondary/30 overflow-hidden">
+        <section id="services" className="relative py-24 section-raised overflow-hidden">
         {/* Circuito con paquetes de datos viajando por las trazas (tech) */}
         <CircuitFlow />
         <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">

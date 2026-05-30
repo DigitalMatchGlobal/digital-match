@@ -2,6 +2,7 @@
 
     import { useState, useEffect, useRef } from 'react';
     import { useLanguage } from '@/contexts/LanguageContext'; // <--- IMPORTAMOS HOOK
+    import CircuitFlow from './CircuitFlow';
 
     const ProofStrip = () => {
     const [isHydrated, setIsHydrated] = useState(false);
@@ -63,15 +64,16 @@
 
     if (!isHydrated) {
         return (
-        <section className="py-12 bg-secondary/50">
+        <section className="py-12 section-raised">
             {/* Skeleton simple */}
         </section>
         );
     }
 
     return (
-        <section ref={sectionRef} className="py-12 bg-secondary/50">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+        <section ref={sectionRef} className="relative overflow-hidden py-12 section-raised">
+        <CircuitFlow />
+        <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             
             {/* MÉTRICA 1: Años de experiencia combinada */}

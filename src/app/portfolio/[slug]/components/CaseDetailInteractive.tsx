@@ -6,6 +6,7 @@
     import Footer from '@/app/landing-page/components/Footer';
     import Icon from '@/components/ui/AppIcon';
     import { useLanguage } from '@/contexts/LanguageContext';
+    import CircuitFlow from '@/app/landing-page/components/CircuitFlow';
     import { cases } from '@/data/cases';
     import type { Case } from '@/data/cases';
 
@@ -39,6 +40,7 @@
 
             {/* ===== HERO ===== */}
             <section className="relative overflow-hidden pt-36 pb-16 px-4 sm:px-6 lg:px-8">
+            <CircuitFlow />
             {/* watermark gigante (anónimo: palabra del rubro) */}
             <div className="absolute inset-x-0 top-24 flex justify-center pointer-events-none select-none">
                 <span className="font-black tracking-tight text-white/[0.05] leading-none whitespace-nowrap text-[24vw] lg:text-[18vw]">

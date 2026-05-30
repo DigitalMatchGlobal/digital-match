@@ -3,6 +3,7 @@
     import { useState, useEffect } from 'react';
     import Icon from '@/components/ui/AppIcon';
     import { useLanguage } from '@/contexts/LanguageContext';
+    import CircuitFlow from './CircuitFlow';
 
     interface FormData {
     name: string;
@@ -123,7 +124,7 @@
 
     if (!isHydrated) {
         return (
-        <section id="contact" className="py-24 bg-secondary/30">
+        <section id="contact" className="py-24 section-raised">
             <div className="max-w-7xl mx-auto px-6 lg:px-8">
                 {/* Skeleton loading simple */}
             </div>
@@ -132,7 +133,8 @@
     }
 
     return (
-        <section id="contact" className="relative overflow-hidden py-24 bg-secondary/30">
+        <section id="contact" className="relative overflow-hidden py-24 section-raised">
+        <CircuitFlow className="[transform:scaleX(-1)]" />
         <div className="glow-radial pointer-events-none absolute inset-x-0 bottom-0 h-2/3" />
         <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
             <div className="grid md:grid-cols-2 gap-12">

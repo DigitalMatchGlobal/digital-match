@@ -55,6 +55,14 @@
         window.open('https://wa.me/+59893892924', '_blank');
     };
 
+    // Separador sutil entre secciones (línea en degradado, no full-bleed).
+    // Refuerza el límite entre secciones, sobre todo cuando comparten fondo.
+    const SectionDivider = () => (
+        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+        <div className="hairline" />
+        </div>
+    );
+
     // Contenido principal (reutilizable para hidratado y no hidratado)
     const content = (
         <div className="min-h-screen bg-background">
@@ -66,14 +74,21 @@
             onViewWorkClick={handleViewWorkClick}
             />
             <ProofStrip />
+            <SectionDivider />
             <AboutSection />
+            <SectionDivider />
             <Certifications />
+            <SectionDivider />
             <ServicesSection onCaseStudyClick={handleCaseStudyClick} />
+            <SectionDivider />
             <TechnicalShowcase />
+            <SectionDivider />
             <CasesSection />
             {/*<TestimonialsSection />*/}
+            <SectionDivider />
             <FAQSection />
             {/*<TrustIndicators />*/}
+            <SectionDivider />
             <ContactSection />
         </main>
         <Footer />

@@ -13,6 +13,9 @@
         /* Surface Colors */
         --color-surface: rgba(255, 255, 255, 0.05); /* white with 5% opacity - Translucent card separation */
         --color-surface-foreground: rgba(255, 255, 255, 0.95); /* white with 95% opacity */
+        /* Surface elevada para secciones "alternas": dark con leve tinte azul (paleta del
+           logo). Visible pero sutil sobre el negro puro → separa secciones sin "cajas". */
+        --color-surface-1: #0C0E16; /* ajustable: subir (#10131D) = más contraste / bajar (#08090E) = más integrado */
         
         /* Card Colors */
         --color-card: rgba(255, 255, 255, 0.05); /* white with 5% opacity - Translucent card separation */
@@ -136,6 +139,12 @@
     .hairline {
         height: 1px;
         background: linear-gradient(to right, transparent, var(--color-border), transparent);
+    }
+
+    /* Sección "elevada": surface dark con leve tinte de marca. Alterna con el negro
+       base (bg-background) para que se note el cambio de sección de forma sutil. */
+    .section-raised {
+        background-color: var(--color-surface-1);
     }
 
     /* Glows de profundidad (gradientes estáticos, GPU-friendly) */
