@@ -35,15 +35,20 @@ Orden actual en `src/app/landing-page/components/LandingPageInteractive.tsx`:
 - `TestimonialsSection` y `TrustIndicators` existen pero están **comentados** (relleno). No reactivar hasta tener prueba social real.
 - Cada sección vive en `src/app/landing-page/components/`. `Header` está en `src/components/common/`.
 - El formulario de contacto (`ContactSection`) envía vía **FormSubmit.co** a `info@digitalmatchglobal.com`.
-- **Componentes nuevos a conocer:** `Certifications` (logo-wall, logos en `public/assets/logos/`), `ContractModels` (modelos de contratación con efecto dock por proximidad), `CircuitFlow` (fondo canvas de "datos" en Servicios y Technical), `CaseCard` (en `src/app/portfolio/components/`, usado por listado y home).
+- **Componentes nuevos a conocer:** `Certifications` (**banner/marquee** infinito de logos — gris→color al hover/touch, pausa al hover; logos en `public/assets/logos/`), `ContractModels` (modelos de contratación con efecto dock por proximidad), `CircuitFlow` (fondo canvas de "datos"; ahora en **7 secciones de la landing + `/portfolio` + `/portfolio/[slug]`**, con pausa por `IntersectionObserver` cuando está fuera de pantalla), `CaseCard` (en `src/app/portfolio/components/`, usado por listado y home).
+- **`CaseCard` (modelo Problema→Resultado):** chip de tipo → rubro → problema (1-2 líneas) → **métricas (héroe)** → stack → CTA "Ver caso". Variante `featured` (más aire, ring de acento, eyebrow) para el bento. Fuente: `cases.ts`.
+- **`cases.ts` — campos del caso:** `tag`, `metrics` (⚠️ valores PLACEHOLDER, reemplazar por reales), `complexity` (1-5), opcionales `image`/`quote`. Helpers: `casesByComplexity`, `featuredCases` (top 4 por complejidad → bento), `restCases`. La home muestra el top-3 por complejidad.
 
 ### Sistema de diseño (IMPORTANTE — usar, no reinventar)
 Definido en `src/styles/tailwind.css` (`@layer utilities`). Para mantener cohesión y evitar "muro de cards":
 - **Marca:** acentos alineados al logo, azul→violeta (`--color-accent #4C8EFF`, `--color-accent-secondary #6D5DFE`, foreground blanco). `bg-gradient-accent`, `shadow-cta` (glow azul). NO usar cian/fucsia/colores fuera del arco de marca.
 - **`.glass-panel`**: superficie de card estándar (borde casi invisible; enciende acento + glow al hover). Usarla en cards nuevas en vez de `bg-surface border border-border`.
 - **`.reveal`** (+ `data-delay="1..5"`): scroll-reveal. Lo activa el hook `src/hooks/useReveal.ts` (montado 1 vez en `LandingPageInteractive`). Agregar `className="reveal"` a lo que deba aparecer al hacer scroll. ⚠️ No combinar `.reveal` con `transform` propio en el MISMO elemento (usar wrapper).
-- **`.hairline`** (separador en gradiente, no full-bleed), **`.glow-radial`/`.glow-violet`** (profundidad de fondo; requieren `relative overflow-hidden` en la `<section>`).
-- **Movimiento:** `prefers-reduced-motion` tiene **guard global** en `tailwind.css` — toda animación nueva debe quedar cubierta por él.
+- **`.hairline`** (separador en gradiente, no full-bleed; se usa como divisor **entre secciones** en `LandingPageInteractive`), **`.glow-radial`/`.glow-violet`** (profundidad de fondo; requieren `relative overflow-hidden` en la `<section>`).
+- **Separación de secciones:** `--color-surface-1` (#0C0E16, dark con leve tinte de marca) + utilidad **`.section-raised`** para las secciones "alternas" (Proof/Servicios/FAQ/Contacto). Alterna con el negro base (`bg-background`) para que se note el cambio de sección sin "cajas". Ajustable con un solo valor (ver comentario en `tailwind.css`).
+- **Verde = color semántico de "resultado/impacto"** (`text-emerald-400`, NO es color de marca). Único uso permitido fuera del arco azul→violeta. Aparece en los impactos de "Cómo lo hacemos" y en las métricas/Resultado del detalle de casos. No usarlo para identidad/UI.
+- **`.marquee`** (`.animate-marquee` + `.marquee-mask`): banner infinito; el track va DUPLICADO (dos copias) y `-50%` = loop sin saltos. Pausa con `hover:[animation-play-state:paused]`.
+- **Movimiento:** `prefers-reduced-motion` tiene **guard global** en `tailwind.css` — toda animación nueva debe quedar cubierta por él (ya cubre `.animate-marquee`; `CircuitFlow` lo respeta vía JS).
 
 ---
 
@@ -141,11 +146,13 @@ Cada sección responde **una** pregunta distinta. No repetir contenido entre ell
 
 ## 10. Estado / pendientes
 
-Estado completo y próximos pasos en [`docs/ROADMAP.md`](docs/ROADMAP.md). Hecho en `feat/portfolio` (Fase 2): casos `/portfolio`, repaleta a la marca, Servicios 4 pilares + modelos, Certificaciones con logos, stack por categorías, seguridad/compliance, tiempos "desde 7-14 días", y overhaul de UX/movimiento (glass-panel + scroll-reveal + CircuitFlow).
+Estado completo y próximos pasos en [`docs/ROADMAP.md`](docs/ROADMAP.md). **Fase 1 y Fase 2 ya están en `main` y EN PRODUCCIÓN** (Fase 2 = commit `9e65cc6`; `main`, `origin/main` y `feat/portfolio` apuntan al mismo commit — la rama `feat/portfolio` se conserva, no borrar). Lo que entró en Fase 2: casos `/portfolio`, repaleta a la marca, Servicios 4 pilares + modelos, Certificaciones con logos, stack por categorías, seguridad/compliance, tiempos "desde 7-14 días", y overhaul de UX/movimiento (glass-panel + scroll-reveal + CircuitFlow).
+
+**En curso (rama `feat/portfolio-casos-v2`, sin mergear):** overhaul del portfolio (CaseCard modelo Problema→Resultado, métricas, ranking por complejidad + bento de destacados, 3 casos nuevos → 9), Certificaciones como marquee, diferenciales de "Nosotros" unificados, contraste/separadores entre secciones, verde semántico de resultado, y CircuitFlow extendido a toda la experiencia.
 
 **Pendientes (resumen — detalle en ROADMAP):**
-- [ ] **Mergear `feat/portfolio` a `main`** tras revisar preview de Vercel (incluye repaleta global → mirar antes).
+- [ ] **⚠️ Métricas reales:** los `metrics` de `cases.ts` son PLACEHOLDER — reemplazar `value` por datos reales ANTES de mergear `feat/portfolio-casos-v2` a `main`.
 - [ ] **Fase 3 — Performance/SEO:** quitar guards `isHydrated` (SSR real), `next/font`, optimizar `Logo.png`, limpiar `rocket.new`.
-- [ ] **Contenido:** instancias reales de consultoría/capacitación (ESTRATEGIA §8), testimonios reales, `result` real por caso, (opcional) logos en el stack.
+- [ ] **Contenido:** instancias reales de consultoría/capacitación (ESTRATEGIA §8), testimonios reales (cargar en `quote` de `cases.ts`), `result` real por caso, screenshots reales por caso (campo `image`), (opcional) logos en el stack.
 - [ ] **Conversión/SEO:** analytics + tracking de CTAs, OG/sitemap/JSON-LD, pasada de accesibilidad + Lighthouse.
 - [ ] Confirmar wording exacto de PCI-DSS; QA en celular real.
