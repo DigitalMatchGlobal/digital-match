@@ -39,6 +39,45 @@
         }
     };
 
+    // Al llegar desde otra página con hash (ej. /#contact desde el detalle de un caso),
+    // el browser no engancha el scroll: las secciones de arriba arrancan en skeleton
+    // (guard isHydrated) y, al hidratarse, crecen y empujan el destino. Si scrolleamos
+    // temprano, aterrizamos en el lugar equivocado. Por eso esperamos a que la posición
+    // del destino se ESTABILICE (el layout dejó de moverse) y recién ahí scrolleamos.
+    useEffect(() => {
+        const hash = window.location.hash;
+        if (!hash) return;
+
+        let attempts = 0;
+        let lastTop = -1;
+        let stableCount = 0;
+
+        const tryScroll = () => {
+            const element = document.querySelector(hash);
+            if (element) {
+                const top = element.getBoundingClientRect().top + window.scrollY;
+                // Misma medición dos veces seguidas = layout asentado.
+                if (top > 0 && top === lastTop) {
+                    stableCount++;
+                } else {
+                    stableCount = 0;
+                }
+                lastTop = top;
+
+                if (stableCount >= 2) {
+                    window.scrollTo({ top: top - 80, behavior: 'smooth' });
+                    // Limpiamos el hash de la URL (deja /#contact como / ) sin recargar ni re-scrollear.
+                    window.history.replaceState(null, '', window.location.pathname);
+                    return;
+                }
+            }
+            if (attempts++ < 40) {
+                setTimeout(tryScroll, 100);
+            }
+        };
+        tryScroll();
+    }, []);
+
     const handleBookingClick = () => {
         scrollToSection('#contact');
     };
