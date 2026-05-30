@@ -34,10 +34,10 @@
         --color-muted: rgba(255, 255, 255, 0.1); /* white with 10% opacity */
         --color-muted-foreground: rgba(255, 255, 255, 0.70); /* white with 70% opacity - Supporting hierarchy without distraction */
         
-        /* Accent Colors */
-        --color-accent: #06B6D4; /* cyan-500 - Consultation CTA power + cyan gradient highlights */
-        --color-accent-foreground: #000000; /* black */
-        --color-accent-secondary: #EC4899; /* fuchsia-500 - Gradient accent complement */
+        /* Accent Colors — alineados al logo oficial (degradado azul → violeta) */
+        --color-accent: #4C8EFF; /* brand blue (logo) - CTA + gradient highlights */
+        --color-accent-foreground: #FFFFFF; /* white - legible sobre azul/violeta */
+        --color-accent-secondary: #6D5DFE; /* brand violet (logo) - complemento del gradiente */
         
         /* Destructive/Error Colors */
         --color-destructive: #EF4444; /* red-500 - Form validation feedback only */
@@ -55,14 +55,14 @@
         
         /* Border Colors */
         --color-border: rgba(255, 255, 255, 0.1); /* white with 10% opacity - Form fields and card separations */
-        --color-border-gradient-start: rgba(6, 182, 212, 0.3); /* cyan with 30% opacity - Gradient borders for hover states */
-        --color-border-gradient-end: rgba(236, 72, 153, 0.3); /* fuchsia with 30% opacity */
+        --color-border-gradient-start: rgba(76, 142, 255, 0.3); /* brand blue 30% - Gradient borders for hover states */
+        --color-border-gradient-end: rgba(109, 93, 254, 0.3); /* brand violet 30% */
         
         /* Input Colors */
         --color-input: rgba(255, 255, 255, 0.1); /* white with 10% opacity */
         
         /* Ring Colors */
-        --color-ring: #06B6D4; /* cyan-500 */
+        --color-ring: #4C8EFF; /* brand blue (logo) */
         
         /* Radius */
         --radius: 0.5rem;
@@ -96,9 +96,9 @@
         border-image: linear-gradient(135deg, var(--color-border-gradient-start) 0%, var(--color-border-gradient-end) 100%) 1;
     }
     
-    /* Custom shadow for CTA buttons and interactive cards */
+    /* Custom shadow for CTA buttons and interactive cards (brand blue) */
     .shadow-cta {
-        box-shadow: 0 20px 25px -5px rgba(6, 182, 212, 0.1), 0 10px 10px -5px rgba(6, 182, 212, 0.04);
+        box-shadow: 0 20px 25px -5px rgba(76, 142, 255, 0.15), 0 10px 10px -5px rgba(76, 142, 255, 0.06);
     }
     
     /* Backdrop blur for navigation */
@@ -115,4 +115,66 @@
     .transition-accordion {
         transition: all 300ms ease-out;
     }
+
+    /* --- Sistema anti-"boxiness": superficie, separadores y profundidad --- */
+
+    /* Panel de vidrio: borde casi invisible en reposo; el acento azul→violeta se enciende al hover */
+    .glass-panel {
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        border-radius: 1rem;
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        transition: border-color 250ms ease-out, box-shadow 250ms ease-out, background-color 250ms ease-out, transform 250ms ease-out;
     }
+    .glass-panel:hover {
+        border-color: rgba(76, 142, 255, 0.40);
+        box-shadow: 0 20px 25px -5px rgba(76, 142, 255, 0.15), 0 10px 10px -5px rgba(76, 142, 255, 0.06);
+    }
+
+    /* Separador que muere en los extremos (no full-bleed, no línea dura) */
+    .hairline {
+        height: 1px;
+        background: linear-gradient(to right, transparent, var(--color-border), transparent);
+    }
+
+    /* Glows de profundidad (gradientes estáticos, GPU-friendly) */
+    .glow-radial {
+        background: radial-gradient(60% 60% at 50% 0%, rgba(76, 142, 255, 0.10), transparent 70%);
+    }
+    .glow-violet {
+        background: radial-gradient(50% 50% at 80% 20%, rgba(109, 93, 254, 0.12), transparent 70%);
+    }
+
+    /* Scroll-reveal: aparece al entrar en viewport (lo activa useReveal) */
+    .reveal {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        will-change: opacity, transform;
+    }
+    .reveal.is-visible {
+        opacity: 1;
+        transform: none;
+    }
+    .reveal[data-delay="1"] { transition-delay: 80ms; }
+    .reveal[data-delay="2"] { transition-delay: 160ms; }
+    .reveal[data-delay="3"] { transition-delay: 240ms; }
+    .reveal[data-delay="4"] { transition-delay: 320ms; }
+    .reveal[data-delay="5"] { transition-delay: 400ms; }
+
+    /* Crossfade de paneles (ej. tabs de TechnicalShowcase) */
+    @keyframes tab-fade {
+        from { opacity: 0; transform: translateY(8px); }
+        to { opacity: 1; transform: none; }
+    }
+    .tab-fade { animation: tab-fade 0.35s cubic-bezier(0.16, 1, 0.3, 1); }
+    }
+
+    /* Guard global: respeta prefers-reduced-motion (neutraliza TODA animación nueva) */
+    @media (prefers-reduced-motion: reduce) {
+        .reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
+        .tab-fade { animation: none !important; }
+        .animate-blob, .animate-gradient-x, .animate-gradient-x-header { animation: none !important; }
+    }
+

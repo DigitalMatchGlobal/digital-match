@@ -50,6 +50,12 @@
         question: t('faq.q5.question'),
         answer: t('faq.q5.answer'),
         stats: t('faq.q5.stats')
+        },
+        {
+        id: '6',
+        question: t('faq.q6.question'),
+        answer: t('faq.q6.answer'),
+        stats: t('faq.q6.stats')
         }
     ], [t]);
 
@@ -96,48 +102,47 @@
             </p>
             </div>
 
-            <div className="space-y-4">
-            {faqs.map((faq) => {
+            <div className="border-t border-border/60 divide-y divide-border/60">
+            {faqs.map((faq, index) => {
                 const isOpen = openItems.has(faq.id);
 
                 return (
-                <div
-                    key={faq.id}
-                    className="bg-surface border border-border rounded-xl overflow-hidden transition-smooth hover:border-accent/50"
-                >
+                <div key={faq.id} className="reveal" data-delay={index}>
                     <button
                     onClick={() => toggleItem(faq.id)}
-                    className="w-full p-6 text-left flex items-center justify-between"
+                    className="group w-full py-6 text-left flex items-center justify-between gap-4"
                     >
-                    <h3 className="text-lg font-semibold text-foreground pr-8">
+                    <h3 className={`text-lg font-semibold pr-2 transition-colors ${
+                        isOpen ? 'text-accent' : 'text-foreground group-hover:text-accent'
+                    }`}>
                         {faq.question}
                     </h3>
                     <div
-                        className={`w-6 h-6 rounded-full bg-accent/20 flex items-center justify-center flex-shrink-0 transition-smooth ${
-                        isOpen ? 'rotate-180' : ''
+                        className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 transition-smooth ${
+                        isOpen ? 'rotate-180 bg-accent/20' : 'bg-accent/10 group-hover:bg-accent/20'
                         }`}
                     >
                         <Icon name="ChevronDownIcon" size={16} className="text-accent" />
                     </div>
                     </button>
 
-                    <div
-                    className={`transition-accordion overflow-hidden ${
-                        isOpen ? 'max-h-96' : 'max-h-0'
-                    }`}
-                    >
-                    <div className="px-6 pb-6">
+                    <div className={`grid transition-[grid-template-rows] duration-300 ease-out ${
+                    isOpen ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'
+                    }`}>
+                    <div className="overflow-hidden min-h-0">
+                        <div className="pb-6">
                         <p className="text-muted-foreground mb-4 leading-relaxed">
-                        {faq.answer}
+                            {faq.answer}
                         </p>
                         {faq.stats && (
-                        <div className="inline-flex items-center space-x-2 px-4 py-2 rounded-full bg-accent/10 border border-accent/30">
+                            <div className="inline-flex items-center space-x-2 px-4 py-2 rounded-full bg-accent/10 border border-accent/30">
                             <Icon name="CheckBadgeIcon" size={16} className="text-accent" />
                             <span className="text-sm font-semibold text-accent">
-                            {faq.stats}
+                                {faq.stats}
                             </span>
-                        </div>
+                            </div>
                         )}
+                        </div>
                     </div>
                     </div>
                 </div>

@@ -2,6 +2,8 @@
 
     import { useState, useEffect, useMemo } from 'react';
     import Icon from '@/components/ui/AppIcon';
+    import CircuitFlow from './CircuitFlow';
+    import ContractModels from './ContractModels';
     import { useLanguage } from '@/contexts/LanguageContext';
 
     interface Service {
@@ -70,8 +72,23 @@
             t('services.web.f4')
         ],
         caseStudyLink: '#case-study-web'
+        },
+        {
+        id: 'consulting',
+        title: t('services.consulting.title'),
+        icon: 'AcademicCapIcon',
+        headline: t('services.consulting.headline'),
+        description: t('services.consulting.desc'),
+        features: [
+            t('services.consulting.f1'),
+            t('services.consulting.f2'),
+            t('services.consulting.f3'),
+            t('services.consulting.f4')
+        ],
+        caseStudyLink: '#case-study-consulting'
         }
     ], [t]);
+
 
     if (!isHydrated) {
         return (
@@ -84,8 +101,10 @@
     }
 
     return (
-        <section id="services" className="py-24 bg-secondary/30">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+        <section id="services" className="relative py-24 bg-secondary/30 overflow-hidden">
+        {/* Circuito con paquetes de datos viajando por las trazas (tech) */}
+        <CircuitFlow />
+        <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
             <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
                 {t('services.main_title')}
@@ -95,16 +114,16 @@
             </p>
             </div>
 
-            <div className="grid md:grid-cols-3 gap-8">
-            {services.map((service) => (
+            <div className="grid md:grid-cols-2 gap-8">
+            {services.map((service, index) => (
+                <div key={service.id} className="reveal" data-delay={index % 2}>
                 <div
-                key={service.id}
                 onMouseEnter={() => setHoveredCard(service.id)}
                 onMouseLeave={() => setHoveredCard(null)}
-                className={`bg-surface border rounded-2xl p-8 transition-smooth cursor-pointer ${
+                className={`glass-panel p-8 h-full cursor-pointer ${
                     hoveredCard === service.id
-                    ? 'border-accent shadow-cta transform -translate-y-2'
-                    : 'border-border hover:border-accent/50'
+                    ? 'shadow-cta -translate-y-2 ring-1 ring-accent/40'
+                    : ''
                 }`}
                 >
                 <div className={`w-12 h-12 rounded-lg bg-gradient-accent flex items-center justify-center mb-6 transition-smooth ${
@@ -135,9 +154,21 @@
                     </li>
                     ))}
                 </ul>
+
+                <button
+                    onClick={() => onCaseStudyClick(service.id)}
+                    className="inline-flex items-center gap-2 text-sm font-semibold text-accent hover:gap-3 transition-all"
+                >
+                    {t('services.cta_button')}
+                    <Icon name="ArrowRightIcon" size={16} />
+                </button>
+                </div>
                 </div>
             ))}
             </div>
+
+            {/* Modelos de contratación (con efecto de proximidad) */}
+            <ContractModels />
         </div>
         </section>
     );

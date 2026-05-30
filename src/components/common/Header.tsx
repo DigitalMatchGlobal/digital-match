@@ -3,6 +3,7 @@
     import { useState, useEffect } from 'react';
     import Link from 'next/link';
     import Image from 'next/image';
+    import { usePathname } from 'next/navigation';
     import Icon from '@/components/ui/AppIcon';
     import { useLanguage } from '@/contexts/LanguageContext';
     import LanguageToggle from './LanguageToggle';
@@ -16,6 +17,7 @@
     anchor: string;
     icon: string;
     tooltipKey: string;
+    route?: string; // si está presente, es una ruta (Link) en lugar de un ancla con scroll
     }
 
     const Header = ({ className = '' }: HeaderProps) => {
@@ -23,6 +25,8 @@
     const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
     const [scrolled, setScrolled] = useState<boolean>(false);
     const { t } = useLanguage();
+    const pathname = usePathname();
+    const isHome = pathname === '/';
 
     const navigationItems: NavigationItem[] = [
         {
@@ -37,13 +41,13 @@
         icon: 'CogIcon',
         tooltipKey: 'nav.tooltips.services'
         },
-        // SECCIÓN COMENTADA: RESULTADOS
-        // {
-        //   labelKey: 'nav.results',
-        //   anchor: '#results',
-        //   icon: 'ChartBarIcon',
-        //   tooltipKey: 'nav.tooltips.results'
-        // },
+        {
+        labelKey: 'nav.cases',
+        anchor: '/portfolio',
+        route: '/portfolio',
+        icon: 'BriefcaseIcon',
+        tooltipKey: 'nav.tooltips.cases'
+        },
         {
         labelKey: 'nav.process',
         anchor: '#process',
@@ -86,6 +90,11 @@
     }, []);
 
     const handleNavClick = (anchor: string) => {
+        // Si no estamos en la home, los anclas (#about) navegan a la home con el hash.
+        if (!isHome) {
+        window.location.href = `/${anchor}`;
+        return;
+        }
         const element = document.querySelector(anchor);
         if (element) {
         const offsetTop = element.getBoundingClientRect().top + window.scrollY - 80;
@@ -127,23 +136,45 @@
             {/* FIN LOGO */}
 
             <div className="hidden lg:flex items-center space-x-1">
-                {navigationItems.map((item) => (
-                <button
+                {navigationItems.map((item) => {
+                if (item.route) {
+                    const active = pathname.startsWith(item.route);
+                    return (
+                    <Link
+                        key={item.anchor}
+                        href={item.route}
+                        className={`group relative px-3 xl:px-4 py-2 text-sm xl:text-base font-semibold transition-smooth ${
+                        active
+                            ? 'text-foreground'
+                            : 'text-muted-foreground hover:text-foreground'
+                        }`}
+                        title={t(item.tooltipKey)}
+                    >
+                        {t(item.labelKey)}
+                        {active && (
+                        <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-accent" />
+                        )}
+                    </Link>
+                    );
+                }
+                return (
+                    <button
                     key={item.anchor}
                     onClick={() => handleNavClick(item.anchor)}
                     className={`group relative px-3 xl:px-4 py-2 text-sm xl:text-base font-semibold transition-smooth ${
-                    activeSection === item.anchor
+                        isHome && activeSection === item.anchor
                         ? 'text-foreground'
                         : 'text-muted-foreground hover:text-foreground'
                     }`}
                     title={t(item.tooltipKey)}
-                >
+                    >
                     {t(item.labelKey)}
-                    {activeSection === item.anchor && (
-                    <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-accent" />
+                    {isHome && activeSection === item.anchor && (
+                        <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-accent" />
                     )}
-                </button>
-                ))}
+                    </button>
+                );
+                })}
             </div>
 
             <div className="hidden lg:flex items-center space-x-3">
@@ -193,22 +224,42 @@
                     <LanguageToggle />
                 </div>
                 
-                {navigationItems.map((item) => (
-                    <button
-                    key={item.anchor}
-                    onClick={() => handleNavClick(item.anchor)}
-                    className={`flex items-center space-x-3 px-4 py-3 sm:py-4 text-left text-sm sm:text-base font-semibold rounded-lg transition-smooth ${
-                        activeSection === item.anchor
+                {navigationItems.map((item) => {
+                    const className = `flex items-center space-x-3 px-4 py-3 sm:py-4 text-left text-sm sm:text-base font-semibold rounded-lg transition-smooth ${
+                    (item.route ? pathname.startsWith(item.route) : isHome && activeSection === item.anchor)
                         ? 'bg-accent/10 text-accent border border-accent/30' :'text-muted-foreground hover:text-foreground hover:bg-surface'
-                    }`}
-                    >
-                    <Icon name={item.icon as any} size={20} />
-                    <div className="flex-1">
+                    }`;
+                    const inner = (
+                    <>
+                        <Icon name={item.icon as any} size={20} />
+                        <div className="flex-1">
                         <div>{t(item.labelKey)}</div>
                         <div className="text-xs text-muted-foreground mt-0.5">{t(item.tooltipKey)}</div>
-                    </div>
+                        </div>
+                    </>
+                    );
+                    if (item.route) {
+                    return (
+                        <Link
+                        key={item.anchor}
+                        href={item.route}
+                        onClick={() => setMobileMenuOpen(false)}
+                        className={className}
+                        >
+                        {inner}
+                        </Link>
+                    );
+                    }
+                    return (
+                    <button
+                        key={item.anchor}
+                        onClick={() => handleNavClick(item.anchor)}
+                        className={className}
+                    >
+                        {inner}
                     </button>
-                ))}
+                    );
+                })}
 
                 <div className="pt-4 mt-4 border-t border-border">
                     <Link

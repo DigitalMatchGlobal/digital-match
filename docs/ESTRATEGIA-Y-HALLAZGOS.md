@@ -21,6 +21,8 @@ Tres ideas que el visitante debería percibir en segundos:
 
 El gran activo a comunicar es la **combinación poco común de skills** (automatización enterprise + IA + desarrollo + visión de negocio) y la **doble experiencia público/privada**.
 
+Hay una **extensión natural de ese nivel**: además de **ejecutar** (automatización, IA, desarrollo), el equipo puede **asesorar y formar** — consultoría de procesos/IA y jornadas de capacitación a equipos y empresas. Es la misma experiencia enterprise/pública, ahora **transferida** a otros. Refuerza el mensaje "nivel de las grandes empresas" y abre una vía de relación que no depende de un proyecto de software (ver §8).
+
 ---
 
 ## 2. Decisiones de marca tomadas (con el cliente)
@@ -31,6 +33,7 @@ El gran activo a comunicar es la **combinación poco común de skills** (automat
 - **Clientes anonimizados por rubro** hasta tener permiso para nombrarlos.
 - **Tono:** vendible/marketinero pero **sin humo**, hablándole directo al lector.
 - **Texto mínimo, mucho visual:** la sección "Nosotros" no debe ser un párrafo largo (se sentía "fantasma"); se resuelve con titular + 1 línea + elementos visuales.
+- **Seguridad / compliance = diferencial, comunicado como EXPERIENCIA (no certificación de la empresa):** se dice "experiencia bajo ISO 9001 y con compliance PCI-DSS (pagos)", nunca "somos ISO/PCI certified". **Sin logos de ISO/PCI** (implicarían certificación de la entidad). Aparece en: Nosotros (diferencial "Seguridad y cumplimiento", ícono escudo), FAQ ("¿Cómo manejan la seguridad y los datos?") y footer. Respaldo real: §6 (Perfil B, ISO 9001 + fintech/pagos).
 
 ---
 
@@ -73,11 +76,21 @@ El gran activo a comunicar es la **combinación poco común de skills** (automat
 
 ## 5. Roadmap / pendientes
 
-1. **Sección de Casos (prueba social real).** Anónimos por rubro. Insumos en §7. Darle destino real al botón "Ver Caso de Éxito".
-2. **Bug:** footer enlaza `#faq` pero la sección FAQ tiene `id="process"` → corregir.
-3. **Bug:** botón "Ver Caso de Éxito" (`ServicesSection.tsx`) desactivado → arreglar o quitar.
-4. **(Opcional)** Logos reales del stack en vez de texto (pega más fuerte).
-5. **(A futuro)** Testimonios reales de clientes para reactivar prueba social.
+**Hecho (Fase 2 — rama `feat/portfolio`):**
+- ✅ **Sección de Casos** (`/portfolio` + `/portfolio/[slug]`, estilo Houlak, 6 casos anónimos por rubro, color propio). Fuente: `src/data/cases.ts`.
+- ✅ **Identidad alineada al logo** (azul→violeta) en todo el sitio; los casos recorren ese arco de marca.
+- ✅ **Servicios = 4 pilares** (RPA explícito, IA, Web, **Consultoría y Capacitación**) + franja **"Cómo podés contratarnos"** (por proyecto/hora/consultoría/jornadas). Diferenciado de "Cómo lo hacemos".
+- ✅ **Certificaciones** con logos (UiPath, Rocketbot, Microsoft, IBM).
+- ✅ **Stack** reorganizado en 6 categorías (cobertura full-stack).
+- ✅ **Seguridad/compliance** (ISO 9001 + PCI-DSS, como experiencia) en Nosotros/FAQ/footer — ver §2 y §8.
+- ✅ **Tiempos** matizados a "desde 7-14 días según complejidad".
+- ✅ **Overhaul de UX/movimiento** (anti-"boxiness"): sistema `glass-panel` + scroll-reveal + glows + `CircuitFlow` + dock de proximidad. Detalle técnico en `ROADMAP.md`.
+
+**Pendiente:** ver lista priorizada en [`ROADMAP.md`](ROADMAP.md) → "Próximos pasos". Lo más relevante de contenido:
+- **(A futuro)** Testimonios reales para reactivar prueba social.
+- **(A futuro)** `result` real por caso en `cases.ts` (hoy omitido para no inventar métricas).
+- **(A futuro)** Casos de consultoría/capacitación en `/portfolio` cuando haya material confirmado (ver §8).
+- Confirmar wording exacto de PCI-DSS (¿entorno que cumplía vs. implementación de controles?).
 
 ---
 
@@ -97,10 +110,44 @@ Juntos cubren: **ingeniería de automatización enterprise + IA + desarrollo ful
 
 > Confirmar permiso antes de publicar cualquier nombre. Mientras tanto, describir por rubro.
 
-1. **ONG / fundación** *(proyecto propio)*: presencia digital completa — sitio institucional, panel admin + portal de socios/usuarios, pasarela de pago para donaciones y suscripciones mensuales; integraciones con Google for Nonprofits, TechSoup/Canva, Goodstack, Mercado Libre Solidario; plataforma de clases virtuales con convenio de un Ministerio de Educación provincial (AR).
-2. **Preparador físico / gimnasio de alto rendimiento** (Salta, AR): sitio web + sistema de gestión con métricas, analytics y cobro de cuotas (MercadoPago AR y UY).
-3. **Marca de wellness / vida saludable** (Salta, AR): presencia digital.
-4. **Courier / import-export** (Uruguay): sitio web entregado; sistema de gestión interna en desarrollo.
-5. **E-commerce de electrónica** (Uruguay): tienda online completa con pasarela de pago, backend robusto, manejo de stock y de kits de productos, y gestión interna.
+Estos 6 ya están publicados como casos en `/portfolio` (slug entre paréntesis):
 
-Rubros que demuestran versatilidad: ONG, salud/fitness, wellness, logística/comercio exterior, e-commerce.
+1. **ONG / fundación** *(proyecto propio)* — `fundacion-educativa-deportiva`: presencia digital completa — sitio institucional, panel admin + portal de socios/usuarios, pasarela de pago para donaciones y suscripciones mensuales; integraciones con Google for Nonprofits, TechSoup/Canva, Goodstack, Mercado Libre Solidario; plataforma de clases virtuales con convenio de un Ministerio de Educación provincial (AR).
+2. **Preparación física de alto rendimiento** (Salta, AR) — `preparacion-fisica-alto-rendimiento`: sitio web / landing de conversión para un preparador físico, foco en método basado en datos.
+3. **Plataforma de gestión de gimnasio** — `gestion-de-gimnasio`: sistema de gestión con check-in, métricas/analytics por atleta, planes y cobro de cuotas (MercadoPago AR y UY), reportes.
+4. **Marca de wellness / vida saludable** (Salta, AR) — `marca-de-wellness`: presencia digital, catálogo, turnos por WhatsApp, CMS autogestionable.
+5. **Courier / import-export** (Uruguay) — `logistica-courier`: sitio web entregado; sistema de gestión interna en desarrollo.
+6. **E-commerce de electrónica** (Uruguay) — `ecommerce-electronica`: tienda online completa con pasarela de pago, backend robusto, manejo de stock y de kits de productos, y gestión interna.
+
+Rubros que demuestran versatilidad: ONG, salud/fitness (×2), wellness, logística/comercio exterior, e-commerce.
+
+---
+
+## 8. Consultoría y capacitación (línea de servicio)
+
+Además de **ejecutar** soluciones, el equipo tiene perfil para **asesorar y formar**: es la misma experiencia enterprise/pública transferida a otros equipos. Es una vía de relación que **no depende de un proyecto de software** y refuerza el posicionamiento "nivel de las grandes empresas". Dos formatos:
+
+- **Consultoría.** Diagnóstico de procesos y oportunidades de automatización/IA; relevamiento y rediseño de procesos (BPMN); arquitectura de soluciones; hoja de ruta de transformación digital; gobierno y aprovechamiento de datos.
+- **Capacitación / jornadas.** Formación a equipos y empresas en automatización (RPA/UiPath), **IA aplicada / IA generativa para negocios**, fundamentos de datos y Power BI, y cultura de automatización. **En distintas escalas**: desde una charla/taller puntual hasta un programa a medida; presencial o remoto.
+
+**Respaldo real (ver §6):** mentoría y formación técnica en entornos enterprise, liderazgo de equipos (+30 personas), ISO 9001 / BPMN y experiencia en sector público — base creíble para pararse frente a un equipo.
+
+**Certificaciones reales (publicables — alimentan la franja "Certificaciones" del sitio):**
+- **UiPath** — RPA Developer Certification; Automation Project Manager; Introducción a RPA y Automatización.
+- **Microsoft** — Azure AI Fundamentals (AI-900).
+- **IBM** — Tools for Data Science; IBM Data Science Professional Certificate *(en curso)*.
+- **Rocketbot** — Rocketbot Suite (Level 1) — RPA.
+- **Otras:** Scrum Foundation (CertiProf); Azure Data Engineer (Udemy); AI for Everyone (Coursera); CCNA (Cisco); DELF A1 (francés).
+- **Académico:** Ingenieros en Sistemas de Información (UTN). **En curso:** Máster en IA (VIU), Diplomatura en Data Science (UTN FRBA), Diplomatura en Transformación Digital.
+
+> En el sitio se muestran con logo oficial las marcas reconocibles y on-message (**UiPath, Rocketbot, Microsoft, IBM**), en monocromo blanco que revela su color al hover. El resto (Scrum, Cisco, Coursera, etc.) queda como reserva. Solo se publica lo que es real (línea roja de honestidad).
+
+### 🔒 Tracción honesta (interno — NO publicar)
+Se hizo en **distintos momentos y medidas**, con resultados dispares. Esto es contexto para redactar copy con fundamento y para calibrar el posicionamiento — **no** son métricas para el sitio:
+- ✅ **Realizadas con éxito:** _(completar con instancias concretas — p. ej. mentoría/formación interna en enterprise, capacitaciones en la ONG/sector público)._
+- 🌱 **En gestación:** propuestas y conversaciones en curso que todavía no cerraron.
+- ⚠️ **No valoradas / no avanzaron:** algunas no prosperaron porque el **nivel propuesto excedía** lo que el interlocutor estaba dispuesto a pagar o a aprovechar. Lectura: apuntamos alto; el aprendizaje es **calificar mejor al cliente** y **graduar la oferta** (de un taller introductorio a un programa completo), no bajar el nivel.
+
+**Implicancia de posicionamiento:** presentar la consultoría/capacitación con **formatos escalonados** para no dejar afuera a PYMEs, manteniendo el techo alto para quien lo valore. Cuando haya instancias confirmadas (con permiso), pueden volverse casos anónimos en `/portfolio` o testimonios.
+
+> ⚠️ **Pendiente de definición tuya:** confirmá qué consultorías/capacitaciones concretas se hicieron (y cuáles podemos nombrar/anonimizar) para completar el ✅ de arriba y, si querés, sumar la sección "Consultoría" al sitio.

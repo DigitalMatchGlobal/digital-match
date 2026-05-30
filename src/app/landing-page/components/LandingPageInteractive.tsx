@@ -1,14 +1,18 @@
     'use client';
 
     import { useState, useEffect } from 'react';
+    import { useRouter } from 'next/navigation';
+    import { useReveal } from '@/hooks/useReveal';
     import Header from '@/components/common/Header';
     import ScrollProgressIndicator from '@/components/common/ScrollProgressIndicator';
     import CTAFloatingButton from '@/components/common/CTAFloatingButton';
     import HeroSection from './HeroSection';
     import ProofStrip from './ProofStrip';
     import AboutSection from './AboutSection';
+    import Certifications from './Certifications';
     import TechnicalShowcase from './TechnicalShowcase';
     import ServicesSection from './ServicesSection';
+    import CasesSection from './CasesSection';
     //import TestimonialsSection from './TestimonialsSection';
     import FAQSection from './FAQSection';
     //import TrustIndicators from './TrustIndicators';*/}
@@ -17,6 +21,8 @@
 
     const LandingPageInteractive = () => {
     const [isHydrated, setIsHydrated] = useState(false);
+    const router = useRouter();
+    useReveal();
 
     useEffect(() => {
         setIsHydrated(true);
@@ -38,11 +44,11 @@
     };
 
     const handleViewWorkClick = () => {
-        scrollToSection('#services');
+        router.push('/portfolio');
     };
 
     const handleCaseStudyClick = (serviceId: string) => {
-        console.log(`Opening case study for: ${serviceId}`);
+        router.push('/portfolio');
     };
 
     const handleWhatsAppClick = () => {
@@ -61,8 +67,10 @@
             />
             <ProofStrip />
             <AboutSection />
-            <TechnicalShowcase />
+            <Certifications />
             <ServicesSection onCaseStudyClick={handleCaseStudyClick} />
+            <TechnicalShowcase />
+            <CasesSection />
             {/*<TestimonialsSection />*/}
             <FAQSection />
             {/*<TrustIndicators />*/}

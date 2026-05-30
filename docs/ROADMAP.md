@@ -1,6 +1,6 @@
 # ROADMAP & Estado — Digital Match Global
 
-Documento para retomar el trabajo entre sesiones. Última actualización: **2026-05-29**.
+Documento para retomar el trabajo entre sesiones. Última actualización: **2026-05-30**.
 Ver también: [`../CLAUDE.md`](../CLAUDE.md) (reglas operativas) y [`ESTRATEGIA-Y-HALLAZGOS.md`](ESTRATEGIA-Y-HALLAZGOS.md) (estrategia, casos reales, contexto interno).
 
 ---
@@ -20,12 +20,13 @@ Llevar el sitio a nivel "profesional" tipo [houlak.com](https://www.houlak.com/o
 ## Estado del repo / deploy
 - Repo: `DigitalMatchGlobal/digital-match` (remoto `origin`). Backup: remoto `contisola-backup`.
 - Producción: `digitalmatchglobal.com` (Vercel) ← `main`. **Online y funcionando.**
-- **Rama de trabajo actual: `feat/url-raiz-y-fixes`** (Fase 1, pusheada, **NO mergeada a main todavía**).
-- Local: `npm install && npm run dev` → http://localhost:4028.
+- **Fase 1: MERGEADA a `main`** (rama `feat/url-raiz-y-fixes` ya borrada).
+- **Fase 2: COMPLETADA en `feat/portfolio`** (commiteada + pusheada). **Pendiente:** revisar el preview de Vercel de la rama y **mergear a `main`** (= deploy a producción).
+- Local: `npm install && npm run dev` → http://localhost:4028. Verificación: `npx tsc --noEmit` + `npm run build` (⚠️ NO correr `build` con `dev` vivo: corrompe `.next`).
 
 ---
 
-## ✅ FASE 1 — COMPLETADA (en rama `feat/url-raiz-y-fixes`, pendiente de merge)
+## ✅ FASE 1 — COMPLETADA y MERGEADA a `main`
 
 Cambios hechos y verificados (build + tsc OK, probado en runtime):
 - **Landing en la raíz:** `src/app/page.tsx` (nuevo) sirve la landing; se borró `src/app/landing-page/page.tsx`. En `next.config.mjs` el redirect ahora es `/landing-page → /` (301). Verificado: `/` = 200, `/landing-page` = 308 → `/`.
@@ -34,25 +35,38 @@ Cambios hechos y verificados (build + tsc OK, probado en runtime):
 - **Bug botón:** se quitó el botón muerto "Ver Caso de Éxito" en `ServicesSection.tsx` (se reactiva en Fase 2 → `/portfolio`).
 - **Perf quick wins** (`next.config.mjs` + `AppImage.tsx`): `productionBrowserSourceMaps: false`; `images.formats: ['image/avif','image/webp']`; se quitó `unoptimized: true` de imágenes locales.
 
-**Pendiente de Fase 1:** revisar preview de Vercel de la rama y **mergear a `main`**.
+**Fase 1 cerrada:** mergeada a `main` el 2026-05-29 (deploy en producción).
 
 ---
 
-## ⏳ FASE 2 — Sección de Casos `/portfolio` (PENDIENTE)
-Rama sugerida: `feat/portfolio`. Es el núcleo del pedido (estilo Houlak).
+## ✅ FASE 2 — Casos, identidad, servicios y UX (COMPLETADA en `feat/portfolio`)
+Terminó siendo mucho más que la sección de casos. Todo verificado (`tsc` + `build` OK, runtime probado). Resumen:
 
-- **Datos:** crear `src/data/cases.ts` (fuente única). Cada caso:
-  ```ts
-  { slug, icon, accent, accentSecondary,
-    rubro: {es,en}, location,
-    challenge: {es,en}, solution: {es,en},
-    services: string[], result?: {es,en} }
-  ```
-  Casos iniciales (de `ESTRATEGIA-Y-HALLAZGOS.md`, anónimos por rubro, color propio c/u): ONG/fundación, gimnasio de alto rendimiento, marca de wellness, courier/import-export, e-commerce de electrónica.
-- **Listado:** `src/app/portfolio/page.tsx` (server + metadata) + grilla cliente (reusar patrón de tarjetas de `ServicesSection.tsx`/`TrustIndicators.tsx`). Cada tarjeta → `/portfolio/[slug]`.
-- **Página de caso:** `src/app/portfolio/[slug]/page.tsx` con `generateStaticParams` (estático = rápido). Color por caso sobrescribiendo variables CSS (`--color-accent`, `--color-accent-secondary`) con `style` inline en el wrapper (el sistema de tokens en `src/styles/tailwind.css` + `tailwind.config.js` ya lo permite). Estructura: Cliente (rubro) · Desafío · Solución · Servicios · Resultado + `Header`/`Footer` + link "Volver".
-- **i18n etiquetas:** agregar a `LanguageContext.tsx` (ES/EN): `portfolio.title`, `portfolio.subtitle`, `case.client`, `case.challenge`, `case.solution`, `case.services`, `case.result`, `case.cta`, `case.back`.
-- **Integración home/nav:** nueva `CasesSection.tsx` en la landing (preview de 3 casos + CTA a `/portfolio`, donde estaban los testimonios comentados); reactivar el botón de `ServicesSection` y el "Ver Nuestro Trabajo" del hero → `/portfolio`; agregar "Casos" al `Header.tsx` y footer.
+**1. Portfolio / Casos (núcleo, estilo Houlak)**
+- `src/data/cases.ts`: fuente única, **6 casos reales anónimos por rubro**, ES/EN, sin métricas inventadas. Fuentes→rubro: `sitio-evolucion-antoniana`→ONG; `Matukana`→wellness; `BPORT`→logística; `POVSTOREUY`→e-commerce; `VC FIT`→preparación física; `DMGFit`→gestión de gimnasio.
+- Listado `src/app/portfolio/page.tsx` + detalle `src/app/portfolio/[slug]/page.tsx` (estilo Houlak: eyebrow, headline, watermark, secciones numeradas 01/02/03, prev/next, CTA) con **color propio por caso** (override de `--color-accent`/`--color-accent-secondary`), `generateStaticParams` + `generateMetadata` (SSG, los 6 prerenderizados).
+- Home: `CasesSection.tsx` (preview 3 + CTA). "Casos" en Header (ruta) y Footer. Botones del hero y de Servicios → `/portfolio`.
+
+**2. Identidad alineada al logo**
+- Paleta global unificada al **azul→violeta del logo** (`--color-accent #4C8EFF`, `--color-accent-secondary #6D5DFE`, foreground blanco), reemplazó el cian/fucsia que choqueaba. Los 6 casos recorren ese mismo arco (cyan-azul → púrpura) para que "fluyan".
+
+**3. Servicios (QUÉ) diferenciado de "Cómo lo hacemos" (CÓMO)**
+- `ServicesSection`: **4 pilares** — Automatización de Procesos **(RPA)** explícito (UiPath·Rocketbot·Power Automate), IA, Desarrollo Web, **Consultoría y Capacitación** (nuevo).
+- Nueva franja **"Cómo podés contratarnos"** (`ContractModels.tsx`): por proyecto · por hora · consultoría · jornadas de capacitación — con **efecto dock por proximidad**.
+- `TechnicalShowcase` reenfocada a "Cómo lo hacemos" (estándares + resultados), ya no duplica Servicios.
+
+**4. Certificaciones (`Certifications.tsx`)** — franja con **logos oficiales** (UiPath, Rocketbot, Microsoft, IBM) monocromo→color al hover. En `public/assets/logos/`.
+
+**5. Stack tecnológico** — de 21 pills planas a **6 categorías** (RPA, IA & Datos, Desarrollo, Cloud, BD, Integraciones) en un panel con filas.
+
+**6. Seguridad / compliance** — diferencial nuevo: **experiencia ISO 9001 + PCI-DSS** (framing "experiencia", NO certificación de la empresa; sin logos ISO/PCI). En Nosotros (diferencial escudo), FAQ ("¿Cómo manejan la seguridad y los datos?") y footer.
+
+**7. Tiempos de entrega** — matizado en todo el sitio a **"desde 7-14 días según complejidad"** (antes era fijo).
+
+**8. UX / movimiento (anti-"boxiness")** — sistema de diseño nuevo en `tailwind.css`: `.glass-panel` (borde casi invisible, glow al hover), `.hairline`, `.glow-radial`/`.glow-violet`, `.reveal` (scroll-reveal con stagger vía hook `src/hooks/useReveal.ts` — 1 IntersectionObserver + MutationObserver), `.tab-fade`. Se aplanaron las secciones más "cuadradas" (diferenciales, stack, FAQ con `grid-rows`, ContractModels), se quitaron los `border-y` full-bleed, y se sumaron glows + masks (Hero, CircuitFlow). **Guard global `prefers-reduced-motion`.**
+- Efectos "vivos": `CircuitFlow.tsx` (canvas, paquetes de datos viajando por trazas) en Servicios y "Cómo lo hacemos"; dock de proximidad en modelos; logo-wall monocromo→color.
+
+**Pendiente de Fase 2 (menor):** confirmar wording exacto de PCI-DSS (¿"trabajé en entorno PCI" vs "implementé controles PCI"?); completar instancias concretas de consultoría/capacitación en `ESTRATEGIA §8`; QA en dispositivo móvil real; revisar preview de Vercel y **mergear a `main`**.
 
 ---
 
@@ -67,12 +81,47 @@ Rama sugerida: `feat/perf`. Mayor impacto en LCP/SEO.
 
 ---
 
-## Fuera de alcance / más adelante
-- Testimonios reales; logos reales de clientes (requiere permiso); BIMI svg en el sitio nuevo; agregar `.env` al `.gitignore`.
+## 🎯 Próximos pasos para dejar el sitio en un nivel altísimo
+Ordenados por impacto. Cada uno en su rama → preview → merge.
+
+**A. Cerrar Fase 2**
+1. Revisar el **preview de Vercel** de `feat/portfolio` (idealmente también en un **celular real** — los efectos de cursor/dock degradan en touch a propósito).
+2. **Mergear a `main`** (deploy a producción). ⚠️ Cambio grande (incluye repaleta global): mirar el preview antes.
+
+**B. Fase 3 — Performance & SEO profundo** (mayor impacto en LCP/SEO, ver detalle abajo)
+- Quitar los guards `isHydrated` para render real en SSR; `next/font`; optimizar `Logo.png`; limpiar scripts `rocket.new`/`@dhiwise/component-tagger` si no se usan.
+
+**C. Contenido que falta para "prueba social" completa**
+- **Instancias reales de consultoría/capacitación** (completar `ESTRATEGIA §8`) → posible caso/testimonio.
+- **Testimonios reales** (reactivar `TestimonialsSection`, hoy comentada) cuando haya permiso.
+- **Resultados reales por caso** (`result` en `cases.ts`, hoy omitido para no inventar métricas).
+- (Opcional) **logos en las categorías del stack** (como las certs).
+
+**D. Confianza & conversión**
+- **Analytics + tracking de conversión** en CTAs / Calendly / WhatsApp.
+- **SEO técnico:** OG images por página, `sitemap.xml`, `robots.txt`, datos estructurados (JSON-LD Organization/Service).
+- **Accesibilidad:** pasada de focus states, `aria`, contraste; correr **Lighthouse**.
+- Confirmar wording PCI-DSS (ver Fase 2 pendiente) para no overclaim.
+
+**E. Housekeeping**
+- `.env` al `.gitignore`; BIMI svg; revisar `typescript.ignoreBuildErrors`/`eslint.ignoreDuringBuilds` (hoy en `true` — correr `tsc`/lint a mano siempre).
+
+---
+
+## ⏳ FASE 3 — Performance profunda (PENDIENTE)
+Rama sugerida: `feat/perf`. Mayor impacto en LCP/SEO.
+
+- **Render en servidor (lo más importante):** quitar los guards `if (!isHydrated) return <skeleton/>` de las secciones para que rendericen contenido real en SSR (idioma inicial `es`; el cambio a `en` ocurre tras montar). Contadores de `ProofStrip`: número final en SSR + animar en cliente. **Verificar warnings de hydration.** *(Nota: el scroll-reveal `.reveal` ya tolera SSR — useReveal revela todo igual; pero hoy las secciones igual dependen de JS por `isHydrated`.)*
+- **Fuentes:** migrar Google Fonts `@import` (`src/styles/tailwind.css:1`) → `next/font/google` (Inter) en `layout.tsx`.
+- **Assets:** optimizar `public/assets/images/Logo.png` (53KB → WebP/SVG).
+- **Limpieza (verificar antes):** evaluar quitar el webpack loader `@dhiwise/component-tagger` y los scripts de `rocket.new` en `layout.tsx` si no se usan.
+- **Opcional:** idioma vía cookie leída en server (SSR ya en el idioma correcto, sin flash es→en).
+
+---
 
 ## Cómo continuar (quickstart próxima sesión)
 1. `cd /Users/gramos/Documents/dev/digital-match`
-2. Si Fase 1 NO está mergeada: `git checkout feat/url-raiz-y-fixes` (revisar/mergear). Si ya está en `main`: `git checkout main && git pull`.
+2. Si Fase 2 ya está en `main`: `git checkout main && git pull`. Si no: `git checkout feat/portfolio` (revisar preview / mergear).
 3. `npm install && npm run dev` → http://localhost:4028.
-4. Arrancar Fase 2: `git checkout -b feat/portfolio` y seguir la sección "FASE 2" de arriba.
-5. Verificación por fase: `npx tsc --noEmit`, `npm run build`, preview de Vercel de la rama, y recién mergear a `main`.
+4. Nueva fase: `git checkout -b feat/<nombre>` y seguir "Próximos pasos" de arriba.
+5. Verificación por fase: `npx tsc --noEmit`, `npm run build` (con dev **detenido**), preview de Vercel, y recién mergear a `main`.

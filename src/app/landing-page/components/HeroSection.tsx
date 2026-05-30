@@ -47,8 +47,8 @@
             className="absolute -bottom-[20%] left-[20%] w-[700px] h-[700px] bg-indigo-600/40 rounded-full mix-blend-screen filter blur-[120px] opacity-50 animate-blob animation-delay-4000"
             />
             
-            {/* Trama de cuadrícula sutil para efecto 'Tech' */}
-            <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]" />
+            {/* Trama de cuadrícula sutil para efecto 'Tech' (se disuelve en los bordes) */}
+            <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_40%,black,transparent)] [-webkit-mask-image:radial-gradient(ellipse_60%_50%_at_50%_40%,black,transparent)]" />
         </div>
         
         {/* --- CONTENIDO PRINCIPAL --- */}
@@ -66,7 +66,7 @@
             <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-6 leading-tight tracking-tight">
             {t('hero.title.part1')}
             <br />
-            <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent animate-gradient-x">
+            <span className="bg-gradient-to-r from-blue-400 via-indigo-400 to-violet-400 bg-clip-text text-transparent animate-gradient-x">
                 {t('hero.title.highlight')}
             </span>{' '}
             {t('hero.title.part2')}
@@ -93,6 +93,9 @@
             </button>
             </div>
         </div>
+
+        {/* Fade de salida hacia ProofStrip (sin corte seco) */}
+        <div className="absolute bottom-0 inset-x-0 h-32 bg-gradient-to-b from-transparent to-[#030712] pointer-events-none" />
 
         {/* Estilos CSS en línea para las animaciones */}
         <style jsx>{`

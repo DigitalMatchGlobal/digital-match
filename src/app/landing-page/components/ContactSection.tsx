@@ -132,10 +132,11 @@
     }
 
     return (
-        <section id="contact" className="py-24 bg-secondary/30">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+        <section id="contact" className="relative overflow-hidden py-24 bg-secondary/30">
+        <div className="glow-radial pointer-events-none absolute inset-x-0 bottom-0 h-2/3" />
+        <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
             <div className="grid md:grid-cols-2 gap-12">
-            <div>
+            <div className="reveal">
                 <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
                 {t('contact.title')}
                 </h2>
@@ -188,7 +189,7 @@
                 </div>
             </div>
 
-            <div className="bg-surface border border-border rounded-2xl p-8">
+            <div className="glass-panel p-8 shadow-cta reveal" data-delay={1}>
                 {showSuccess ? (
                 <div className="text-center py-12">
                     <div className="w-16 h-16 rounded-full bg-success/20 flex items-center justify-center mx-auto mb-6">

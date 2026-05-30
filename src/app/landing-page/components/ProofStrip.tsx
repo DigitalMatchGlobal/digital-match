@@ -63,19 +63,19 @@
 
     if (!isHydrated) {
         return (
-        <section className="py-12 bg-secondary/50 border-y border-border">
+        <section className="py-12 bg-secondary/50">
             {/* Skeleton simple */}
         </section>
         );
     }
 
     return (
-        <section ref={sectionRef} className="py-12 bg-secondary/50 border-y border-border">
+        <section ref={sectionRef} className="py-12 bg-secondary/50">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             
             {/* MÉTRICA 1: Años de experiencia combinada */}
-            <div className="text-center">
+            <div className="text-center reveal" data-delay={0}>
                 <div className="text-4xl md:text-5xl font-bold text-foreground mb-2">
                 +{counts.years}
                 </div>
@@ -85,7 +85,7 @@
             </div>
 
             {/* MÉTRICA 2: Proyectos entregados */}
-            <div className="text-center">
+            <div className="text-center reveal" data-delay={1}>
                 <div className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-accent to-accent-secondary bg-clip-text text-transparent mb-2">
                 +{counts.projects}
                 </div>
@@ -95,7 +95,7 @@
             </div>
 
             {/* MÉTRICA 3: Días de entrega */}
-            <div className="text-center">
+            <div className="text-center reveal" data-delay={2}>
                 <div className="text-4xl md:text-5xl font-bold text-foreground mb-2">
                 7-{counts.delivery}
                 </div>

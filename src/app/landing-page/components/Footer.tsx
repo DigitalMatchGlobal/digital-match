@@ -3,6 +3,7 @@
     import { useState, useEffect, useMemo } from 'react';
     import Link from 'next/link';
     import Image from 'next/image';
+    import { usePathname } from 'next/navigation';
     import Icon from '@/components/ui/AppIcon';
     import { useLanguage } from '@/contexts/LanguageContext';
 
@@ -34,11 +35,14 @@
 
     const Footer = () => {
     const { t, language } = useLanguage();
+    const pathname = usePathname();
+    const isHome = pathname === '/';
     const currentYear = new Date().getFullYear();
 
     // Enlaces de navegación
     const footerLinks: FooterLink[] = [
         { label: t('nav.services'), href: '#services' },
+        { label: t('nav.cases'), href: '/portfolio' },
         { label: t('faq.title'), href: '#process' }, // sección FAQ tiene id="process"
         { label: t('nav.contact'), href: '#contact' },
     ];
@@ -83,10 +87,21 @@
         );
         }
         
-        // Si es un ancla (#), usamos <a> para el scroll suave
+        // Si es un ancla (#): en la home hacemos scroll suave; fuera de la home
+        // (ej. /portfolio) navegamos a la home con el hash.
         if (link.href.startsWith('#')) {
+        if (!isHome) {
+            return (
+            <Link
+                href={`/${link.href}`}
+                className="text-sm text-muted-foreground hover:text-accent transition-colors"
+            >
+                {link.label}
+            </Link>
+            );
+        }
         return (
-            <a 
+            <a
             href={link.href}
             onClick={(e) => {
                 e.preventDefault();

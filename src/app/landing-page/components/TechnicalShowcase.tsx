@@ -2,6 +2,7 @@
 
     import { useState, useEffect, useMemo } from 'react';
     import Icon from '@/components/ui/AppIcon';
+    import CircuitFlow from './CircuitFlow';
     import { useLanguage } from '@/contexts/LanguageContext'; // <--- Importamos el hook
 
     interface Capability {
@@ -78,9 +79,11 @@
     }
 
     return (
-        <section className="py-24 bg-background">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8">
-            <div className="text-center mb-16">
+        <section className="relative py-24 bg-background overflow-hidden">
+        {/* Circuito con paquetes de datos viajando por las trazas (tech) */}
+        <CircuitFlow />
+        <div className="relative z-10 max-w-5xl mx-auto px-6 lg:px-8">
+            <div className="text-center mb-12 reveal">
             <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
                 {t('technical.title')}
             </h2>
@@ -89,58 +92,63 @@
             </p>
             </div>
 
-            <div className="bg-surface border border-border rounded-2xl p-8 md:p-12 transition-smooth hover:border-accent/30">
-            <div className="flex flex-col md:flex-row gap-4 mb-8">
-                {capabilities.map((capability) => (
-                <button
-                    key={capability.id}
-                    onClick={() => setActiveTab(capability.id)}
-                    className={`flex-1 px-6 py-4 text-left rounded-lg transition-smooth ${
-                    activeTab === capability.id
-                        ? 'bg-gradient-accent text-accent-foreground shadow-cta'
-                        : 'bg-secondary border border-border hover:border-accent/50'
-                    }`}
-                >
-                    <div className="flex items-center space-x-3 mb-2">
-                    <Icon name={capability.icon as any} size={24} />
-                    <div className="text-lg font-semibold">
-                        {capability.title}
-                    </div>
-                    </div>
-                </button>
-                ))}
-            </div>
+            <div className="relative reveal">
+            {/* glow de foco (no recorta el circuito) */}
+            <div className="glow-radial pointer-events-none absolute inset-0" />
 
-            <div className="grid md:grid-cols-2 gap-8">
+            <div className="relative">
+                {/* Tabs estilo subrayado (sin cajas) */}
+                <div className="flex flex-col sm:flex-row gap-1 sm:gap-8 border-b border-border/60 mb-10">
+                {capabilities.map((capability) => {
+                    const active = activeTab === capability.id;
+                    return (
+                    <button
+                        key={capability.id}
+                        onClick={() => setActiveTab(capability.id)}
+                        className={`flex items-center gap-3 px-1 pb-4 -mb-px border-b-2 transition-smooth ${
+                        active
+                            ? 'border-accent text-foreground'
+                            : 'border-transparent text-muted-foreground hover:text-foreground'
+                        }`}
+                    >
+                        <Icon name={capability.icon as any} size={22} className={active ? 'text-accent' : ''} />
+                        <span className="text-lg font-semibold">{capability.title}</span>
+                    </button>
+                    );
+                })}
+                </div>
+
+                {/* Panel: crossfade al cambiar de tab (remount por key) */}
+                <div key={activeTab} className="tab-fade grid md:grid-cols-2 gap-8 md:gap-12">
                 <div>
-                <h3 className="text-2xl font-bold text-foreground mb-4">
+                    <h3 className="text-2xl font-bold text-foreground mb-4">
                     {activeCapability.title}
-                </h3>
-                <p className="text-muted-foreground mb-6">
+                    </h3>
+                    <p className="text-muted-foreground mb-6">
                     {activeCapability.description}
-                </p>
-                <div className="inline-flex items-center space-x-2 px-4 py-2 rounded-full bg-success/20 border border-success/30">
+                    </p>
+                    <div className="inline-flex items-center space-x-2 px-4 py-2 rounded-full bg-success/20 border border-success/30">
                     <Icon name="ChartBarIcon" size={16} className="text-emerald-400" />
-                    {/* CAMBIO AQUÍ: Usamos text-emerald-400 para asegurar visibilidad sobre fondo oscuro */}
                     <span className="text-sm font-semibold text-emerald-400">
-                    {activeCapability.roi}
+                        {activeCapability.roi}
                     </span>
-                </div>
+                    </div>
                 </div>
 
-                <div>
-                <h4 className="text-lg font-semibold text-foreground mb-4">
+                <div className="md:border-l md:border-border/50 md:pl-12">
+                    <h4 className="text-lg font-semibold text-foreground mb-4">
                     {t('technical.outcomes_title')}
-                </h4>
-                <div className="space-y-3">
+                    </h4>
+                    <div className="space-y-3">
                     {activeCapability.outcomes.map((outcome, index) => (
-                    <div key={index} className="flex items-start space-x-3">
+                        <div key={index} className="flex items-start space-x-3">
                         <div className="w-6 h-6 rounded-full bg-accent/20 flex items-center justify-center flex-shrink-0 mt-0.5">
-                        <Icon name="CheckIcon" size={16} className="text-accent" />
+                            <Icon name="CheckIcon" size={16} className="text-accent" />
                         </div>
                         <span className="text-foreground">{outcome}</span>
-                    </div>
+                        </div>
                     ))}
+                    </div>
                 </div>
                 </div>
             </div>
