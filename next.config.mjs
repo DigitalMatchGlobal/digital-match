@@ -1,6 +1,6 @@
     /** @type {import('next').NextConfig} */
     const nextConfig = {
-    productionBrowserSourceMaps: true,
+    productionBrowserSourceMaps: false,
     distDir: process.env.DIST_DIR || '.next',  typescript: {
         ignoreBuildErrors: true,
     },
@@ -8,6 +8,7 @@
         ignoreDuringBuilds: true,
     },
     images: {
+        formats: ['image/avif', 'image/webp'],
         remotePatterns: [
         {
             protocol: 'https',
@@ -26,9 +27,9 @@
     async redirects() {
         return [
         {
-            source: '/',
-            destination: '/landing-page',
-            permanent: false,
+            source: '/landing-page',
+            destination: '/',
+            permanent: true,
         },
         ];
     },

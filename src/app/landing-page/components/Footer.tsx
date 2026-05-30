@@ -39,9 +39,7 @@
     // Enlaces de navegación
     const footerLinks: FooterLink[] = [
         { label: t('nav.services'), href: '#services' },
-        { label: t('nav.process'), href: '#process' },
-        // { label: t('nav.results'), href: '#results' }, // COMENTADO COMO EN EL HEADER
-        { label: t('faq.title'), href: '#faq' }, // <--- CAMBIO AQUÍ: Usamos 'faq.title' que ya existe
+        { label: t('faq.title'), href: '#process' }, // sección FAQ tiene id="process"
         { label: t('nav.contact'), href: '#contact' },
     ];
 

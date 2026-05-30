@@ -23,7 +23,7 @@
     children: React.ReactNode;
     }>) {
     return (
-        <html lang="en">
+        <html lang="es">
         <body>
             {/* Envolvemos TODO en el LanguageProvider */}
             <LanguageProvider>

@@ -135,16 +135,6 @@
                     </li>
                     ))}
                 </ul>
-
-                <button
-                    // onClick={() => onCaseStudyClick(service.id)} <--- DESACTIVADO
-                    onClick={() => { console.log("Botón desactivado por ahora") }}
-                    className="flex items-center space-x-2 text-accent font-semibold transition-smooth hover:text-accent-secondary cursor-default opacity-80"
-                    title="Próximamente" 
-                >
-                    <span>{t('services.cta_button')}</span>
-                    <Icon name="ArrowRightIcon" size={16} />
-                </button>
                 </div>
             ))}
             </div>
