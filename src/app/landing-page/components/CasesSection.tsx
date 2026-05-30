@@ -4,7 +4,7 @@
     import Link from 'next/link';
     import Icon from '@/components/ui/AppIcon';
     import { useLanguage } from '@/contexts/LanguageContext';
-    import { cases } from '@/data/cases';
+    import { casesByComplexity } from '@/data/cases';
     import CaseCard from '@/app/portfolio/components/CaseCard';
 
     const CasesSection = () => {
@@ -25,7 +25,7 @@
         );
     }
 
-    const preview = cases.slice(0, 3);
+    const preview = casesByComplexity.slice(0, 3);
 
     return (
         <section id="cases" className="relative overflow-hidden py-24">

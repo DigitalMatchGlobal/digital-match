@@ -4,7 +4,7 @@
     import Footer from '@/app/landing-page/components/Footer';
     import CTAFloatingButton from '@/components/common/CTAFloatingButton';
     import { useLanguage } from '@/contexts/LanguageContext';
-    import { cases } from '@/data/cases';
+    import { featuredCases, restCases } from '@/data/cases';
     import CaseCard from './CaseCard';
 
     const PortfolioListInteractive = () => {
@@ -33,8 +33,30 @@
                 </p>
                 </div>
 
+                {/* Destacados (bento): los de mayor complejidad, en tarjetas más grandes */}
+                <div className="mb-10 flex items-center gap-4">
+                <span className="text-xs font-bold uppercase tracking-[0.2em] text-accent">
+                    {t('portfolio.featured')}
+                </span>
+                <span className="hairline h-px flex-1" />
+                </div>
+
+                <div className="grid gap-8 md:grid-cols-2 mb-16">
+                {featuredCases.map((item) => (
+                    <CaseCard key={item.slug} item={item} featured />
+                ))}
+                </div>
+
+                {/* Resto de proyectos, en grilla normal */}
+                <div className="mb-10 flex items-center gap-4">
+                <span className="text-xs font-bold uppercase tracking-[0.2em] text-muted-foreground">
+                    {t('portfolio.more')}
+                </span>
+                <span className="hairline h-px flex-1" />
+                </div>
+
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {cases.map((item) => (
+                {restCases.map((item) => (
                     <CaseCard key={item.slug} item={item} />
                 ))}
                 </div>

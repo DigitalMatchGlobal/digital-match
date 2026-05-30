@@ -79,6 +79,16 @@
                     <div className="w-16 h-16 rounded-2xl bg-gradient-accent flex items-center justify-center mb-5 mx-auto">
                     <Icon name={item.icon as any} size={32} className="text-accent-foreground" />
                     </div>
+                    {item.metrics && item.metrics.length > 0 && (
+                    <div className="mb-5 flex divide-x divide-white/10 overflow-hidden rounded-xl border border-white/10">
+                        {item.metrics.map((m, i) => (
+                        <div key={i} className="flex-1 px-2 py-3 text-center">
+                            <div className="mb-1 text-lg font-bold leading-none text-white">{m.value}</div>
+                            <div className="text-[11px] leading-tight text-white/55">{m.label[language]}</div>
+                        </div>
+                        ))}
+                    </div>
+                    )}
                     <div className="flex flex-wrap justify-center gap-2">
                     {item.services.map((service, i) => (
                         <span key={i} className="px-3 py-1 rounded-full bg-accent/15 border border-accent/30 text-xs font-medium text-white/85">
