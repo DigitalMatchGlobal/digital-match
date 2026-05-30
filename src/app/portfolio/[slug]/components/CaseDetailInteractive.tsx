@@ -83,7 +83,8 @@
                     <div className="mb-5 flex divide-x divide-white/10 overflow-hidden rounded-xl border border-white/10">
                         {item.metrics.map((m, i) => (
                         <div key={i} className="flex-1 px-2 py-3 text-center">
-                            <div className="mb-1 text-lg font-bold leading-none text-white">{m.value}</div>
+                            {/* verde = color semántico de "resultado/impacto" (ver TechnicalShowcase) */}
+                            <div className="mb-1 text-lg font-bold leading-none text-emerald-400">{m.value}</div>
                             <div className="text-[11px] leading-tight text-white/55">{m.label[language]}</div>
                         </div>
                         ))}
@@ -146,7 +147,7 @@
                     <h2 className="text-3xl md:text-4xl font-bold text-white">{t('case.result')}</h2>
                 </div>
                 <div className="md:col-span-7">
-                    <p className="text-2xl font-semibold text-accent">{item.result[language]}</p>
+                    <p className="text-2xl font-semibold text-emerald-400">{item.result[language]}</p>
                 </div>
                 </div>
             )}
