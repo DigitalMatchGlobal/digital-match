@@ -21,7 +21,7 @@ Llevar el sitio a nivel "profesional" tipo [houlak.com](https://www.houlak.com/o
 - Repo: `DigitalMatchGlobal/digital-match` (remoto `origin`). Backup: remoto `contisola-backup`.
 - Producción: `digitalmatchglobal.com` (Vercel) ← `main`. **Online y funcionando.**
 - **Fase 1: MERGEADA a `main`** (rama `feat/url-raiz-y-fixes` ya borrada).
-- **Fase 2: COMPLETADA en `feat/portfolio`** (commiteada + pusheada). **Pendiente:** revisar el preview de Vercel de la rama y **mergear a `main`** (= deploy a producción).
+- **Fase 2: MERGEADA a `main` y EN PRODUCCIÓN** (commit `9e65cc6`). `main`, `origin/main` y `feat/portfolio` apuntan al mismo commit. La rama `feat/portfolio` se conserva (no borrar).
 - Local: `npm install && npm run dev` → http://localhost:4028. Verificación: `npx tsc --noEmit` + `npm run build` (⚠️ NO correr `build` con `dev` vivo: corrompe `.next`).
 
 ---
@@ -39,7 +39,7 @@ Cambios hechos y verificados (build + tsc OK, probado en runtime):
 
 ---
 
-## ✅ FASE 2 — Casos, identidad, servicios y UX (COMPLETADA en `feat/portfolio`)
+## ✅ FASE 2 — Casos, identidad, servicios y UX (MERGEADA a `main` + EN PRODUCCIÓN)
 Terminó siendo mucho más que la sección de casos. Todo verificado (`tsc` + `build` OK, runtime probado). Resumen:
 
 **1. Portfolio / Casos (núcleo, estilo Houlak)**
@@ -66,7 +66,7 @@ Terminó siendo mucho más que la sección de casos. Todo verificado (`tsc` + `b
 **8. UX / movimiento (anti-"boxiness")** — sistema de diseño nuevo en `tailwind.css`: `.glass-panel` (borde casi invisible, glow al hover), `.hairline`, `.glow-radial`/`.glow-violet`, `.reveal` (scroll-reveal con stagger vía hook `src/hooks/useReveal.ts` — 1 IntersectionObserver + MutationObserver), `.tab-fade`. Se aplanaron las secciones más "cuadradas" (diferenciales, stack, FAQ con `grid-rows`, ContractModels), se quitaron los `border-y` full-bleed, y se sumaron glows + masks (Hero, CircuitFlow). **Guard global `prefers-reduced-motion`.**
 - Efectos "vivos": `CircuitFlow.tsx` (canvas, paquetes de datos viajando por trazas) en Servicios y "Cómo lo hacemos"; dock de proximidad en modelos; logo-wall monocromo→color.
 
-**Pendiente de Fase 2 (menor):** confirmar wording exacto de PCI-DSS (¿"trabajé en entorno PCI" vs "implementé controles PCI"?); completar instancias concretas de consultoría/capacitación en `ESTRATEGIA §8`; QA en dispositivo móvil real; revisar preview de Vercel y **mergear a `main`**.
+**Pendiente de Fase 2 (menor, NO bloquea — ya está en prod):** confirmar wording exacto de PCI-DSS (¿"trabajé en entorno PCI" vs "implementé controles PCI"?); completar instancias concretas de consultoría/capacitación en `ESTRATEGIA §8`; QA en dispositivo móvil real.
 
 ---
 
@@ -84,9 +84,9 @@ Rama sugerida: `feat/perf`. Mayor impacto en LCP/SEO.
 ## 🎯 Próximos pasos para dejar el sitio en un nivel altísimo
 Ordenados por impacto. Cada uno en su rama → preview → merge.
 
-**A. Cerrar Fase 2**
-1. Revisar el **preview de Vercel** de `feat/portfolio` (idealmente también en un **celular real** — los efectos de cursor/dock degradan en touch a propósito).
-2. **Mergear a `main`** (deploy a producción). ⚠️ Cambio grande (incluye repaleta global): mirar el preview antes.
+**A. Cerrar Fase 2 — ✅ HECHO**
+1. ~~Revisar el **preview de Vercel** de `feat/portfolio`.~~
+2. ~~**Mergear a `main`** (deploy a producción).~~ **Mergeado a `main` y en producción** (commit `9e65cc6`). Pendiente menor (no bloquea): QA en un **celular real** (los efectos de cursor/dock degradan en touch a propósito).
 
 **B. Fase 3 — Performance & SEO profundo** (mayor impacto en LCP/SEO, ver detalle abajo)
 - Quitar los guards `isHydrated` para render real en SSR; `next/font`; optimizar `Logo.png`; limpiar scripts `rocket.new`/`@dhiwise/component-tagger` si no se usan.
@@ -121,7 +121,7 @@ Rama sugerida: `feat/perf`. Mayor impacto en LCP/SEO.
 
 ## Cómo continuar (quickstart próxima sesión)
 1. `cd /Users/gramos/Documents/dev/digital-match`
-2. Si Fase 2 ya está en `main`: `git checkout main && git pull`. Si no: `git checkout feat/portfolio` (revisar preview / mergear).
+2. `git checkout main && git pull` (Fase 1 y Fase 2 ya están en `main` y en producción).
 3. `npm install && npm run dev` → http://localhost:4028.
 4. Nueva fase: `git checkout -b feat/<nombre>` y seguir "Próximos pasos" de arriba.
 5. Verificación por fase: `npx tsc --noEmit`, `npm run build` (con dev **detenido**), preview de Vercel, y recién mergear a `main`.

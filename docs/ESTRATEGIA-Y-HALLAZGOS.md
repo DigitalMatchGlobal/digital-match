@@ -9,14 +9,16 @@ Reglas operativas para editar el sitio: ver [`../CLAUDE.md`](../CLAUDE.md).
 
 ## 1. Qué queremos transmitir
 
-Que detrás de Digital Match Global hay **gente con experiencia real y de alto nivel**, capaz de resolver problemas de negocio con tecnología — y que es **accesible** para startups y PYMEs.
+Que Digital Match Global le **devuelve a tu equipo las horas que hoy se pierden en tareas manuales** — automatizando procesos, conectando sistemas y construyendo herramientas — y que detrás hay **gente con experiencia real y de alto nivel**, accesible para startups y PYMEs.
 
-El mensaje en una frase:
-> **"El nivel de las grandes empresas, sin su complejidad ni su costo."**
+El mensaje en una frase (líder = beneficio operativo):
+> **"Recuperá las horas que hoy se pierden en tareas manuales."**
+
+El posicionamiento *"el nivel de las grandes empresas, sin su complejidad ni su costo"* sigue vigente, pero como **reason to believe** (respalda la promesa de eficiencia), **no como titular**.
 
 Tres ideas que el visitante debería percibir en segundos:
-1. **Saben de verdad** (ingenieros, experiencia enterprise + sector público, certificaciones, stack amplio).
-2. **Es para mí** (startups/PYMEs, entrega rápida 7-14 días, sin la burocracia ni el precio de una gran consultora).
+1. **Me resuelve un dolor concreto** (menos trabajo manual, sistemas conectados, operaciones más fluidas — entrega rápida 7-14 días).
+2. **Saben de verdad** (ingenieros, experiencia enterprise + sector público, certificaciones, stack amplio — el nivel de las grandes empresas, sin su burocracia ni su precio).
 3. **Es confiable / sin humo** (datos reales, no promesas infladas).
 
 El gran activo a comunicar es la **combinación poco común de skills** (automatización enterprise + IA + desarrollo + visión de negocio) y la **doble experiencia público/privada**.
@@ -64,10 +66,11 @@ Hay una **extensión natural de ese nivel**: además de **ejecutar** (automatiza
 ## 4. Cambios ya aplicados
 
 - ➕ **Nueva sección `AboutSection` ("Nosotros")**, anónima, enfocada en **diferencial** (no servicios):
-  - Titular: *"El nivel de las grandes empresas, sin su complejidad ni su costo."*
+  - Titular (pivot a beneficio operativo, 2026-05): *"Recuperá las horas que hoy se pierden en tareas manuales."* (antes: *"El nivel de las grandes empresas, sin su complejidad ni su costo."*)
   - 4 tarjetas: **+14 años combinados** (destacada) · Empresas y gobierno · Estándares enterprise · Certificados (UiPath, Microsoft, IBM).
   - Fila de **stack tecnológico** (21 tecnologías) como señal de profundidad.
-- 🔁 **Stats reales** en `ProofStrip`: `+14` años de experiencia combinada · `+5` proyectos entregados · `7-14` días de entrega.
+- 🔁 **Stats reales** en `ProofStrip` (actualizadas 2026-05): `+14` Años de Experiencia · `+144` Procesos Automatizados · `7-14` Días del diagnóstico a la solución. *(Antes: `+5` proyectos entregados · "Días para tu primer MVP".)*
+- 🔁 **Sección Casos (home):** titular pivotado a *"Así convertimos problemas operativos en soluciones digitales"* + subtítulo orientado a reducir trabajo manual / conectar herramientas / mejorar operaciones.
 - 🔁 **FAQ:** se quitaron "100% satisfacción", "95% retención", "50+ proyectos" → reemplazados por hechos ("comunicación diaria", "30 días de soporte incluido", "clientes en Uruguay y Argentina").
 - 🔁 **`<meta>` SEO:** se quitó "Trusted by 50+ startups" → ahora describe la experiencia real.
 - ➕ **Nav:** se agregó "Nosotros / About" → `#about`.

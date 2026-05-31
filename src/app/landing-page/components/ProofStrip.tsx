@@ -49,13 +49,13 @@
         // Actualizamos los contadores con los nuevos objetivos
         setCounts({
             years: Math.floor(14 * progress), // Meta: 14 años combinados
-            projects: Math.floor(5 * progress), // Meta: 5 proyectos entregados
+            projects: Math.floor(144 * progress), // Meta: 144 procesos automatizados
             delivery: Math.floor(14 * progress) // Meta: 14 días
         });
 
         if (currentStep >= steps) {
             clearInterval(timer);
-            setCounts({ years: 14, projects: 5, delivery: 14 });
+            setCounts({ years: 14, projects: 144, delivery: 14 });
         }
         }, interval);
 
@@ -76,7 +76,7 @@
         <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             
-            {/* MÉTRICA 1: Años de experiencia combinada */}
+            {/* MÉTRICA 1: Años de experiencia */}
             <div className="text-center reveal" data-delay={0}>
                 <div className="text-4xl md:text-5xl font-bold text-foreground mb-2">
                 +{counts.years}
@@ -86,7 +86,7 @@
                 </div>
             </div>
 
-            {/* MÉTRICA 2: Proyectos entregados */}
+            {/* MÉTRICA 2: Procesos automatizados */}
             <div className="text-center reveal" data-delay={1}>
                 <div className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-accent to-accent-secondary bg-clip-text text-transparent mb-2">
                 +{counts.projects}
@@ -96,7 +96,7 @@
                 </div>
             </div>
 
-            {/* MÉTRICA 3: Días de entrega */}
+            {/* MÉTRICA 3: Días del diagnóstico a la solución */}
             <div className="text-center reveal" data-delay={2}>
                 <div className="text-4xl md:text-5xl font-bold text-foreground mb-2">
                 7-{counts.delivery}

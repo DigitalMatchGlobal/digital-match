@@ -85,7 +85,9 @@ npm run dev      # Next.js dev en http://localhost:4028
 
 ## 6. Marca y posicionamiento — qué queremos transmitir
 
-**Promesa central:** el nivel y los estándares de las grandes empresas, **sin su complejidad ni su costo**, con entrega rápida (7-14 días).
+**Promesa central (líder = beneficio operativo):** recuperar las horas que hoy se pierden en **tareas manuales** — ingeniería aplicada al día a día (automatizar procesos, conectar sistemas, construir herramientas) para que tu equipo trabaje con menos fricción, con entrega rápida (7-14 días).
+
+**Reason to believe (soporte, no titular):** el nivel y los estándares de las grandes empresas, **sin su complejidad ni su costo**. La pedigree enterprise/pública ya no encabeza el mensaje: respalda la promesa de eficiencia, no la lidera.
 
 **Diferencial real (lo que nos hace difíciles de replicar):** un equipo de **ingenieros en sistemas** con experiencia comprobada en el **sector privado (multinacionales) y público**, +14 años combinados, certificaciones (UiPath, Microsoft, IBM) y un stack técnico amplio (del bot RPA a la nube).
 
