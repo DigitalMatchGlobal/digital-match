@@ -70,14 +70,15 @@ Terminó siendo mucho más que la sección de casos. Todo verificado (`tsc` + `b
 
 ---
 
-## ⏳ FASE 3 — Performance profunda (PENDIENTE)
-Rama sugerida: `feat/perf`. Mayor impacto en LCP/SEO.
+## ✅ FASE 3 — Performance & SEO + social (HECHA en rama `feat/perf`, sin mergear)
+Verificada con `tsc --noEmit` + `npm run build` (19 páginas estáticas OK). **Falta correr Lighthouse en el preview de Vercel y mergear.**
 
-- **Render en servidor (lo más importante):** quitar los guards `if (!isHydrated) return <skeleton/>` de las secciones (`HeroSection`, `AboutSection`, `ProofStrip`, `TechnicalShowcase`, `ServicesSection`, `FAQSection`, `ContactSection`) para que rendericen contenido real en SSR (idioma inicial `es`; el cambio a `en` ocurre tras montar, sin mismatch). Contadores de `ProofStrip`: render del número final en SSR + animar en cliente. **Verificar warnings de hydration.**
-- **Fuentes:** migrar Google Fonts `@import` (`src/styles/tailwind.css:1`) → `next/font/google` (Inter) en `layout.tsx`.
-- **Assets:** optimizar `public/assets/images/Logo.png` (53KB → WebP/SVG).
-- **Limpieza (verificar antes):** evaluar quitar el webpack loader `@dhiwise/component-tagger` y los scripts de `rocket.new` en `layout.tsx` si no se usan.
-- **Opcional:** idioma vía cookie leída en server (SSR ya en el idioma correcto, sin flash es→en).
+- **SSR real:** se quitaron los guards `if (!isHydrated) return <skeleton/>` de las 9 secciones activas (`HeroSection`, `ProofStrip`, `AboutSection`, `Certifications`, `ServicesSection`, `TechnicalShowcase`, `CasesSection`, `FAQSection`, `ContactSection`) + el `isHydrated` muerto de `LandingPageInteractive`. Ahora renderizan contenido real en SSR (idioma `es`; el switch a `en` ocurre post-montaje, sin mismatch). `ProofStrip`: el estado arranca en los valores FINALES (14/144/14) — visibles en SSR sin JS — y la animación de conteo corre desde 0 sólo al entrar en viewport (queda bajo el hero, sin flash). Verificado: HTML del servidor trae los textos y números reales, 0 skeletons.
+- **Fuentes:** migrado `@import` de Google Fonts → `next/font/google` (Inter) en `layout.tsx` (variable `--font-inter`, autoalojada). `tailwind.css` (body/headings) y `tailwind.config.js` (`font-sans`/`font-inter`) usan la variable. 0 requests a `fonts.googleapis`.
+- **Social / OG (faltaba; arreglaba el preview feo en WhatsApp):** `metadataBase` en `layout.tsx`; `openGraph` + `twitter` + `canonical` en `page.tsx`, todo **en español** (antes el título/descr salían en inglés). Imagen generada dinámicamente con `next/og`: `src/app/opengraph-image.tsx` (1200×630 on-brand, glow azul→violeta + monograma DM real leído de `Logo.png`); `twitter-image.tsx` la reutiliza. Heredada por `/portfolio` y `/portfolio/[slug]`.
+- **Limpieza:** quitado el webpack loader `@dhiwise/component-tagger` (`next.config.mjs`), su dependencia en `package.json` (–97 paquetes transitivos) y los 2 `<script>` de `rocket.new` en `layout.tsx`. **HTML de la home: 404 KB → 115 KB** (los `data-component-*` que inyectaba dhiwise en cada elemento desaparecieron).
+- **Logo:** NO se tocó el fuente. Se confirmó que `next/image` (con `formats: ['avif','webp']`) ya sirve el logo como **AVIF de ~3.3 KB** al tamaño mostrado; el PNG de 54 KB nunca llega crudo al cliente. Optimizar el fuente es marginal y sin un SVG vectorial original arriesgaría calidad de marca.
+- **Opcional pendiente:** idioma vía cookie leída en server (SSR ya en el idioma correcto, sin flash es→en).
 
 ---
 
@@ -88,8 +89,8 @@ Ordenados por impacto. Cada uno en su rama → preview → merge.
 1. ~~Revisar el **preview de Vercel** de `feat/portfolio`.~~
 2. ~~**Mergear a `main`** (deploy a producción).~~ **Mergeado a `main` y en producción** (commit `9e65cc6`). Pendiente menor (no bloquea): QA en un **celular real** (los efectos de cursor/dock degradan en touch a propósito).
 
-**B. Fase 3 — Performance & SEO profundo** (mayor impacto en LCP/SEO, ver detalle abajo)
-- Quitar los guards `isHydrated` para render real en SSR; `next/font`; optimizar `Logo.png`; limpiar scripts `rocket.new`/`@dhiwise/component-tagger` si no se usan.
+**B. Fase 3 — Performance & SEO + social — ✅ HECHA (rama `feat/perf`, falta Lighthouse + merge)**
+- SSR real (guards `isHydrated` fuera), `next/font`, OG/social con imagen, limpieza de `rocket.new`/`@dhiwise`. Detalle arriba en la sección "✅ FASE 3".
 
 **C. Contenido que falta para "prueba social" completa**
 - **Instancias reales de consultoría/capacitación** (completar `ESTRATEGIA §8`) → posible caso/testimonio.
@@ -108,20 +109,9 @@ Ordenados por impacto. Cada uno en su rama → preview → merge.
 
 ---
 
-## ⏳ FASE 3 — Performance profunda (PENDIENTE)
-Rama sugerida: `feat/perf`. Mayor impacto en LCP/SEO.
-
-- **Render en servidor (lo más importante):** quitar los guards `if (!isHydrated) return <skeleton/>` de las secciones para que rendericen contenido real en SSR (idioma inicial `es`; el cambio a `en` ocurre tras montar). Contadores de `ProofStrip`: número final en SSR + animar en cliente. **Verificar warnings de hydration.** *(Nota: el scroll-reveal `.reveal` ya tolera SSR — useReveal revela todo igual; pero hoy las secciones igual dependen de JS por `isHydrated`.)*
-- **Fuentes:** migrar Google Fonts `@import` (`src/styles/tailwind.css:1`) → `next/font/google` (Inter) en `layout.tsx`.
-- **Assets:** optimizar `public/assets/images/Logo.png` (53KB → WebP/SVG).
-- **Limpieza (verificar antes):** evaluar quitar el webpack loader `@dhiwise/component-tagger` y los scripts de `rocket.new` en `layout.tsx` si no se usan.
-- **Opcional:** idioma vía cookie leída en server (SSR ya en el idioma correcto, sin flash es→en).
-
----
-
 ## Cómo continuar (quickstart próxima sesión)
 1. `cd /Users/gramos/Documents/dev/digital-match`
-2. `git checkout main && git pull` (Fase 1 y Fase 2 ya están en `main` y en producción).
+2. **Fase 3 está en la rama `feat/perf` (sin mergear).** Para retomarla: `git checkout feat/perf`. Falta: revisar el **preview de Vercel** (correr **Lighthouse** ahí, no en dev — dev no minifica), validar el preview social con el [Sharing Debugger de Meta](https://developers.facebook.com/tools/debug/) / WhatsApp, y **mergear a `main`**.
 3. `npm install && npm run dev` → http://localhost:4028.
-4. Nueva fase: `git checkout -b feat/<nombre>` y seguir "Próximos pasos" de arriba.
-5. Verificación por fase: `npx tsc --noEmit`, `npm run build` (con dev **detenido**), preview de Vercel, y recién mergear a `main`.
+4. Nueva fase: `git checkout main && git checkout -b feat/<nombre>` y seguir "Próximos pasos" de arriba.
+5. Verificación por fase: `npx tsc --noEmit`, `npm run build` (con dev **detenido** — corrompe `.next` si está vivo), preview de Vercel, y recién mergear a `main`.

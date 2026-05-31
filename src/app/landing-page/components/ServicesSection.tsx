@@ -1,6 +1,6 @@
     'use client';
 
-    import { useState, useEffect, useMemo } from 'react';
+    import { useState, useMemo } from 'react';
     import Icon from '@/components/ui/AppIcon';
     import CircuitFlow from './CircuitFlow';
     import ContractModels from './ContractModels';
@@ -21,13 +21,8 @@
     }
 
     const ServicesSection = ({ onCaseStudyClick }: ServicesSectionProps) => {
-    const [isHydrated, setIsHydrated] = useState(false);
     const [hoveredCard, setHoveredCard] = useState<string | null>(null);
     const { t } = useLanguage();
-
-    useEffect(() => {
-        setIsHydrated(true);
-    }, []);
 
     // Usamos useMemo para que las traducciones se actualicen al cambiar el idioma
     const services: Service[] = useMemo(() => [
@@ -89,16 +84,6 @@
         }
     ], [t]);
 
-
-    if (!isHydrated) {
-        return (
-        <section id="services" className="py-24 section-raised">
-            <div className="max-w-7xl mx-auto px-6 lg:px-8">
-            {/* Skeleton simple */}
-            </div>
-        </section>
-        );
-    }
 
     return (
         <section id="services" className="relative py-24 section-raised overflow-hidden">

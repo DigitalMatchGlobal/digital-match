@@ -1,6 +1,5 @@
     'use client';
 
-    import { useState, useEffect } from 'react';
     import { useLanguage } from '@/contexts/LanguageContext';
 
     interface HeroSectionProps {
@@ -9,22 +8,7 @@
     }
 
     const HeroSection = ({ onBookingClick, onViewWorkClick }: HeroSectionProps) => {
-    const [isHydrated, setIsHydrated] = useState(false);
     const { t } = useLanguage();
-
-    useEffect(() => {
-        setIsHydrated(true);
-    }, []);
-
-    if (!isHydrated) {
-        return (
-        <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#030712] pt-16">
-            <div className="relative z-10 max-w-7xl mx-auto px-4 text-center">
-                <h1 className="text-4xl font-bold opacity-0">Loading...</h1>
-            </div>
-        </section>
-        );
-    }
 
     return (
         <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#030712] pt-16">

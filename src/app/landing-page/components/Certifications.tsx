@@ -1,6 +1,5 @@
     'use client';
 
-    import { useState, useEffect } from 'react';
     import { useLanguage } from '@/contexts/LanguageContext';
 
     // Certificaciones oficiales que el equipo posee (ver docs/ESTRATEGIA §6/§8).
@@ -19,16 +18,7 @@
     const TRACK = Array.from({ length: 3 }).flatMap(() => CERTS);
 
     const Certifications = () => {
-    const [isHydrated, setIsHydrated] = useState(false);
     const { t } = useLanguage();
-
-    useEffect(() => {
-        setIsHydrated(true);
-    }, []);
-
-    if (!isHydrated) {
-        return <section id="certs" className="py-16 bg-background" />;
-    }
 
     return (
         <section id="certs" className="py-16 bg-background overflow-hidden">
