@@ -16,9 +16,22 @@
     if (!item) {
         return { title: 'Caso no encontrado | Digital Match Global' };
     }
+    const title = `${item.rubro.es} | Casos | Digital Match Global`;
+    const description = item.solution.es;
+    const url = `/portfolio/${item.slug}`;
     return {
-        title: `${item.rubro.es} | Casos | Digital Match Global`,
-        description: item.solution.es,
+        title,
+        description,
+        alternates: { canonical: url },
+        openGraph: {
+            type: 'article',
+            url,
+            siteName: 'Digital Match Global',
+            title,
+            description,
+            locale: 'es_ES',
+        },
+        twitter: { card: 'summary_large_image', title, description },
     };
     }
 

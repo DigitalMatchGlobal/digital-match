@@ -25,6 +25,7 @@ Objetivo del sitio: que el visitante **agende una llamada** (CTA principal → s
 - Entrada de la landing: `src/app/page.tsx` (raíz, define el `<metadata>` SEO) → renderiza `LandingPageInteractive`. Los componentes de la landing siguen en `src/app/landing-page/components/`.
 - `/landing-page` **redirige** a `/` (301, ver `next.config.mjs`).
 - **Casos/Portfolio:** `/portfolio` (listado) y `/portfolio/[slug]` (detalle estático con color propio por caso). Fuente de datos: `src/data/cases.ts` (anónimos por rubro, bilingüe).
+- **SEO / GEO (Fase 4):** config central en `src/data/site.ts` (URL, nombre, contacto, redes, servicios) — **reutilizar, no duplicar** esos datos. Rutas generadas por Next: `src/app/robots.ts` (permite bots de IA), `src/app/sitemap.ts`, `src/app/manifest.ts`. Datos estructurados en `src/components/seo/JsonLd.tsx` (montado en la home). Índice para LLMs en `public/llms.txt`. La metadata OG/`canonical` por página vive en cada `page.tsx`/`generateMetadata`; la imagen OG global es `src/app/opengraph-image.tsx` (Fase 3).
 - Iconos: `src/components/ui/AppIcon.tsx`, wrapper de **Heroicons v2** (`@heroicons/react/24/outline` por defecto). Usar nombres válidos de Heroicons (ej. `Cog6ToothIcon`, `SparklesIcon`); si el nombre no existe, cae a un `QuestionMarkCircleIcon`.
 
 ### Secciones de la landing
@@ -156,5 +157,6 @@ Estado completo y próximos pasos en [`docs/ROADMAP.md`](docs/ROADMAP.md). **Fas
 - [ ] **⚠️ Métricas reales:** los `metrics` de `cases.ts` son PLACEHOLDER — reemplazar `value` por datos reales ANTES de mergear `feat/portfolio-casos-v2` a `main`.
 - [x] **Fase 3 — Performance/SEO + social: HECHA en rama `feat/perf`** (SSR real sin guards `isHydrated`, `next/font`, OG/social con imagen `next/og` en español, limpieza de `rocket.new`/`@dhiwise` → HTML 404KB→115KB). **Falta:** Lighthouse en preview de Vercel + validar preview social + mergear a `main`. Logo: `next/image` ya lo entrega como AVIF ~3.3KB (no se tocó el fuente).
 - [ ] **Contenido:** instancias reales de consultoría/capacitación (ESTRATEGIA §8), testimonios reales (cargar en `quote` de `cases.ts`), `result` real por caso, screenshots reales por caso (campo `image`), (opcional) logos en el stack.
-- [ ] **Conversión/SEO:** analytics + tracking de CTAs, OG/sitemap/JSON-LD, pasada de accesibilidad + Lighthouse.
+- [x] **SEO técnico + GEO: HECHO en Fase 4 (rama `feat/seo-geo`)** — `robots.ts` (permite bots de IA: GPTBot/ClaudeBot/PerplexityBot/Google-Extended…), `sitemap.ts` (14 URLs), JSON-LD `@graph` (Organization/WebSite/ProfessionalService/FAQPage) en `src/components/seo/JsonLd.tsx`, OG/canonical por página en portfolio, `public/llms.txt`, `manifest.ts`, config central `src/data/site.ts`. **Falta:** enviar sitemap a Search Console + validar Rich Results en producción.
+- [ ] **Conversión:** analytics + tracking de CTAs (Calendly/WhatsApp). Accesibilidad: pasada de focus/`aria`/contraste + Lighthouse.
 - [ ] Confirmar wording exacto de PCI-DSS; QA en celular real.
