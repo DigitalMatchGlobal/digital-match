@@ -89,6 +89,10 @@ Hay una **extensión natural de ese nivel**: además de **ejecutar** (automatiza
 - ✅ **Tiempos** matizados a "desde 7-14 días según complejidad".
 - ✅ **Overhaul de UX/movimiento** (anti-"boxiness"): sistema `glass-panel` + scroll-reveal + glows + `CircuitFlow` + dock de proximidad. Detalle técnico en `ROADMAP.md`.
 
+**Hecho (Fases 3 y 4 — EN PRODUCCIÓN):**
+- ✅ **Fase 3 — Performance + social:** SSR real (sin guards `isHydrated`), `next/font`, imagen de preview social (`opengraph-image` con `next/og`) + metadata OG en español (arregló el preview feo de WhatsApp), limpieza de `rocket.new`/`@dhiwise` (HTML 404→115 KB). Detalle en `ROADMAP.md`.
+- ✅ **Fase 4 — SEO técnico + GEO:** `robots.txt` (permite bots de IA), `sitemap.xml`, JSON-LD (Organization/WebSite/ProfessionalService/FAQPage), `llms.txt`, OG por página. Validado en Rich Results + Search Console. **GEO = Generative Engine Optimization** (aparecer en respuestas de ChatGPT/Claude/Perplexity/Gemini).
+
 **Pendiente:** ver lista priorizada en [`ROADMAP.md`](ROADMAP.md) → "Próximos pasos". Lo más relevante de contenido:
 - **(A futuro)** Testimonios reales para reactivar prueba social.
 - **(A futuro)** `result` real por caso en `cases.ts` (hoy omitido para no inventar métricas).

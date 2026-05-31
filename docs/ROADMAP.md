@@ -21,7 +21,9 @@ Llevar el sitio a nivel "profesional" tipo [houlak.com](https://www.houlak.com/o
 - Repo: `DigitalMatchGlobal/digital-match` (remoto `origin`). Backup: remoto `contisola-backup`.
 - Producción: `digitalmatchglobal.com` (Vercel) ← `main`. **Online y funcionando.**
 - **Fase 1: MERGEADA a `main`** (rama `feat/url-raiz-y-fixes` ya borrada).
-- **Fase 2: MERGEADA a `main` y EN PRODUCCIÓN** (commit `9e65cc6`). `main`, `origin/main` y `feat/portfolio` apuntan al mismo commit. La rama `feat/portfolio` se conserva (no borrar).
+- **Fase 2: MERGEADA a `main` y EN PRODUCCIÓN** (commit `9e65cc6`). La rama `feat/portfolio` se conserva (no borrar).
+- **Fase 3 (Performance/social): MERGEADA a `main` y EN PRODUCCIÓN** (PR #1, merge `b8c7a68`). Validada en producción (preview social de WhatsApp OK). Rama `feat/perf` conservada.
+- **Fase 4 (SEO técnico + GEO): MERGEADA a `main` y EN PRODUCCIÓN** (PR #2, merge `b556a95`). Validada: Rich Results Test = 5 elementos válidos (FAQ + Organization + LocalBusiness), sitemap enviado a Search Console (14 páginas, "Correcto"). Rama `feat/seo-geo` conservada.
 - Local: `npm install && npm run dev` → http://localhost:4028. Verificación: `npx tsc --noEmit` + `npm run build` (⚠️ NO correr `build` con `dev` vivo: corrompe `.next`).
 
 ---
@@ -70,8 +72,8 @@ Terminó siendo mucho más que la sección de casos. Todo verificado (`tsc` + `b
 
 ---
 
-## ✅ FASE 3 — Performance & SEO + social (HECHA en rama `feat/perf`, sin mergear)
-Verificada con `tsc --noEmit` + `npm run build` (19 páginas estáticas OK). **Falta correr Lighthouse en el preview de Vercel y mergear.**
+## ✅ FASE 3 — Performance & SEO + social (MERGEADA a `main` + EN PRODUCCIÓN)
+PR #1 (merge `b8c7a68`). Verificada con `tsc` + `build` (19 páginas) y en producción (preview social de WhatsApp validado). **Pendiente menor:** correr Lighthouse en producción para el número de LCP/SEO.
 
 - **SSR real:** se quitaron los guards `if (!isHydrated) return <skeleton/>` de las 9 secciones activas (`HeroSection`, `ProofStrip`, `AboutSection`, `Certifications`, `ServicesSection`, `TechnicalShowcase`, `CasesSection`, `FAQSection`, `ContactSection`) + el `isHydrated` muerto de `LandingPageInteractive`. Ahora renderizan contenido real en SSR (idioma `es`; el switch a `en` ocurre post-montaje, sin mismatch). `ProofStrip`: el estado arranca en los valores FINALES (14/144/14) — visibles en SSR sin JS — y la animación de conteo corre desde 0 sólo al entrar en viewport (queda bajo el hero, sin flash). Verificado: HTML del servidor trae los textos y números reales, 0 skeletons.
 - **Fuentes:** migrado `@import` de Google Fonts → `next/font/google` (Inter) en `layout.tsx` (variable `--font-inter`, autoalojada). `tailwind.css` (body/headings) y `tailwind.config.js` (`font-sans`/`font-inter`) usan la variable. 0 requests a `fonts.googleapis`.
@@ -82,8 +84,8 @@ Verificada con `tsc --noEmit` + `npm run build` (19 páginas estáticas OK). **F
 
 ---
 
-## ✅ FASE 4 — SEO técnico + GEO (HECHA en rama `feat/seo-geo`, sin mergear)
-Verificada con `tsc --noEmit` + `npm run build` (22 páginas estáticas, +3 vs Fase 3) y rutas probadas en runtime. **GEO = Generative Engine Optimization** (aparecer en ChatGPT/Claude/Perplexity/Gemini).
+## ✅ FASE 4 — SEO técnico + GEO (MERGEADA a `main` + EN PRODUCCIÓN)
+PR #2 (merge `b556a95`). Verificada con `tsc` + `build` (22 páginas) y en producción. **GEO = Generative Engine Optimization** (aparecer en ChatGPT/Claude/Perplexity/Gemini). Validado en producción: robots/sitemap/llms.txt/manifest sirviendo 200, JSON-LD válido, **Rich Results Test = 5 elementos válidos** (FAQ + Organization + LocalBusiness) y **sitemap enviado a Search Console** (14 páginas, "Correcto").
 
 - **Config central `src/data/site.ts`:** única fuente de URL, nombre, descripción, contacto (email `info@`, WhatsApp `+59893892924`), redes (IG/LinkedIn), servicios y `areaServed`. La usan robots, sitemap, JSON-LD y metadata.
 - **`src/app/robots.ts`:** permite rastreo general **y explícitamente a los bots de IA** (GPTBot, OAI-SearchBot, ChatGPT-User, ClaudeBot, anthropic-ai, Claude-Web, PerplexityBot, Google-Extended, Applebot-Extended, Amazonbot, cohere-ai, Bytespider). Apunta a `sitemap.xml` + `host`. **Decisión de negocio: bots de IA PERMITIDOS** (para aparecer en respuestas generativas). Para bloquear alguno: `disallow: '/'` en su user-agent.
@@ -93,7 +95,7 @@ Verificada con `tsc --noEmit` + `npm run build` (22 páginas estáticas, +3 vs F
 - **`public/llms.txt`:** índice Markdown para LLMs (quién es DMG, servicios, páginas, los 9 casos con URL, contacto).
 - **`src/app/manifest.ts`:** PWA básica (nombre, colores de marca `#0B0D14`, display). ⚠️ Pendiente menor: iconos cuadrados 192/512 maskable (el logo no es cuadrado) para instalabilidad completa.
 
-**Pendiente de Fase 4 (post-merge, requiere producción):** enviar `sitemap.xml` a Google Search Console; validar el JSON-LD en el [Rich Results Test](https://search.google.com/test/rich-results); correr **Lighthouse** (SEO/PWA) en producción.
+**Post-merge de Fase 4 — ✅ HECHO:** sitemap enviado a Search Console (14 páginas, "Correcto") y JSON-LD validado en el Rich Results Test (5 elementos válidos). *Nota:* el LocalBusiness muestra "problemas no críticos" (faltan campos recomendados como `address`/`priceRange` que omitimos a propósito por no publicar dirección/precios). Mejora opcional truthful: agregar `address.addressCountry: "UY"` en `JsonLd.tsx`. Falta sólo **Lighthouse** (SEO/PWA) en producción.
 
 ---
 
@@ -104,8 +106,8 @@ Ordenados por impacto. Cada uno en su rama → preview → merge.
 1. ~~Revisar el **preview de Vercel** de `feat/portfolio`.~~
 2. ~~**Mergear a `main`** (deploy a producción).~~ **Mergeado a `main` y en producción** (commit `9e65cc6`). Pendiente menor (no bloquea): QA en un **celular real** (los efectos de cursor/dock degradan en touch a propósito).
 
-**B. Fase 3 — Performance & SEO + social — ✅ HECHA (rama `feat/perf`, falta Lighthouse + merge)**
-- SSR real (guards `isHydrated` fuera), `next/font`, OG/social con imagen, limpieza de `rocket.new`/`@dhiwise`. Detalle arriba en la sección "✅ FASE 3".
+**B. Fase 3 (Performance/social) y Fase 4 (SEO + GEO) — ✅ HECHAS y EN PRODUCCIÓN**
+- Detalle en las secciones "✅ FASE 3" y "✅ FASE 4" arriba. Falta sólo correr Lighthouse en producción.
 
 **C. Contenido que falta para "prueba social" completa**
 - **Instancias reales de consultoría/capacitación** (completar `ESTRATEGIA §8`) → posible caso/testimonio.
@@ -126,7 +128,7 @@ Ordenados por impacto. Cada uno en su rama → preview → merge.
 
 ## Cómo continuar (quickstart próxima sesión)
 1. `cd /Users/gramos/Documents/dev/digital-match`
-2. **Fase 3 está en la rama `feat/perf` (sin mergear).** Para retomarla: `git checkout feat/perf`. Falta: revisar el **preview de Vercel** (correr **Lighthouse** ahí, no en dev — dev no minifica), validar el preview social con el [Sharing Debugger de Meta](https://developers.facebook.com/tools/debug/) / WhatsApp, y **mergear a `main`**.
+2. `git checkout main && git pull` — **Fases 1, 2, 3 y 4 ya están en `main` y EN PRODUCCIÓN.**
 3. `npm install && npm run dev` → http://localhost:4028.
-4. Nueva fase: `git checkout main && git checkout -b feat/<nombre>` y seguir "Próximos pasos" de arriba.
-5. Verificación por fase: `npx tsc --noEmit`, `npm run build` (con dev **detenido** — corrompe `.next` si está vivo), preview de Vercel, y recién mergear a `main`.
+4. Nueva fase: `git checkout -b feat/<nombre>` y seguir "Próximos pasos" de arriba (candidato siguiente: **Fase 5 — analytics + tracking de conversión** y/o **accesibilidad + Lighthouse**).
+5. Verificación por fase: `npx tsc --noEmit`, `npm run build` (con dev **detenido** — corrompe `.next` si está vivo), preview de Vercel, y recién mergear a `main`. PRs con `gh` (instalado y autenticado).
