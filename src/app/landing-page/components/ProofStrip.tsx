@@ -4,25 +4,41 @@
     import { useLanguage } from '@/contexts/LanguageContext'; // <--- IMPORTAMOS HOOK
     import CircuitFlow from './CircuitFlow';
 
+    // Valores finales reales: se renderizan en SSR (visibles sin JS, buenos para SEO)
+    // y la animación de conteo arranca desde 0 sólo al entrar en viewport (cliente).
+    const FINAL = { years: 14, projects: 144, delivery: 14 };
+
     const ProofStrip = () => {
-    const [isHydrated, setIsHydrated] = useState(false);
-    const [isVisible, setIsVisible] = useState(false);
-    const [counts, setCounts] = useState({ years: 0, projects: 0, delivery: 0 }); // Métricas reales
+    const [counts, setCounts] = useState(FINAL); // SSR/hidratación con el número final
     const sectionRef = useRef<HTMLDivElement>(null);
+    const hasAnimated = useRef(false);
     const { t } = useLanguage(); // <--- USAMOS HOOK
 
     useEffect(() => {
-        setIsHydrated(true);
-    }, []);
-
-    useEffect(() => {
-        if (!isHydrated) return;
-
         const observer = new IntersectionObserver(
         (entries) => {
-            if (entries[0].isIntersecting) {
-            setIsVisible(true);
+            if (!entries[0].isIntersecting || hasAnimated.current) return;
+            hasAnimated.current = true;
+
+            const duration = 2000;
+            const steps = 60;
+            const interval = duration / steps;
+
+            setCounts({ years: 0, projects: 0, delivery: 0 }); // arrancar el conteo
+            let currentStep = 0;
+            const timer = setInterval(() => {
+            currentStep++;
+            const progress = currentStep / steps;
+            setCounts({
+                years: Math.floor(FINAL.years * progress),
+                projects: Math.floor(FINAL.projects * progress),
+                delivery: Math.floor(FINAL.delivery * progress),
+            });
+            if (currentStep >= steps) {
+                clearInterval(timer);
+                setCounts(FINAL);
             }
+            }, interval);
         },
         { threshold: 0.3 }
         );
@@ -32,43 +48,7 @@
         }
 
         return () => observer.disconnect();
-    }, [isHydrated]);
-
-    useEffect(() => {
-        if (!isVisible || !isHydrated) return;
-
-        const duration = 2000;
-        const steps = 60;
-        const interval = duration / steps;
-
-        let currentStep = 0;
-        const timer = setInterval(() => {
-        currentStep++;
-        const progress = currentStep / steps;
-
-        // Actualizamos los contadores con los nuevos objetivos
-        setCounts({
-            years: Math.floor(14 * progress), // Meta: 14 años combinados
-            projects: Math.floor(144 * progress), // Meta: 144 procesos automatizados
-            delivery: Math.floor(14 * progress) // Meta: 14 días
-        });
-
-        if (currentStep >= steps) {
-            clearInterval(timer);
-            setCounts({ years: 14, projects: 144, delivery: 14 });
-        }
-        }, interval);
-
-        return () => clearInterval(timer);
-    }, [isVisible, isHydrated]);
-
-    if (!isHydrated) {
-        return (
-        <section className="py-12 section-raised">
-            {/* Skeleton simple */}
-        </section>
-        );
-    }
+    }, []);
 
     return (
         <section ref={sectionRef} className="relative overflow-hidden py-12 section-raised">

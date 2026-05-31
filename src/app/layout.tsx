@@ -1,6 +1,16 @@
     import React from 'react';
+    import { Inter } from 'next/font/google';
     import '../styles/index.css'; // Mantenemos tu importación de estilos original
     import { LanguageProvider } from '@/contexts/LanguageContext'; // <--- IMPORTANTE
+
+    // Fuente autoalojada por Next (sin @import bloqueante a Google Fonts).
+    // Expone --font-inter, que tailwind.css usa en body y headings.
+    const inter = Inter({
+        subsets: ['latin'],
+        weight: ['400', '500', '600', '700'],
+        display: 'swap',
+        variable: '--font-inter',
+    });
 
     export const viewport = {
     width: 'device-width',
@@ -8,8 +18,12 @@
     };
 
     export const metadata = {
-    title: 'Digital Match Global',
-    description: 'Scale Your Business with Automation & AI',
+    metadataBase: new URL('https://www.digitalmatchglobal.com'),
+    title: {
+        default: 'Digital Match Global',
+        template: '%s · Digital Match Global',
+    },
+    description: 'Automatización de procesos, IA y desarrollo de software a medida para PYMEs y startups en LATAM y EE.UU.',
     icons: {
         icon: [
         { url: '/favicon.ico', type: 'image/x-icon' }
@@ -23,15 +37,12 @@
     children: React.ReactNode;
     }>) {
     return (
-        <html lang="es">
+        <html lang="es" className={inter.variable}>
         <body>
             {/* Envolvemos TODO en el LanguageProvider */}
             <LanguageProvider>
             {children}
             </LanguageProvider>
-
-            <script type="module" async src="https://static.rocket.new/rocket-web.js?_cfg=https%3A%2F%2Fdigitalma8609back.builtwithrocket.new&_be=https%3A%2F%2Fapplication.rocket.new&_v=0.1.11" />
-            <script type="module" defer src="https://static.rocket.new/rocket-shot.js?v=0.0.1" />
         </body>
         </html>
     );

@@ -1,6 +1,6 @@
     'use client';
 
-    import { useState, useEffect } from 'react';
+    import { useState } from 'react';
     import Icon from '@/components/ui/AppIcon';
     import { useLanguage } from '@/contexts/LanguageContext';
     import CircuitFlow from './CircuitFlow';
@@ -22,7 +22,6 @@
     }
 
     const ContactSection = () => {
-    const [isHydrated, setIsHydrated] = useState(false);
     const [formData, setFormData] = useState<FormData>({
         name: '',
         email: '',
@@ -38,10 +37,6 @@
     // 📧 CONFIGURACIÓN GRATUITA (FormSubmit.co)
     // Usamos el endpoint /ajax/ para que no redireccione la página, sino que responda a nuestro código.
     const FORM_ENDPOINT = "https://formsubmit.co/ajax/info@digitalmatchglobal.com";
-
-    useEffect(() => {
-        setIsHydrated(true);
-    }, []);
 
     const validateForm = (): boolean => {
         const newErrors: FormErrors = {};
@@ -121,16 +116,6 @@
         setErrors((prev) => ({ ...prev, [name]: undefined }));
         }
     };
-
-    if (!isHydrated) {
-        return (
-        <section id="contact" className="py-24 section-raised">
-            <div className="max-w-7xl mx-auto px-6 lg:px-8">
-                {/* Skeleton loading simple */}
-            </div>
-        </section>
-        );
-    }
 
     return (
         <section id="contact" className="relative overflow-hidden py-24 section-raised">

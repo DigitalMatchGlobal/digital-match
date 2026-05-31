@@ -78,7 +78,7 @@ npm run dev      # Next.js dev en http://localhost:4028
 ## 5. Convenciones de código
 
 - Los archivos `.tsx` usan una **indentación inicial inusual (~4 espacios)**. Respetar el estilo del archivo que estás editando para que el diff sea limpio.
-- Componentes con animación/estado usan el patrón `isHydrated` (un `useState(false)` + `useEffect` que lo pone en `true`) para evitar mismatch de hidratación. Mantenerlo en componentes nuevos que dependan del cliente.
+- **SSR real (Fase 3):** las secciones de la landing **ya NO** usan el patrón `if (!isHydrated) return <skeleton/>` — renderizan contenido real en SSR (mejor LCP/SEO). El `LanguageProvider` arranca en `es` en server y cliente (el switch a `en` ocurre en `useEffect`, sin mismatch). Para componentes nuevos: **NO** envolver todo en un guard `isHydrated`; renderizá real en SSR y usá `useEffect`/refs sólo para lo client-only (observers, animaciones, acceso a `window`). Patrón de contadores: estado inicial = valor final (visible en SSR) y animar desde 0 al entrar en viewport (ver `ProofStrip.tsx`).
 - Estilos con clases Tailwind + tokens del theme (`bg-surface`, `text-foreground`, `text-muted-foreground`, `bg-accent`, `border-border`, `bg-gradient-accent`, etc.). Reutilizar esos tokens, no hardcodear colores salvo casos puntuales.
 
 ---
@@ -154,7 +154,7 @@ Estado completo y próximos pasos en [`docs/ROADMAP.md`](docs/ROADMAP.md). **Fas
 
 **Pendientes (resumen — detalle en ROADMAP):**
 - [ ] **⚠️ Métricas reales:** los `metrics` de `cases.ts` son PLACEHOLDER — reemplazar `value` por datos reales ANTES de mergear `feat/portfolio-casos-v2` a `main`.
-- [ ] **Fase 3 — Performance/SEO:** quitar guards `isHydrated` (SSR real), `next/font`, optimizar `Logo.png`, limpiar `rocket.new`.
+- [x] **Fase 3 — Performance/SEO + social: HECHA en rama `feat/perf`** (SSR real sin guards `isHydrated`, `next/font`, OG/social con imagen `next/og` en español, limpieza de `rocket.new`/`@dhiwise` → HTML 404KB→115KB). **Falta:** Lighthouse en preview de Vercel + validar preview social + mergear a `main`. Logo: `next/image` ya lo entrega como AVIF ~3.3KB (no se tocó el fuente).
 - [ ] **Contenido:** instancias reales de consultoría/capacitación (ESTRATEGIA §8), testimonios reales (cargar en `quote` de `cases.ts`), `result` real por caso, screenshots reales por caso (campo `image`), (opcional) logos en el stack.
 - [ ] **Conversión/SEO:** analytics + tracking de CTAs, OG/sitemap/JSON-LD, pasada de accesibilidad + Lighthouse.
 - [ ] Confirmar wording exacto de PCI-DSS; QA en celular real.

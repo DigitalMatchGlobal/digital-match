@@ -1,6 +1,6 @@
     'use client';
 
-    import { useState, useEffect, useMemo } from 'react';
+    import { useMemo } from 'react';
     import Icon from '@/components/ui/AppIcon';
     import { useLanguage } from '@/contexts/LanguageContext';
     import CircuitFlow from './CircuitFlow';
@@ -17,12 +17,7 @@
     ];
 
     const AboutSection = () => {
-    const [isHydrated, setIsHydrated] = useState(false);
     const { t } = useLanguage();
-
-    useEffect(() => {
-        setIsHydrated(true);
-    }, []);
 
     // Diferenciales (POR QUÉ confiar) — NO servicios (eso está en Servicios/Capacidades)
     // Los 4 comparten el mismo estilo destacado (tile con degradado + título en acento).
@@ -32,10 +27,6 @@
         { icon: 'ShieldCheckIcon', title: t('about.diff3.title'), desc: t('about.diff3.desc') },
         { icon: 'CheckBadgeIcon', title: t('about.diff4.title'), desc: t('about.diff4.desc') }
     ], [t]);
-
-    if (!isHydrated) {
-        return <section id="about" className="py-24 bg-background" />;
-    }
 
     return (
         <section id="about" className="relative overflow-hidden py-24 bg-background">

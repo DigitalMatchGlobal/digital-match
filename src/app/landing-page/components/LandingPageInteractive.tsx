@@ -1,6 +1,6 @@
     'use client';
 
-    import { useState, useEffect } from 'react';
+    import { useEffect } from 'react';
     import { useRouter } from 'next/navigation';
     import { useReveal } from '@/hooks/useReveal';
     import Header from '@/components/common/Header';
@@ -20,13 +20,8 @@
     import Footer from './Footer';
 
     const LandingPageInteractive = () => {
-    const [isHydrated, setIsHydrated] = useState(false);
     const router = useRouter();
     useReveal();
-
-    useEffect(() => {
-        setIsHydrated(true);
-    }, []);
 
     const scrollToSection = (sectionId: string) => {
         const element = document.querySelector(sectionId);
@@ -40,9 +35,8 @@
     };
 
     // Al llegar desde otra página con hash (ej. /#contact desde el detalle de un caso),
-    // el browser no engancha el scroll: las secciones de arriba arrancan en skeleton
-    // (guard isHydrated) y, al hidratarse, crecen y empujan el destino. Si scrolleamos
-    // temprano, aterrizamos en el lugar equivocado. Por eso esperamos a que la posición
+    // el browser puede no enganchar el scroll si el layout todavía se está asentando
+    // (fuentes/imágenes cargando empujan el destino). Por eso esperamos a que la posición
     // del destino se ESTABILICE (el layout dejó de moverse) y recién ahí scrolleamos.
     useEffect(() => {
         const hash = window.location.hash;

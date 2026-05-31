@@ -1,6 +1,6 @@
     'use client';
 
-    import { useState, useEffect, useMemo } from 'react';
+    import { useState, useMemo } from 'react';
     import Icon from '@/components/ui/AppIcon';
     import { useLanguage } from '@/contexts/LanguageContext';
     import CircuitFlow from './CircuitFlow';
@@ -13,13 +13,8 @@
     }
 
     const FAQSection = () => {
-    const [isHydrated, setIsHydrated] = useState(false);
     const [openItems, setOpenItems] = useState<Set<string>>(new Set());
     const { t } = useLanguage();
-
-    useEffect(() => {
-        setIsHydrated(true);
-    }, []);
 
     const faqs: FAQItem[] = useMemo(() => [
         {
@@ -71,24 +66,6 @@
         return newSet;
         });
     };
-
-    if (!isHydrated) {
-        return (
-        // AGREGADO ID AQUI
-        <section id="process" className="py-24 section-raised">
-            <div className="max-w-4xl mx-auto px-6 lg:px-8">
-            <div className="text-center mb-16">
-                <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
-                Frequently Asked Questions 
-                </h2>
-                <p className="text-xl text-muted-foreground">
-                Everything you need to know about working with us
-                </p>
-            </div>
-            </div>
-        </section>
-        );
-    }
 
     return (
         // AGREGADO ID AQUI (Esto era lo que faltaba para que funcionara siempre)

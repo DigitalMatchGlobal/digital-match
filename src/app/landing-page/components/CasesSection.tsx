@@ -1,6 +1,5 @@
     'use client';
 
-    import { useState, useEffect } from 'react';
     import Link from 'next/link';
     import Icon from '@/components/ui/AppIcon';
     import { useLanguage } from '@/contexts/LanguageContext';
@@ -9,22 +8,7 @@
     import CircuitFlow from './CircuitFlow';
 
     const CasesSection = () => {
-    const [isHydrated, setIsHydrated] = useState(false);
     const { t } = useLanguage();
-
-    useEffect(() => {
-        setIsHydrated(true);
-    }, []);
-
-    if (!isHydrated) {
-        return (
-        <section id="cases" className="py-24">
-            <div className="max-w-7xl mx-auto px-6 lg:px-8">
-            {/* Skeleton simple */}
-            </div>
-        </section>
-        );
-    }
 
     const preview = casesByComplexity.slice(0, 3);
 

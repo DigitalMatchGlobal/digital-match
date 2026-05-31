@@ -1,6 +1,6 @@
     'use client';
 
-    import { useState, useEffect, useMemo } from 'react';
+    import { useState, useMemo } from 'react';
     import Icon from '@/components/ui/AppIcon';
     import CircuitFlow from './CircuitFlow';
     import { useLanguage } from '@/contexts/LanguageContext'; // <--- Importamos el hook
@@ -15,13 +15,8 @@
     }
 
     const TechnicalShowcase = () => {
-    const [isHydrated, setIsHydrated] = useState(false);
     const [activeTab, setActiveTab] = useState('automation');
     const { t } = useLanguage(); // <--- Usamos el hook
-
-    useEffect(() => {
-        setIsHydrated(true);
-    }, []);
 
     // Usamos useMemo para que las capacidades se actualicen al cambiar el idioma
     const capabilities: Capability[] = useMemo(() => [
@@ -67,16 +62,6 @@
     ], [t]);
 
     const activeCapability = capabilities.find(c => c.id === activeTab) || capabilities[0];
-
-    if (!isHydrated) {
-        return (
-        <section className="py-24 bg-background">
-            <div className="max-w-7xl mx-auto px-6 lg:px-8">
-            {/* Skeleton loader simple */}
-            </div>
-        </section>
-        );
-    }
 
     return (
         <section className="relative py-24 bg-background overflow-hidden">
