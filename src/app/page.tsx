@@ -1,5 +1,6 @@
     import type { Metadata } from 'next';
     import LandingPageInteractive from './landing-page/components/LandingPageInteractive';
+    import SiteJsonLd from '@/components/seo/JsonLd';
 
     const title = 'Digital Match Global — Automatización, IA y desarrollo a medida';
     const description =
@@ -25,5 +26,10 @@
     };
 
     export default function HomePage() {
-    return <LandingPageInteractive />;
+    return (
+        <>
+        <SiteJsonLd />
+        <LandingPageInteractive />
+        </>
+    );
     }

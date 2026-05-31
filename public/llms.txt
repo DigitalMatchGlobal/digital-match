@@ -1,0 +1,39 @@
+# Digital Match Global
+
+> Consultora de automatización de procesos (RPA), inteligencia artificial y desarrollo de software a medida para PYMEs y startups en LATAM (Uruguay, Argentina) y EE.UU. Ayudamos a recuperar las horas que hoy se pierden en tareas manuales, con entregas desde 7-14 días según complejidad.
+
+Equipo de ingenieros en sistemas con +14 años de experiencia combinada en el sector privado (multinacionales) y público, con certificaciones en UiPath, Microsoft e IBM, y experiencia bajo gestión de calidad ISO 9001 y compliance PCI-DSS en pagos. El objetivo principal del sitio es que el visitante agende una llamada de consulta.
+
+## Servicios
+
+- Automatización de procesos (RPA) — UiPath, Power Automate, Rocketbot
+- Inteligencia artificial y agentes — asistentes, chatbots, integración de IA
+- Desarrollo web y de aplicaciones — Next.js, React, Node.js, TypeScript
+- Consultoría y capacitación — diagnóstico, implementación y jornadas de formación
+
+Modelos de contratación: por proyecto, por hora, consultoría o jornadas de capacitación.
+
+## Páginas principales
+
+- [Inicio](https://www.digitalmatchglobal.com/): promesa, servicios, diferenciales, stack, certificaciones y contacto.
+- [Casos y proyectos](https://www.digitalmatchglobal.com/portfolio): selección de proyectos reales, anónimos por rubro.
+
+## Casos (anónimos por rubro)
+
+- [Logística y courier (B2B)](https://www.digitalmatchglobal.com/portfolio/logistica-courier)
+- [E-commerce de electrónica](https://www.digitalmatchglobal.com/portfolio/ecommerce-electronica)
+- [ONG / Fundación educativa y deportiva](https://www.digitalmatchglobal.com/portfolio/fundacion-educativa-deportiva)
+- [Plataforma de gestión de gimnasio](https://www.digitalmatchglobal.com/portfolio/gestion-de-gimnasio)
+- [Marca de wellness y salud natural](https://www.digitalmatchglobal.com/portfolio/marca-de-wellness)
+- [Preparación física de alto rendimiento](https://www.digitalmatchglobal.com/portfolio/preparacion-fisica-alto-rendimiento)
+- [Plataforma SaaS de automatización (WhatsApp)](https://www.digitalmatchglobal.com/portfolio/plataforma-whatsapp)
+- [Formación profesional online (EdTech)](https://www.digitalmatchglobal.com/portfolio/diplomado-online)
+- [Salud y cuidado de personas (asistencia por voz)](https://www.digitalmatchglobal.com/portfolio/cuidado-asistencia-voz)
+
+## Contacto
+
+- Email: info@digitalmatchglobal.com
+- WhatsApp: +598 93 892 924
+- Instagram: https://instagram.com/digitalmatch.global
+- LinkedIn: https://linkedin.com/company/digital-match-global
+- Ubicación: Uruguay (atiende LATAM y EE.UU.)

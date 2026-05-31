@@ -82,6 +82,21 @@ Verificada con `tsc --noEmit` + `npm run build` (19 páginas estáticas OK). **F
 
 ---
 
+## ✅ FASE 4 — SEO técnico + GEO (HECHA en rama `feat/seo-geo`, sin mergear)
+Verificada con `tsc --noEmit` + `npm run build` (22 páginas estáticas, +3 vs Fase 3) y rutas probadas en runtime. **GEO = Generative Engine Optimization** (aparecer en ChatGPT/Claude/Perplexity/Gemini).
+
+- **Config central `src/data/site.ts`:** única fuente de URL, nombre, descripción, contacto (email `info@`, WhatsApp `+59893892924`), redes (IG/LinkedIn), servicios y `areaServed`. La usan robots, sitemap, JSON-LD y metadata.
+- **`src/app/robots.ts`:** permite rastreo general **y explícitamente a los bots de IA** (GPTBot, OAI-SearchBot, ChatGPT-User, ClaudeBot, anthropic-ai, Claude-Web, PerplexityBot, Google-Extended, Applebot-Extended, Amazonbot, cohere-ai, Bytespider). Apunta a `sitemap.xml` + `host`. **Decisión de negocio: bots de IA PERMITIDOS** (para aparecer en respuestas generativas). Para bloquear alguno: `disallow: '/'` en su user-agent.
+- **`src/app/sitemap.ts`:** 14 URLs — home, `/portfolio`, los 9 casos (desde `cases.ts`), privacy/terms/data-deletion.
+- **JSON-LD (`src/components/seo/JsonLd.tsx`, montado en la home):** `@graph` con **Organization + WebSite + ProfessionalService + FAQPage**. Datos reales desde `site.ts`; el FAQPage refleja `faq.q1..q6` (ES) — ⚠️ mantener en sync si cambian las FAQ.
+- **OG por página:** `generateMetadata` de `/portfolio` y `/portfolio/[slug]` ahora con `openGraph` + `twitter` + `canonical` propios (los casos usan `og:type=article`). Heredan la imagen OG global de Fase 3.
+- **`public/llms.txt`:** índice Markdown para LLMs (quién es DMG, servicios, páginas, los 9 casos con URL, contacto).
+- **`src/app/manifest.ts`:** PWA básica (nombre, colores de marca `#0B0D14`, display). ⚠️ Pendiente menor: iconos cuadrados 192/512 maskable (el logo no es cuadrado) para instalabilidad completa.
+
+**Pendiente de Fase 4 (post-merge, requiere producción):** enviar `sitemap.xml` a Google Search Console; validar el JSON-LD en el [Rich Results Test](https://search.google.com/test/rich-results); correr **Lighthouse** (SEO/PWA) en producción.
+
+---
+
 ## 🎯 Próximos pasos para dejar el sitio en un nivel altísimo
 Ordenados por impacto. Cada uno en su rama → preview → merge.
 
@@ -99,9 +114,9 @@ Ordenados por impacto. Cada uno en su rama → preview → merge.
 - (Opcional) **logos en las categorías del stack** (como las certs).
 
 **D. Confianza & conversión**
-- **Analytics + tracking de conversión** en CTAs / Calendly / WhatsApp.
-- **SEO técnico:** OG images por página, `sitemap.xml`, `robots.txt`, datos estructurados (JSON-LD Organization/Service).
-- **Accesibilidad:** pasada de focus states, `aria`, contraste; correr **Lighthouse**.
+- **Analytics + tracking de conversión** en CTAs / Calendly / WhatsApp. *(SIGUE PENDIENTE — buen candidato a Fase 5.)*
+- ~~**SEO técnico:** OG images por página, `sitemap.xml`, `robots.txt`, datos estructurados (JSON-LD).~~ **✅ HECHO en Fase 4** (+ `llms.txt` y robots para bots de IA / GEO). Falta sólo enviar el sitemap a Search Console y validar Rich Results en producción.
+- **Accesibilidad:** pasada de focus states, `aria`, contraste; correr **Lighthouse**. *(Sigue pendiente.)*
 - Confirmar wording PCI-DSS (ver Fase 2 pendiente) para no overclaim.
 
 **E. Housekeeping**
