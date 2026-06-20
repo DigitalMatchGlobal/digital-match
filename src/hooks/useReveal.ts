@@ -23,15 +23,29 @@
                 }
                 }
             },
-            { threshold: 0.15, rootMargin: '0px 0px -10% 0px' }
+            // threshold 0 = revela apenas asoma 1px (no 15%): así no quedan
+            // negras las secciones más altas que el viewport.
+            { threshold: 0, rootMargin: '0px 0px -10% 0px' }
             );
 
         const scan = () => {
         document.querySelectorAll<HTMLElement>('.reveal').forEach((el) => {
             if (seen.has(el)) return;
             seen.add(el);
-            if (reduce || !io) el.classList.add('is-visible');
-            else io.observe(el);
+            if (reduce || !io) {
+            el.classList.add('is-visible');
+            return;
+            }
+            // Si el elemento YA está en pantalla o quedó por encima (el usuario
+            // scrolleó durante la hidratación, más lenta en prod), lo revelamos
+            // al instante: el IntersectionObserver solo dispara al INTERSECAR, así
+            // que un elemento ya pasado nunca se revelaría solo → quedaba en negro.
+            // Solo observamos (para animar al entrar) lo que sigue debajo del fold.
+            if (el.getBoundingClientRect().top < window.innerHeight) {
+            el.classList.add('is-visible');
+            } else {
+            io.observe(el);
+            }
         });
         };
 
