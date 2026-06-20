@@ -4,6 +4,7 @@
     import Icon from '@/components/ui/AppIcon';
     import CircuitFlow from './CircuitFlow';
     import ContractModels from './ContractModels';
+    import { WhatsAppGlyph } from '@/components/ui/BrandGlyphs';
     import { useLanguage } from '@/contexts/LanguageContext';
 
     interface Service {
@@ -150,6 +151,41 @@
                 </div>
                 </div>
             ))}
+            </div>
+
+            {/* Producto propio: MatchBot. Es la "prueba viva" del pilar Asistentes IA
+                (arriba): nuestra integración como Tech Provider de Meta convertida en
+                un SaaS real. Link suave a la plataforma; sin prometer features puntuales. */}
+            <div className="reveal mt-10" data-delay={1}>
+            <a
+                href="https://matchbot.digitalmatchglobal.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="glass-panel group relative flex flex-col gap-6 overflow-hidden rounded-2xl p-8 sm:flex-row sm:items-center"
+            >
+                {/* glow propio en verde WhatsApp, muy sutil */}
+                <div className="pointer-events-none absolute -right-16 -top-16 h-48 w-48 rounded-full bg-[#25D366]/10 blur-3xl" />
+
+                <span className="relative flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-[#25D366]/10 ring-1 ring-[#25D366]/30">
+                <WhatsAppGlyph className="h-9 w-9" />
+                </span>
+
+                <div className="relative flex-1">
+                <p className="mb-2 flex flex-wrap items-center gap-2 text-xs font-semibold uppercase tracking-wider text-accent">
+                    {t('services.matchbot.eyebrow')}
+                    <span className="inline-flex items-center gap-1 rounded-full bg-accent/10 px-2 py-0.5 text-[10px] normal-case tracking-normal text-accent">
+                    <Icon name="CheckBadgeIcon" size={11} /> Meta Tech Provider
+                    </span>
+                </p>
+                <h3 className="text-2xl font-bold text-foreground">MatchBot</h3>
+                <p className="mt-1 max-w-xl text-muted-foreground">{t('services.matchbot.desc')}</p>
+                </div>
+
+                <span className="relative inline-flex shrink-0 items-center gap-2 text-sm font-semibold text-accent transition-all group-hover:gap-3">
+                {t('services.matchbot.cta')}
+                <Icon name="ArrowTopRightOnSquareIcon" size={16} />
+                </span>
+            </a>
             </div>
 
             {/* Modelos de contratación (con efecto de proximidad) */}

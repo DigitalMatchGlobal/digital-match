@@ -45,6 +45,8 @@
         { label: t('nav.cases'), href: '/portfolio' },
         { label: t('faq.title'), href: '#process' }, // sección FAQ tiene id="process"
         { label: t('nav.contact'), href: '#contact' },
+        // Producto propio (SaaS, Tech Provider de Meta) — link externo a la plataforma.
+        { label: t('footer.matchbot'), href: 'https://matchbot.digitalmatchglobal.com', external: true },
     ];
 
     // Enlaces legales

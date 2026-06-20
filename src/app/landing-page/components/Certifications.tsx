@@ -1,6 +1,8 @@
     'use client';
 
     import { useLanguage } from '@/contexts/LanguageContext';
+    import Icon from '@/components/ui/AppIcon';
+    import { WhatsAppGlyph, MetaGlyph } from '@/components/ui/BrandGlyphs';
 
     // Certificaciones oficiales que el equipo posee (ver docs/ESTRATEGIA §6/§8).
     // Solo se listan certificaciones REALES (regla de honestidad del CLAUDE.md).
@@ -62,6 +64,32 @@
                 </span>
                 </div>
             ))}
+            </div>
+        </div>
+
+        {/* Estado OFICIAL de plataforma — verificado por Meta. Va aparte del marquee
+            porque no es una certificación del equipo sino un status de la empresa
+            (Tech Provider + App Review aprobado). Claim en texto = dato real y
+            defendible (CLAUDE.md §7); logos de marca solo como señal, sin implicar
+            partnership/endorsement. */}
+        <div className="max-w-3xl mx-auto px-6 lg:px-8 mt-12 reveal" data-delay={3}>
+            <div className="glass-panel mx-auto flex max-w-2xl flex-col items-center gap-4 rounded-2xl px-6 py-5 text-center sm:flex-row sm:text-left">
+            <div className="flex shrink-0 items-center gap-3">
+                <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-[#25D366]/10 ring-1 ring-[#25D366]/25">
+                <WhatsAppGlyph className="h-7 w-7" />
+                </span>
+                <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-[#0866FF]/10 ring-1 ring-[#0866FF]/25">
+                <MetaGlyph className="h-6 w-6" />
+                </span>
+            </div>
+            <div className="hidden h-12 w-px bg-border sm:block" />
+            <div className="flex-1">
+                <p className="flex items-center justify-center gap-1.5 text-sm font-bold text-foreground sm:justify-start">
+                <Icon name="CheckBadgeIcon" size={16} className="text-accent" />
+                {t('certs.meta.title')}
+                </p>
+                <p className="mt-1 text-sm text-muted-foreground">{t('certs.meta.subtitle')}</p>
+            </div>
             </div>
         </div>
         </section>
