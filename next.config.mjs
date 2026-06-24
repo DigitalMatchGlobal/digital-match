@@ -31,6 +31,23 @@
             destination: '/',
             permanent: true,
         },
+        // URLs legales legacy (.html) → rutas actuales. Evita 404 en enlaces viejos
+        // (p. ej. los configurados en el panel de Meta antes de la migración a Next).
+        {
+            source: '/privacy-policy.html',
+            destination: '/privacy',
+            permanent: true,
+        },
+        {
+            source: '/terms.html',
+            destination: '/terms',
+            permanent: true,
+        },
+        {
+            source: '/data-deletion.html',
+            destination: '/data-deletion',
+            permanent: true,
+        },
         ];
     },
     };

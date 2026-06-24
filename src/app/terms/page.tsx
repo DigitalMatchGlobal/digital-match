@@ -21,7 +21,7 @@
             {language === 'es' && (
                 <>
                 <h1 className="text-3xl font-bold text-foreground mb-2">Términos y Condiciones de Uso</h1>
-                <p className="text-muted-foreground text-sm mb-8">Última actualización: 02/12/2025</p>
+                <p className="text-muted-foreground text-sm mb-8">Última actualización: 24/06/2026</p>
 
                 <div className="space-y-6 text-muted-foreground">
                     <p>
@@ -35,15 +35,15 @@
                     <ul className="list-disc pl-5 space-y-2">
                     <li><strong>Cliente:</strong> empresa o profesional que contrata y utiliza la Plataforma.</li>
                     <li><strong>Usuario autorizado:</strong> persona que usa la Plataforma en nombre del Cliente (por ejemplo, agentes, administradores).</li>
-                    <li><strong>Usuarios finales:</strong> personas que interactúan con el Cliente a través de canales como WhatsApp u otros medios integrados.</li>
+                    <li><strong>Usuarios finales:</strong> personas que interactúan con el Cliente a través de canales como WhatsApp, Instagram u otros medios integrados.</li>
                     </ul>
 
                     <h3 className="text-xl font-bold text-foreground mt-8">2. Objeto del servicio</h3>
                     <p>
-                    Digital Match Global ofrece una Plataforma SaaS para gestionar conversaciones, automatizar flujos y operar canales como WhatsApp Business a través de integraciones oficiales (por ejemplo, la API de Meta).
+                    Digital Match Global ofrece una Plataforma SaaS para gestionar conversaciones, automatizar flujos y operar canales como WhatsApp Business e Instagram a través de integraciones oficiales (por ejemplo, las API de Meta).
                     </p>
                     <p>
-                    No somos Meta, WhatsApp ni un sustituto de dichos servicios. El uso de la Plataforma no exime al Cliente de cumplir con las políticas de Meta/WhatsApp y con las leyes aplicables.
+                    No somos Meta, WhatsApp ni Instagram, ni un sustituto de dichos servicios. El uso de la Plataforma no exime al Cliente de cumplir con las políticas de Meta, WhatsApp e Instagram y con las leyes aplicables.
                     </p>
 
                     <h3 className="text-xl font-bold text-foreground mt-8">3. Cuenta del cliente</h3>
@@ -65,8 +65,8 @@
                     </ul>
                     <p>El incumplimiento de estas reglas puede dar lugar a la suspensión o cancelación de la cuenta, sin derecho a reembolso.</p>
 
-                    <h3 className="text-xl font-bold text-foreground mt-8">5. Relación con proveedores externos (Meta / WhatsApp y otros)</h3>
-                    <p>El uso de la integración con la API de WhatsApp Business está sujeto a las políticas de Meta y de WhatsApp. Determinadas conductas (por ejemplo, spam, uso abusivo de plantillas) pueden ocasionar sanciones externas ajenas a Digital Match Global.</p>
+                    <h3 className="text-xl font-bold text-foreground mt-8">5. Relación con proveedores externos (Meta / WhatsApp / Instagram y otros)</h3>
+                    <p>El uso de las integraciones con la API de WhatsApp Business y con la API de Instagram está sujeto a las políticas de Meta, de WhatsApp y de Instagram. Determinadas conductas (por ejemplo, spam, uso abusivo de plantillas) pueden ocasionar sanciones externas ajenas a Digital Match Global.</p>
                     <p>El Cliente reconoce que incidencias o decisiones tomadas por proveedores externos (Meta, operadores de telecomunicaciones, servicios de nube, etc.) pueden afectar el funcionamiento de la Plataforma y no siempre están bajo nuestro control.</p>
 
                     <h3 className="text-xl font-bold text-foreground mt-8">6. Planes, pagos y cancelaciones</h3>
@@ -127,7 +127,7 @@
             {language === 'en' && (
                 <>
                 <h1 className="text-3xl font-bold text-foreground mb-2">Terms and Conditions of Use</h1>
-                <p className="text-muted-foreground text-sm mb-8">Last Updated: 12/02/2025</p>
+                <p className="text-muted-foreground text-sm mb-8">Last Updated: 06/24/2026</p>
 
                 <div className="space-y-6 text-muted-foreground">
                     <p>
@@ -141,15 +141,15 @@
                     <ul className="list-disc pl-5 space-y-2">
                     <li><strong>Client:</strong> The company or professional that contracts and uses the Platform.</li>
                     <li><strong>Authorized User:</strong> A person who uses the Platform on behalf of the Client (e.g., agents, administrators).</li>
-                    <li><strong>End Users:</strong> People who interact with the Client through channels such as WhatsApp or other integrated media.</li>
+                    <li><strong>End Users:</strong> People who interact with the Client through channels such as WhatsApp, Instagram, or other integrated media.</li>
                     </ul>
 
                     <h3 className="text-xl font-bold text-foreground mt-8">2. Object of the Service</h3>
                     <p>
-                    Digital Match Global offers a SaaS Platform to manage conversations, automate flows, and operate channels such as WhatsApp Business through official integrations (e.g., the Meta API).
+                    Digital Match Global offers a SaaS Platform to manage conversations, automate flows, and operate channels such as WhatsApp Business and Instagram through official integrations (e.g., the Meta APIs).
                     </p>
                     <p>
-                    We are not Meta, WhatsApp, nor a substitute for such services. Using the Platform does not exempt the Client from complying with Meta/WhatsApp policies and applicable laws.
+                    We are not Meta, WhatsApp, or Instagram, nor a substitute for such services. Using the Platform does not exempt the Client from complying with Meta, WhatsApp, and Instagram policies and applicable laws.
                     </p>
 
                     <h3 className="text-xl font-bold text-foreground mt-8">3. Client Account</h3>
@@ -171,8 +171,8 @@
                     </ul>
                     <p>Failure to comply with these rules may result in the suspension or cancellation of the account, without the right to a refund.</p>
 
-                    <h3 className="text-xl font-bold text-foreground mt-8">5. Relationship with External Providers (Meta / WhatsApp and others)</h3>
-                    <p>Use of the WhatsApp Business API integration is subject to Meta and WhatsApp policies. Certain behaviors (e.g., spam, abusive use of templates) may result in external sanctions outside of Digital Match Global's control.</p>
+                    <h3 className="text-xl font-bold text-foreground mt-8">5. Relationship with External Providers (Meta / WhatsApp / Instagram and others)</h3>
+                    <p>Use of the WhatsApp Business API and Instagram API integrations is subject to Meta, WhatsApp, and Instagram policies. Certain behaviors (e.g., spam, abusive use of templates) may result in external sanctions outside of Digital Match Global's control.</p>
                     <p>The Client acknowledges that incidents or decisions made by external providers (Meta, telecommunications operators, cloud services, etc.) may affect the operation of the Platform and are not always under our control.</p>
 
                     <h3 className="text-xl font-bold text-foreground mt-8">6. Plans, Payments, and Cancellations</h3>

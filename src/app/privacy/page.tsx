@@ -21,11 +21,11 @@
             {language === 'es' && (
                 <>
                 <h1 className="text-3xl font-bold text-foreground mb-2">Política de Privacidad</h1>
-                <p className="text-muted-foreground text-sm mb-8">Última actualización: 02/12/2025</p>
+                <p className="text-muted-foreground text-sm mb-8">Última actualización: 24/06/2026</p>
 
                 <div className="space-y-6 text-muted-foreground">
                     <p>
-                    En <strong>Digital Match Global</strong> (“DigitalMatch”, “nosotros” o “la empresa”) valoramos y protegemos la privacidad de nuestros clientes y de los usuarios finales que interactúan a través de nuestras soluciones de automatización conversacional, incluyendo nuestra plataforma de gestión de WhatsApp Business y otros canales digitales.
+                    En <strong>Digital Match Global</strong> (“DigitalMatch”, “nosotros” o “la empresa”) valoramos y protegemos la privacidad de nuestros clientes y de los usuarios finales que interactúan a través de nuestras soluciones de automatización conversacional, incluyendo nuestra plataforma de gestión de WhatsApp Business e Instagram (mensajes directos) y otros canales digitales.
                     </p>
                     <p>
                     Esta política explica cómo recopilamos, usamos, almacenamos y protegemos los datos personales, en cumplimiento de la normativa aplicable en Uruguay y de buenas prácticas internacionales de privacidad (incluyendo principios alineados con el Reglamento General de Protección de Datos de la Unión Europea – GDPR).
@@ -40,14 +40,14 @@
                     <p className="mt-4">Esta política aplica a:</p>
                     <ul className="list-disc pl-5 space-y-2">
                     <li>El sitio web digitalmatchglobal.com y sus subdominios (por ejemplo: matchbot.digitalmatchglobal.com).</li>
-                    <li>Nuestra plataforma SaaS de automatización conversacional y gestión de canales (incluyendo la integración con la API oficial de WhatsApp Business de Meta).</li>
+                    <li>Nuestra plataforma SaaS de automatización conversacional y gestión de canales (incluyendo las integraciones con la API oficial de WhatsApp Business y con la API de Instagram de Meta).</li>
                     <li>Cualquier comunicación, formulario o canal de soporte que ofrezcamos (correo, WhatsApp, etc.).</li>
                     </ul>
 
                     <h3 className="text-xl font-bold text-foreground mt-8">2. Rol de Digital Match Global</h3>
                     <ul className="list-disc pl-5 space-y-2">
                     <li><strong>Responsable de datos de clientes (B2B):</strong> somos responsables de los datos de contacto, acceso y facturación de las empresas que contratan nuestros servicios.</li>
-                    <li><strong>Encargado del tratamiento de datos de usuarios finales:</strong> cuando nuestros clientes usan nuestra plataforma para comunicarse con sus propios usuarios (por ejemplo, vía WhatsApp), procesamos dichos mensajes y metadatos únicamente en nombre de nuestros clientes y siguiendo sus instrucciones.</li>
+                    <li><strong>Encargado del tratamiento de datos de usuarios finales:</strong> cuando nuestros clientes usan nuestra plataforma para comunicarse con sus propios usuarios (por ejemplo, vía WhatsApp o mensajes directos de Instagram), procesamos dichos mensajes y metadatos únicamente en nombre de nuestros clientes y siguiendo sus instrucciones.</li>
                     </ul>
 
                     <h3 className="text-xl font-bold text-foreground mt-8">3. Datos que recopilamos</h3>
@@ -62,10 +62,10 @@
                     </ul>
 
                     <h4 className="text-lg font-bold text-foreground mt-4">3.2 Datos operativos de la plataforma</h4>
-                    <p>Al utilizar nuestra integración con la API oficial de WhatsApp Business u otros canales, se pueden procesar:</p>
+                    <p>Al utilizar nuestras integraciones con la API oficial de WhatsApp Business, con la API de Instagram (mensajes directos) u otros canales, se pueden procesar:</p>
                     <ul className="list-disc pl-5 space-y-2">
                     <li>Mensajes enviados y recibidos (texto, contenido multimedia y metadatos necesarios para el envío y entrega).</li>
-                    <li>Identificadores técnicos (por ejemplo: ID de conversación, número de teléfono, ID de plantilla).</li>
+                    <li>Identificadores técnicos (por ejemplo: ID de conversación, número de teléfono, ID de plantilla y, en Instagram, el identificador de usuario/remitente —Instagram-scoped ID— y el nombre de usuario de la cuenta).</li>
                     <li>Estados de entrega, lectura, etiquetas de conversación y asignación de agentes.</li>
                     </ul>
                     <p>No utilizamos estos datos para publicidad ni para crear perfiles comerciales ajenos al servicio contratado.</p>
@@ -89,7 +89,7 @@
                     <p>Tratamos los datos personales para las siguientes finalidades:</p>
                     <ul className="list-disc pl-5 space-y-2">
                     <li>Prestar y mantener el funcionamiento de nuestra plataforma y servicios.</li>
-                    <li>Configurar y gestionar la integración con la API de WhatsApp Business y otros proveedores.</li>
+                    <li>Configurar y gestionar las integraciones con las API de WhatsApp Business e Instagram y otros proveedores.</li>
                     <li>Brindar soporte técnico y atención al cliente.</li>
                     <li>Enviar comunicaciones relacionadas con el servicio (alertas, cambios, mejoras, avisos legales).</li>
                     <li>Mejorar la seguridad, estabilidad y experiencia de uso de la plataforma.</li>
@@ -144,13 +144,16 @@
                     </ul>
                     <p>Ningún sistema es 100% inmune, pero trabajamos para reducir los riesgos y actuar de forma diligente ante cualquier incidente.</p>
 
-                    <h3 className="text-xl font-bold text-foreground mt-8">10. Uso de APIs de Meta (Facebook / WhatsApp)</h3>
-                    <p>Nuestra plataforma se integra con la API oficial de WhatsApp Business proporcionada por Meta. El uso de esta integración se limita a:</p>
+                    <h3 className="text-xl font-bold text-foreground mt-8">10. Uso de APIs de Meta (Facebook / WhatsApp / Instagram)</h3>
+                    <p>Nuestra plataforma se integra con las API oficiales de <strong>WhatsApp Business</strong> e <strong>Instagram</strong> proporcionadas por Meta. El uso de estas integraciones se limita a:</p>
                     <ul className="list-disc pl-5 space-y-2">
-                    <li>Enviar y recibir mensajes en nombre de nuestros clientes, de acuerdo con las políticas de WhatsApp Business y de Meta.</li>
+                    <li>Enviar y recibir mensajes en nombre de nuestros clientes, de acuerdo con las políticas de WhatsApp Business, de Instagram y de Meta.</li>
+                    <li>Acceder a la cuenta de Instagram que el cliente conecta, para leer y responder sus <strong>mensajes directos (DMs)</strong> y, cuando corresponda, gestionar comentarios, mediante el permiso <em>instagram_business_manage_messages</em>.</li>
+                    <li>Procesar el identificador de usuario de Instagram (Instagram-scoped ID), el contenido de los mensajes y sus metadatos únicamente para operar el canal de atención del cliente.</li>
                     <li>Gestionar plantillas de mensajes, números de teléfono y otros activos necesarios para la operación del canal.</li>
                     </ul>
-                    <p>No vendemos, cedemos ni reutilizamos los datos de Meta para finalidades ajenas al servicio contratado.</p>
+                    <p>No vendemos, cedemos ni reutilizamos los datos de Meta (incluidos los de Instagram) para finalidades ajenas al servicio contratado, ni para publicidad o elaboración de perfiles. El uso de estos datos cumple con las Condiciones de la plataforma y las Políticas para desarrolladores de Meta.</p>
+                    <p>Los usuarios de Instagram pueden solicitar la eliminación de sus datos en cualquier momento. Además del procedimiento manual descrito en <Link href="/data-deletion" className="text-accent hover:underline">/data-deletion</Link>, procesamos automáticamente las solicitudes que Meta nos envía cuando un usuario quita la app o pide la eliminación de sus datos.</p>
 
                     <h3 className="text-xl font-bold text-foreground mt-8">11. Eliminación de datos de usuario</h3>
                     <p>
@@ -176,11 +179,11 @@
             {language === 'en' && (
                 <>
                 <h1 className="text-3xl font-bold text-foreground mb-2">Privacy Policy</h1>
-                <p className="text-muted-foreground text-sm mb-8">Last Updated: 12/02/2025</p>
+                <p className="text-muted-foreground text-sm mb-8">Last Updated: 06/24/2026</p>
 
                 <div className="space-y-6 text-muted-foreground">
                     <p>
-                    At <strong>Digital Match Global</strong> (“DigitalMatch”, “we” or “the company”), we value and protect the privacy of our clients and end users who interact through our conversational automation solutions, including our WhatsApp Business management platform and other digital channels.
+                    At <strong>Digital Match Global</strong> (“DigitalMatch”, “we” or “the company”), we value and protect the privacy of our clients and end users who interact through our conversational automation solutions, including our WhatsApp Business and Instagram (direct messages) management platform and other digital channels.
                     </p>
                     <p>
                     This policy explains how we collect, use, store, and protect personal data, in compliance with applicable regulations in Uruguay and international privacy best practices (including principles aligned with the European Union General Data Protection Regulation – GDPR).
@@ -195,14 +198,14 @@
                     <p className="mt-4">This policy applies to:</p>
                     <ul className="list-disc pl-5 space-y-2">
                     <li>The website digitalmatchglobal.com and its subdomains (e.g., matchbot.digitalmatchglobal.com).</li>
-                    <li>Our SaaS conversational automation and channel management platform (including integration with Meta's official WhatsApp Business API).</li>
+                    <li>Our SaaS conversational automation and channel management platform (including integrations with Meta's official WhatsApp Business API and Instagram API).</li>
                     <li>Any communication, form, or support channel we offer (email, WhatsApp, etc.).</li>
                     </ul>
 
                     <h3 className="text-xl font-bold text-foreground mt-8">2. Role of Digital Match Global</h3>
                     <ul className="list-disc pl-5 space-y-2">
                     <li><strong>Responsible for Client Data (B2B):</strong> We are responsible for the contact, access, and billing data of companies that contract our services.</li>
-                    <li><strong>Data Processor for End Users:</strong> When our clients use our platform to communicate with their own users (e.g., via WhatsApp), we process such messages and metadata solely on behalf of our clients and following their instructions.</li>
+                    <li><strong>Data Processor for End Users:</strong> When our clients use our platform to communicate with their own users (e.g., via WhatsApp or Instagram direct messages), we process such messages and metadata solely on behalf of our clients and following their instructions.</li>
                     </ul>
 
                     <h3 className="text-xl font-bold text-foreground mt-8">3. Data We Collect</h3>
@@ -217,10 +220,10 @@
                     </ul>
 
                     <h4 className="text-lg font-bold text-foreground mt-4">3.2 Platform Operational Data</h4>
-                    <p>When using our integration with the official WhatsApp Business API or other channels, the following may be processed:</p>
+                    <p>When using our integrations with the official WhatsApp Business API, with the Instagram API (direct messages), or other channels, the following may be processed:</p>
                     <ul className="list-disc pl-5 space-y-2">
                     <li>Sent and received messages (text, multimedia content, and metadata necessary for sending and delivery).</li>
-                    <li>Technical identifiers (e.g., conversation ID, phone number, template ID).</li>
+                    <li>Technical identifiers (e.g., conversation ID, phone number, template ID and, on Instagram, the sender/user identifier —Instagram-scoped ID— and the account username).</li>
                     <li>Delivery status, read receipts, conversation labels, and agent assignment.</li>
                     </ul>
                     <p>We do not use this data for advertising or to create commercial profiles unrelated to the contracted service.</p>
@@ -244,7 +247,7 @@
                     <p>We process personal data for the following purposes:</p>
                     <ul className="list-disc pl-5 space-y-2">
                     <li>Provide and maintain the operation of our platform and services.</li>
-                    <li>Configure and manage integration with the WhatsApp Business API and other providers.</li>
+                    <li>Configure and manage integrations with the WhatsApp Business and Instagram APIs and other providers.</li>
                     <li>Provide technical support and customer service.</li>
                     <li>Send service-related communications (alerts, changes, improvements, legal notices).</li>
                     <li>Improve the security, stability, and user experience of the platform.</li>
@@ -299,13 +302,16 @@
                     </ul>
                     <p>No system is 100% immune, but we work to reduce risks and act diligently in the event of any incident.</p>
 
-                    <h3 className="text-xl font-bold text-foreground mt-8">10. Use of Meta APIs (Facebook / WhatsApp)</h3>
-                    <p>Our platform integrates with the official WhatsApp Business API provided by Meta. Use of this integration is limited to:</p>
+                    <h3 className="text-xl font-bold text-foreground mt-8">10. Use of Meta APIs (Facebook / WhatsApp / Instagram)</h3>
+                    <p>Our platform integrates with the official <strong>WhatsApp Business</strong> and <strong>Instagram</strong> APIs provided by Meta. Use of these integrations is limited to:</p>
                     <ul className="list-disc pl-5 space-y-2">
-                    <li>Sending and receiving messages on behalf of our clients, in accordance with WhatsApp Business and Meta policies.</li>
+                    <li>Sending and receiving messages on behalf of our clients, in accordance with WhatsApp Business, Instagram, and Meta policies.</li>
+                    <li>Accessing the Instagram account connected by the client to read and reply to its <strong>direct messages (DMs)</strong> and, where applicable, manage comments, through the <em>instagram_business_manage_messages</em> permission.</li>
+                    <li>Processing the Instagram user identifier (Instagram-scoped ID), message content, and metadata solely to operate the client's support channel.</li>
                     <li>Managing message templates, phone numbers, and other assets necessary for channel operation.</li>
                     </ul>
-                    <p>We do not sell, transfer, or reuse Meta data for purposes unrelated to the contracted service.</p>
+                    <p>We do not sell, transfer, or reuse Meta data (including Instagram data) for purposes unrelated to the contracted service, nor for advertising or profiling. Use of this data complies with Meta's Platform Terms and Developer Policies.</p>
+                    <p>Instagram users may request deletion of their data at any time. In addition to the manual procedure described at <Link href="/data-deletion" className="text-accent hover:underline">/data-deletion</Link>, we automatically process the requests Meta sends us when a user removes the app or requests deletion of their data.</p>
 
                     <h3 className="text-xl font-bold text-foreground mt-8">11. User Data Deletion</h3>
                     <p>

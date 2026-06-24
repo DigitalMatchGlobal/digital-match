@@ -21,11 +21,11 @@
             {language === 'es' && (
                 <>
                 <h1 className="text-3xl font-bold text-foreground mb-2">Eliminación de Datos de Usuario</h1>
-                <p className="text-muted-foreground text-sm mb-8">Última actualización: 02/12/2025</p>
+                <p className="text-muted-foreground text-sm mb-8">Última actualización: 24/06/2026</p>
 
                 <div className="space-y-6 text-muted-foreground">
                     <p>
-                    En <strong>Digital Match Global</strong> respetamos tu derecho a solicitar la eliminación de tus datos personales. Esta página describe cómo puedes hacerlo en relación con nuestros servicios, incluyendo nuestra Plataforma de automatización y las integraciones con la API oficial de WhatsApp Business.
+                    En <strong>Digital Match Global</strong> respetamos tu derecho a solicitar la eliminación de tus datos personales. Esta página describe cómo puedes hacerlo en relación con nuestros servicios, incluyendo nuestra Plataforma de automatización y las integraciones con las API oficiales de <strong>WhatsApp Business</strong> e <strong>Instagram</strong> de Meta.
                     </p>
 
                     <h3 className="text-xl font-bold text-foreground mt-8">1. ¿Quién puede solicitar la eliminación de datos?</h3>
@@ -49,6 +49,9 @@
                     </p>
                     <p>
                     También puedes contactar a la empresa con la que te comunicaste (nuestro Cliente), quien podrá derivar la solicitud hacia nosotros en caso de que corresponda.
+                    </p>
+                    <p>
+                    <strong>Instagram:</strong> si interactuaste por mensajes directos de Instagram, también puedes eliminar la conexión quitando nuestra app desde la configuración de tu cuenta de Instagram. Cuando lo hacés (o cuando solicitás la eliminación de datos a través de Meta), Meta nos notifica y procesamos la eliminación de forma <strong>automática</strong>: borramos las conversaciones y mensajes asociados a tu identificador de usuario de Instagram.
                     </p>
 
                     <h3 className="text-xl font-bold text-foreground mt-8">4. Qué ocurre cuando eliminamos tus datos</h3>
@@ -85,11 +88,11 @@
             {language === 'en' && (
                 <>
                 <h1 className="text-3xl font-bold text-foreground mb-2">User Data Deletion</h1>
-                <p className="text-muted-foreground text-sm mb-8">Last Updated: 12/02/2025</p>
+                <p className="text-muted-foreground text-sm mb-8">Last Updated: 06/24/2026</p>
 
                 <div className="space-y-6 text-muted-foreground">
                     <p>
-                    At <strong>Digital Match Global</strong>, we respect your right to request the deletion of your personal data. This page describes how you can do so regarding our services, including our automation Platform and integrations with the official WhatsApp Business API.
+                    At <strong>Digital Match Global</strong>, we respect your right to request the deletion of your personal data. This page describes how you can do so regarding our services, including our automation Platform and integrations with Meta's official <strong>WhatsApp Business</strong> and <strong>Instagram</strong> APIs.
                     </p>
 
                     <h3 className="text-xl font-bold text-foreground mt-8">1. Who Can Request Data Deletion?</h3>
@@ -113,6 +116,9 @@
                     </p>
                     <p>
                     You can also contact the company you communicated with (our Client), who can forward the request to us if applicable.
+                    </p>
+                    <p>
+                    <strong>Instagram:</strong> if you interacted via Instagram direct messages, you can also remove the connection by removing our app from your Instagram account settings. When you do this (or when you request data deletion through Meta), Meta notifies us and we process the deletion <strong>automatically</strong>: we delete the conversations and messages associated with your Instagram user identifier.
                     </p>
 
                     <h3 className="text-xl font-bold text-foreground mt-8">4. What Happens When We Delete Your Data</h3>
