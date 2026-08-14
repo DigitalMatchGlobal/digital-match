@@ -93,10 +93,6 @@
         'keywords.cloud': 'Infraestructura en la Nube',
         'keywords.analytics': 'Análisis de Datos',
         'keywords.ai': 'Soluciones IA',
-        'proof.clients': '50+ clientes en LATAM y EE.UU.',
-        'proof.automation': '80% reducción en tareas manuales',
-        'proof.delivery': 'Entrega desde 7-14 días',
-        'proof.support': 'Soporte 24/7',
         'proof.m1.label': 'Años de Experiencia',
         'proof.m2.label': 'Procesos Automatizados',
         'proof.m3.label': 'Días del diagnóstico a la solución',
@@ -237,14 +233,16 @@
         'footer.data_deletion': 'Eliminación de Datos',
         'footer.matchbot': 'MatchBot ↗',
         'footer.description': 'Construyendo sistemas que escalan tu negocio a través de automatización, IA y desarrollo web.',
-        'footer.services.title': 'Servicios',
         'footer.legal.title': 'Legal',
         'footer.location': 'Con base en Uruguay',
-        'footer.security': 'Seguridad primero • ISO 9001 · PCI-DSS • Documentado',
-        'footer.links.automation': 'Automatización de Procesos',
-        'footer.links.ai': 'Asistentes IA',
-        'footer.links.web': 'Productos Web',
-        'footer.links.consulting': 'Consultoría'
+        // "Experiencia" no es opcional: comunicamos ISO/PCI como experiencia, nunca como
+        // certificación propia de la empresa (ver CLAUDE.md §7).
+        'footer.security': 'Seguridad primero • Experiencia ISO 9001 · PCI-DSS • Documentado',
+        'footer.contact.title': 'Contacto',
+        'footer.contact.email': 'Escribinos',
+        'footer.contact.whatsapp': 'WhatsApp',
+        'footer.social.follow': 'Seguinos en',
+        'footer.signature.madeBy': 'Hecho por'
     },
     en: {
         // ... MANTENER TODO LO ANTERIOR EN INGLÉS ...
@@ -327,10 +325,6 @@
         'keywords.cloud': 'Cloud Infrastructure',
         'keywords.analytics': 'Data Analytics',
         'keywords.ai': 'AI Solutions',
-        'proof.clients': '50+ clients in LATAM and US',
-        'proof.automation': '80% reduction in manual tasks',
-        'proof.delivery': 'Delivery from 7-14 days',
-        'proof.support': '24/7 support',
         'proof.m1.label': 'Years of Experience',
         'proof.m2.label': 'Automated Processes',
         'proof.m3.label': 'Days from diagnosis to solution',
@@ -471,14 +465,14 @@
         'footer.data_deletion': 'Data Deletion',
         'footer.matchbot': 'MatchBot ↗',
         'footer.description': 'Building systems that scale your business through automation, AI, and web development',
-        'footer.services.title': 'Services',
         'footer.legal.title': 'Legal',
         'footer.location': 'Based in Uruguay',
-        'footer.security': 'Security-first • ISO 9001 · PCI-DSS • Documented',
-        'footer.links.automation': 'Process Automation',
-        'footer.links.ai': 'AI Assistants',
-        'footer.links.web': 'Web Products',
-        'footer.links.consulting': 'Consulting'
+        'footer.security': 'Security-first • ISO 9001 · PCI-DSS experience • Documented',
+        'footer.contact.title': 'Contact',
+        'footer.contact.email': 'Email us',
+        'footer.contact.whatsapp': 'WhatsApp',
+        'footer.social.follow': 'Follow us on',
+        'footer.signature.madeBy': 'Made by'
     },
     };
 

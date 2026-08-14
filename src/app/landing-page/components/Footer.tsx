@@ -6,6 +6,7 @@
     import { usePathname } from 'next/navigation';
     import Icon from '@/components/ui/AppIcon';
     import { useLanguage } from '@/contexts/LanguageContext';
+    import { site } from '@/data/site';
 
     // --- ICONOS SOCIALES SVG ---
 
@@ -56,23 +57,11 @@
         { label: t('footer.data_deletion'), href: '/data-deletion' },
     ];
 
-    // Redes sociales
+    // Redes sociales. Contacto y redes salen de `site.ts` (fuente única, ver CLAUDE.md §2).
     const socialLinks = [
-        { 
-        name: 'WhatsApp', 
-        href: 'https://wa.me/+59893892924', 
-        icon: WhatsappSVG 
-        },
-        { 
-        name: 'Instagram', 
-        href: 'https://instagram.com/digitalmatch.global', 
-        icon: InstagramSVG 
-        },
-        { 
-        name: 'LinkedIn', 
-        href: 'https://linkedin.com/company/digital-match-global', 
-        icon: LinkedInSVG 
-        },
+        { name: 'WhatsApp', href: `https://wa.me/${site.phone}`, icon: WhatsappSVG },
+        { name: 'Instagram', href: site.social[0], icon: InstagramSVG },
+        { name: 'LinkedIn', href: site.social[1], icon: LinkedInSVG },
     ];
 
     const renderFooterLink = (link: FooterLink) => {
@@ -133,33 +122,38 @@
 
     return (
         <>
-        <footer className="bg-background border-t border-border pt-16 pb-8 px-4 sm:px-6 lg:px-8">
+        {/* pb generoso en mobile: el CTA flotante es `fixed bottom-6 right-6` (56px) y sin
+            este aire se monta encima del copyright al llegar al final de la página. */}
+        <footer className="bg-background border-t border-border pt-16 pb-28 lg:pb-10 px-4 sm:px-6 lg:px-8">
             <div className="max-w-7xl mx-auto">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
-                
-                {/* COLUMNA 1: Info de la empresa (LOGO + TEXTO ACTUALIZADO) */}
-                <div className="space-y-6">
+            {/* La marca ocupa 2 de las 4 columnas: antes la grilla declaraba 4 con solo
+                3 hijos y quedaba una columna vacía en desktop. */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 lg:gap-12 mb-16">
+
+                {/* COLUMNA 1-2: Marca */}
+                <div className="space-y-6 lg:col-span-2">
                 <Link href="/" className="flex items-center gap-3">
-                    {/* Logo Imagen */}
-                    <Image 
-                    src="/assets/images/Logo.png" 
-                    alt="Logo DM"
+                    {/* Decorativo: el nombre va como texto al lado, no hay que duplicarlo
+                        en el alt (si no, los lectores de pantalla lo leen dos veces). */}
+                    <Image
+                    src="/assets/images/Logo.png"
+                    alt=""
+                    aria-hidden="true"
                     width={0}
                     height={0}
                     sizes="100vw"
-                    className="h-10 w-auto object-contain" 
+                    className="h-10 w-auto object-contain"
                     />
-                    
-                    {/* Texto Digital Match Global con Degradado Animado */}
+
                     <span className="text-lg font-bold bg-gradient-to-r from-[#2563EB] via-[#6D5DFE] to-[#2563EB] bg-clip-text text-transparent animate-gradient-x-header">
                     Digital Match Global
                     </span>
                 </Link>
 
-                <p className="text-sm text-muted-foreground leading-relaxed max-w-xs">
-                    {t('hero.subtitle')}
+                <p className="text-sm text-muted-foreground leading-relaxed max-w-sm">
+                    {t('footer.description')}
                 </p>
-                
+
                 <div className="flex items-center space-x-4">
                     {socialLinks.map((social) => (
                     <a
@@ -168,7 +162,7 @@
                         target="_blank"
                         rel="noopener noreferrer"
                         className="p-2 rounded-lg bg-secondary text-muted-foreground hover:bg-accent hover:text-accent-foreground transition-all duration-300"
-                        aria-label={`Follow us on ${social.name}`}
+                        aria-label={`${t('footer.social.follow')} ${social.name}`}
                     >
                         <social.icon size={20} />
                     </a>
@@ -176,9 +170,9 @@
                 </div>
                 </div>
 
-                {/* COLUMNA 2: Navegación */}
+                {/* COLUMNA 3: Navegación */}
                 <div>
-                <h3 className="text-lg font-bold text-foreground mb-4">{t('nav.menu')}</h3>
+                <h3 className="text-base font-bold text-foreground mb-4">{t('nav.menu')}</h3>
                 <ul className="space-y-3">
                     {footerLinks.map((link) => (
                     <li key={link.label}>
@@ -188,35 +182,80 @@
                 </ul>
                 </div>
 
-                {/* COLUMNA 3: Legal y Ubicación */}
+                {/* COLUMNA 4: Legal */}
                 <div>
-                <h3 className="text-lg font-bold text-foreground mb-4">{t('footer.legal.title')}</h3>
-                <ul className="space-y-3 mb-6">
+                <h3 className="text-base font-bold text-foreground mb-4">{t('footer.legal.title')}</h3>
+                <ul className="space-y-3">
                     {legalLinks.map((link) => (
                     <li key={link.label}>
                         {renderFooterLink(link)}
                     </li>
                     ))}
                 </ul>
-                <div className="flex items-center space-x-2 text-sm text-muted-foreground">
-                    <Icon name="MapPinIcon" size={16} /> 
-                    <span>{t('footer.location')}</span>
                 </div>
+
+                {/* COLUMNA 5: Contacto — el sitio existe para que te escriban, faltaba. */}
+                <div>
+                <h3 className="text-base font-bold text-foreground mb-4">{t('footer.contact.title')}</h3>
+                <ul className="space-y-3">
+                    <li>
+                    <a
+                        href={`mailto:${site.email}`}
+                        className="group flex items-start gap-2 text-sm text-muted-foreground hover:text-accent transition-colors"
+                    >
+                        <Icon name="EnvelopeIcon" size={16} className="mt-0.5 shrink-0" />
+                        <span className="break-all">{site.email}</span>
+                    </a>
+                    </li>
+                    <li>
+                    <a
+                        href={`https://wa.me/${site.phone}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-2 text-sm text-muted-foreground hover:text-accent transition-colors"
+                    >
+                        <Icon name="ChatBubbleLeftRightIcon" size={16} className="shrink-0" />
+                        <span>{t('footer.contact.whatsapp')}</span>
+                    </a>
+                    </li>
+                    <li className="flex items-center gap-2 text-sm text-muted-foreground">
+                    <Icon name="MapPinIcon" size={16} className="shrink-0" />
+                    <span>{t('footer.location')}</span>
+                    </li>
+                </ul>
                 </div>
             </div>
 
-            {/* BARRA INFERIOR: Copyright */}
+            {/* BARRA INFERIOR: copyright · seguridad · firma */}
             <div className="border-t border-border pt-8">
-                <div className="flex flex-col md:flex-row items-center justify-between space-y-4 md:space-y-0">
-                <p className="text-sm text-muted-foreground">
+                <div className="flex flex-col items-center gap-6 lg:flex-row lg:justify-between lg:gap-4">
+                <p className="order-3 text-center text-sm text-muted-foreground lg:order-1 lg:text-left">
                     © {currentYear} Digital Match Global. {t('footer.rights')}.
                 </p>
-                <div className="flex items-center space-x-2">
-                    <Icon name="ShieldCheckIcon" size={16} className="text-success" />
+
+                <div className="order-2 flex items-center gap-2 text-center">
+                    <Icon name="ShieldCheckIcon" size={16} className="shrink-0 text-success" />
                     <span className="text-sm text-muted-foreground">
                     {t('footer.security')}
                     </span>
                 </div>
+
+                {/* FIRMA DIGITAL MATCH GLOBAL — la misma que dejamos en los sitios de
+                    clientes. Acá apunta al portfolio (enlazar a la home sería un
+                    autoenlace sin valor para el usuario ni para SEO). */}
+                <Link
+                    href="/portfolio"
+                    className="group relative order-1 flex items-center gap-2 overflow-hidden rounded-full border border-white/10 bg-white/5 px-4 py-2 transition-all duration-500 hover:border-accent/50 lg:order-3"
+                >
+                    <span className="absolute inset-0 translate-x-[-100%] bg-gradient-to-r from-transparent via-accent/20 to-transparent transition-transform duration-1000 group-hover:translate-x-[100%]" />
+                    <span className="text-[10px] font-medium uppercase tracking-wider text-muted-foreground transition-colors group-hover:text-foreground">
+                    {t('footer.signature.madeBy')}
+                    </span>
+                    <span className="bg-gradient-to-r from-[#2563EB] to-[#6D5DFE] bg-clip-text text-xs font-bold text-transparent transition-all duration-300 group-hover:brightness-125">
+                    DigitalMatchGlobal
+                    </span>
+                    <Icon name="BoltIcon" variant="solid" size={12} className="text-muted-foreground transition-colors group-hover:text-accent-secondary" />
+                </Link>
                 </div>
             </div>
             </div>
