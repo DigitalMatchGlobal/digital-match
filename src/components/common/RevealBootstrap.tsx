@@ -16,6 +16,12 @@
     //  4. Ante un error de JS no capturado, se muestra todo.
     //
     // ⚠️ Si tocás esto, mantené el orden: ocultar es lo ÚLTIMO que se hace.
+    //
+    // ⚠️ El `rootMargin` inferior es POSITIVO (500px) a propósito: el elemento se revela
+    // ANTES de entrar en pantalla, así la transición de 0.6s ya terminó cuando lo ves.
+    // El mismo margen (500px) se usa en el scan sincrónico. Antes era '-10%', que encogía el área de detección y revelaba TARDE: en iOS, que
+    // difiere los callbacks del observer durante el scroll con inercia, eso se veía como
+    // una banda negra al bajar (reproducido en WebKit/iPhone 14 Pro). No volver a negativo.
 
     const BOOTSTRAP = `(function(){
     var d=document,root=d.documentElement,w=window;
@@ -25,11 +31,11 @@
     if(w.matchMedia&&w.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
     var io=new IntersectionObserver(function(es){
     for(var i=0;i<es.length;i++){if(es[i].isIntersecting){es[i].target.classList.add('is-visible');io.unobserve(es[i].target);}}
-    },{threshold:0,rootMargin:'0px 0px -10% 0px'});
+    },{threshold:0,rootMargin:'0px 0px 500px 0px'});
     function scan(){
     var els=d.querySelectorAll('.reveal:not(.is-visible)');
     for(var i=0;i<els.length;i++){var el=els[i];
-    if(el.getBoundingClientRect().top<w.innerHeight){el.classList.add('is-visible');}else{io.observe(el);}}
+    if(el.getBoundingClientRect().top<w.innerHeight+500){el.classList.add('is-visible');}else{io.observe(el);}}
     }
     var q=false;
     function schedule(){if(q)return;q=true;w.requestAnimationFrame(function(){q=false;scan();});}
