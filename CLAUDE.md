@@ -44,7 +44,9 @@ Orden actual en `src/app/landing-page/components/LandingPageInteractive.tsx`:
 Definido en `src/styles/tailwind.css` (`@layer utilities`). Para mantener cohesión y evitar "muro de cards":
 - **Marca:** acentos alineados al logo, azul→violeta (`--color-accent #4C8EFF`, `--color-accent-secondary #6D5DFE`, foreground blanco). `bg-gradient-accent`, `shadow-cta` (glow azul). NO usar cian/fucsia/colores fuera del arco de marca.
 - **`.glass-panel`**: superficie de card estándar (borde casi invisible; enciende acento + glow al hover). Usarla en cards nuevas en vez de `bg-surface border border-border`.
-- **`.reveal`** (+ `data-delay="1..5"`): scroll-reveal. Lo activa el hook `src/hooks/useReveal.ts` (montado 1 vez en `LandingPageInteractive`). Agregar `className="reveal"` a lo que deba aparecer al hacer scroll. ⚠️ No combinar `.reveal` con `transform` propio en el MISMO elemento (usar wrapper).
+- **`.reveal`** (+ `data-delay="1..5"`): scroll-reveal. Agregar `className="reveal"` a lo que deba aparecer al hacer scroll. ⚠️ No combinar `.reveal` con `transform` propio en el MISMO elemento (usar wrapper).
+  - 🚨 **Regla que no se negocia:** el estado oculto (`opacity: 0`) cuelga de **`html.reveal-js`**, clase que agrega el script inline de `src/components/common/RevealBootstrap.tsx` (primer hijo del `<body>` en el RootLayout). Ese script corre **durante el parseo del HTML** y monta ahí mismo el IntersectionObserver, sin esperar a que React hidrate. **Nunca** mover `opacity: 0` a `.reveal` a secas: si el JS tarda, falla o no carga, la página entera se ve NEGRA (pasó en producción, ver §10). El bootstrap además tiene red de seguridad: ante un error de JS no capturado, muestra todo.
+  - `src/hooks/useReveal.ts` quedó como un simple empujón (`window.__dmgReveal()`) para el contenido que aparece recién en cliente. No reimplementar observers ahí.
 - **`.hairline`** (separador en gradiente, no full-bleed; se usa como divisor **entre secciones** en `LandingPageInteractive`), **`.glow-radial`/`.glow-violet`** (profundidad de fondo; requieren `relative overflow-hidden` en la `<section>`).
 - **Separación de secciones:** `--color-surface-1` (#0C0E16, dark con leve tinte de marca) + utilidad **`.section-raised`** para las secciones "alternas" (Proof/Servicios/FAQ/Contacto). Alterna con el negro base (`bg-background`) para que se note el cambio de sección sin "cajas". Ajustable con un solo valor (ver comentario en `tailwind.css`).
 - **Verde = color semántico de "resultado/impacto"** (`text-emerald-400`, NO es color de marca). Único uso permitido fuera del arco azul→violeta. Aparece en los impactos de "Cómo lo hacemos" y en las métricas/Resultado del detalle de casos. No usarlo para identidad/UI.
@@ -140,14 +142,23 @@ Cada sección responde **una** pregunta distinta. No repetir contenido entre ell
 - ⚠️ **Push a `main` = deploy a producción automático.** Para cambios no triviales: trabajar en una **rama** y abrir **PR** (Vercel crea un *preview deploy* por rama/PR); recién mergear a `main` cuando esté aprobado.
 - **Ojo con la confusión Hostinger vs Vercel** (son capas distintas):
   - **Dominio** (registro de `digitalmatchglobal.com`) → sigue en **Hostinger**.
-  - **DNS** → administrado por Hostinger (nameservers `dns-parking.com`), pero el registro `www` apunta a **Vercel** por CNAME.
+  - **DNS** → administrado por Hostinger (nameservers `dns-parking.com`). Apex (`ALIAS @`) y `www` (`CNAME`) apuntan a **Vercel**, ambos al target propio del proyecto: **`e414dbd59da2a284.vercel-dns-017.com`** (alternativa: `A` a `216.198.79.1` + `64.29.17.1`). El apex responde `307` a `www`, que es el canónico.
   - **Hosting del sitio** → **Vercel** (sirve el Next.js de este repo). Hostinger **ya no hostea** el sitio.
+  - **Correo SÍ sigue en Hostinger:** los registros `MX`, `SPF`, `DKIM`, `DMARC`, `autodiscover` y `autoconfig` son suyos. Al tocar DNS, **no tocar esos**.
   - Para publicar cambios del sitio: push a este repo (Vercel despliega). Hostinger solo importa para tocar dominio/DNS.
+- 🚨 **Verificar el DNS antes de dar por buena cualquier validación en producción.** En 2026-08 la zona volvió a los valores por defecto de Hostinger y el dominio sirvió el **sitio estático viejo durante ~6 meses**, con el certificado TLS vencido (26-feb-2026), mientras Vercel seguía sano pero sin tráfico. Chequeo rápido:
+  ```bash
+  dig +short digitalmatchglobal.com          # debe dar IPs de Vercel, no de Hostinger
+  curl -sI https://www.digitalmatchglobal.com | grep -i server   # debe decir "Vercel", no "hcdn"
+  ```
+  ⚠️ **Nunca usar el botón "Restablecer registros DNS"** del panel de Hostinger: devuelve todo a Hostinger y es la causa más probable de aquel incidente.
 - El viejo deploy por Hostinger del repo estático `DigitalMatchGlobal/digitalmatchglobal-web` quedó **obsoleto**.
 
 ---
 
 ## 10. Estado / pendientes
+
+> **Incidente 2026-08-14 (resuelto).** El dominio resolvía a Hostinger y sirvió el **sitio estático viejo ~6 meses** con el **certificado TLS vencido** (26-feb-2026), mientras el Next.js seguía sano en Vercel sin recibir tráfico. La "pantalla negra al scrollear" que se reportaba era el **AOS del sitio viejo** (25 de 30 elementos quedaban en `opacity: 0`). Se restauró el DNS (ver §9) y se blindó el scroll-reveal propio, que tenía la misma fragilidad latente (ver §2 y `RevealBootstrap.tsx`). **Secuela para el futuro: verificar el header `server:` de producción antes de dar por válida cualquier prueba.**
 
 Estado completo y próximos pasos en [`docs/ROADMAP.md`](docs/ROADMAP.md). **Fases 1, 2, 3 y 4 ya están en `main` y EN PRODUCCIÓN.** Fase 2 (commit `9e65cc6`): casos `/portfolio`, repaleta a la marca, Servicios 4 pilares + modelos, Certificaciones, stack por categorías, seguridad/compliance, tiempos "desde 7-14 días", overhaul de UX. Fase 3 (PR #1, `b8c7a68`): performance + preview social. Fase 4 (PR #2, `b556a95`): SEO técnico + GEO. Ramas `feat/portfolio`, `feat/perf` y `feat/seo-geo` se conservan (no borrar).
 
