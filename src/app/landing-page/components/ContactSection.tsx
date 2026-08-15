@@ -4,6 +4,7 @@
     import Icon from '@/components/ui/AppIcon';
     import { useLanguage } from '@/contexts/LanguageContext';
     import CircuitFlow from './CircuitFlow';
+    import { site } from '@/data/site';
 
     interface FormData {
     name: string;
@@ -32,11 +33,43 @@
     const [errors, setErrors] = useState<FormErrors>({});
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [showSuccess, setShowSuccess] = useState(false);
+    // Por qué canal salió la consulta: el mensaje de éxito tiene que decir la verdad.
+    const [successChannel, setSuccessChannel] = useState<'wa' | 'mail'>('wa');
     const { t } = useLanguage();
 
-    // 📧 CONFIGURACIÓN GRATUITA (FormSubmit.co)
-    // Usamos el endpoint /ajax/ para que no redireccione la página, sino que responda a nuestro código.
-    const FORM_ENDPOINT = "https://formsubmit.co/ajax/info@digitalmatchglobal.com";
+    // 🤖 La consulta entra por MatchBot (nuestro propio producto), no por correo.
+    //
+    // Antes esto posteaba a FormSubmit.co —un tercero gratuito— que reenviaba un
+    // mail. Se quitó por dos motivos: los datos del prospecto (nombre, empresa,
+    // teléfono) pasaban por un servicio ajeno, y una consultora que vende
+    // automatización no puede tomar sus propios leads a mano.
+    //
+    // Ahora el formulario arma un mensaje estructurado y abre la conversación de
+    // WhatsApp con nuestro número: MatchBot la atiende, la califica y la deja en
+    // la bandeja del equipo. Sin backend propio y sin intermediarios.
+    //
+    // El correo queda como alternativa explícita para quien no quiera WhatsApp
+    // (mailto directo, tampoco pasa por terceros).
+    const WHATSAPP_NUMBER = site.phone.replace(/[^\d]/g, '');
+
+    // Mensaje que el prospecto envía. Va etiquetado para que el bot y la bandeja
+    // reconozcan de dónde viene el lead.
+    const buildLeadMessage = () => {
+        const lines = [
+        t('contact.wa.intro'),
+        '',
+        `${t('contact.form.name')}: ${formData.name}`,
+        `${t('contact.form.company')}: ${formData.company}`,
+        `${t('contact.form.email')}: ${formData.email}`,
+        ];
+        if (formData.phone.trim()) {
+        lines.push(`${t('contact.form.phone')}: ${formData.phone}`);
+        }
+        if (formData.message.trim()) {
+        lines.push('', `${t('contact.form.message')}: ${formData.message}`);
+        }
+        return lines.join('\n');
+    };
 
     const validateForm = (): boolean => {
         const newErrors: FormErrors = {};
@@ -55,9 +88,9 @@
         newErrors.company = t('contact.error.company');
         }
 
-        if (!formData.phone.trim()) {
-        newErrors.phone = t('contact.error.phone');
-        }
+        // El teléfono ya no es obligatorio: la consulta sale por WhatsApp, así que
+        // el número lo aporta el propio canal. Se deja el campo por si quieren
+        // dejar otro distinto al que escriben.
 
         // ✅ MODIFICACIÓN: Validaciones de mensaje ELIMINADAS.
         // El campo puede ir vacío y no requiere longitud mínima.
@@ -66,7 +99,13 @@
         return Object.keys(newErrors).length === 0;
     };
 
-    const handleSubmit = async (e: React.FormEvent) => {
+    const resetForm = () => {
+        setFormData({ name: '', email: '', company: '', phone: '', message: '' });
+    };
+
+    // Abre la conversación de WhatsApp con el mensaje ya escrito. No hay request
+    // de red: no hay nada que pueda fallar ni tercero al que enviarle el dato.
+    const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
 
         if (!validateForm()) {
@@ -74,39 +113,25 @@
         }
 
         setIsSubmitting(true);
-
-        try {
-        const response = await fetch(FORM_ENDPOINT, {
-            method: 'POST',
-            headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-            },
-            body: JSON.stringify({
-            ...formData,
-            _subject: `Nuevo Lead: ${formData.company}`, // Asunto del correo
-            _template: 'table' // Formato bonito en tabla
-            })
-        });
-
-        if (response.ok) {
-            setShowSuccess(true);
-            setFormData({
-            name: '',
-            email: '',
-            company: '',
-            phone: '',
-            message: ''
-            });
-        } else {
-            alert("Hubo un error al enviar el mensaje. Por favor intenta nuevamente.");
-        }
-        } catch (error) {
-        console.error("Error enviando formulario:", error);
-        alert("Error de conexión. Verifica tu internet.");
-        } finally {
+        const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(buildLeadMessage())}`;
+        window.open(url, '_blank', 'noopener,noreferrer');
+        setSuccessChannel('wa');
+        setShowSuccess(true);
+        resetForm();
         setIsSubmitting(false);
+    };
+
+    // Alternativa para quien no usa WhatsApp: mailto directo a la casilla propia.
+    const handleEmailFallback = () => {
+        if (!validateForm()) {
+        return;
         }
+        const subject = `${t('contact.mail.subject')}: ${formData.company}`;
+        const url = `mailto:${site.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(buildLeadMessage())}`;
+        window.location.href = url;
+        setSuccessChannel('mail');
+        setShowSuccess(true);
+        resetForm();
     };
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -183,10 +208,10 @@
                     <Icon name="CheckCircleIcon" size={32} className="text-success" />
                     </div>
                     <h3 className="text-2xl font-bold text-foreground mb-4">
-                    {t('contact.success.title')}
+                    {t(successChannel === 'wa' ? 'contact.success.title' : 'contact.success.mail.title')}
                     </h3>
                     <p className="text-muted-foreground mb-6">
-                    {t('contact.success.desc')}
+                    {t(successChannel === 'wa' ? 'contact.success.desc' : 'contact.success.mail.desc')}
                     </p>
                     <button
                     onClick={() => setShowSuccess(false)}
@@ -259,7 +284,7 @@
 
                     <div>
                     <label htmlFor="phone" className="block text-sm font-semibold text-foreground mb-2">
-                        {t('contact.form.phone')} *
+                        {t('contact.form.phone')}
                     </label>
                     <input
                         type="tel"
@@ -305,8 +330,21 @@
                         <span>{t('contact.form.sending')}</span>
                         </span>
                     ) : (
-                        t('contact.form.submit')
+                        <span className="flex items-center justify-center gap-2">
+                        <Icon name="ChatBubbleLeftRightIcon" size={20} />
+                        {t('contact.form.submit')}
+                        </span>
                     )}
+                    </button>
+
+                    {/* Alternativa para quien no quiera WhatsApp. Deliberadamente
+                        secundaria: el camino bueno es el que atiende el bot. */}
+                    <button
+                    type="button"
+                    onClick={handleEmailFallback}
+                    className="w-full -mt-2 text-sm text-muted-foreground underline underline-offset-4 transition-smooth hover:text-accent"
+                    >
+                    {t('contact.form.email.fallback')}
                     </button>
 
                     <p className="text-xs text-muted-foreground text-center">
