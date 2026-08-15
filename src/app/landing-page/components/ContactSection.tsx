@@ -55,18 +55,21 @@
     // Mensaje que el prospecto envía. Va etiquetado para que el bot y la bandeja
     // reconozcan de dónde viene el lead.
     const buildLeadMessage = () => {
+        // Etiquetas propias y cortas: las del formulario están redactadas para
+        // que las lea el visitante ("Cuéntanos sobre tu proyecto"), y suenan mal
+        // en un mensaje que escribe él mismo.
         const lines = [
         t('contact.wa.intro'),
         '',
-        `${t('contact.form.name')}: ${formData.name}`,
-        `${t('contact.form.company')}: ${formData.company}`,
-        `${t('contact.form.email')}: ${formData.email}`,
+        `${t('contact.wa.label.name')}: ${formData.name}`,
+        `${t('contact.wa.label.company')}: ${formData.company}`,
+        `${t('contact.wa.label.email')}: ${formData.email}`,
         ];
         if (formData.phone.trim()) {
-        lines.push(`${t('contact.form.phone')}: ${formData.phone}`);
+        lines.push(`${t('contact.wa.label.phone')}: ${formData.phone}`);
         }
         if (formData.message.trim()) {
-        lines.push('', `${t('contact.form.message')}: ${formData.message}`);
+        lines.push('', `${t('contact.wa.label.message')}: ${formData.message}`);
         }
         return lines.join('\n');
     };
