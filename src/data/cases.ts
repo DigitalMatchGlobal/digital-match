@@ -22,8 +22,17 @@ export type CaseMetric = { value: string; label: LocalizedText };
 // Cita anónima (rol, nunca nombre). OPCIONAL — usar solo con testimonios reales.
 export type CaseQuote = { text: LocalizedText; author: LocalizedText };
 
+// Segmento del caso. Separa DOS tipos de trabajo que no se comparan entre sí:
+//  - 'client'     → proyectos entregados a clientes (default si se omite).
+//  - 'enterprise' → soluciones de ingeniería construidas para operaciones
+//                   corporativas (entorno Microsoft: Azure DevOps, SharePoint,
+//                   SQL Server). Herramientas internas a medida, en uso real.
+// Se muestran en una banda propia del portfolio y llevan badge en la card.
+export type CaseSegment = 'client' | 'enterprise';
+
 export type Case = {
     slug: string;
+    segment?: CaseSegment; // omitido = 'client'
     icon: string; // nombre válido de Heroicons v2 (ver AppIcon)
     accent: string; // sobrescribe --color-accent en la página del caso (matiz del arco de marca)
     accentSecondary: string; // sobrescribe --color-accent-secondary
@@ -393,6 +402,159 @@ export const cases: Case[] = [
             { value: 'ES/EN', label: { es: 'skill bilingüe', en: 'bilingual skill' } },
         ],
     },
+
+    // ─────────────────────────────────────────────────────────────────────────
+    // SEGMENTO ENTERPRISE
+    // Soluciones de ingeniería para operaciones corporativas sobre stack
+    // Microsoft. Son herramientas internas a medida, construidas por el equipo
+    // y EN USO REAL — no encargos de cliente. Por eso se redactan como CLASE DE
+    // PROBLEMA (el dolor se repite en cualquier organización con ese stack), no
+    // como un encargo puntual: no se afirma ninguna contratación que no existió.
+    //
+    // ⚠️ Anonimato reforzado (CLAUDE.md §7): sin sector, sin volúmenes de
+    // negocio, sin nombres de sistemas internos. Nunca capturas ni código.
+    //
+    // ⚠️ MÉTRICAS: acá los valores SÍ son reales y contados del proyecto (no
+    // placeholder). Cada una lleva de dónde sale, para poder defenderla en una
+    // llamada. Miden LA HERRAMIENTA, nunca el negocio de un tercero.
+    // ─────────────────────────────────────────────────────────────────────────
+    {
+        slug: 'trazabilidad-documental',
+        segment: 'enterprise',
+        icon: 'DocumentMagnifyingGlassIcon',
+        accent: '#0EA5E9',
+        accentSecondary: '#3B82F6',
+        watermark: 'Trazabilidad',
+        complexity: 5,
+        rubro: {
+            es: 'Gobernanza documental (entorno Microsoft)',
+            en: 'Document governance (Microsoft stack)',
+        },
+        tag: {
+            es: 'Herramienta interna a medida',
+            en: 'Custom internal tool',
+        },
+        headline: {
+            es: 'La matriz de trazabilidad que nadie quería armar a mano.',
+            en: 'The traceability matrix nobody wanted to build by hand.',
+        },
+        challenge: {
+            es: 'En organizaciones que llevan los requerimientos en Azure DevOps y la documentación en SharePoint, cruzar ambos mundos es trabajo manual: alguien arma la matriz de trazabilidad en una planilla y al día siguiente ya quedó vieja. Nadie sabe qué documento falta, cuál está desactualizado ni qué se está desarrollando sin especificación aprobada.',
+            en: 'In organizations that track requirements in Azure DevOps and documentation in SharePoint, cross-checking the two is manual work: someone builds the traceability matrix in a spreadsheet and it is outdated the next day. Nobody knows which document is missing, which one is stale, or what is being built without an approved spec.',
+        },
+        solution: {
+            es: 'Antes de escribir código mapeamos la operativa real: cómo se nombran los documentos, qué versiona cada área y en qué momento del ciclo se aprueban. Sobre ese análisis construimos un motor que inventaría SharePoint, clasifica cada documento por tipo (negocio, funcional, técnico, testing) con reglas de nombre y contexto, recorre el árbol completo de work items de Azure DevOps y los cruza en ambas direcciones. El resultado es una matriz viva con score de cobertura, más un reporte que señala documentos referenciados que no existen, versiones desactualizadas y archivos huérfanos.',
+            en: 'Before writing code we mapped the real process: how documents get named, what each area versions, and when in the cycle they are approved. On top of that analysis we built an engine that inventories SharePoint, classifies each document by type (business, functional, technical, testing) using name and context rules, walks the full Azure DevOps work-item tree and cross-checks both directions. The output is a living matrix with a coverage score, plus a report flagging referenced documents that do not exist, stale versions and orphan files.',
+        },
+        services: [
+            { es: 'Análisis y reingeniería de procesos', en: 'Process analysis & reengineering' },
+            { es: 'Integración Azure DevOps + SharePoint', en: 'Azure DevOps + SharePoint integration' },
+            { es: 'Motor de clasificación y matcheo', en: 'Classification & matching engine' },
+            { es: 'Reportes y tablero de control', en: 'Reporting & control dashboard' },
+        ],
+        metrics: [
+            // 688 = suma de work items de los 15 árboles de épica procesados.
+            { value: '688', label: { es: 'work items cruzados', en: 'work items cross-checked' } },
+            // Azure DevOps + SharePoint, conectados por API.
+            { value: '2 sistemas', label: { es: 'conectados por API', en: 'connected via API' } },
+            // 20 = brechas del reporte de un solo proyecto (faltantes + desactualizados + huérfanos).
+            { value: '20', label: { es: 'brechas detectadas', en: 'gaps detected' } },
+        ],
+        result: {
+            es: 'Brechas de documentación que antes no se revisaban, ahora detectadas en minutos y con evidencia.',
+            en: 'Documentation gaps that used to go unreviewed are now detected in minutes, with evidence.',
+        },
+    },
+    {
+        slug: 'operaciones-base-datos',
+        segment: 'enterprise',
+        icon: 'CircleStackIcon',
+        accent: '#4F46E5',
+        accentSecondary: '#6D5DFE',
+        watermark: 'Operaciones',
+        complexity: 5,
+        rubro: {
+            es: 'Operaciones sobre bases de datos críticas',
+            en: 'Critical database operations',
+        },
+        tag: {
+            es: 'Herramienta interna a medida',
+            en: 'Custom internal tool',
+        },
+        headline: {
+            es: 'Tocar producción sin cruzar los dedos.',
+            en: 'Touching production without crossing your fingers.',
+        },
+        challenge: {
+            es: 'Las tareas de mantenimiento sobre bases críticas se resolvían a mano: conectarse con credenciales compartidas, correr procedimientos sueltos y confiar en que el resultado fuera el esperado. Sin simulación previa, sin forma de comparar el antes y el después, y sin registro de quién ejecutó qué. Un error no se detectaba hasta que alguien lo reportaba.',
+            en: 'Maintenance on critical databases was handled by hand: connect with shared credentials, run loose procedures and hope the result was the expected one. No dry run, no way to compare before and after, and no record of who ran what. A mistake went unnoticed until someone reported it.',
+        },
+        solution: {
+            es: 'Primero desarmamos el procedimiento operativo para entender qué se ejecutaba, en qué orden y qué se validaba en cada paso. Con eso rediseñamos el flujo en una aplicación web: sesión con credenciales propias de cada operador, configurador que arma la corrida, ejecución en modo simulación (dry-run) antes de confirmar, snapshots del estado previo y posterior con comparador lado a lado, y un registro de auditoría que guarda cada ejecución con su autor, sus parámetros, su duración y su resultado.',
+            en: 'We first took the operating procedure apart to understand what ran, in what order and what was validated at each step. Then we redesigned the flow as a web application: per-operator credentialed sessions, a configurator that assembles the run, dry-run execution before committing, before/after snapshots with a side-by-side comparator, and an audit log that stores every execution with its author, parameters, duration and outcome.',
+        },
+        services: [
+            { es: 'Análisis y reingeniería de procesos', en: 'Process analysis & reengineering' },
+            { es: 'Orquestación de procedimientos', en: 'Procedure orchestration' },
+            { es: 'Auditoría y trazabilidad', en: 'Audit trail & traceability' },
+            { es: 'Control de acceso por operador', en: 'Per-operator access control' },
+        ],
+        metrics: [
+            // Toda ejecución escribe su registro de auditoría: no hay corrida sin log.
+            { value: '100%', label: { es: 'ejecuciones auditadas', en: 'executions audited' } },
+            // Modo simulación disponible antes de confirmar cualquier cambio.
+            { value: 'Dry-run', label: { es: 'antes de confirmar', en: 'before committing' } },
+            // Snapshots del estado previo y posterior, comparables lado a lado.
+            { value: 'Antes/después', label: { es: 'estado comparable', en: 'comparable state' } },
+        ],
+        result: {
+            es: 'Cada cambio queda registrado con autor, parámetros y resultado: el historial existe aunque nadie lo pida.',
+            en: 'Every change is logged with author, parameters and outcome: the history exists even when nobody asks for it.',
+        },
+    },
+    {
+        slug: 'portal-documentacion-api',
+        segment: 'enterprise',
+        icon: 'BookOpenIcon',
+        accent: '#6366F1',
+        accentSecondary: '#8B5CF6',
+        watermark: 'Developers',
+        complexity: 4,
+        rubro: {
+            es: 'Portal de desarrolladores (documentación de APIs)',
+            en: 'Developer portal (API documentation)',
+        },
+        tag: {
+            es: 'Portal de documentación',
+            en: 'Documentation portal',
+        },
+        headline: {
+            es: 'Documentación que se genera sola desde la API.',
+            en: 'Documentation that generates itself from the API.',
+        },
+        challenge: {
+            es: 'Una plataforma con muchas líneas de producto acumula documentación dispersa, escrita a mano y siempre atrasada respecto de la API real. Mantenerla en dos idiomas multiplica el problema: cada cambio hay que replicarlo, y lo que no se replica queda desincronizado sin que nadie lo note.',
+            en: 'A platform with many product lines accumulates scattered documentation, hand-written and always lagging behind the actual API. Keeping it in two languages multiplies the problem: every change has to be replicated, and whatever is not replicated drifts out of sync unnoticed.',
+        },
+        solution: {
+            es: 'Portal de desarrolladores donde la referencia de API se genera en tiempo de build desde las especificaciones OpenAPI 3.1: la fuente de verdad es el contrato, no un texto copiado. El contenido conceptual se escribe en MDX con componentes propios (diagramas de secuencia interactivos, bloques de código multi-lenguaje, tablas de parámetros), la estructura bilingüe garantiza paridad ES/EN, y un escáner de datos sensibles revisa el contenido antes de publicar. Se despliega como sitio estático sobre infraestructura serverless con CDN.',
+            en: 'A developer portal where the API reference is generated at build time from OpenAPI 3.1 specs: the contract is the source of truth, not copied prose. Conceptual content is authored in MDX with custom components (interactive sequence diagrams, multi-language code blocks, parameter tables), the bilingual structure enforces ES/EN parity, and a sensitive-data scanner reviews content before publishing. It ships as a static site on serverless infrastructure with a CDN.',
+        },
+        services: [
+            { es: 'Portal de documentación técnica', en: 'Technical documentation portal' },
+            { es: 'Generación desde OpenAPI 3.1', en: 'Generation from OpenAPI 3.1' },
+            { es: 'Arquitectura bilingüe ES/EN', en: 'Bilingual ES/EN architecture' },
+            { es: 'Despliegue serverless con CDN', en: 'Serverless deployment with CDN' },
+        ],
+        metrics: [
+            // 87 = paths declarados en las specs OpenAPI que alimentan la referencia.
+            { value: '87', label: { es: 'endpoints documentados', en: 'documented endpoints' } },
+            // 17 = espacios de producto con especificación propia.
+            { value: '17', label: { es: 'líneas de producto', en: 'product lines' } },
+            // 528 = páginas MDX publicadas (264 ES + 264 EN: paridad exacta).
+            { value: '528', label: { es: 'páginas ES/EN', en: 'ES/EN pages' } },
+        ],
+    },
 ];
 
 export const getCase = (slug: string): Case | undefined =>
@@ -404,6 +566,25 @@ export const casesByComplexity: Case[] = [...cases].sort(
     (a, b) => b.complexity - a.complexity,
 );
 
-// Destacados (bento): los 4 de mayor complejidad. El resto va en la grilla normal.
-export const featuredCases: Case[] = casesByComplexity.slice(0, 4);
-export const restCases: Case[] = casesByComplexity.slice(4);
+// Los dos segmentos, ya rankeados. Se muestran en bandas separadas del portfolio:
+// no se comparan entre sí (un caso de cliente y una herramienta interna no compiten
+// por el mismo lugar), y así el trabajo enterprise no se come el bento de clientes.
+export const clientCases: Case[] = casesByComplexity.filter(
+    (c) => c.segment !== 'enterprise',
+);
+export const enterpriseCases: Case[] = casesByComplexity.filter(
+    (c) => c.segment === 'enterprise',
+);
+
+// Destacados (bento): los 4 casos de cliente de mayor complejidad. El resto va
+// en la grilla normal, debajo de la banda enterprise.
+export const featuredCases: Case[] = clientCases.slice(0, 4);
+export const restCases: Case[] = clientCases.slice(4);
+
+// Preview de la home (3 cards): 2 de cliente + 1 enterprise. La mezcla es
+// deliberada — la home tiene que mostrar que hay trabajo de los dos tipos, sin
+// que el ranking por complejidad deje el segmento enterprise fuera de pantalla.
+export const homePreviewCases: Case[] = [
+    ...clientCases.slice(0, 2),
+    ...enterpriseCases.slice(0, 1),
+];

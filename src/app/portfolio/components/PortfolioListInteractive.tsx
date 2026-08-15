@@ -4,7 +4,7 @@
     import Footer from '@/app/landing-page/components/Footer';
     import CTAFloatingButton from '@/components/common/CTAFloatingButton';
     import { useLanguage } from '@/contexts/LanguageContext';
-    import { featuredCases, restCases } from '@/data/cases';
+    import { enterpriseCases, featuredCases, restCases } from '@/data/cases';
     import CaseCard from './CaseCard';
     import CircuitFlow from '@/app/landing-page/components/CircuitFlow';
 
@@ -51,6 +51,28 @@
                     <CaseCard key={item.slug} item={item} featured />
                 ))}
                 </div>
+
+                {/* Banda ENTERPRISE: segmento propio, con bajada que explica qué son
+                    (ingeniería sobre operaciones corporativas, no encargos de cliente). */}
+                {enterpriseCases.length > 0 && (
+                <div className="mb-16">
+                    <div className="mb-4 flex items-center gap-4">
+                    <span className="text-xs font-bold uppercase tracking-[0.2em] text-accent">
+                        {t('portfolio.enterprise')}
+                    </span>
+                    <span className="hairline h-px flex-1" />
+                    </div>
+                    <p className="mb-10 max-w-3xl text-muted-foreground">
+                    {t('portfolio.enterprise.subtitle')}
+                    </p>
+
+                    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    {enterpriseCases.map((item) => (
+                        <CaseCard key={item.slug} item={item} />
+                    ))}
+                    </div>
+                </div>
+                )}
 
                 {/* Resto de proyectos, en grilla normal */}
                 <div className="mb-10 flex items-center gap-4">

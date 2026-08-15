@@ -24,6 +24,10 @@
         background: `radial-gradient(60% 50% at 50% 0%, ${item.accent}2E 0%, transparent 70%), radial-gradient(55% 45% at 85% 8%, ${item.accentSecondary}24 0%, transparent 60%), #05070f`,
     } as CSSProperties;
 
+    // En el segmento enterprise no hubo un cliente que encargue el trabajo: son
+    // herramientas propias. El hero cambia el rótulo para no afirmar lo que no fue.
+    const isEnterprise = item.segment === 'enterprise';
+
     const idx = cases.findIndex((c) => c.slug === item.slug);
     const prev = cases[(idx - 1 + cases.length) % cases.length];
     const next = cases[(idx + 1) % cases.length];
@@ -58,7 +62,7 @@
                 </Link>
 
                 <p className="text-xs sm:text-sm font-bold uppercase tracking-[0.3em] text-accent mb-5">
-                {t('case.eyebrow')}
+                {t(isEnterprise ? 'case.eyebrow.enterprise' : 'case.eyebrow')}
                 </p>
 
                 <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white leading-tight mb-8 max-w-3xl mx-auto">
@@ -66,7 +70,9 @@
                 </h1>
 
                 <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/15 text-sm text-white/80 backdrop-blur-sm">
-                <span className="uppercase text-[10px] tracking-wider text-white/50">{t('case.client')}</span>
+                <span className="uppercase text-[10px] tracking-wider text-white/50">
+                    {t(isEnterprise ? 'case.context' : 'case.client')}
+                </span>
                 {item.rubro[language]}
                 </span>
 

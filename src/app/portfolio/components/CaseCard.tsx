@@ -17,6 +17,8 @@
     const CaseCard = ({ item, featured = false }: CaseCardProps) => {
     const { t, language } = useLanguage();
 
+    const isEnterprise = item.segment === 'enterprise';
+
     const accentStyle = {
         '--color-accent': item.accent,
         '--color-accent-secondary': item.accentSecondary,
@@ -29,7 +31,7 @@
         aria-label={`${t('case.view')}: ${item.rubro[language]}`}
         className={`group relative flex h-full flex-col overflow-hidden glass-panel transition-smooth hover:-translate-y-2 hover:shadow-cta hover:ring-1 hover:ring-accent/40 ${
             featured ? 'p-8 md:p-10 ring-1 ring-accent/20' : 'p-8'
-        }`}
+        } ${isEnterprise ? 'ring-1 ring-accent/15' : ''}`}
         >
         {/* glow del color del caso (en destacados, sutil siempre; en el resto, al hover) */}
         <span
@@ -50,11 +52,18 @@
             </span>
             </div>
 
-            {featured && (
+            {/* Eyebrow: el badge de segmento manda sobre el de destacado (una card
+                enterprise nunca entra al bento, pero si algún día entra, no se apilan). */}
+            {isEnterprise ? (
+            <span className="mb-2 inline-flex w-fit items-center gap-1.5 text-[11px] font-bold uppercase tracking-[0.2em] text-accent">
+                <span className="h-1.5 w-1.5 rounded-full bg-accent" />
+                {t('case.enterprise')}
+            </span>
+            ) : featured ? (
             <span className="mb-2 text-[11px] font-bold uppercase tracking-[0.2em] text-accent">
                 {t('case.featured')}
             </span>
-            )}
+            ) : null}
 
             <h3 className={`mb-3 font-bold text-foreground ${featured ? 'text-2xl md:text-3xl' : 'text-2xl'}`}>
             {item.rubro[language]}
