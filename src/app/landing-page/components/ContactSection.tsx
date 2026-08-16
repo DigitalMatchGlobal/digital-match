@@ -72,9 +72,17 @@
         const lines = [t(`contact.wa.msg.${intent}`)];
 
         if (needsSchedule) {
-        const day = days.find((d) => d.id === dayPref)?.label ?? '';
-        const time = times.find((tt) => tt.id === timePref)?.label ?? '';
-        lines.push(`${t('contact.wa.pref')}: ${day}, ${time}.`);
+        // ⚠️ NO usar la etiqueta del chip acá. El chip está escrito para leerse
+        // solo ("La próxima", "Me adapto") y dentro de una oración queda roto:
+        // "Me queda cómodo: La próxima, ..." o "Me queda cómodo: Me adapto, ...".
+        // El mensaje usa fragmentos redactados para prosa (contact.wa.day/time.*).
+        if (dayPref === 'any' && timePref === 'any') {
+            lines.push(t('contact.wa.pref.any'));
+        } else {
+            lines.push(
+            `${t('contact.wa.pref')} ${t(`contact.wa.day.${dayPref}`)}, ${t(`contact.wa.time.${timePref}`)}.`,
+            );
+        }
         }
 
         if (topic.trim()) {
