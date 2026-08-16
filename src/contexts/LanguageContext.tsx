@@ -221,9 +221,11 @@
         'contact.day.this': 'Esta semana',
         'contact.day.next': 'La próxima',
         'contact.day.any': 'Me adapto',
-        'contact.time.morning': 'Mañana (8-12)',
-        'contact.time.midday': 'Mediodía (12-15)',
-        'contact.time.afternoon': 'Tarde (15-19)',
+        // ⚠️ "Por la mañana", no "Mañana": el texto viaja al mensaje de WhatsApp y
+        // el bot lo repite en prosa, donde "mañana" se lee como el DÍA siguiente.
+        'contact.time.morning': 'Por la mañana (8-12)',
+        'contact.time.midday': 'Al mediodía (12-15)',
+        'contact.time.afternoon': 'Por la tarde (15-19)',
         'contact.time.any': 'Cualquier horario',
         'contact.topic.label': '¿Sobre qué? (opcional)',
         'contact.topic.ph': 'Ej: automatizar la carga de facturas',
