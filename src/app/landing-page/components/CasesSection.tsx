@@ -3,14 +3,15 @@
     import Link from 'next/link';
     import Icon from '@/components/ui/AppIcon';
     import { useLanguage } from '@/contexts/LanguageContext';
-    import { casesByComplexity } from '@/data/cases';
+    import { homePreviewCases } from '@/data/cases';
     import CaseCard from '@/app/portfolio/components/CaseCard';
     import CircuitFlow from './CircuitFlow';
 
     const CasesSection = () => {
     const { t } = useLanguage();
 
-    const preview = casesByComplexity.slice(0, 3);
+    // 2 casos de cliente + 1 enterprise (ver homePreviewCases en cases.ts).
+    const preview = homePreviewCases;
 
     return (
         <section id="cases" className="relative overflow-hidden py-24">
