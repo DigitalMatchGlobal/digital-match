@@ -22,6 +22,12 @@ Thumbs.db
 # Vercel deployment
 .vercel/
 
+# Variables de entorno — NUNCA subir (traen claves de API, tokens, secretos).
+# .env.example sí se versiona: documenta qué variables hacen falta, sin valores.
+.env
+.env.*
+!.env.example
+
 # Optional: if using TypeScript
 *.tsbuildinfo
 
