@@ -12,7 +12,8 @@ export default async function Image() {
   return new ImageResponse(
     <SocialCard
       eyebrow="AUTOMATIZACIÓN · IA · SOFTWARE"
-      title="Lo que hoy tu equipo hace a mano, hecho sistema."
+      title="Lo que hoy tu equipo hace a mano,"
+      titleAccent="hecho sistema."
       description="Diagnosticamos dónde se pierde el tiempo y construimos el sistema que lo resuelve."
     />,
     { ...size }
