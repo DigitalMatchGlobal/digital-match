@@ -23,12 +23,16 @@
     const { t } = useLanguage();
 
     return (
-        <section id="certs" className="py-16 bg-background overflow-hidden">
+        <section id="certs" className="relative py-16 section-raised overflow-hidden">
         <div className="max-w-5xl mx-auto px-6 lg:px-8 text-center">
-            <p className="text-sm uppercase tracking-wider text-muted-foreground mb-2 reveal">
+            <div className="reveal flex items-center justify-center gap-2.5">
+            <span aria-hidden="true" className="slash slash-sm text-accent" />
+            <p className="eyebrow">{t('certs.eyebrow')}</p>
+            </div>
+            <p className="font-display mt-4 text-xl font-bold tracking-[-0.02em] text-foreground reveal" data-delay={1}>
             {t('certs.title')}
             </p>
-            <p className="text-base text-muted-foreground/80 mb-10 reveal" data-delay={1}>
+            <p className="text-base text-muted-foreground mt-3 mb-10 reveal" data-delay={2}>
             {t('certs.subtitle')}
             </p>
         </div>
@@ -51,13 +55,13 @@
             {[...TRACK, ...TRACK].map((cert, i) => (
                 <div
                 key={i}
-                className="group flex shrink-0 flex-col items-center gap-3 px-8 sm:px-12"
+                className="group flex shrink-0 flex-col items-center gap-3 px-14 sm:px-20"
                 >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                     src={cert.src}
                     alt=""
-                    className="h-11 sm:h-12 w-auto object-contain opacity-60 transition-all duration-300 [filter:brightness(0)_invert(1)] group-hover:opacity-100 group-hover:scale-110 group-hover:[filter:none] group-active:opacity-100 group-active:[filter:none]"
+                    className="h-11 sm:h-12 w-auto object-contain opacity-45 transition-all duration-300 [filter:brightness(0)] group-hover:opacity-100 group-hover:scale-110 group-hover:[filter:none] group-active:opacity-100 group-active:[filter:none]"
                 />
                 <span className="text-xs font-medium uppercase tracking-wider text-muted-foreground whitespace-nowrap transition-colors group-hover:text-foreground group-active:text-foreground">
                     {t(cert.labelKey)}
@@ -73,12 +77,12 @@
             defendible (CLAUDE.md §7); logos de marca solo como señal, sin implicar
             partnership/endorsement. */}
         <div className="max-w-3xl mx-auto px-6 lg:px-8 mt-12 reveal" data-delay={3}>
-            <div className="glass-panel mx-auto flex max-w-2xl flex-col items-center gap-4 rounded-2xl px-6 py-5 text-center sm:flex-row sm:text-left">
+            <div className="glass-panel mx-auto flex max-w-2xl flex-col items-center gap-4 rounded-sm px-6 py-5 text-center sm:flex-row sm:text-left">
             <div className="flex shrink-0 items-center gap-3">
-                <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-[#25D366]/10 ring-1 ring-[#25D366]/25">
+                <span className="flex h-12 w-12 items-center justify-center rounded-sm bg-[#25D366]/10 ring-1 ring-[#25D366]/25">
                 <WhatsAppGlyph className="h-7 w-7" />
                 </span>
-                <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-[#0866FF]/10 ring-1 ring-[#0866FF]/25">
+                <span className="flex h-12 w-12 items-center justify-center rounded-sm bg-[#0866FF]/10 ring-1 ring-[#0866FF]/25">
                 <MetaGlyph className="h-6 w-6" />
                 </span>
             </div>

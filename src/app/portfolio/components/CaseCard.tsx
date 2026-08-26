@@ -5,6 +5,7 @@
     import Icon from '@/components/ui/AppIcon';
     import { useLanguage } from '@/contexts/LanguageContext';
     import type { Case } from '@/data/cases';
+    import { hexToChannels } from '@/lib/color';
 
     interface CaseCardProps {
     item: Case;
@@ -19,9 +20,19 @@
 
     const isEnterprise = item.segment === 'enterprise';
 
+    // Identidad por caso SIN romper la paleta clara.
+    // 🚨 Acá había `'--color-accent': item.accent` con el HEX crudo. Los tokens del
+    // proyecto son CANALES ("76 142 255"), así que `rgb(#4C8EFF / 0.1)` era inválido y
+    // TODO uso de acento dentro de la tarjeta caía a su valor de respaldo, en silencio:
+    // `.icon-tile` quedaba con tinta negra y fondo transparente, los chips caían a los
+    // grises por defecto y el CTA "Ver caso" salía negro. La sección se veía en blanco y
+    // negro y parecía una decisión de diseño.
+    // Además los `accent` de `cases.ts` son matices CLAROS (#38BDF8, #8B5CF6…), elegidos
+    // para fondo negro: sobre blanco no llegan a 4.5:1. Por eso el color del caso va en
+    // `--color-accent-bright`, que por contrato es SÓLO gráfico (acá, el glow), y el
+    // texto sigue con el azul institucional. Mismo criterio que en el detalle del caso.
     const accentStyle = {
-        '--color-accent': item.accent,
-        '--color-accent-secondary': item.accentSecondary,
+        '--color-accent-bright': hexToChannels(item.accent),
     } as CSSProperties;
 
     return (
@@ -44,10 +55,13 @@
         <div className="relative z-10 flex h-full flex-col">
             {/* fila superior: ícono + chip de tipo de proyecto */}
             <div className="mb-6 flex items-center justify-between gap-3">
-            <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-accent transition-transform duration-300 group-hover:scale-110">
-                <Icon name={item.icon as any} size={24} className="text-accent-foreground" />
+            {/* `.icon-tile` (esquina recta, tinte de marca) en vez del cuadrado con
+                degradado: mismo tile que usan hero, servicios y contacto. Se comparte
+                con /portfolio y /portfolio/[slug], que también quedan alineados. */}
+            <div className="icon-tile transition-transform duration-300 group-hover:scale-105">
+                <Icon name={item.icon as any} size={22} />
             </div>
-            <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[11px] font-medium uppercase tracking-wider text-muted-foreground">
+            <span className="rounded-full border border-border bg-muted px-3 py-1 text-[11px] font-medium uppercase tracking-wider text-muted-foreground">
                 {item.tag[language]}
             </span>
             </div>
@@ -75,7 +89,7 @@
 
             {/* MÉTRICAS — el dato que respalda (héroe visual de la card) */}
             {item.metrics && item.metrics.length > 0 && (
-            <div className="mb-6 flex divide-x divide-white/10 overflow-hidden rounded-xl border border-white/10">
+            <div className="mb-6 flex divide-x divide-border overflow-hidden rounded-sm border border-border">
                 {item.metrics.map((m, i) => (
                 <div key={i} className="flex-1 px-2 py-3 text-center">
                     <div className="mb-1 text-lg font-bold leading-none text-foreground sm:text-xl">
@@ -94,7 +108,7 @@
             {item.services.slice(0, 3).map((service, i) => (
                 <span
                 key={i}
-                className="rounded-full border border-accent/20 bg-accent/10 px-2.5 py-1 text-[11px] font-medium text-white/70"
+                className="rounded-full border border-accent/20 bg-accent/10 px-2.5 py-1 text-[11px] font-medium text-muted-foreground"
                 >
                 {service[language]}
                 </span>
@@ -103,7 +117,7 @@
 
             {/* cita anónima opcional (solo si es real — ver cases.ts) */}
             {item.quote && (
-            <p className="mb-6 border-l-2 border-accent/40 pl-3 text-sm italic text-white/70">
+            <p className="mb-6 border-l-2 border-accent/40 pl-3 text-sm italic text-muted-foreground">
                 “{item.quote.text[language]}”
                 <span className="mt-1 block text-xs not-italic text-muted-foreground">
                 — {item.quote.author[language]}

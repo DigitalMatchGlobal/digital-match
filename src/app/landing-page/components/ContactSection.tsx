@@ -3,8 +3,8 @@
     import { useState } from 'react';
     import Icon from '@/components/ui/AppIcon';
     import { useLanguage } from '@/contexts/LanguageContext';
-    import CircuitFlow from './CircuitFlow';
     import { site } from '@/data/site';
+    import { waLink } from '@/lib/whatsapp';
 
     // ────────────────────────────────────────────────────────────────────────────
     // CONTACTO — todo termina en MatchBot, sin terceros.
@@ -42,8 +42,6 @@
     const [topic, setTopic] = useState('');
     const [showSuccess, setShowSuccess] = useState(false);
     const [successChannel, setSuccessChannel] = useState<'wa' | 'mail'>('wa');
-
-    const WHATSAPP_NUMBER = site.phone.replace(/[^\d]/g, '');
 
     // La franja horaria solo tiene sentido si hay algo que coordinar.
     const needsSchedule = intent === 'book' || intent === 'call';
@@ -100,7 +98,7 @@
     };
 
     const handleWhatsApp = () => {
-        const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(buildMessage())}`;
+        const url = waLink(buildMessage());
         window.open(url, '_blank', 'noopener,noreferrer');
         setSuccessChannel('wa');
         setShowSuccess(true);
@@ -117,26 +115,47 @@
     };
 
     // Estilo compartido de las "píldoras" seleccionables (día y franja horaria).
+    // 🚨 `w-full` en móvil y `w-auto` desde `sm`. Con `flex-wrap` y píldoras de ancho
+    // variable, en un teléfono las 7 opciones caían en una ESCALERA (dos, después una
+    // sola, después una por línea) que se leía como desorden y no dejaba ver dónde
+    // terminaba una pregunta y empezaba la otra. En grilla forman un bloque parejo — y de
+    // paso el área táctil pasa a ser la celda entera, no el texto.
+    //
+    // ⚠️ El cuerpo en móvil se queda en 13px aunque las etiquetas caigan en DOS líneas.
+    // Probado en 12px: ahí algunas entran en una línea y otras no, y el bloque queda
+    // desparejo. Uniforme en dos líneas se lee mejor que mezclado en una.
     const chipClass = (active: boolean) =>
-        `rounded-full border px-4 py-2 text-sm font-medium transition-smooth ${
+        `w-full rounded-full border px-2.5 py-2.5 text-center text-[13px] font-medium leading-tight transition-smooth sm:w-auto sm:px-4 sm:py-2 sm:text-sm ${
         active
-            ? 'border-accent bg-accent/15 text-foreground'
-            : 'border-border bg-white/[0.03] text-muted-foreground hover:border-accent/40 hover:text-foreground'
+            ? 'border-accent bg-accent/15 font-semibold text-foreground'
+            : 'border-border bg-muted text-muted-foreground hover:border-accent/40 hover:text-foreground'
         }`;
+
+    // Rótulo de paso numerado. Las tres preguntas se veían como bloques sueltos: no había
+    // forma de saber cuántas decisiones había ni en qué orden. El numeral es el mismo
+    // recurso que la banda del hero, el proceso y los casos.
+    const StepHeading = ({ n, title }: { n: number; title: string }) => (
+        <div className="mb-4 flex items-baseline gap-3">
+        <span className="font-mono text-[11px] font-semibold leading-none text-accent">0{n}</span>
+        <h3 className="text-sm font-bold uppercase tracking-[0.2em] text-accent">{title}</h3>
+        </div>
+    );
 
     return (
         <section id="contact" className="relative overflow-hidden py-24 section-raised">
-        <CircuitFlow className="[transform:scaleX(-1)]" />
-        <div className="glow-radial pointer-events-none absolute inset-x-0 bottom-0 h-2/3" />
         <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
             <div className="grid md:grid-cols-2 gap-12">
 
             {/* ── Columna izquierda: promesa y expectativa ── */}
-            <div className="reveal">
-                <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
+            <div>
+                <div className="reveal flex items-center gap-2.5">
+                <span aria-hidden="true" className="slash slash-sm text-accent" />
+                <p className="eyebrow">{t('contact.eyebrow')}</p>
+                </div>
+                <h2 className="reveal mt-5 text-3xl leading-[1.08] text-foreground sm:text-4xl lg:text-[2.6rem]" data-delay="1">
                 {t('contact.title')}
                 </h2>
-                <p className="text-xl text-muted-foreground mb-8">
+                <p className="reveal mt-5 mb-9 text-base leading-7 text-muted-foreground sm:text-lg sm:leading-8" data-delay="2">
                 {t('contact.subtitle')}
                 </p>
 
@@ -147,8 +166,8 @@
                     { icon: 'RocketLaunchIcon', title: t('contact.feat.start.title'), desc: t('contact.feat.start.desc') },
                 ].map((feat) => (
                     <div key={feat.title} className="flex items-start space-x-4">
-                    <div className="w-12 h-12 rounded-lg bg-accent/20 flex items-center justify-center flex-shrink-0">
-                        <Icon name={feat.icon as any} size={24} className="text-accent" />
+                    <div className="icon-tile flex-shrink-0">
+                        <Icon name={feat.icon as any} size={22} />
                     </div>
                     <div>
                         <h3 className="text-lg font-bold text-foreground mb-2">{feat.title}</h3>
@@ -184,9 +203,7 @@
 
                     {/* 1 · Intención */}
                     <div>
-                    <h3 className="text-sm font-bold uppercase tracking-[0.2em] text-accent mb-4">
-                        {t('contact.q.title')}
-                    </h3>
+                    <StepHeading n={1} title={t('contact.q.title')} />
                     <div className="space-y-3" role="radiogroup" aria-label={t('contact.q.title')}>
                         {intents.map((opt) => {
                         const active = intent === opt.id;
@@ -197,15 +214,15 @@
                             role="radio"
                             aria-checked={active}
                             onClick={() => setIntent(opt.id)}
-                            className={`flex w-full items-center gap-4 rounded-xl border px-5 py-4 text-left transition-smooth ${
+                            className={`flex w-full items-center gap-3 rounded-sm border px-4 py-4 text-left transition-smooth sm:gap-4 sm:px-5 ${
                                 active
                                 ? 'border-accent bg-accent/10 ring-1 ring-accent/30'
-                                : 'border-border bg-white/[0.03] hover:border-accent/40'
+                                : 'border-border bg-muted hover:border-accent/40'
                             }`}
                             >
                             <span
                                 className={`flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-lg transition-smooth ${
-                                active ? 'bg-gradient-accent' : 'bg-accent/15'
+                                active ? 'bg-accent' : 'bg-accent/15'
                                 }`}
                             >
                                 <Icon
@@ -227,18 +244,23 @@
                     {/* 2 · Preferencia horaria (solo si hay algo que coordinar) */}
                     {needsSchedule && (
                     <div>
-                        <h3 className="text-sm font-bold uppercase tracking-[0.2em] text-accent mb-1">
-                        {t('contact.when.title')}
-                        </h3>
+                        <StepHeading n={2} title={t('contact.when.title')} />
                         {/* Honestidad: no mostramos agenda real, se cierra en el chat. */}
-                        <p className="text-sm text-muted-foreground mb-4">{t('contact.when.note')}</p>
+                        <p className="-mt-2 mb-5 text-sm text-muted-foreground">{t('contact.when.note')}</p>
 
-                        <div className="mb-3 flex flex-wrap gap-2">
+                        {/* 🚨 DOS elecciones independientes, con su rótulo cada una. Antes
+                            eran 7 chips idénticos seguidos: se leían como una sola lista y
+                            no se entendía que había que elegir en las dos filas. */}
+                        <p className="mb-2 text-xs font-semibold uppercase tracking-[0.12em] text-muted-foreground">
+                        {t('contact.when.day')}
+                        </p>
+                        <div className="mb-5 grid grid-cols-3 gap-2 sm:flex sm:flex-wrap" role="radiogroup" aria-label={t('contact.when.day')}>
                         {days.map((d) => (
                             <button
                             key={d.id}
                             type="button"
-                            aria-pressed={dayPref === d.id}
+                            role="radio"
+                            aria-checked={dayPref === d.id}
                             onClick={() => setDayPref(d.id)}
                             className={chipClass(dayPref === d.id)}
                             >
@@ -246,12 +268,17 @@
                             </button>
                         ))}
                         </div>
-                        <div className="flex flex-wrap gap-2">
+
+                        <p className="mb-2 text-xs font-semibold uppercase tracking-[0.12em] text-muted-foreground">
+                        {t('contact.when.slot')}
+                        </p>
+                        <div className="grid grid-cols-2 gap-2 sm:flex sm:flex-wrap" role="radiogroup" aria-label={t('contact.when.slot')}>
                         {times.map((tt) => (
                             <button
                             key={tt.id}
                             type="button"
-                            aria-pressed={timePref === tt.id}
+                            role="radio"
+                            aria-checked={timePref === tt.id}
                             onClick={() => setTimePref(tt.id)}
                             className={chipClass(timePref === tt.id)}
                             >
@@ -264,7 +291,8 @@
 
                     {/* 3 · Tema (opcional, no bloquea nada) */}
                     <div>
-                    <label htmlFor="topic" className="block text-sm font-semibold text-foreground mb-2">
+                    <StepHeading n={needsSchedule ? 3 : 2} title={t('contact.topic.label')} />
+                    <label htmlFor="topic" className="sr-only">
                         {t('contact.topic.label')}
                     </label>
                     <textarea
@@ -279,10 +307,26 @@
 
                     {/* 4 · Salida */}
                     <div className="space-y-3">
+                    {/* 🚨 Vista previa del mensaje. Toda la sección se apoya en que "el
+                        mensaje se arma solo" y hasta acá el visitante no lo veía nunca:
+                        apretaba un botón que abría WhatsApp con un texto que no había
+                        leído. Mostrarlo elimina la duda de "qué va a pasar si toco esto",
+                        que en el paso de conversión es exactamente la duda que frena, y de
+                        paso demuestra lo que vendemos en vez de contarlo.
+                        `whitespace-pre-line` porque el mensaje trae saltos de línea. */}
+                    <div className="rounded-sm border border-border bg-muted/60 px-4 py-3">
+                        <p className="mb-1.5 text-[11px] font-bold uppercase tracking-[0.14em] text-muted-foreground">
+                        {t('contact.preview.title')}
+                        </p>
+                        <p className="whitespace-pre-line text-[13px] leading-6 text-foreground">
+                        {buildMessage()}
+                        </p>
+                    </div>
+
                     <button
                         type="button"
                         onClick={handleWhatsApp}
-                        className="w-full px-8 py-4 text-lg font-semibold bg-gradient-accent text-accent-foreground rounded-lg shadow-cta transition-smooth hover:scale-105 hover:shadow-xl"
+                        className="w-full px-8 py-4 text-lg font-semibold bg-accent text-accent-foreground transition-colors hover:bg-accent-hover"
                     >
                         <span className="flex items-center justify-center gap-2">
                         <Icon name="ChatBubbleLeftRightIcon" size={20} />

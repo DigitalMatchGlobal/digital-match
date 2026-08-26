@@ -2,11 +2,11 @@
 
     import Header from '@/components/common/Header';
     import Footer from '@/app/landing-page/components/Footer';
-    import CTAFloatingButton from '@/components/common/CTAFloatingButton';
+    import FloatingActions from '@/components/common/FloatingActions';
+    import { waLink } from '@/lib/whatsapp';
     import { useLanguage } from '@/contexts/LanguageContext';
     import { enterpriseCases, featuredCases, restCases } from '@/data/cases';
     import CaseCard from './CaseCard';
-    import CircuitFlow from '@/app/landing-page/components/CircuitFlow';
 
     const PortfolioListInteractive = () => {
     const { t } = useLanguage();
@@ -16,7 +16,7 @@
     };
 
     const handleWhatsAppClick = () => {
-        window.open('https://wa.me/+59893892924', '_blank');
+        window.open(waLink(t('wa.default')), '_blank', 'noopener,noreferrer');
     };
 
     return (
@@ -26,7 +26,6 @@
             <section className="relative overflow-hidden pt-32 pb-24 px-4 sm:px-6 lg:px-8">
             {/* Circuito acotado a la zona superior (no estirado por toda la lista) */}
             <div className="pointer-events-none absolute inset-x-0 top-0 h-[640px]">
-                <CircuitFlow />
             </div>
             <div className="relative z-10 max-w-7xl mx-auto">
                 <div className="text-center mb-16">
@@ -91,7 +90,7 @@
             </section>
         </main>
         <Footer />
-        <CTAFloatingButton
+        <FloatingActions
             onBookingClick={handleBookingClick}
             onWhatsAppClick={handleWhatsAppClick}
         />

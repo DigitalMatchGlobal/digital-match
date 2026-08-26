@@ -106,9 +106,9 @@
             </div>
 
             <div className="relative">
-            <div className="bg-surface border border-border rounded-2xl p-8 md:p-12 transition-smooth">
+            <div className="bg-surface border border-border rounded-sm p-8 md:p-12 transition-smooth">
                 <div className="grid md:grid-cols-2 gap-8 items-center">
-                <div className="relative aspect-square rounded-xl overflow-hidden">
+                <div className="relative aspect-square rounded-sm overflow-hidden">
                     <AppImage
                     src={activeTestimonial.image}
                     alt={activeTestimonial.alt}

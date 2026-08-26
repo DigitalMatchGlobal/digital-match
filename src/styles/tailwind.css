@@ -4,67 +4,110 @@
 
     @layer base {
     :root {
-        /* Background Colors */
-        --color-background: #000000; /* black - Maximum focus elimination of distractions */
-        --color-foreground: rgba(255, 255, 255, 0.95); /* white with 95% opacity - High contrast scanning optimization */
-        
-        /* Surface Colors */
-        --color-surface: rgba(255, 255, 255, 0.05); /* white with 5% opacity - Translucent card separation */
-        --color-surface-foreground: rgba(255, 255, 255, 0.95); /* white with 95% opacity */
-        /* Surface elevada para secciones "alternas": dark con leve tinte azul (paleta del
-           logo). Visible pero sutil sobre el negro puro → separa secciones sin "cajas". */
-        --color-surface-1: #0C0E16; /* ajustable: subir (#10131D) = más contraste / bajar (#08090E) = más integrado */
-        
-        /* Card Colors */
-        --color-card: rgba(255, 255, 255, 0.05); /* white with 5% opacity - Translucent card separation */
-        --color-card-foreground: rgba(255, 255, 255, 0.95); /* white with 95% opacity */
-        
-        /* Popover Colors */
-        --color-popover: #0B0B0F; /* gray-950 - Section depth without harsh contrast */
-        --color-popover-foreground: rgba(255, 255, 255, 0.95); /* white with 95% opacity */
-        
-        /* Primary Colors */
-        --color-primary: #000000; /* black - Brand authority + clean canvas for content focus */
-        --color-primary-foreground: rgba(255, 255, 255, 0.95); /* white with 95% opacity */
-        
-        /* Secondary Colors */
-        --color-secondary: #0B0B0F; /* gray-950 - Section depth without harsh contrast */
-        --color-secondary-foreground: rgba(255, 255, 255, 0.95); /* white with 95% opacity */
-        
-        /* Muted Colors */
-        --color-muted: rgba(255, 255, 255, 0.1); /* white with 10% opacity */
-        --color-muted-foreground: rgba(255, 255, 255, 0.70); /* white with 70% opacity - Supporting hierarchy without distraction */
-        
-        /* Accent Colors — alineados al logo oficial (degradado azul → violeta) */
-        --color-accent: #4C8EFF; /* brand blue (logo) - CTA + gradient highlights */
-        --color-accent-foreground: #FFFFFF; /* white - legible sobre azul/violeta */
-        --color-accent-secondary: #6D5DFE; /* brand violet (logo) - complemento del gradiente */
-        
-        /* Destructive/Error Colors */
-        --color-destructive: #EF4444; /* red-500 - Form validation feedback only */
-        --color-destructive-foreground: rgba(255, 255, 255, 0.95); /* white with 95% opacity */
-        --color-error: #EF4444; /* red-500 */
-        --color-error-foreground: rgba(255, 255, 255, 0.95); /* white with 95% opacity */
-        
-        /* Success Colors */
-        --color-success: #10B981; /* green-500 - Form completion + positive metrics */
-        --color-success-foreground: #000000; /* black */
-        
-        /* Warning Colors */
-        --color-warning: #F59E0B; /* amber-500 - Scarcity indicators for consultation slots */
-        --color-warning-foreground: #000000; /* black */
-        
-        /* Border Colors */
-        --color-border: rgba(255, 255, 255, 0.1); /* white with 10% opacity - Form fields and card separations */
-        --color-border-gradient-start: rgba(76, 142, 255, 0.3); /* brand blue 30% - Gradient borders for hover states */
-        --color-border-gradient-end: rgba(109, 93, 254, 0.3); /* brand violet 30% */
-        
-        /* Input Colors */
-        --color-input: rgba(255, 255, 255, 0.1); /* white with 10% opacity */
-        
-        /* Ring Colors */
-        --color-ring: #4C8EFF; /* brand blue (logo) */
-        
+        /* ============================================================================
+           PALETA CLARA INSTITUCIONAL (marca paraguas)
+           ----------------------------------------------------------------------------
+           Digital Match Global es la MARCA MADRE: la casa que construye soluciones.
+           MatchBot y los productos son sus hijos. La madre va CLARA y sobria; los
+           productos pueden ser oscuros y energéticos. Si algún día se invierte esto,
+           el sitio vuelve a leer "dev shop" en vez de "casa consultora".
+           Reglas duras: sin degradados en texto, sin glows, sin auroras. La profundidad
+           la dan el aire, los filetes y la jerarquía tipográfica.
+
+           🚨 FORMATO: los tokens de color son CANALES RGB sueltos ("31 81 196"), no
+           colores completos. Es obligatorio, no estético: Tailwind sólo puede inyectar
+           alfa (`bg-accent/10`, `border-accent/30`) si el token viene en canales y el
+           config lo envuelve en `rgb(var(--x) / <alpha-value>)`. Cuando estos tokens
+           eran `#1F51C4` / `rgba(...)`, los ~50 usos de `/opacidad` del proyecto
+           fallaban EN SILENCIO: `bg-accent/10` resolvía a `rgba(0,0,0,0)` (nada) y
+           `border-accent/30` caía al borde por defecto. Sobre el tema oscuro no se veía
+           y quedó años así.
+           → Al agregar un token nuevo: canales acá, `rgb(var(--x) / <alpha-value>)` en
+             tailwind.config.js, y `rgb(var(--x))` si lo usás en CSS a mano.
+           ============================================================================ */
+
+        /* Fondos */
+        --color-background: 255 255 255; /* #FFFFFF - lienzo base */
+        --color-foreground: 11 14 20;    /* #0B0E14 - casi negro azulado, 18:1 sobre blanco */
+
+        /* Superficies */
+        --color-surface: 246 247 249;    /* #F6F7F9 */
+        --color-surface-foreground: 11 14 20;
+        /* Superficie de secciones "alternas". Alterna con el blanco para marcar el
+           cambio de sección sin cajas. Bajar (242 244 247) = más contraste. */
+        /* 🚨 Era 246 247 249 (#F6F7F9): 1.072:1 contra el blanco, o sea un 7% de
+           diferencia de luminancia. En un teléfono con luz la alternancia de suelos
+           era LITERALMENTE invisible y las secciones se leían como una sola plancha.
+           #F2F4F7 sube a 1.102 (~40% más de separación) sin dejar de ser un gris
+           institucional, y mantiene 4 puntos de distancia con `--color-muted` (#EEF0F4)
+           para que los bloques `bg-muted` sigan destacando SOBRE una sección elevada. */
+        --color-surface-1: 242 244 247;
+
+        /* Cards */
+        --color-card: 255 255 255;
+        --color-card-foreground: 11 14 20;
+
+        /* Popover */
+        --color-popover: 255 255 255;
+        --color-popover-foreground: 11 14 20;
+
+        /* Primary */
+        --color-primary: 11 14 20;       /* casi negro - autoridad de marca, fondo de CTA */
+        --color-primary-foreground: 255 255 255;
+
+        /* Secondary */
+        --color-secondary: 246 247 249;
+        --color-secondary-foreground: 11 14 20;
+
+        /* Muted */
+        --color-muted: 238 240 244;      /* #EEF0F4 - fondo de hover */
+        --color-muted-foreground: 74 85 103; /* #4A5567 - 7.4:1 sobre blanco */
+
+        /* Acentos — mismo arco azul→violeta del logo, OSCURECIDO para servir sobre
+           blanco. El #4C8EFF del logo da ~2.3:1 sobre blanco: no alcanza para texto.
+           Por eso hay dos tokens y NO son intercambiables:
+             --color-accent        → texto, links, fondo de CTA (cumple contraste)
+             --color-accent-bright → SOLO gráficos: filetes, barras, fondos de tile */
+        --color-accent: 31 81 196;           /* #1F51C4 - 6.5:1 sobre blanco */
+        --color-accent-hover: 22 60 150;     /* #163C96 - hover del CTA azul */
+        --color-accent-foreground: 255 255 255;
+        --color-accent-bright: 76 142 255;   /* #4C8EFF - logo, sólo gráfico */
+        --color-accent-secondary: 75 63 212; /* #4B3FD4 - violeta del logo oscurecido */
+
+        /* Destructive/Error */
+        --color-destructive: 194 38 38;
+        --color-destructive-foreground: 255 255 255;
+        --color-error: 194 38 38;
+        --color-error-foreground: 255 255 255;
+
+        /* Success — verde semántico de "resultado/impacto" (no es color de identidad) */
+        --color-success: 15 123 84;
+        --color-success-foreground: 255 255 255;
+
+        /* Warning */
+        --color-warning: 150 89 10;
+        --color-warning-foreground: 255 255 255;
+
+        /* Bordes — sólidos, no rgba: el alfa ahora lo pone Tailwind cuando hace falta */
+        --color-border: 226 228 232;         /* #E2E4E8 - filete estándar */
+        --color-border-strong: 197 201 208;  /* #C5C9D0 - filete de énfasis */
+
+        /* Input */
+        --color-input: 255 255 255;
+
+        /* Ring */
+        --color-ring: 31 81 196;
+
+        /* Grafito de rótulos: los eyebrows salieron del azul. El azul quedó reservado
+           para los dos elementos que aparecen en TODAS las pantallas —el logotipo y el
+           CTA primario— más los numerales de índice. Cuando el eyebrow también era azul,
+           el color aparecía en todas partes y no identificaba nada. */
+        --color-label: 58 66 82;             /* #3A4252 - 9.2:1 sobre blanco */
+
+        /* Bordes en degradado (se usan crudos en `border-image`, van como color) */
+        --color-border-gradient-start: rgba(31, 81, 196, 0.3);
+        --color-border-gradient-end: rgba(75, 63, 212, 0.3);
+
         /* Radius */
         --radius: 0.5rem;
     }
@@ -81,25 +124,35 @@
         font-feature-settings: "rlig" 1, "calt" 1;
     }
 
+    /* Titulares en la DISPLAY (Archivo), no en Inter. Peso 700 y tracking suave:
+       Archivo en 800/900 con tracking muy cerrado lee "startup", no "casa consultora".
+       La familia se comparte con MatchBot (sistema de marca); lo que diferencia a la
+       madre del producto es el PESO y el color, no la tipografía. El texto corrido
+       sigue en Inter (ver `body`) — Archivo en párrafos cansa la lectura. */
     h1, h2, h3, h4, h5, h6 {
-        font-family: var(--font-inter), sans-serif;
+        font-family: var(--font-archivo), var(--font-inter), sans-serif;
         font-weight: 700;
+        letter-spacing: -0.015em;
     }
+    /* Cuanto más grande el titular, más cerrado el tracking (óptica, no capricho). */
+    h1 { letter-spacing: -0.025em; }
+    h2 { letter-spacing: -0.02em; }
     }
 
     @layer utilities {
     /* Custom gradient utilities for CTA buttons */
     .gradient-accent {
-        background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-secondary) 100%);
+        background: linear-gradient(135deg, rgb(var(--color-accent)) 0%, rgb(var(--color-accent-secondary)) 100%);
     }
     
     .gradient-border {
         border-image: linear-gradient(135deg, var(--color-border-gradient-start) 0%, var(--color-border-gradient-end) 100%) 1;
     }
     
-    /* Custom shadow for CTA buttons and interactive cards (brand blue) */
+    /* Sombra de elevación SOBRIA. Antes era un glow azul (glow de color = producto);
+       en la marca madre la elevación es neutra y mínima. */
     .shadow-cta {
-        box-shadow: 0 20px 25px -5px rgba(76, 142, 255, 0.15), 0 10px 10px -5px rgba(76, 142, 255, 0.06);
+        box-shadow: 0 1px 2px rgba(11, 14, 20, 0.06), 0 8px 24px -8px rgba(11, 14, 20, 0.12);
     }
     
     /* Backdrop blur for navigation */
@@ -119,44 +172,185 @@
 
     /* --- Sistema anti-"boxiness": superficie, separadores y profundidad --- */
 
-    /* Panel de vidrio: borde casi invisible en reposo; el acento azul→violeta se enciende al hover */
+    /* Card clara de filete fino. Ya no es "vidrio" (el backdrop-blur sobre blanco no
+       hace nada y costaba una capa de composición). Radio chico: 1rem leía a producto. */
     .glass-panel {
-        background: rgba(255, 255, 255, 0.03);
-        border: 1px solid rgba(255, 255, 255, 0.06);
-        border-radius: 1rem;
-        backdrop-filter: blur(8px);
-        -webkit-backdrop-filter: blur(8px);
-        transition: border-color 250ms ease-out, box-shadow 250ms ease-out, background-color 250ms ease-out, transform 250ms ease-out;
+        background-color: rgb(var(--color-card));
+        border: 1px solid rgb(var(--color-border));
+        border-radius: 0.25rem;
+        transition: border-color 250ms ease-out, box-shadow 250ms ease-out, background-color 250ms ease-out;
     }
     .glass-panel:hover {
-        border-color: rgba(76, 142, 255, 0.40);
-        box-shadow: 0 20px 25px -5px rgba(76, 142, 255, 0.15), 0 10px 10px -5px rgba(76, 142, 255, 0.06);
+        border-color: rgb(var(--color-border-strong));
+        box-shadow: 0 1px 2px rgba(11, 14, 20, 0.05), 0 10px 28px -12px rgba(11, 14, 20, 0.14);
+    }
+
+    /* Remate del titular del hero en el ARCO DEL LOGO (azul → violeta).
+       Decisión del cliente (2026-08-25), con la reserva anotada: el degradado en texto se
+       había descartado dos veces en este proyecto por leer a startup en una marca madre
+       (ver el comentario del `Header` y la historia del `HeroSection`). Si vuelve a
+       incomodar, se saca esta clase y el remate queda en `text-foreground`: el resto de la
+       jerarquía tonal sigue funcionando sola.
+
+       🚨 Va con los tonos OSCURECIDOS (`--color-accent` #1F51C4 → `--color-accent-secondary`
+       #4B3FD4), NUNCA con el #4C8EFF del logo: ese da 2.3:1 sobre blanco y no pasa ni el
+       umbral de texto grande (3:1). Los dos extremos de este arco dan 6.5:1 y 7.1:1.
+
+       El ángulo es casi horizontal (100deg) y no 135deg como `bg-gradient-accent`: en una
+       línea de titular ancha y baja, un degradado diagonal recorre el alto (que es poco) y
+       no el ancho, y se pierde. */
+    .text-brand-arc {
+        background-image: linear-gradient(
+            100deg,
+            rgb(var(--color-accent)) 0%,
+            rgb(var(--color-accent-secondary)) 88%
+        );
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        /* Sin esto, en modo de alto contraste el texto DESAPARECE: el sistema pisa el
+           fondo y el color sigue en transparent. */
+        @media (forced-colors: active) {
+            color: CanvasText;
+            background-image: none;
+        }
+    }
+
+    /* Destello del destino de un enlace interno (lo pone `scrollToAnchor`). El filete va
+       INTERNO (`inset`) para no correr nada: sobre una celda de `.lattice`, un borde real
+       empujaría a las vecinas 2px. */
+    @keyframes target-flash {
+        0%, 55% { box-shadow: inset 0 0 0 2px rgb(var(--color-accent) / 0.55); }
+        100%    { box-shadow: inset 0 0 0 2px rgb(var(--color-accent) / 0); }
+    }
+    [data-targeted] {
+        animation: target-flash 1.9s ease-out both;
+    }
+
+    /* Guías de columna del hero: los filetes divisores de la banda de capacidades
+       CONTINÚAN hacia arriba, atravesando el hero, y se disuelven antes de llegar al
+       titular. Es lo que le da estructura al blanco sin sumar un solo elemento
+       decorativo — y es la única vía disponible: los glows de color están retirados a
+       propósito en esta marca (ver la nota más abajo), así que la profundidad tiene que
+       venir del aire y de los filetes.
+       Van al 25/50/75% del contenedor de contenido, la misma geometría exacta que los
+       `border-l` de la banda, para que se lean como una sola estructura. */
+    .hero-guide {
+        width: 1px;
+        background-image: linear-gradient(
+            to bottom,
+            rgb(var(--color-border) / 0) 0%,
+            rgb(var(--color-border) / 0) 32%,
+            rgb(var(--color-border)) 100%
+        );
     }
 
     /* Separador que muere en los extremos (no full-bleed, no línea dura) */
     .hairline {
         height: 1px;
-        background: linear-gradient(to right, transparent, var(--color-border), transparent);
+        background: linear-gradient(to right, transparent, rgb(var(--color-border)), transparent);
     }
+
+    /* ── Separador de secciones ──────────────────────────────────────────────────────
+       Antes eran dos `.hairline` (que se desvanecen en LOS DOS extremos) con la diagonal
+       en medio: la línea moría justo al lado de la diagonal, así que el separador se leía
+       como tres piecitos sueltos en vez de una regla. Ahora cada mitad se desvanece sólo
+       hacia AFUERA y llega sólida a la diagonal, que queda como el nudo de la regla.
+
+       Y al entrar en viewport, dos pulsos SALEN de la diagonal hacia los extremos. Es el
+       mismo recurso que el riel del kicker y el del stack: el sitio tiene un solo idioma
+       de movimiento (algo que recorre un filete) y el separador ahora lo habla también.
+       Con `prefers-reduced-motion` el guard global colapsa la duración y, al ser `both`,
+       el pulso se queda en su frame final (opacidad 0): no aparece, y la regla estática
+       sigue estando. */
+    .rule-l {
+        height: 1px;
+        background-image: linear-gradient(to right, transparent, rgb(var(--color-border)));
+    }
+    .rule-r {
+        height: 1px;
+        background-image: linear-gradient(to left, transparent, rgb(var(--color-border)));
+    }
+
+    /* `--color-accent-bright` y no `--color-accent`: esto es un filete, o sea GRÁFICO, que
+       es exactamente para lo que existe ese token (no cumple contraste de texto). */
+    .rule-pulse {
+        position: absolute;
+        inset: 0;
+        background-image: linear-gradient(90deg, transparent, rgb(var(--color-accent-bright)), transparent);
+        background-size: 46% 100%;
+        background-repeat: no-repeat;
+        opacity: 0;
+    }
+    /* 🚨 Recorrido y desvanecido van en DOS animaciones, no en una con keyframes
+       intermedios. La función de tiempo de CSS se aplica entre CADA par de keyframes, no
+       a lo largo de toda la animación: metiendo un `12%` y un `70%` que sólo tocan la
+       opacidad, el recorrido quedaba partido en tres tramos con la curva reiniciándose en
+       cada uno, y el pulso se movía a saltos. Separados, el recorrido lleva su curva y la
+       opacidad va lineal. */
+    /* El ciclo dura 3.4s pero el RECORRIDO ocupa sólo el primer 40%: el resto es pausa,
+       con el pulso ya fuera del filete. Un loop sin pausa sería una cinta transportadora
+       en cada límite de sección; con pausa es un latido. La pausa está adentro de los
+       keyframes (y no como `animation-delay`, que no se repite en cada iteración). */
+    @keyframes rule-out-r {
+        0%   { background-position: -46% 0; }
+        40%  { background-position: 146% 0; }
+        100% { background-position: 146% 0; }
+    }
+    @keyframes rule-out-l {
+        0%   { background-position: 146% 0; }
+        40%  { background-position: -46% 0; }
+        100% { background-position: -46% 0; }
+    }
+    @keyframes rule-fade {
+        0%   { opacity: 0; }
+        5%   { opacity: 1; }
+        32%  { opacity: 1; }
+        40%  { opacity: 0; }
+        100% { opacity: 0; }
+    }
+    @keyframes rule-slash-pop {
+        0%       { color: rgb(var(--color-border-strong)); transform: scale(1); }
+        7%       { color: rgb(var(--color-accent-bright)); transform: scale(1.45); }
+        26%      { color: rgb(var(--color-border-strong)); transform: scale(1); }
+        100%     { color: rgb(var(--color-border-strong)); transform: scale(1); }
+    }
+    /* 🚨 Cuelgan de `.is-live`, NO de `.is-visible`. El observer del scroll-reveal usa
+       `rootMargin` inferior de +500px a propósito (revela antes de entrar en pantalla),
+       así que colgado de ahí el pulso corría entero POR DEBAJO DEL FOLD y terminaba antes
+       de que la costura llegara a verse: parecía que no había animación. `.is-live` la
+       pone `SectionSeam` con un observer propio de `rootMargin: 0`, y la saca al salir de
+       pantalla para no dejar 8 loops corriendo fuera de vista. */
+    .is-live .rule-pulse-r {
+        animation: rule-out-r 3.4s cubic-bezier(0.3, 0.45, 0.3, 1) infinite,
+                   rule-fade 3.4s linear infinite;
+    }
+    .is-live .rule-pulse-l {
+        animation: rule-out-l 3.4s cubic-bezier(0.3, 0.45, 0.3, 1) infinite,
+                   rule-fade 3.4s linear infinite;
+    }
+    .is-live .rule-slash { animation: rule-slash-pop 3.4s ease-out infinite; }
 
     /* Sección "elevada": surface dark con leve tinte de marca. Alterna con el negro
        base (bg-background) para que se note el cambio de sección de forma sutil. */
     .section-raised {
-        background-color: var(--color-surface-1);
+        background-color: rgb(var(--color-surface-1));
     }
 
-    /* Glows de profundidad (gradientes estáticos, GPU-friendly) */
-    .glow-radial {
-        background: radial-gradient(60% 60% at 50% 0%, rgba(76, 142, 255, 0.10), transparent 70%);
-    }
+    /* Glows RETIRADOS a propósito. La marca madre no usa resplandores de color: la
+       profundidad la dan el aire, los filetes y la alternancia blanco/#F6F7F9.
+       Quedan como no-op para no tener que cazar cada `className` que los usaba; si
+       aparece un `.glow-*` nuevo en el código, es una señal de que alguien está
+       volviendo al lenguaje de producto. */
+    .glow-radial,
     .glow-violet {
-        background: radial-gradient(50% 50% at 80% 20%, rgba(109, 93, 254, 0.12), transparent 70%);
+        background: none;
     }
 
     /* Scroll-reveal: aparece al entrar en viewport.
        ⚠️ El estado OCULTO cuelga de `html.reveal-js`, clase que agrega el script inline
        de `RevealBootstrap` (primer hijo del <body>). Si ese JS no corre, falla o todavía
-       no llegó, el contenido se ve normal: el sitio NUNCA puede quedar en negro por
+       no llegó, el contenido se ve normal: el sitio NUNCA puede quedar en blanco por
        culpa de la animación. No mover `opacity: 0` a `.reveal` a secas. */
     .reveal {
         transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
@@ -178,7 +372,9 @@
     .reveal[data-delay="4"] { transition-delay: 320ms; }
     .reveal[data-delay="5"] { transition-delay: 400ms; }
 
-    /* Crossfade de paneles (ej. tabs de TechnicalShowcase) */
+    /* Crossfade de paneles al remontar por `key`. Sin consumidores desde que se
+       eliminó TechnicalShowcase (era su único uso); se conserva por si vuelve a
+       hacer falta un panel con tabs. */
     @keyframes tab-fade {
         from { opacity: 0; transform: translateY(8px); }
         to { opacity: 1; transform: none; }
@@ -200,13 +396,241 @@
         -webkit-mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
         mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
     }
+
+    /* --- Línea visual editorial (alineada a la landing de MatchBot) --- */
+
+    /* Eyebrow: el rótulo chico en versalitas que ENCABEZA cada sección. Reemplaza a los
+       "badge pill" y es el único lugar donde el acento aparece como texto de sección.
+       Regla de contenido: eyebrow = de qué va; el <h2> = qué afirmamos. Nunca un
+       titular-etiqueta ("Nuestros Servicios") sin eyebrow arriba. */
+    .eyebrow {
+        font-family: var(--font-archivo), var(--font-inter), sans-serif;
+        font-size: 0.6875rem;   /* 11px */
+        font-weight: 700;
+        line-height: 1;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        /* GRAFITO, no azul: ver la nota de --color-label en :root. */
+        color: rgb(var(--color-label));
     }
 
-    /* Guard global: respeta prefers-reduced-motion (neutraliza TODA animación nueva) */
+    /* Retícula de hairlines: las cards NO flotan con gap y sombra, van a ras separadas
+       por una línea de 1px. Es lo que evita el "muro de cards" (ver CLAUDE.md §2).
+       Uso: <div class="lattice grid sm:grid-cols-3"> … celdas … </div>
+       El gap de 1px lo pinta el fondo del contenedor; cada celda tapa el resto. */
+    .lattice {
+        gap: 1px;
+        background-color: rgb(var(--color-border));
+    }
+    /* Las celdas van BLANCAS: sobre una sección `.section-raised` (#F6F7F9) la retícula
+       se lee como bloque elevado, y sobre blanco se lee como filete puro. */
+    .lattice > * {
+        background-color: rgb(var(--color-card));
+    }
+    /* 🚨 NUNCA poner `.reveal` en una CELDA de `.lattice` — va en el contenedor.
+       Con las celdas en `opacity: 0`, el fondo del contenedor (que ES el color de los
+       filetes) queda expuesto y se ve una PLANCHA GRIS del tamaño de toda la retícula,
+       hasta 1s (400ms de `transition-delay` + 600ms de transición) y para siempre si el
+       observer llega tarde. Pasó en cinco retículas a la vez (Proof, Nosotros,
+       Servicios, Soluciones y el stack) y se veía como un bloque roto.
+       Esta regla es la red de seguridad: si alguien vuelve a ponerlo en las celdas, el
+       contenedor no muestra su fondo mientras alguna siga sin revelar. Los filetes
+       aparecen de golpe al final, que es feo pero infinitamente mejor que la plancha. */
+    .reveal-js .lattice:has(> .reveal:not(.is-visible)) {
+        background-color: transparent;
+    }
+
+    /* Panel de esquina recta: la superficie "seria". Convive con .glass-panel (que sigue
+       siendo la card redondeada); usar .panel-flat cuando la card va dentro de una
+       retícula o cuando el bloque representa producto/datos. */
+    .panel-flat {
+        background-color: rgb(var(--color-card));
+        border: 1px solid rgb(var(--color-border));
+        transition: border-color 250ms ease-out, background-color 250ms ease-out;
+    }
+    .panel-flat:hover {
+        border-color: rgb(var(--color-border-strong));
+    }
+
+    /* --- LA DIAGONAL: el recurso propio de la marca ---
+       El isologo "DM" tiene un corte diagonal. Esa diagonal es el único elemento de
+       este sistema que no se puede sacar de una librería: identifica al sitio. Se usa
+       como tick de los eyebrows, como marca de las celdas de índice y en los hovers.
+       Regla: SIEMPRE con la misma inclinación y el mismo grosor (2px). Si aparece una
+       diagonal con otro ángulo, deja de ser un recurso y pasa a ser decoración. */
+    .slash {
+        display: block;
+        flex: none;
+        width: 0.6875rem;   /* 11px */
+        height: 1.125rem;   /* 18px → ~31° de inclinación, el del isologo */
+        /* `to bottom right` y no `to top right`: la franja de color queda PERPENDICULAR
+           al eje del degradado, así que "to top right" dibuja "\" y no "/". La del
+           isologo es "/". */
+        background: linear-gradient(
+            to bottom right,
+            transparent calc(50% - 1px),
+            currentColor calc(50% - 1px),
+            currentColor calc(50% + 1px),
+            transparent calc(50% + 1px)
+        );
+    }
+    /* Variante chica, para rótulos y celdas */
+    .slash-sm {
+        width: 0.5rem;
+        height: 0.8125rem;
+    }
+
+    /* --- APILADO STICKY (sección Proceso) ---
+       Las etapas se apilan al scrollear: cada tarjeta queda pegada debajo de la barra
+       de título de la anterior, así las barras se acumulan arriba y funcionan como
+       índice de etapas recorridas.
+
+       🚨 `--stack-step` DEBE valer exactamente la altura de la barra de título
+       (`.stack-bar`). Es lo que evita el defecto típico de este efecto: si el paso es
+       menor que la barra, la tarjeta de abajo asoma cortada por la mitad y se ve como
+       un glitch; si es mayor, quedan huecos. Si cambiás el alto de la barra, cambiá el
+       paso — son un solo número en dos lugares.
+
+       Es CSS puro: `position: sticky`, sin JavaScript ni listeners de scroll. El
+       recorrido de scroll lo da el flujo normal del documento (alto de cada tarjeta +
+       separación), no espaciadores de 100vh. */
+    .stack {
+        --stack-top: 5.5rem;   /* despeje del header fijo */
+        --stack-step: 3.25rem; /* == alto de .stack-bar */
+    }
+    .stack > * {
+        position: sticky;
+        /* `--i` lo pone el componente por tarjeta */
+        top: calc(var(--stack-top) + var(--i) * var(--stack-step));
+    }
+    .stack-bar {
+        height: var(--stack-step);
+    }
+    /* La tarjeta va OPACA: es lo que tapa a la anterior. Si tuviera transparencia,
+       se leerían los dos textos superpuestos. */
+    .stack-card {
+        background-color: rgb(var(--color-card));
+    }
+    /* 🚨 Cola del apilado: un elemento VACÍO en flujo, no `padding-bottom` en la lista.
+       Medido: con `padding-bottom` el apilado completo duraba **10px de scroll** — un
+       frame. El motor recorta el `sticky` contra la CAJA DE CONTENIDO del contenedor, así
+       que el padding no extiende el recorrido: el `pb-[14vh]` que había era aire muerto
+       (225px en una pantalla de 1600) que no compraba nada, y encima el vacío crecía con
+       el alto de la ventana. Un elemento en flujo sí agranda la caja de contenido, así que
+       el apilado queda armado mientras se lo recorre.
+       `position: static` para que la cola no herede el `sticky` de `.stack > *`. */
+    .stack-tail {
+        position: static;
+        height: 6rem;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        /* Sin apilado: las etapas caen en flujo normal, una debajo de la otra. */
+        .stack > * {
+            position: static;
+        }
+    }
+
+    /* Tile de icono: cuadrado de esquina recta con tinte de marca e icono fino.
+       Reemplaza al cuadradito con degradado azul y rounded-2xl.
+       El tamaño se puede pisar con `[--tile-size:4rem]` (lo usa el hero del detalle de
+       caso) para no tener que reescribir el tinte y el borde en cada variante — que es
+       exactamente cómo se colaba un `bg-primary` negro donde iba el azul de marca. */
+    .icon-tile {
+        display: grid;
+        place-items: center;
+        width: var(--tile-size, 2.75rem);
+        height: var(--tile-size, 2.75rem);
+        color: rgb(var(--color-accent));
+        background-color: rgb(var(--color-accent) / 0.07);
+        border: 1px solid rgb(var(--color-accent) / 0.16);
+    }
+    }
+
+    /* ── Kicker del hero: el pulso que recorre el riel ─────────────────────────────
+       El riel entre el proceso y AUTOMATIZADO era una línea muerta: el kicker NOMBRABA
+       una transformación sin mostrarla. Ahora un pulso lo recorre en cada rotación y
+       remata encendiendo la punta de flecha. Es el mismo recurso del riel del stack
+       (`.stack-rail`), para que el sitio hable un solo idioma visual.
+
+       🚨 El reinicio en cada rotación NO lo hace el CSS: React remonta el nodo con
+       `key={index}`, así que la animación arranca de cero y queda siempre EN FASE con el
+       cambio de palabra. Una animación en loop de 2.6s driftearía contra el `setInterval`
+       del componente y al rato el pulso llegaría a destiempo.
+
+       El pulso se mueve por `background-position` y no por `transform`: un `translateX`
+       en porcentaje mide contra el ancho del PROPIO elemento, y el riel es de ancho
+       variable (`flex-1` en móvil), así que no hay forma de saber cuánto recorrer. Con
+       `background-size` fijo y `no-repeat`, `background-position: 100%` alinea el
+       degradado contra el borde derecho del riel, cualquiera sea su ancho. */
+    @keyframes kicker-pulse {
+        from { background-position: -2.5rem 0; }
+        to   { background-position: calc(100% + 2.5rem) 0; }
+    }
+    .kicker-pulse {
+        position: absolute;
+        inset: 0;
+        background-image: linear-gradient(90deg, transparent 0%, rgb(var(--color-accent)) 50%, transparent 100%);
+        background-size: 2.5rem 100%;
+        background-repeat: no-repeat;
+        animation: kicker-pulse 2.6s cubic-bezier(0.33, 0, 0.2, 1) both;
+    }
+
+    /* La punta de flecha RECIBE el pulso: se enciende cuando llega. La rotación va
+       adentro de los keyframes (no como utilidad `rotate-45`) porque si no, la animación
+       de `transform` la pisaría. Con `both`, en reposo queda fija en el frame final. */
+    @keyframes kicker-tip {
+        0%, 62% { opacity: 0.4; transform: rotate(45deg) scale(1); }
+        78%     { opacity: 1;   transform: rotate(45deg) scale(1.45); }
+        100%    { opacity: 1;   transform: rotate(45deg) scale(1); }
+    }
+    .kicker-tip {
+        animation: kicker-tip 2.6s cubic-bezier(0.33, 0, 0.2, 1) both;
+    }
+
+    /* AUTOMATIZADO se ENCIENDE cuando el pulso llega, y vuelve a grafito con la palabra
+       siguiente. Es motion, no color permanente: los eyebrows van en grafito por regla de
+       marca (ver la nota de `--color-label`), así que el azul acá es un instante de
+       llegada y no una excepción a la regla.
+       🚨 El color va en los keyframes y no en una utilidad: `.eyebrow` vive en
+       `@layer utilities` y se declara DESPUÉS de las utilidades generadas, así que un
+       `text-accent` sobre un `.eyebrow` no hace nada — pierde por orden de fuente. Una
+       animación, en cambio, gana por origen. */
+    @keyframes kicker-arrive {
+        0%, 72% { color: rgb(var(--color-label)); }
+        80%     { color: rgb(var(--color-accent)); }
+        100%    { color: rgb(var(--color-accent)); }
+    }
+    .kicker-arrive {
+        animation: kicker-arrive 2.6s cubic-bezier(0.33, 0, 0.2, 1) both;
+    }
+
+    /* Pulso que recorre el diagrama de capas del stack de ABAJO hacia ARRIBA: el filete
+       de la izquierda de cada banda se enciende en secuencia, como un proceso cruzando
+       el stack. No es adorno — es la semántica del dibujo puesta en movimiento, y es lo
+       que hace que el bloque se lea como un sistema y no como una tabla.
+       El escalonado lo pone el componente con `animationDelay` por banda (invertido
+       respecto del DOM). Ciclo largo a propósito: recorre en ~0.8s y queda ~4.4s quieto.
+       El azul del logo (`accent-bright`) es legal acá porque es GRÁFICO, no texto. */
+    @keyframes stack-rail {
+        0%, 14%, 100% { background-color: rgb(var(--color-border)); }
+        4%            { background-color: rgb(var(--color-accent-bright)); }
+    }
+    .stack-rail {
+        background-color: rgb(var(--color-border));
+        animation: stack-rail 5.2s linear infinite;
+    }
+
+    /* Guard de prefers-reduced-motion.
+       🚨 Antes esto era una LISTA de nombres de clase con un comentario que decía
+       "neutraliza TODA animación nueva". No era cierto: cada animación nueva quedaba
+       afuera hasta que alguien se acordara de agregarla. Ahora es global de verdad. */
     @media (prefers-reduced-motion: reduce) {
         .reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
-        .tab-fade { animation: none !important; }
-        .animate-blob, .animate-gradient-x, .animate-gradient-x-header { animation: none !important; }
-        .animate-marquee { animation: none !important; }
+        *, *::before, *::after {
+            animation-duration: 0.01ms !important;
+            animation-iteration-count: 1 !important;
+            animation-delay: 0ms !important;
+        }
     }
 

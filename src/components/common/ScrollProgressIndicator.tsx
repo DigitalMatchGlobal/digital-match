@@ -29,7 +29,10 @@
     return (
         <div className={`fixed top-16 left-0 right-0 z-100 h-0.5 bg-muted ${className}`}>
         <div
-            className="h-full bg-gradient-accent transition-smooth"
+            /* 🚨 `bg-accent`, NO `bg-primary`: en la paleta clara `--color-primary` es la
+               TINTA (casi negro), así que la barra se pintaba negra y no de marca. Al
+               invertir la paleta este componente quedó mal en silencio. */
+            className="h-full bg-accent transition-smooth"
             style={{ width: `${scrollProgress}%` }}
         />
         </div>
