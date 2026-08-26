@@ -208,7 +208,7 @@ export default function SocialCard({
         </span>
       </div>
 
-      {/* Marca de sistema en la columna lateral, visible sin competir con el copy. */}
+      {/* Acento editorial lateral: conserva la retícula sin sumar mensajes redundantes. */}
       <div
         style={{
           position: 'absolute',
@@ -219,14 +219,24 @@ export default function SocialCard({
           flexDirection: 'column',
         }}
       >
-        <span style={{ fontSize: 13, color: '#4A5567', letterSpacing: 2.2 }}>PROCESO</span>
-        <span style={{ fontSize: 50, fontWeight: 750, color: '#0B0E14', marginTop: 10 }}>01</span>
         <span
-          style={{ width: 48, height: 3, background: accent, display: 'flex', marginTop: 16 }}
+          style={{
+            width: 72,
+            height: 4,
+            background: `linear-gradient(90deg, ${accent}, ${accentSecondary})`,
+            display: 'flex',
+          }}
         />
-        <span style={{ fontSize: 15, lineHeight: 1.35, color: '#4A5567', marginTop: 18 }}>
-          DEL TRABAJO MANUAL AL SISTEMA
-        </span>
+        <span
+          style={{
+            width: 24,
+            height: 24,
+            border: '2px solid #D7DBE2',
+            borderRadius: 12,
+            display: 'flex',
+            marginTop: 20,
+          }}
+        />
       </div>
     </div>
   );
