@@ -2,13 +2,16 @@
 
     import { useState, useMemo } from 'react';
     import Icon from '@/components/ui/AppIcon';
-    import CircuitFlow from './CircuitFlow';
+    import SectionIntro from '@/components/common/SectionIntro';
     import ContractModels from './ContractModels';
-    import { WhatsAppGlyph } from '@/components/ui/BrandGlyphs';
     import { useLanguage } from '@/contexts/LanguageContext';
+    import { serviceDomId } from '@/data/capabilities';
+    import type { CapabilityId } from '@/data/capabilities';
 
     interface Service {
-    id: string;
+    /** 🚨 Tipado como unión a propósito: es lo que ata esta tarjeta con la celda de la
+        banda del hero. Un typo acá rompe el build en vez de dejar un link muerto. */
+    id: CapabilityId;
     title: string;
     icon: string;
     headline: string;
@@ -87,105 +90,69 @@
 
 
     return (
-        <section id="services" className="relative py-24 section-raised overflow-hidden">
-        {/* Circuito con paquetes de datos viajando por las trazas (tech) */}
-        <CircuitFlow />
+        <section id="services" className="relative py-24 bg-background overflow-hidden">
         <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
-            <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
-                {t('services.main_title')}
-            </h2>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-                {t('services.main_subtitle')}
-            </p>
-            </div>
+            <SectionIntro
+            className="mb-14"
+            eyebrow={t('services.eyebrow')}
+            title={t('services.main_title')}
+            body={t('services.main_subtitle')}
+            />
 
-            <div className="grid md:grid-cols-2 gap-8">
+            {/* Retícula de hairlines en vez de 4 cards redondeadas con gap-8: los cuatro
+                pilares se leen como un solo bloque. El hover ya no levanta la card
+                (`-translate-y-2` desalineaba la retícula): enciende el borde y el fondo. */}
+            <div className="reveal lattice grid md:grid-cols-2">
             {services.map((service, index) => (
-                <div key={service.id} className="reveal" data-delay={index % 2}>
                 <div
+                key={service.id}
+                // Destino del link de la banda del hero. Ver `@/data/capabilities`.
+                id={serviceDomId(service.id)}
                 onMouseEnter={() => setHoveredCard(service.id)}
                 onMouseLeave={() => setHoveredCard(null)}
-                className={`glass-panel p-8 h-full cursor-pointer ${
-                    hoveredCard === service.id
-                    ? 'shadow-cta -translate-y-2 ring-1 ring-accent/40'
-                    : ''
+                className={`cursor-pointer p-7 transition-smooth sm:p-8 ${
+                    hoveredCard === service.id ? '!bg-muted' : ''
                 }`}
                 >
-                <div className={`w-12 h-12 rounded-lg bg-gradient-accent flex items-center justify-center mb-6 transition-smooth ${
-                    hoveredCard === service.id ? 'scale-110' : ''
+                <div className={`icon-tile mb-6 transition-smooth ${
+                    hoveredCard === service.id ? 'scale-105' : ''
                 }`}>
-                    <Icon name={service.icon as any} size={24} className="text-accent-foreground" />
+                    <Icon name={service.icon as any} size={22} />
                 </div>
 
-                <h3 className="text-2xl font-bold text-foreground mb-3">
+                {/* El claim pasó a EYEBROW arriba del título: abajo competía en azul
+                    con el link "Ver caso de éxito" por la misma atención. */}
+                {/* tracking mas corto que el .eyebrow de seccion: estos claims son
+                    frases largas y con 0.22em ocupaban todo el ancho de la celda. */}
+                <p className="eyebrow tracking-[0.12em]">{service.headline}</p>
+
+                <h3 className="mt-3 text-xl font-bold leading-tight text-foreground sm:text-2xl">
                     {service.title}
                 </h3>
 
-                <p className="text-lg font-semibold text-accent mb-4">
-                    {service.headline}
-                </p>
-
-                <p className="text-muted-foreground mb-6">
+                <p className="mt-3 text-[15px] leading-7 text-muted-foreground">
                     {service.description}
                 </p>
 
-                <ul className="space-y-3 mb-6">
+                <ul className="mt-6 space-y-2.5">
                     {service.features.map((feature, index) => (
-                    <li key={index} className="flex items-start space-x-3">
-                        <div className="w-5 h-5 rounded-full bg-accent/20 flex items-center justify-center flex-shrink-0 mt-0.5">
-                        <Icon name="CheckIcon" size={12} className="text-accent" />
-                        </div>
-                        <span className="text-sm text-foreground">{feature}</span>
+                    <li key={index} className="flex items-start gap-3">
+                        {/* `text-success`, no `emerald-400`: el emerald claro es para fondo oscuro. */}
+                        <Icon name="CheckIcon" size={15} className="mt-1 flex-shrink-0 text-success" />
+                        <span className="text-sm text-foreground/90">{feature}</span>
                     </li>
                     ))}
                 </ul>
 
                 <button
                     onClick={() => onCaseStudyClick(service.id)}
-                    className="inline-flex items-center gap-2 text-sm font-semibold text-accent hover:gap-3 transition-all"
+                    className="mt-7 inline-flex items-center gap-2 text-sm font-semibold text-accent transition-all hover:gap-3"
                 >
                     {t('services.cta_button')}
                     <Icon name="ArrowRightIcon" size={16} />
                 </button>
                 </div>
-                </div>
             ))}
-            </div>
-
-            {/* Producto propio: MatchBot. Es la "prueba viva" del pilar Asistentes IA
-                (arriba): nuestra integración como Tech Provider de Meta convertida en
-                un SaaS real. Link suave a la plataforma; sin prometer features puntuales. */}
-            <div className="reveal mt-10" data-delay={1}>
-            <a
-                href="https://matchbot.digitalmatchglobal.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="glass-panel group relative flex flex-col gap-6 overflow-hidden rounded-2xl p-8 sm:flex-row sm:items-center"
-            >
-                {/* glow propio en verde WhatsApp, muy sutil */}
-                <div className="pointer-events-none absolute -right-16 -top-16 h-48 w-48 rounded-full bg-[#25D366]/10 blur-3xl" />
-
-                <span className="relative flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-[#25D366]/10 ring-1 ring-[#25D366]/30">
-                <WhatsAppGlyph className="h-9 w-9" />
-                </span>
-
-                <div className="relative flex-1">
-                <p className="mb-2 flex flex-wrap items-center gap-2 text-xs font-semibold uppercase tracking-wider text-accent">
-                    {t('services.matchbot.eyebrow')}
-                    <span className="inline-flex items-center gap-1 rounded-full bg-accent/10 px-2 py-0.5 text-[10px] normal-case tracking-normal text-accent">
-                    <Icon name="CheckBadgeIcon" size={11} /> Meta Tech Provider
-                    </span>
-                </p>
-                <h3 className="text-2xl font-bold text-foreground">MatchBot</h3>
-                <p className="mt-1 max-w-xl text-muted-foreground">{t('services.matchbot.desc')}</p>
-                </div>
-
-                <span className="relative inline-flex shrink-0 items-center gap-2 text-sm font-semibold text-accent transition-all group-hover:gap-3">
-                {t('services.matchbot.cta')}
-                <Icon name="ArrowTopRightOnSquareIcon" size={16} />
-                </span>
-            </a>
             </div>
 
             {/* Modelos de contratación (con efecto de proximidad) */}

@@ -1,5 +1,5 @@
     import React from 'react';
-    import { Inter } from 'next/font/google';
+    import { Inter, Archivo } from 'next/font/google';
     import '../styles/index.css'; // Mantenemos tu importación de estilos original
     import { LanguageProvider } from '@/contexts/LanguageContext'; // <--- IMPORTANTE
     import RevealBootstrap from '@/components/common/RevealBootstrap';
@@ -11,6 +11,17 @@
         weight: ['400', '500', '600', '700'],
         display: 'swap',
         variable: '--font-inter',
+    });
+
+    // Fuente de DISPLAY: Archivo. Sólo para titulares y números-héroe (ver `font-display`
+    // en tailwind.config y la regla de h1..h6 en tailwind.css). Inter sigue siendo la de
+    // texto corrido: Archivo en párrafos pesa demasiado y baja la legibilidad.
+    // Es la misma familia que usa la landing de MatchBot → línea visual compartida.
+    const archivo = Archivo({
+        subsets: ['latin'],
+        weight: ['600', '700', '800', '900'],
+        display: 'swap',
+        variable: '--font-archivo',
     });
 
     export const viewport = {
@@ -38,7 +49,7 @@
     children: React.ReactNode;
     }>) {
     return (
-        <html lang="es" className={inter.variable}>
+        <html lang="es" className={`${inter.variable} ${archivo.variable}`}>
         <body>
             {/* PRIMER hijo del body a propósito: arranca el scroll-reveal durante el
                 parseo del HTML, sin esperar a que React hidrate. Ver RevealBootstrap. */}

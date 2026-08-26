@@ -96,7 +96,7 @@
                 {clients.map((client) =>
                 <div
                 key={client.id}
-                className="aspect-video rounded-xl overflow-hidden bg-surface border border-border">
+                className="aspect-video rounded-sm overflow-hidden bg-surface border border-border">
 
                     <AppImage
                     src={client.logo}
@@ -111,7 +111,7 @@
                 {certifications.map((cert) =>
                 <div
                 key={cert.id}
-                className="bg-surface border border-border rounded-xl p-6 text-center">
+                className="bg-surface border border-border rounded-sm p-6 text-center">
 
                     <div className="w-12 h-12 rounded-full bg-accent/20 flex items-center justify-center mx-auto mb-4" />
                     <h3 className="text-lg font-bold text-foreground mb-2">
@@ -146,7 +146,7 @@
                 key={client.id}
                 onMouseEnter={() => setHoveredClient(client.id)}
                 onMouseLeave={() => setHoveredClient(null)}
-                className="relative aspect-video rounded-xl overflow-hidden bg-surface border border-border transition-smooth hover:border-accent cursor-pointer group">
+                className="relative aspect-video rounded-sm overflow-hidden bg-surface border border-border transition-smooth hover:border-accent cursor-pointer group">
 
                 <AppImage
                 src={client.logo}
@@ -154,8 +154,8 @@
                 className="w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-smooth" />
 
                 {hoveredClient === client.id &&
-                <div className="absolute inset-0 bg-gradient-accent/90 flex items-center justify-center p-4">
-                    <p className="text-sm font-semibold text-accent-foreground text-center">
+                <div className="absolute inset-0 bg-primary/90 flex items-center justify-center p-4">
+                    <p className="text-sm font-semibold text-primary-foreground text-center">
                         {client.outcome}
                     </p>
                     </div>
@@ -168,7 +168,7 @@
             {certifications.map((cert) =>
             <div
                 key={cert.id}
-                className="bg-surface border border-border rounded-xl p-6 text-center transition-smooth hover:border-accent hover:shadow-cta">
+                className="bg-surface border border-border rounded-sm p-6 text-center transition-smooth hover:border-accent hover:shadow-cta">
 
                 <div className="w-12 h-12 rounded-full bg-accent/20 flex items-center justify-center mx-auto mb-4">
                     <Icon name={cert.icon as any} size={24} className="text-accent" />

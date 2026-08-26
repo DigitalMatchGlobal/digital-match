@@ -15,9 +15,14 @@ export const site = {
     // E.164 (sin espacios) para tel:/JSON-LD.
     phone: '+59893892924',
     areaServed: ['UY', 'AR', 'US', 'LATAM'],
+    // 🚨 Perfiles REALES, confirmados por el cliente el 2026-08-25. Los que había
+    // (`instagram.com/digitalmatch.global` y `linkedin.com/company/digital-match-global`)
+    // no existen: eran enlaces rotos en el footer y, peor, en el `sameAs` del JSON-LD y en
+    // `llms.txt`, o sea que también le decíamos a Google y a los LLMs que la marca vive en
+    // dos perfiles inexistentes. Verificar antes de tocar.
     social: [
-        'https://instagram.com/digitalmatch.global',
-        'https://linkedin.com/company/digital-match-global',
+        'https://www.instagram.com/digitalmatchglobal/',
+        'https://www.linkedin.com/company/digitalmatchglobal/',
     ],
     // Servicios principales (los 4 pilares de ServicesSection) — para JSON-LD y llms.txt.
     services: [

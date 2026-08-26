@@ -6,6 +6,8 @@
     import { usePathname } from 'next/navigation';
     import Icon from '@/components/ui/AppIcon';
     import { useLanguage } from '@/contexts/LanguageContext';
+    import AnchorLink from './AnchorLink';
+    import { scrollToAnchor } from '@/lib/anchor';
     import LanguageToggle from './LanguageToggle';
 
     interface HeaderProps {
@@ -40,6 +42,12 @@
         anchor: '#services',
         icon: 'CogIcon',
         tooltipKey: 'nav.tooltips.services'
+        },
+        {
+        labelKey: 'nav.solutions',
+        anchor: '#solutions',
+        icon: 'CubeIcon',
+        tooltipKey: 'nav.tooltips.solutions'
         },
         {
         labelKey: 'nav.cases',
@@ -89,20 +97,16 @@
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
+    // El scroll y el offset del header viven en `@/lib/anchor` (un solo lugar para el
+    // `HEADER_OFFSET`, que antes estaba escrito a mano como `- 80` en tres archivos).
     const handleNavClick = (anchor: string) => {
-        // Si no estamos en la home, los anclas (#about) navegan a la home con el hash.
+        // Si no estamos en la home, el ancla navega a la home con el hash; al llegar,
+        // `LandingPageInteractive` scrollea y BORRA el hash de la URL.
         if (!isHome) {
         window.location.href = `/${anchor}`;
         return;
         }
-        const element = document.querySelector(anchor);
-        if (element) {
-        const offsetTop = element.getBoundingClientRect().top + window.scrollY - 80;
-        window.scrollTo({
-            top: offsetTop,
-            behavior: 'smooth'
-        });
-        }
+        scrollToAnchor(anchor);
         setMobileMenuOpen(false);
     };
 
@@ -110,26 +114,35 @@
         <>
         <header
             className={`fixed top-0 left-0 right-0 z-100 transition-smooth ${
-            scrolled ? 'backdrop-blur-nav bg-background/80' : 'bg-transparent'
+            // 🚨 TRANSPARENTE arriba de la página, no `bg-background`: con la barra
+            // blanca sobre el hero blanco, el circuito del hero se cortaba en una franja
+            // muerta de 64px y la página entera se leía como una sola plancha blanca.
+            // Al scrollear sí se vuelve sólida (con blur y filete), que es cuando pasa a
+            // haber contenido por debajo que necesita separación.
+            scrolled ? 'backdrop-blur-nav bg-background/90 border-b border-border' : 'bg-transparent'
             } ${className}`}
         >
             <nav className="mx-auto flex h-16 items-center justify-between px-4 sm:px-6 lg:px-8">
             
             {/* LOGO + TEXTO CON ANIMACIÓN DINÁMICA */}
-            <Link href="/" className="flex items-center gap-3">
-                <Image 
-                src="/assets/images/Logo.png" 
+            <Link href="/" className="flex items-center gap-2 sm:gap-3">
+                {/* El isologo se mostraba `hidden sm:block`: en móvil la marca quedaba
+                    representada sólo por el wordmark de texto. El isologo es la parte
+                    reconocible de la firma, así que va SIEMPRE — más chico en móvil. */}
+                <Image
+                src="/assets/images/Logo.png"
                 alt="Logo DM"
                 width={0}
                 height={0}
                 sizes="100vw"
-                className="hidden sm:block h-10 w-auto object-contain" 
+                className="h-8 w-auto object-contain sm:h-10"
                 priority
                 />
 
-                <span 
-                className="text-base sm:text-lg font-bold bg-gradient-to-r from-[#2563EB] via-[#6D5DFE] to-[#2563EB] bg-clip-text text-transparent animate-gradient-x-header"
-                >
+                {/* Wordmark en color plano. Antes era texto con degradado ANIMADO:
+                    en una marca paraguas eso lee a startup, y el degradado en texto es
+                    justo lo que esta línea visual no usa. */}
+                <span className="font-display text-base font-bold tracking-[-0.02em] text-accent sm:text-lg">
                 Digital Match Global
                 </span>
             </Link>
@@ -152,7 +165,7 @@
                     >
                         {t(item.labelKey)}
                         {active && (
-                        <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-accent" />
+                        <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-accent" />
                         )}
                     </Link>
                     );
@@ -170,7 +183,7 @@
                     >
                     {t(item.labelKey)}
                     {isHome && activeSection === item.anchor && (
-                        <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-accent" />
+                        <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-accent" />
                     )}
                     </button>
                 );
@@ -179,16 +192,12 @@
 
             <div className="hidden lg:flex items-center space-x-3">
                 <LanguageToggle />
-                <Link
-                href="#contact"
-                onClick={(e) => {
-                    e.preventDefault();
-                    handleNavClick('#contact');
-                }}
-                className="px-4 xl:px-6 py-2 xl:py-2.5 text-sm xl:text-base font-semibold bg-gradient-accent text-accent-foreground rounded-lg shadow-cta transition-smooth hover:scale-105 hover:shadow-xl whitespace-nowrap"
+                <AnchorLink
+                to="#contact"
+                className="whitespace-nowrap bg-accent px-4 py-2.5 text-sm font-bold text-accent-foreground transition-colors hover:bg-accent-hover xl:px-6 xl:text-base"
                 >
                 {t('nav.book')}
-                </Link>
+                </AnchorLink>
             </div>
 
             <button
@@ -207,7 +216,7 @@
                 className="absolute inset-0 bg-background/95 backdrop-blur-nav"
                 onClick={() => setMobileMenuOpen(false)}
             />
-            <div className="absolute right-0 top-0 bottom-0 w-full max-w-sm bg-secondary/95 backdrop-blur-nav shadow-2xl overflow-y-auto">
+            <div className="absolute right-0 top-0 bottom-0 w-full max-w-sm bg-background border-l border-border shadow-2xl overflow-y-auto">
                 <div className="flex items-center justify-between p-4 sm:p-6 border-b border-border">
                 <span className="text-base sm:text-lg font-bold text-foreground">{t('nav.menu')}</span>
                 <button
@@ -227,7 +236,7 @@
                 {navigationItems.map((item) => {
                     const className = `flex items-center space-x-3 px-4 py-3 sm:py-4 text-left text-sm sm:text-base font-semibold rounded-lg transition-smooth ${
                     (item.route ? pathname.startsWith(item.route) : isHome && activeSection === item.anchor)
-                        ? 'bg-accent/10 text-accent border border-accent/30' :'text-muted-foreground hover:text-foreground hover:bg-surface'
+                        ? 'bg-accent/[0.07] text-accent border border-accent/25' :'text-muted-foreground hover:text-foreground hover:bg-muted'
                     }`;
                     const inner = (
                     <>
@@ -262,16 +271,15 @@
                 })}
 
                 <div className="pt-4 mt-4 border-t border-border">
-                    <Link
-                    href="#contact"
-                    onClick={(e) => {
-                        e.preventDefault();
-                        handleNavClick('#contact');
-                    }}
-                    className="flex items-center justify-center w-full px-6 py-3 sm:py-4 text-sm sm:text-base font-semibold bg-gradient-accent text-accent-foreground rounded-lg shadow-cta transition-smooth hover:scale-105"
+                    <AnchorLink
+                    to="#contact"
+                    // 🚨 Sin esto el panel del menú quedaba abierto tapando el formulario
+                    // al que acababa de scrollear: tocabas "Agendar" y no pasaba nada.
+                    onNavigate={() => setMobileMenuOpen(false)}
+                    className="flex w-full items-center justify-center bg-accent px-6 py-3 text-sm font-bold text-accent-foreground transition-colors hover:bg-accent-hover sm:py-4 sm:text-base"
                     >
                     {t('nav.book')}
-                    </Link>
+                    </AnchorLink>
                 </div>
                 </div>
             </div>
@@ -279,17 +287,6 @@
         )}
 
         {/* --- ESTILOS DE LA ANIMACIÓN --- */}
-        <style jsx>{`
-            @keyframes gradient-x-header {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-            }
-            .animate-gradient-x-header {
-            background-size: 200% auto;
-            animation: gradient-x-header 3s linear infinite;
-            }
-        `}</style>
         </>
     );
     };

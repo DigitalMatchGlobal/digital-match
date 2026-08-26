@@ -3,15 +3,20 @@
     import { useEffect } from 'react';
     import { useRouter } from 'next/navigation';
     import { useReveal } from '@/hooks/useReveal';
+    import { useLanguage } from '@/contexts/LanguageContext';
+    import { scrollToAnchor, HEADER_OFFSET } from '@/lib/anchor';
+    import { waLink } from '@/lib/whatsapp';
     import Header from '@/components/common/Header';
+    import SectionSeam from '@/components/common/SectionSeam';
     import ScrollProgressIndicator from '@/components/common/ScrollProgressIndicator';
-    import CTAFloatingButton from '@/components/common/CTAFloatingButton';
+    import FloatingActions from '@/components/common/FloatingActions';
     import HeroSection from './HeroSection';
     import ProofStrip from './ProofStrip';
     import AboutSection from './AboutSection';
     import Certifications from './Certifications';
-    import TechnicalShowcase from './TechnicalShowcase';
+    import ProcessSection from './ProcessSection';
     import ServicesSection from './ServicesSection';
+    import SolutionsSection from './SolutionsSection';
     import CasesSection from './CasesSection';
     //import TestimonialsSection from './TestimonialsSection';
     import FAQSection from './FAQSection';
@@ -21,17 +26,11 @@
 
     const LandingPageInteractive = () => {
     const router = useRouter();
+    const { t } = useLanguage();
     useReveal();
 
     const scrollToSection = (sectionId: string) => {
-        const element = document.querySelector(sectionId);
-        if (element) {
-        const offsetTop = element.getBoundingClientRect().top + window.scrollY - 80;
-        window.scrollTo({
-            top: offsetTop,
-            behavior: 'smooth'
-        });
-        }
+        scrollToAnchor(sectionId);
     };
 
     // Al llegar desde otra página con hash (ej. /#contact desde el detalle de un caso),
@@ -59,7 +58,7 @@
                 lastTop = top;
 
                 if (stableCount >= 2) {
-                    window.scrollTo({ top: top - 80, behavior: 'smooth' });
+                    window.scrollTo({ top: top - HEADER_OFFSET, behavior: 'smooth' });
                     // Limpiamos el hash de la URL (deja /#contact como / ) sin recargar ni re-scrollear.
                     window.history.replaceState(null, '', window.location.pathname);
                     return;
@@ -85,16 +84,21 @@
     };
 
     const handleWhatsAppClick = () => {
-        window.open('https://wa.me/+59893892924', '_blank');
+        // Mensaje prellenado: el botón abría un chat VACÍO (ver `@/lib/whatsapp`).
+        window.open(waLink(t('wa.default')), '_blank', 'noopener,noreferrer');
     };
 
-    // Separador sutil entre secciones (línea en degradado, no full-bleed).
-    // Refuerza el límite entre secciones, sobre todo cuando comparten fondo.
-    const SectionDivider = () => (
-        <div className="max-w-7xl mx-auto px-6 lg:px-8">
-        <div className="hairline" />
-        </div>
-    );
+    // Separador entre secciones. Al entrar en viewport, dos pulsos SALEN de la diagonal
+    // hacia los extremos (ver `.rule-*` en `tailwind.css`, que explica por qué cada mitad
+    // se desvanece sólo hacia afuera).
+    //
+    // 🚨 Va SÓLO entre secciones que COMPARTEN FONDO. Si el fondo cambia
+    // (blanco ↔ `.section-raised`), el cambio de suelo ya separa y el separador encima
+    // queda como una línea perdida: peor, el separador no tiene fondo propio, así que en
+    // un límite blanco→gris dibujaba una FRANJA BLANCA entre la sección gris y la línea.
+    // Estaban puestos en los 9 límites; 5 eran de esos. La regla que queda es legible:
+    // **misma tierra + filete = otra sección del mismo bloque; cambio de tierra = bloque
+    // nuevo**. Antes de agregar uno, mirar el fondo de las dos secciones que separa.
 
     // Contenido principal (reutilizable para hidratado y no hidratado)
     const content = (
@@ -106,26 +110,38 @@
             onBookingClick={handleBookingClick}
             onViewWorkClick={handleViewWorkClick}
             />
+            {/* 🚨 ÚNICO límite sin costura: el hero ya cierra con su propia banda de
+                capacidades, que tiene filete superior y divisores verticales. Una costura
+                acá sumaría una tercera línea a 80px de las otras dos. */}
             <ProofStrip />
-            <SectionDivider />
+            <SectionSeam />
             <AboutSection />
-            <SectionDivider />
+            <SectionSeam />
             <Certifications />
-            <SectionDivider />
+            <SectionSeam />
             <ServicesSection onCaseStudyClick={handleCaseStudyClick} />
-            <SectionDivider />
-            <TechnicalShowcase />
-            <SectionDivider />
+            <SectionSeam />
+            {/* La cartera de soluciones propias va DESPUÉS de las capacidades (qué
+                sabemos hacer) y ANTES de los casos (qué entregamos): primero la casa,
+                después sus productos, después la prueba. */}
+            <SolutionsSection />
+            <SectionSeam />
+            {/* El proceso va antes de los casos: primero cómo trabajamos, después la
+                prueba de que funciona. Es la sección que el nav prometía y no existía.
+                Ocupa el lugar del ex-`TechnicalShowcase`, que decía lo mismo que
+                Servicios con otras palabras (y con otra cifra) — ver CLAUDE.md §8. */}
+            <ProcessSection />
+            <SectionSeam />
             <CasesSection />
             {/*<TestimonialsSection />*/}
-            <SectionDivider />
+            <SectionSeam />
             <FAQSection />
             {/*<TrustIndicators />*/}
-            <SectionDivider />
+            <SectionSeam />
             <ContactSection />
         </main>
         <Footer />
-        <CTAFloatingButton
+        <FloatingActions
             onBookingClick={handleBookingClick}
             onWhatsAppClick={handleWhatsAppClick}
         />

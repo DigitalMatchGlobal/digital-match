@@ -58,23 +58,27 @@
 
     return (
         <div className="mt-20">
-        <div className="text-center mb-10 reveal">
-            <h3 className="text-2xl md:text-3xl font-bold text-foreground mb-2">
+        <div className="mb-10">
+            <div className="reveal flex items-center gap-2.5">
+            <span aria-hidden="true" className="slash slash-sm text-accent" />
+            <p className="eyebrow">{t('services.models.eyebrow')}</p>
+            </div>
+            <h3 className="reveal mt-4 text-2xl text-foreground md:text-3xl" data-delay="1">
             {t('services.models.title')}
             </h3>
-            <p className="text-muted-foreground">
+            <p className="reveal mt-3 max-w-2xl text-muted-foreground" data-delay="2">
             {t('services.models.subtitle')}
             </p>
         </div>
-        <div ref={gridRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div ref={gridRef} className="lattice grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
             {models.map((model) => (
             <div
                 key={model.title}
                 data-dock
-                className="rounded-2xl p-6 bg-white/[0.02] hover:bg-white/[0.05] will-change-transform [transform-origin:center] [transition:transform_120ms_ease-out,background-color_250ms_ease-out]"
+                className="p-6 will-change-transform [transform-origin:center] [transition:transform_120ms_ease-out,background-color_250ms_ease-out] hover:!bg-muted"
             >
-                <div className="w-10 h-10 rounded-full bg-accent/10 flex items-center justify-center mb-4">
-                <Icon name={model.icon as any} size={20} className="text-accent" />
+                <div className="icon-tile mb-5">
+                <Icon name={model.icon as any} size={20} />
                 </div>
                 <h4 className="text-lg font-bold text-foreground mb-2">{model.title}</h4>
                 <p className="text-sm text-muted-foreground leading-relaxed">{model.desc}</p>

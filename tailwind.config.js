@@ -18,55 +18,61 @@
         },
         extend: {
         colors: {
-            border: "var(--color-border)", /* white with 10% opacity */
-            input: "var(--color-input)", /* white with 10% opacity */
-            ring: "var(--color-ring)", /* cyan-500 */
-            background: "var(--color-background)", /* black */
-            foreground: "var(--color-foreground)", /* white with 95% opacity */
+            border: "rgb(var(--color-border) / <alpha-value>)", /* #E2E4E8 */
+            "border-strong": "rgb(var(--color-border-strong) / <alpha-value>)", /* filete de énfasis */
+            input: "rgb(var(--color-input) / <alpha-value>)", /* blanco */
+            ring: "rgb(var(--color-ring) / <alpha-value>)", /* azul de marca oscurecido */
+            background: "rgb(var(--color-background) / <alpha-value>)", /* blanco */
+            foreground: "rgb(var(--color-foreground) / <alpha-value>)", /* #0B0E14 */
+            label: "rgb(var(--color-label) / <alpha-value>)", /* grafito de rótulos */
             surface: {
-            DEFAULT: "var(--color-surface)", /* white with 5% opacity */
-            foreground: "var(--color-surface-foreground)", /* white with 95% opacity */
+            DEFAULT: "rgb(var(--color-surface) / <alpha-value>)", /* — */
+            foreground: "rgb(var(--color-surface-foreground) / <alpha-value>)", /* — */
             },
             primary: {
-            DEFAULT: "var(--color-primary)", /* black */
-            foreground: "var(--color-primary-foreground)", /* white with 95% opacity */
+            DEFAULT: "rgb(var(--color-primary) / <alpha-value>)", /* — */
+            foreground: "rgb(var(--color-primary-foreground) / <alpha-value>)", /* — */
             },
             secondary: {
-            DEFAULT: "var(--color-secondary)", /* gray-950 */
-            foreground: "var(--color-secondary-foreground)", /* white with 95% opacity */
+            DEFAULT: "rgb(var(--color-secondary) / <alpha-value>)", /* — */
+            foreground: "rgb(var(--color-secondary-foreground) / <alpha-value>)", /* — */
             },
             destructive: {
-            DEFAULT: "var(--color-destructive)", /* red-500 */
-            foreground: "var(--color-destructive-foreground)", /* white with 95% opacity */
+            DEFAULT: "rgb(var(--color-destructive) / <alpha-value>)", /* — */
+            foreground: "rgb(var(--color-destructive-foreground) / <alpha-value>)", /* — */
             },
             muted: {
-            DEFAULT: "var(--color-muted)", /* white with 10% opacity */
-            foreground: "var(--color-muted-foreground)", /* white with 70% opacity */
+            DEFAULT: "rgb(var(--color-muted) / <alpha-value>)", /* — */
+            foreground: "rgb(var(--color-muted-foreground) / <alpha-value>)", /* — */
             },
             accent: {
-            DEFAULT: "var(--color-accent)", /* cyan-500 */
-            foreground: "var(--color-accent-foreground)", /* black */
-            secondary: "var(--color-accent-secondary)", /* fuchsia-500 */
+            DEFAULT: "rgb(var(--color-accent) / <alpha-value>)", /* azul de marca oscurecido - texto/links/CTA */
+            foreground: "rgb(var(--color-accent-foreground) / <alpha-value>)", /* blanco */
+            /* SOLO gráficos (filetes, barras, fondos de tile). Nunca texto: no
+               cumple contraste sobre blanco. Ver la nota en :root de tailwind.css. */
+            bright: "rgb(var(--color-accent-bright) / <alpha-value>)",
+            hover: "rgb(var(--color-accent-hover) / <alpha-value>)", /* hover del CTA azul */
+            secondary: "rgb(var(--color-accent-secondary) / <alpha-value>)", /* violeta del logo oscurecido */
             },
             popover: {
-            DEFAULT: "var(--color-popover)", /* gray-950 */
-            foreground: "var(--color-popover-foreground)", /* white with 95% opacity */
+            DEFAULT: "rgb(var(--color-popover) / <alpha-value>)", /* — */
+            foreground: "rgb(var(--color-popover-foreground) / <alpha-value>)", /* — */
             },
             card: {
-            DEFAULT: "var(--color-card)", /* white with 5% opacity */
-            foreground: "var(--color-card-foreground)", /* white with 95% opacity */
+            DEFAULT: "rgb(var(--color-card) / <alpha-value>)", /* — */
+            foreground: "rgb(var(--color-card-foreground) / <alpha-value>)", /* — */
             },
             success: {
-            DEFAULT: "var(--color-success)", /* green-500 */
-            foreground: "var(--color-success-foreground)", /* black */
+            DEFAULT: "rgb(var(--color-success) / <alpha-value>)", /* — */
+            foreground: "rgb(var(--color-success-foreground) / <alpha-value>)", /* — */
             },
             warning: {
-            DEFAULT: "var(--color-warning)", /* amber-500 */
-            foreground: "var(--color-warning-foreground)", /* black */
+            DEFAULT: "rgb(var(--color-warning) / <alpha-value>)", /* — */
+            foreground: "rgb(var(--color-warning-foreground) / <alpha-value>)", /* — */
             },
             error: {
-            DEFAULT: "var(--color-error)", /* red-500 */
-            foreground: "var(--color-error-foreground)", /* white with 95% opacity */
+            DEFAULT: "rgb(var(--color-error) / <alpha-value>)", /* — */
+            foreground: "rgb(var(--color-error-foreground) / <alpha-value>)", /* — */
             },
         },
         borderRadius: {
@@ -77,18 +83,30 @@
         fontFamily: {
             sans: ['var(--font-inter)', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
             inter: ['var(--font-inter)', 'sans-serif'],
+            // Display: Archivo. Se aplica sola a h1..h6 (ver tailwind.css); usar
+            // `font-display` a mano sólo para números-héroe y cifras de métricas.
+            display: ['var(--font-archivo)', 'var(--font-inter)', 'system-ui', 'sans-serif'],
         },
         fontWeight: {
             normal: '400',
             medium: '500',
             semibold: '600',
             bold: '700',
+            extrabold: '800',
+            black: '900',
         },
         boxShadow: {
-            'cta': '0 20px 25px -5px rgba(6, 182, 212, 0.1), 0 10px 10px -5px rgba(6, 182, 212, 0.04)',
+            /* ⚠️ Era un glow CIAN (`rgba(6,182,212,...)`) del tema oscuro viejo. No se veía
+               porque el `.shadow-cta` de `tailwind.css` lo pisa por orden de fuente — o
+               sea que quedaba como trampa: el día que alguien borre esa utilidad, vuelve
+               un resplandor de color en una marca que no usa resplandores. Igualado al
+               valor real. */
+            'cta': '0 1px 2px rgba(11, 14, 20, 0.06), 0 8px 24px -8px rgba(11, 14, 20, 0.12)',
         },
         backgroundImage: {
-            'gradient-accent': 'linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-secondary) 100%)',
+            /* 🚨 rgb() obligatorio: los tokens son CANALES, así que `var(--color-accent)` suelto
+               dentro de un gradiente es inválido y el degradado no se dibuja. Hoy sin uso. */
+            'gradient-accent': 'linear-gradient(135deg, rgb(var(--color-accent)) 0%, rgb(var(--color-accent-secondary)) 100%)',
         },
         keyframes: {
             "accordion-down": {

@@ -17,15 +17,23 @@
         // ... MANTENER TODO LO ANTERIOR (nav, etc) ...
         'nav.services': 'Servicios',
         'nav.about': 'Nosotros',
-        'nav.results': 'Resultados',
+        'nav.solutions': 'Soluciones',
         'nav.cases': 'Casos',
         'nav.process': 'Proceso',
         'nav.contact': 'Contacto',
         'nav.menu': 'Menú',
-        'nav.book': 'Agendar Consulta',
+        'nav.book': 'Agendar una conversación',
         'nav.tooltips.services': 'Explora soluciones de automatización',
+        // Botones flotantes. Van traducidos porque un `aria-label` es texto que el
+        // usuario LEE (con lector de pantalla): estaban hardcodeados en inglés.
+        // Mensaje con el que abre el botón flotante de WhatsApp. Antes abría el chat
+        // VACÍO: ni el visitante sabía qué escribir ni nosotros de dónde venía.
+        'wa.default': 'Hola, vengo del sitio web de Digital Match Global. Tengo una consulta.',
+        'float.top': 'Volver arriba',
+        'float.book': 'Agendar una conversación',
+        'float.whatsapp': 'Escribinos por WhatsApp',
         'nav.tooltips.about': 'Conocé al equipo detrás',
-        'nav.tooltips.results': 'Ver resultados de clientes',
+        'nav.tooltips.solutions': 'Nuestras soluciones propias',
         'nav.tooltips.cases': 'Ver nuestros casos y proyectos',
         'nav.tooltips.process': 'Entender nuestra metodología',
         'nav.tooltips.contact': 'Agendar consulta',
@@ -33,6 +41,7 @@
         // --- PORTFOLIO / CASOS ---
         'portfolio.title': 'Casos y proyectos',
         'portfolio.subtitle': 'Una selección de trabajos reales por rubro. Cada proyecto, su propio desafío y su propia solución.',
+        'portfolio.home.eyebrow': 'Casos',
         'portfolio.home.title': 'Así convertimos problemas operativos en soluciones digitales',
         'portfolio.home.subtitle': 'Selección de proyectos entregados para reducir trabajo manual, conectar herramientas y mejorar operaciones.',
         'portfolio.home.cta': 'Ver todos los casos',
@@ -51,7 +60,6 @@
         'case.services': 'Servicios',
         'case.result': 'Resultado',
         'case.view': 'Ver caso',
-        'case.cta': 'Hablemos de tu proyecto',
         'case.back': 'Volver a los casos',
         'case.prev': 'Proyecto anterior',
         'case.next': 'Proyecto siguiente',
@@ -60,15 +68,41 @@
         'case.contact.subtitle': 'Si llegaste hasta acá, escribinos y lo charlamos sin compromiso.',
         'case.contact.cta': 'Ponerse en contacto',
 
-        // --- CAMBIO  (Hero Badge) ---
-        // Antes decía: 'Transformación digital • Automatización • IA'
-        'hero.badge': 'Automatización • IA • Desarrollo Web', 
-        'hero.title.part1': 'Construí sistemas que',
-        'hero.title.highlight': 'hacen escalar',
-        'hero.title.part2': 'tu negocio',
-        'hero.subtitle': 'Del cuello de botella al crecimiento, desde 7-14 días',
-        'hero.cta.book': 'Agendar Llamada Estratégica',
-        'hero.cta.work': 'Ver Nuestro Trabajo',
+        // El hero pasó de titular+2 botones a una composición asimétrica (copy a la
+        // izquierda, panel de "cómo entra un proceso" a la derecha). La bajada dejó de
+        // ser un eslogan de una línea y ahora dice QUÉ hacemos: es lo primero que lee
+        // alguien que no nos conoce.
+        // VOZ INSTITUCIONAL. Digital Match Global es la marca PARAGUAS: habla como casa
+        // ("construimos", "nuestros clientes"), no como producto que le habla al usuario
+        // ("construí tu sistema"). Los productos —MatchBot y los que vengan— son los que
+        // usan la voz directa en segunda persona. No mezclar los dos registros.
+        // KICKER del hero. Reemplazó a 'hero.eyebrow', que era una lista con puntos
+        // medios ("Automatización · IA · Desarrollo a medida") y no comunicaba nada que
+        // el titular no dijera ya. Esto MUESTRA la transformación que vendemos.
+        // 🚨 Los procesos que rotan salen de features REALES de `services.*` y del
+        // placeholder de contacto. No agregar procesos que no hagamos.
+        'hero.kicker.label': 'Proceso',
+        'hero.kicker.p1': 'carga de facturas',
+        'hero.kicker.p2': 'generación de reportes',
+        'hero.kicker.p3': 'notificaciones y correos',
+        'hero.kicker.p4': 'integración entre sistemas',
+        'hero.kicker.p5': 'atención de consultas',
+        'hero.kicker.result': 'Automatizado',
+        // El titular le habla al LECTOR de su problema, no describe a la empresa: el
+        // anterior ("...la operación de nuestros clientes") ponía al lector afuera,
+        // mirando, y medía 5 líneas en móvil. Éste sale del patrón que más se repite en la
+        // cartera real — un proceso que alguien hacía a mano convertido en sistema — y lo
+        // continúa el subtítulo. 3 líneas en móvil (medido).
+        // 🚨 Van en DOS claves porque el titular tiene jerarquía tonal: el arranque (el
+        // problema de hoy) en grafito y el remate (el resultado) en tinta plena. El gris
+        // → negro es la misma transición que la frase nombra; no es decoración. Partirlo
+        // en render por la coma sería frágil entre idiomas.
+        'hero.title.lead': 'Lo que hoy tu equipo hace a mano,',
+        'hero.title.payoff': 'hecho sistema.',
+        'hero.subtitle': 'Diagnosticamos dónde se pierde el tiempo y construimos el sistema que lo resuelve.',
+        'hero.cta.book': 'Agendar una conversación',
+        'hero.cta.work': 'Ver nuestro trabajo',
+        // Chips: contestan las tres objeciones que aparecen siempre.
 
         // --- QUIÉNES SOMOS (anónimo, diferencial — NO servicios) ---
         'about.eyebrow': 'El equipo detrás de Digital Match Global',
@@ -83,7 +117,10 @@
         'about.diff4.title': 'Certificados',
         'about.diff4.desc': 'En UiPath, Microsoft e IBM.',
         'about.tools_label': 'Stack tecnológico',
-        'stack.subtitle': 'Cubrimos todo el pipeline, de la automatización a la nube.',
+        'stack.subtitle': 'De la infraestructura al proceso automatizado: elegimos y sostenemos cada capa.',
+        'stack.count': '{tools} tecnologías',
+        'stack.top': 'Lo que el cliente usa',
+        'stack.base': 'Lo que no se ve, y sostiene todo',
         'stack.rpa': 'Automatización / RPA',
         'stack.ai': 'IA & Datos',
         'stack.dev': 'Desarrollo',
@@ -91,23 +128,35 @@
         'stack.data': 'Bases de datos',
         'stack.integrations': 'Integraciones & APIs',
 
-        // ... MANTENER RESTO DE CLAVES (keywords, proof, services, technical, etc) ...
-        'keywords.ml': 'Aprendizaje Automático',
-        'keywords.automation': 'Automatización de Procesos',
-        'keywords.api': 'Integración de APIs',
-        'keywords.cloud': 'Infraestructura en la Nube',
-        'keywords.analytics': 'Análisis de Datos',
-        'keywords.ai': 'Soluciones IA',
         'proof.m1.label': 'Años de Experiencia',
         'proof.m2.label': 'Procesos Automatizados',
         'proof.m3.label': 'Días del diagnóstico a la solución',
-        'services.main_title': 'Nuestros Servicios',
-        'services.main_subtitle': 'Soluciones integrales para escalar las operaciones de tu negocio',
-        'services.cta_button': 'Ver Caso de Éxito',
+        'services.eyebrow': 'Qué hacemos',
+        'services.main_title': 'Cuatro frentes para sacarle trabajo manual a tu operación.',
+        'services.main_subtitle': 'Automatización, asistentes de IA, producto web y consultoría. Se combinan según lo que tu operación necesita, no según un paquete cerrado.',
+        'services.cta_button': 'Ver caso de éxito',
         // --- Producto propio: MatchBot ---
-        'services.matchbot.eyebrow': 'Producto propio',
-        'services.matchbot.desc': 'MatchBot es nuestra plataforma de bots de WhatsApp con IA: cada empresa conecta su propio número y automatiza sus conversaciones. Construida sobre nuestra integración oficial como Tech Provider de Meta.',
-        'services.matchbot.cta': 'Conocé MatchBot',
+        // --- SOLUCIONES (banda de cartera) ---
+        // Digital Match Global es el paraguas: acá viven las soluciones propias, y
+        // MatchBot es la primera. 🚨 NO inventar soluciones para "llenar" la banda:
+        // si mañana hay una segunda, se agrega; hasta entonces la segunda celda es
+        // una invitación explícita, no un producto fantasma.
+        'solutions.eyebrow': 'Soluciones',
+        'solutions.title': 'Además de construir a medida, desarrollamos soluciones propias.',
+        // 🚨 Decía: "Cuando un problema se repite en muchos clientes, deja de ser un
+        // proyecto y pasa a ser un producto". Describe, literalmente, convertir trabajo que
+        // pagó un cliente en producto para vender a otro: se lee como que aprovechamos lo
+        // que nos plantean y después lo monetizamos. Aunque no sea la intención, es lo que
+        // dice la oración. Reescrita desde el BENEFICIO DEL LECTOR: no siempre hace falta
+        // construir desde cero, y si la herramienta ya existe entra antes.
+        'solutions.subtitle': 'No todo necesita construirse desde cero: cuando la herramienta ya existe, entra antes y cuesta menos. Estas son nuestras, así que las conocemos por dentro y las sostenemos nosotros.',
+        'solutions.status.live': 'En producción',
+        'solutions.matchbot.category': 'Automatización conversacional',
+        'solutions.matchbot.desc': 'MatchBot es nuestra plataforma de bots de WhatsApp con IA: cada empresa conecta su propio número y automatiza sus conversaciones. Construida sobre nuestra integración oficial como Tech Provider de Meta.',
+        'solutions.matchbot.cta': 'Conocé MatchBot',
+        'solutions.next.title': '¿Tu problema no tiene herramienta?',
+        'solutions.next.desc': 'La mayoría de lo que construimos empieza así: un proceso que ninguna herramienta del mercado resuelve como necesitás. Contanos cuál es el tuyo.',
+        'solutions.next.cta': 'Plantearnos el caso',
         'services.auto.title': 'Automatización de Procesos (RPA)',
         'services.auto.headline': 'Elimina el 80% de tareas manuales',
         'services.auto.desc': 'Bots RPA que transforman flujos repetitivos en sistemas que trabajan 24/7, sin intervención humana (UiPath · Rocketbot · Power Automate).',
@@ -122,34 +171,36 @@
         'services.ai.f2': 'Integración multicanal (WhatsApp/Web)',
         'services.ai.f3': 'Entrenamiento personalizado con tus datos',
         'services.ai.f4': 'Panel de análisis y métricas',
-        'services.web.title': 'Productos Web',
+        'services.web.title': 'Productos web',
         'services.web.headline': 'Plataformas que generan ingresos',
         'services.web.desc': 'Construye aplicaciones web escalables y herramientas internas que impulsan el crecimiento y la eficiencia.',
-        'services.web.f1': 'Desarrollo de MVP (desde 7-14 días)',
+        'services.web.f1': 'Desarrollo de MVP funcional',
         'services.web.f2': 'Diseño adaptable a móviles',
         'services.web.f3': 'Integraciones API y de terceros',
         'services.web.f4': 'Seguridad y cumplimiento integrados',
         'services.consulting.title': 'Consultoría y Capacitación',
         'services.consulting.headline': 'Transformación digital y adopción de tecnología',
-        'services.consulting.desc': 'Asesoramos y formamos a tu equipo: del diagnóstico de procesos a jornadas de capacitación en automatización e IA.',
+        'services.consulting.desc': 'Cuando lo que falta no es construir, sino decidir qué construir y que el equipo sepa operarlo.',
         'services.consulting.f1': 'Diagnóstico de procesos y oportunidades (RPA/IA)',
         'services.consulting.f2': 'Hoja de ruta de transformación digital',
         'services.consulting.f3': 'Jornadas de capacitación a equipos',
         'services.consulting.f4': 'Adopción de IA y automatización',
 
         // --- Modelos de contratación ---
+        'services.models.eyebrow': 'Modelos de trabajo',
         'services.models.title': 'Cómo podés contratarnos',
         'services.models.subtitle': 'Elegí el formato que mejor se adapta a tu necesidad.',
         'services.models.project.title': 'Por proyecto',
-        'services.models.project.desc': 'Solución llave en mano, con un MVP funcional desde 7-14 días según la complejidad.',
+        'services.models.project.desc': 'Alcance y precio cerrados de antemano: el riesgo de la estimación lo asumimos nosotros.',
         'services.models.hourly.title': 'Por hora',
         'services.models.hourly.desc': 'Bolsa de horas para RPA, automatización y desarrollo, a demanda.',
         'services.models.consulting.title': 'Consultoría',
-        'services.models.consulting.desc': 'Diagnóstico, arquitectura y hoja de ruta de transformación digital.',
+        'services.models.consulting.desc': 'Sin construir nada: te queda el análisis y el plan, y decidís con quién lo ejecutás.',
         'services.models.training.title': 'Jornadas de capacitación',
-        'services.models.training.desc': 'Formación a tu equipo en RPA, IA y adopción de tecnología.',
+        'services.models.training.desc': 'Jornadas agendadas, presenciales o remotas, para el equipo que va a usar la herramienta.',
 
         // --- Certificaciones ---
+        'certs.eyebrow': 'Formación oficial',
         'certs.title': 'Certificaciones que nos avalan',
         'certs.subtitle': 'Formación oficial que respalda cómo trabajamos.',
         'certs.uipath': 'UiPath RPA Developer',
@@ -159,57 +210,57 @@
         'certs.meta.title': 'Tech Provider verificado de Meta',
         'certs.meta.subtitle': 'Integración oficial con la API de WhatsApp Business — negocio verificado y App Review aprobado por Meta.',
 
-        'technical.title': 'Cómo lo hacemos',
-        'technical.subtitle': 'Estándares enterprise y resultados típicos en cada área de trabajo',
-        'technical.outcomes_title': 'Resultados Típicos',
-        'technical.auto.title': 'Automatización de Procesos',
-        'technical.auto.desc': 'Elimina tareas repetitivas y optimiza operaciones con sistemas inteligentes.',
-        'technical.auto.impact': 'Máxima Eficiencia Operativa', 
-        'technical.auto.out1': 'Reduce la entrada manual de datos en un 90%',
-        'technical.auto.out2': 'Corta tiempos de proceso de horas a minutos',
-        'technical.auto.out3': 'Elimina el error humano en tareas de rutina',
-        'technical.auto.out4': 'Libera a tu equipo para trabajo estratégico',
-        'technical.ai.title': 'Asistentes IA',
-        'technical.ai.desc': 'Implementa chatbots inteligentes y asistentes virtuales para atención 24/7.',
-        'technical.ai.impact': 'Atención 24/7 Garantizada', 
-        'technical.ai.out1': 'Maneja el 80% de consultas automáticamente',
-        'technical.ai.out2': 'Reduce el tiempo de respuesta a segundos',
-        'technical.ai.out3': 'Escala el soporte sin contratar más personal',
-        'technical.ai.out4': 'Mejora la satisfacción del cliente',
-        'technical.web.title': 'Productos Web',
-        'technical.web.desc': 'Construye plataformas y herramientas internas que impulsan el crecimiento.',
-        'technical.web.impact': 'Alto Rendimiento y SEO', 
-        'technical.web.out1': 'Primer MVP desde 7-14 días, según complejidad',
-        'technical.web.out2': 'Escalable a miles de usuarios',
-        'technical.web.out3': 'Integración con sistemas existentes',
-        'technical.web.out4': 'Optimizado para móviles y seguro',
-        'faq.title': 'Preguntas Frecuentes',
-        'faq.subtitle': 'Todo lo que necesitas saber sobre cómo trabajamos',
-        'faq.q1.question': '¿Cuánto tiempo toma entregar un proyecto?',
-        'faq.q1.answer': 'Depende de la complejidad: la mayoría de los proyectos empieza a entregarse a partir de 7-14 días desde el inicio. Seguimos una metodología ágil con actualizaciones diarias; en proyectos más grandes, la primera versión funcional llega en pocas semanas.',
-        'faq.q1.stats': 'Primer MVP: desde 7-14 días',
-        'faq.q2.question': '¿Cuál es su proceso de trabajo?',
-        'faq.q2.answer': 'Comenzamos con una llamada estratégica, seguida de una especificación técnica. Desarrollamos en sprints con comunicación diaria. Tendrás acceso a un entorno de pruebas y la entrega final incluye documentación y capacitación.',
-        'faq.q2.stats': 'Comunicación diaria durante el proyecto',
-        'faq.q3.question': '¿Ofrecen soporte post-entrega?',
-        'faq.q3.answer': '¡Sí! Cada proyecto incluye 30 días de soporte gratuito. Después, ofrecemos planes de mantenimiento flexibles desde USD 15/mes. También entregamos documentación completa para que puedas gestionar el sistema independientemente.',
-        'faq.q3.stats': '30 días de soporte incluido',
-        'faq.q4.question': '¿Qué necesito para empezar?',
-        'faq.q4.answer': 'Solo tres cosas: un problema de negocio claro que quieras resolver, acceso a los sistemas existentes (si aplica) y disponibilidad para una llamada de inicio de 30 minutos. Nosotros nos encargamos del resto.',
-        'faq.q4.stats': 'Inicio en 24-48 horas',
-        'faq.q5.question': '¿Quiénes son sus clientes típicos?',
-        'faq.q5.answer': 'Trabajamos con startups y PyMEs ambiciosas en LATAM y EE.UU. Clientes que buscan escalar eficientemente, valoran la experiencia técnica y necesitan sistemas documentados y mantenibles.',
-        'faq.q5.stats': 'Clientes en Uruguay y Argentina',
-        'faq.q6.question': '¿Cómo manejan la seguridad y los datos?',
-        'faq.q6.answer': 'Con prácticas security-first y experiencia real en entornos de alto cumplimiento: trabajamos bajo gestión de calidad ISO 9001 y con compliance PCI-DSS en pagos. Aplicamos cifrado, principio de mínimo privilegio y sistemas documentados y mantenibles que podés auditar.',
-        'faq.q6.stats': 'Experiencia ISO 9001 · PCI-DSS',
-        'contact.title': '¿Listo para Escalar tu Negocio?',
+        // --- PROCESO (sección con apilado sticky) ---
+        // 🚨 Estas etapas describen cómo trabaja el equipo. Si el proceso real cambia,
+        // se corrige ACÁ y no se maquilla en la UI. Los plazos ("7 a 14 días") son los
+        // mismos que ya afirma el hero y el FAQ: no inventar otros.
+        'process.eyebrow': 'Cómo trabajamos',
+        'process.title': 'Cuatro etapas, sin entregas sorpresa al final.',
+        'process.subtitle': 'Cada etapa se apoya en la anterior y termina en algo que podés ver. No hay una caja negra de tres meses.',
+
+        'process.s1.name': 'Diagnóstico',
+        'process.s1.lede': 'Mapeamos el proceso real: quién lo ejecuta, cuánto tarda y dónde se traba.',
+        'process.s1.p1': 'Relevamos con quien hace la tarea, no con el organigrama',
+        'process.s1.p2': 'Definimos qué conviene automatizar y qué no',
+
+        'process.s2.name': 'Diseño de la solución',
+        'process.s2.lede': 'Decidimos qué se automatiza, qué queda manual y sobre qué sistemas se construye.',
+        'process.s2.p1': 'Se construye sobre las herramientas que ya usás',
+        'process.s2.p2': 'Acordamos el alcance y también qué queda afuera',
+
+        'process.s3.name': 'Construcción iterativa',
+        'process.s3.lede': 'Entregas parciales y frecuentes, para que puedas corregir el rumbo mientras se construye.',
+        'process.s3.p1': 'Primera versión útil entre 7 y 14 días',
+        'process.s3.p2': 'Lo ves funcionando antes de que esté terminado',
+
+        'process.s4.name': 'Entrega y traspaso',
+        'process.s4.lede': 'Queda documentado y tu equipo puede operarlo sin depender de nosotros.',
+        'process.s4.p1': 'Documentación de cómo funciona y cómo se opera',
+        'process.s4.p2': 'Soporte posterior, sin quedar atado a nosotros',
+
+        // Acá vivían las claves `technical.*` de `TechnicalShowcase`. La sección se
+        // ELIMINÓ: decía las mismas áreas que los cuatro pilares de Servicios con
+        // otras palabras ("Asistentes IA" era el mismo string), y contradecía a
+        // Servicios en la cifra (80% de tareas manuales vs 90% de entrada de datos,
+        // ninguna con fuente). El rótulo "Cómo trabajamos" lo tiene ahora Proceso.
+        //
+        // Las preguntas del FAQ tampoco están acá: viven en `src/data/faq.ts`, que es
+        // también la fuente del FAQPage de JSON-LD. Sólo queda el chrome de la sección.
+        // `faq.nav` es la etiqueta CORTA para menús. Existe porque `faq.title` pasó a
+        // ser una frase y el footer la usaba como texto de link: quedaba una oración
+        // entera en el menú.
+        'faq.nav': 'Preguntas frecuentes',
+        'faq.eyebrow': 'Antes de escribirnos',
+        'faq.title': 'Las dudas que aparecen siempre, contestadas.',
+        'faq.subtitle': 'Plazos, comunicación, soporte y con qué te tenés que venir para arrancar.',
+        'contact.eyebrow': 'Siguiente paso',
+        'contact.title': 'Contanos qué proceso te está comiendo el tiempo.',
         'contact.subtitle': 'Contanos qué necesitás y seguimos la charla por WhatsApp. Te atiende MatchBot, nuestra propia plataforma de bots con IA: la misma que implementamos para nuestros clientes.',
         'contact.feat.response.title': 'Te atiende al instante',
         'contact.feat.response.desc': 'MatchBot toma tu consulta apenas la enviás, a cualquier hora. Un humano del equipo sigue la conversación en el día.',
-        'contact.feat.commit.title': 'Sin Compromiso',
+        'contact.feat.commit.title': 'Sin compromiso',
         'contact.feat.commit.desc': 'Consulta gratuita sin obligación. Te daremos consejos honestos incluso si no somos la opción ideal.',
-        'contact.feat.start.title': 'Inicio Rápido',
+        'contact.feat.start.title': 'Inicio rápido',
         'contact.feat.start.desc': 'Si somos compatibles, podemos iniciar tu proyecto en 24-48 horas.',
         // --- Selector de contacto (todo sale por WhatsApp → MatchBot) ---
         'contact.q.title': '¿Qué necesitás?',
@@ -218,14 +269,21 @@
         'contact.intent.ask': 'Consulta puntual',
         'contact.when.title': '¿Cuándo te queda cómodo?',
         'contact.when.note': 'Horario de Montevideo (UTC-3). Lo confirmamos en el chat, en el momento.',
+        // Sub-rótulos de las dos filas de chips. Sin ellos, las 7 opciones se leían como
+        // un solo bloque y no se entendía que son DOS elecciones independientes.
+        // 🚨 Los rangos llevan GUION SIN CORTE (U+2011). Con el guion normal, en la
+        // grilla de móvil el chip partía en "(12-" / "15)" y el rango quedaba roto.
+        'contact.when.day': 'Semana',
+        'contact.when.slot': 'Franja horaria',
+        'contact.preview.title': 'Esto es lo que vas a enviar',
         'contact.day.this': 'Esta semana',
         'contact.day.next': 'La próxima',
         'contact.day.any': 'Me adapto',
         // ⚠️ "Por la mañana", no "Mañana": el texto viaja al mensaje de WhatsApp y
         // el bot lo repite en prosa, donde "mañana" se lee como el DÍA siguiente.
-        'contact.time.morning': 'Por la mañana (8-12)',
-        'contact.time.midday': 'Al mediodía (12-15)',
-        'contact.time.afternoon': 'Por la tarde (15-19)',
+        'contact.time.morning': 'Por la mañana (8‑12)',
+        'contact.time.midday': 'Al mediodía (12‑15)',
+        'contact.time.afternoon': 'Por la tarde (15‑19)',
         'contact.time.any': 'Cualquier horario',
         'contact.topic.label': '¿Sobre qué? (opcional)',
         'contact.topic.ph': 'Ej: automatizar la carga de facturas',
@@ -259,14 +317,21 @@
         'footer.terms': 'Términos de Servicio',
         'footer.data_deletion': 'Eliminación de Datos',
         'footer.matchbot': 'MatchBot ↗',
-        'footer.description': 'Construyendo sistemas que escalan tu negocio a través de automatización, IA y desarrollo web.',
+        // 🚨 Dos cosas que NO tiene que hacer esta línea:
+        //  · Decía "Todas nacen y se sostienen bajo Digital Match Global", copiada de
+        //    `solutions.subtitle`. Allá "Todas" tiene antecedente (las soluciones propias);
+        //    acá la oración anterior enumera CATEGORÍAS, no productos, así que el "Todas"
+        //    se quedaba sin sujeto y la frase no decía nada.
+        //  · Tampoco nombra un producto concreto. La descripción de la MADRE no se cierra
+        //    en una sola solución: hoy es MatchBot, mañana puede ser otra, y el footer
+        //    quedaría desactualizado o angosto. Los productos se nombran en Soluciones.
+        'footer.description': 'Construimos automatización de procesos, inteligencia artificial y software a medida. Trabajamos para empresas y también desarrollamos productos propios.',
         'footer.legal.title': 'Legal',
         'footer.location': 'Con base en Uruguay',
         // "Experiencia" no es opcional: comunicamos ISO/PCI como experiencia, nunca como
         // certificación propia de la empresa (ver CLAUDE.md §7).
         'footer.security': 'Seguridad primero • Experiencia ISO 9001 · PCI-DSS • Documentado',
         'footer.contact.title': 'Contacto',
-        'footer.contact.email': 'Escribinos',
         'footer.contact.whatsapp': 'WhatsApp',
         'footer.social.follow': 'Seguinos en',
         'footer.signature.madeBy': 'Hecho por'
@@ -275,15 +340,19 @@
         // ... MANTENER TODO LO ANTERIOR EN INGLÉS ...
         'nav.services': 'Services',
         'nav.about': 'About',
-        'nav.results': 'Results',
+        'nav.solutions': 'Solutions',
         'nav.cases': 'Cases',
         'nav.process': 'Process',
         'nav.contact': 'Contact',
         'nav.menu': 'Menu',
-        'nav.book': 'Book Consultation',
+        'nav.book': 'Book a conversation',
         'nav.tooltips.services': 'Explore automation solutions',
+        'wa.default': "Hi, I'm coming from the Digital Match Global website. I have a question.",
+        'float.top': 'Back to top',
+        'float.book': 'Book a conversation',
+        'float.whatsapp': 'Message us on WhatsApp',
         'nav.tooltips.about': 'Meet the team behind it',
-        'nav.tooltips.results': 'See client results',
+        'nav.tooltips.solutions': 'Our own solutions',
         'nav.tooltips.cases': 'See our cases and projects',
         'nav.tooltips.process': 'Understand our methodology',
         'nav.tooltips.contact': 'Book consultation',
@@ -291,6 +360,7 @@
         // --- PORTFOLIO / CASES ---
         'portfolio.title': 'Cases & projects',
         'portfolio.subtitle': 'A selection of real work by industry. Each project, its own challenge and its own solution.',
+        'portfolio.home.eyebrow': 'Cases',
         'portfolio.home.title': 'How we turn operational problems into digital solutions',
         'portfolio.home.subtitle': 'A selection of delivered projects to reduce manual work, connect tools and improve operations.',
         'portfolio.home.cta': 'View all cases',
@@ -309,7 +379,6 @@
         'case.services': 'Services',
         'case.result': 'Result',
         'case.view': 'View case',
-        'case.cta': "Let's talk about your project",
         'case.back': 'Back to cases',
         'case.prev': 'Previous project',
         'case.next': 'Next project',
@@ -318,16 +387,19 @@
         'case.contact.subtitle': 'If you got this far, drop us a line — no strings attached.',
         'case.contact.cta': 'Get in touch',
 
-        // --- CAMBIO AQUÍ (Hero Badge) ---
-        'hero.badge': 'Automation • AI • Web Development',
-        // Antes decía: 'Digital transformation • Automation • AI'
 
-        'hero.title.part1': 'Build systems that',
-        'hero.title.highlight': 'scale',
-        'hero.title.part2': 'your business',
-        'hero.subtitle': 'From bottleneck to breakthrough in as little as 7-14 days',
-        'hero.cta.book': 'Book Strategy Call',
-        'hero.cta.work': 'View Our Work',
+        'hero.kicker.label': 'Process',
+        'hero.kicker.p1': 'invoice entry',
+        'hero.kicker.p2': 'report generation',
+        'hero.kicker.p3': 'notifications and emails',
+        'hero.kicker.p4': 'system integration',
+        'hero.kicker.p5': 'handling inquiries',
+        'hero.kicker.result': 'Automated',
+        'hero.title.lead': 'What your team does by hand today,',
+        'hero.title.payoff': 'turned into a system.',
+        'hero.subtitle': 'We find where the time is lost and build the system that fixes it.',
+        'hero.cta.book': 'Book a conversation',
+        'hero.cta.work': 'View our work',
 
         // --- ABOUT / WHO WE ARE (anonymous, differentiators — NOT services) ---
         'about.eyebrow': 'The team behind Digital Match Global',
@@ -342,7 +414,10 @@
         'about.diff4.title': 'Certified',
         'about.diff4.desc': 'In UiPath, Microsoft & IBM.',
         'about.tools_label': 'Technology stack',
-        'stack.subtitle': 'We cover the whole pipeline, from automation to the cloud.',
+        'stack.subtitle': 'From the infrastructure to the automated process: we choose and maintain every layer.',
+        'stack.count': '{tools} technologies',
+        'stack.top': 'What the client uses',
+        'stack.base': 'What you never see, holding it all up',
         'stack.rpa': 'Automation / RPA',
         'stack.ai': 'AI & Data',
         'stack.dev': 'Development',
@@ -351,22 +426,25 @@
         'stack.integrations': 'Integrations & APIs',
 
         // ... MANTENER EL RESTO EN INGLÉS ...
-        'keywords.ml': 'Machine Learning',
-        'keywords.automation': 'Process Automation',
-        'keywords.api': 'API Integration',
-        'keywords.cloud': 'Cloud Infrastructure',
-        'keywords.analytics': 'Data Analytics',
-        'keywords.ai': 'AI Solutions',
         'proof.m1.label': 'Years of Experience',
         'proof.m2.label': 'Automated Processes',
         'proof.m3.label': 'Days from diagnosis to solution',
-        'services.main_title': 'Our Services',
-        'services.main_subtitle': 'Comprehensive solutions to scale your business operations',
-        'services.cta_button': 'View Case Study',
+        'services.eyebrow': 'What we do',
+        'services.main_title': 'Four fronts for taking manual work out of your operation.',
+        'services.main_subtitle': 'Automation, AI assistants, web product and consulting. They combine around what your operation needs, not around a fixed package.',
+        'services.cta_button': 'View case study',
         // --- Our own product: MatchBot ---
-        'services.matchbot.eyebrow': 'Our own product',
-        'services.matchbot.desc': 'MatchBot is our AI-powered WhatsApp bot platform: each business connects its own number and automates its conversations. Built on our official Meta Tech Provider integration.',
-        'services.matchbot.cta': 'Discover MatchBot',
+        // --- SOLUTIONS (portfolio band) ---
+        'solutions.eyebrow': 'Solutions',
+        'solutions.title': 'Alongside custom work, we develop our own solutions.',
+        'solutions.subtitle': 'Not everything needs to be built from scratch: when the tool already exists, it gets you there sooner and costs less. These are ours, so we know them inside out and we maintain them.',
+        'solutions.status.live': 'In production',
+        'solutions.matchbot.category': 'Conversational automation',
+        'solutions.matchbot.desc': 'MatchBot is our AI-powered WhatsApp bot platform: each business connects its own number and automates its conversations. Built on our official Meta Tech Provider integration.',
+        'solutions.matchbot.cta': 'Discover MatchBot',
+        'solutions.next.title': 'No tool for your problem?',
+        'solutions.next.desc': 'Most of what we build starts exactly there: a process no off-the-shelf tool solves the way you need it. Tell us which one is yours.',
+        'solutions.next.cta': 'Bring us the case',
         'services.auto.title': 'Process Automation (RPA)',
         'services.auto.headline': 'Eliminate 80% manual tasks',
         'services.auto.desc': 'RPA bots that turn repetitive workflows into systems running 24/7, without human intervention (UiPath · Rocketbot · Power Automate).',
@@ -381,34 +459,36 @@
         'services.ai.f2': 'Multi-channel integration',
         'services.ai.f3': 'Custom training on your data',
         'services.ai.f4': 'Analytics & insights dashboard',
-        'services.web.title': 'Web Products',
+        'services.web.title': 'Web products',
         'services.web.headline': 'Revenue-generating platforms',
         'services.web.desc': 'Build scalable web applications and internal tools that drive business growth and efficiency.',
-        'services.web.f1': 'MVP development (from 7-14 days)',
+        'services.web.f1': 'Working MVP development',
         'services.web.f2': 'Mobile-responsive design',
         'services.web.f3': 'API & third-party integrations',
         'services.web.f4': 'Security & compliance built-in',
         'services.consulting.title': 'Consulting & Training',
         'services.consulting.headline': 'Digital transformation & technology adoption',
-        'services.consulting.desc': 'We advise and train your team: from process assessment to training sessions on automation and AI.',
+        'services.consulting.desc': 'When what is missing is not building, but deciding what to build and having the team run it.',
         'services.consulting.f1': 'Process & opportunity assessment (RPA/AI)',
         'services.consulting.f2': 'Digital transformation roadmap',
         'services.consulting.f3': 'Team training sessions',
         'services.consulting.f4': 'AI & automation adoption',
 
         // --- Engagement models ---
+        'services.models.eyebrow': 'Ways of working',
         'services.models.title': 'How you can work with us',
         'services.models.subtitle': 'Pick the format that best fits your need.',
         'services.models.project.title': 'By project',
-        'services.models.project.desc': 'Turnkey solution, with a working MVP from 7-14 days depending on complexity.',
+        'services.models.project.desc': 'Scope and price agreed upfront: we carry the estimation risk.',
         'services.models.hourly.title': 'By the hour',
         'services.models.hourly.desc': 'Hour bank for RPA, automation and development, on demand.',
         'services.models.consulting.title': 'Consulting',
-        'services.models.consulting.desc': 'Assessment, architecture and a digital transformation roadmap.',
+        'services.models.consulting.desc': 'No build involved: you keep the analysis and the plan, and decide who executes it.',
         'services.models.training.title': 'Training sessions',
-        'services.models.training.desc': 'Train your team in RPA, AI and technology adoption.',
+        'services.models.training.desc': 'Scheduled sessions, on-site or remote, for the team that will use the tool.',
 
         // --- Certifications ---
+        'certs.eyebrow': 'Official training',
         'certs.title': 'Certifications that back us',
         'certs.subtitle': 'Official training that backs how we work.',
         'certs.uipath': 'UiPath RPA Developer',
@@ -418,57 +498,42 @@
         'certs.meta.title': 'Verified Meta Tech Provider',
         'certs.meta.subtitle': 'Official WhatsApp Business API integration — business verified and Meta App Review approved.',
 
-        'technical.title': 'How we do it',
-        'technical.subtitle': 'Enterprise standards and typical outcomes in each area of work',
-        'technical.outcomes_title': 'Typical Outcomes',
-        'technical.auto.title': 'Process Automation',
-        'technical.auto.desc': 'Eliminate repetitive tasks and streamline operations with intelligent automation systems.',
-        'technical.auto.impact': 'High Operational Efficiency', 
-        'technical.auto.out1': 'Reduce manual data entry by 90%',
-        'technical.auto.out2': 'Cut processing time from hours to minutes',
-        'technical.auto.out3': 'Eliminate human error in routine tasks',
-        'technical.auto.out4': 'Free up team for strategic work',
-        'technical.ai.title': 'AI Assistants',
-        'technical.ai.desc': 'Deploy intelligent chatbots and virtual assistants for 24/7 customer engagement.',
-        'technical.ai.impact': 'Guaranteed 24/7 Support', 
-        'technical.ai.out1': 'Handle 80% of customer inquiries automatically',
-        'technical.ai.out2': 'Reduce response time from hours to seconds',
-        'technical.ai.out3': 'Scale support without hiring',
-        'technical.ai.out4': 'Improve customer satisfaction scores',
-        'technical.web.title': 'Web Products',
-        'technical.web.desc': 'Build revenue-generating platforms and internal tools that drive business growth.',
-        'technical.web.impact': 'High Performance & SEO', 
-        'technical.web.out1': 'First MVP from 7-14 days, by complexity',
-        'technical.web.out2': 'Scale to thousands of users',
-        'technical.web.out3': 'Integrate with existing systems',
-        'technical.web.out4': 'Mobile-optimized and secure',
-        'faq.title': 'Frequently Asked Questions',
-        'faq.subtitle': 'Everything you need to know about working with us',
-        'faq.q1.question': 'How long does it take to deliver a project?',
-        'faq.q1.answer': 'It depends on complexity: most projects start being delivered from 7-14 days after kickoff. We follow an agile methodology with daily updates and iterative releases; for larger projects, the first working version arrives within a few weeks.',
-        'faq.q1.stats': 'First MVP: from 7-14 days',
-        'faq.q2.question': 'What is your work process?',
-        'faq.q2.answer': 'We start with a strategy call to understand your needs, then create a detailed technical specification. Development happens in sprints with daily updates via Slack/WhatsApp. You get access to a staging environment to test features as they are built. Final delivery includes complete documentation, training, and 30 days of support.',
-        'faq.q2.stats': 'Daily communication during the project',
-        'faq.q3.question': 'Do you provide post-delivery support?',
-        'faq.q3.answer': 'Yes! Every project includes 30 days of free support and bug fixes. After that, we offer flexible maintenance plans starting at USD 15/month. We also provide training for your team and comprehensive documentation so you can manage the system independently if needed.',
-        'faq.q3.stats': '30 days of support included',
-        'faq.q4.question': 'What do I need to get started?',
-        'faq.q4.answer': 'Just three things: a clear business problem you want to solve, access to any existing systems we need to integrate with, and availability for 30 minutes kickoff call. We handle everything else including project management, design, development, testing, and deployment.',
-        'faq.q4.stats': 'Start in 24-48 hours',
-        'faq.q5.question': 'Who are your typical clients?',
-        'faq.q5.answer': 'We work with ambitious startups and SMEs in LATAM and US. Our clients are typically experiencing operational bottlenecks, looking to scale efficiently, and value technical expertise over cheap alternatives. They need fast implementation with documented, maintainable systems.',
-        'faq.q5.stats': 'Clients in Uruguay and Argentina',
-        'faq.q6.question': 'How do you handle security and data?',
-        'faq.q6.answer': 'With security-first practices and real experience in high-compliance environments: we work under ISO 9001 quality management and with PCI-DSS compliance in payments. We apply encryption, least-privilege access, and documented, maintainable systems you can audit.',
-        'faq.q6.stats': 'ISO 9001 · PCI-DSS experience',
-        'contact.title': "Ready to Scale Your Business?",
+        'process.eyebrow': 'How we work',
+        'process.title': 'Four stages, with no surprise delivery at the end.',
+        'process.subtitle': 'Each stage builds on the previous one and ends in something you can see. There is no three-month black box.',
+
+        'process.s1.name': 'Diagnosis',
+        'process.s1.lede': 'We map the real process: who runs it, how long it takes and where it stalls.',
+        'process.s1.p1': 'We survey with whoever does the task, not with the org chart',
+        'process.s1.p2': 'We define what is worth automating and what is not',
+
+        'process.s2.name': 'Solution design',
+        'process.s2.lede': 'We decide what gets automated, what stays manual and which systems it builds on.',
+        'process.s2.p1': 'Built on the tools you already use',
+        'process.s2.p2': 'We agree on scope, and on what is out of scope',
+
+        'process.s3.name': 'Iterative build',
+        'process.s3.lede': 'Frequent partial deliveries, so you can correct course while it is being built.',
+        'process.s3.p1': 'First useful version in 7 to 14 days',
+        'process.s3.p2': 'You see it working before it is finished',
+
+        'process.s4.name': 'Handover',
+        'process.s4.lede': 'It ships documented, so your team can run it without depending on us.',
+        'process.s4.p1': 'Documentation of how it works and how it is operated',
+        'process.s4.p2': 'Ongoing support, without being locked to us',
+
+        'faq.nav': 'FAQ',
+        'faq.eyebrow': 'Before you write',
+        'faq.title': 'The questions that always come up, answered.',
+        'faq.subtitle': 'Timelines, communication, support and what you need to have ready to start.',
+        'contact.eyebrow': 'Next step',
+        'contact.title': 'Tell us which process is eating your time.',
         'contact.subtitle': 'Tell us what you need and we continue on WhatsApp. MatchBot takes it from there — our own AI bot platform, the same one we deploy for our clients.',
         'contact.feat.response.title': 'Answered instantly',
         'contact.feat.response.desc': 'MatchBot picks up your inquiry the moment you send it, at any hour. Someone from the team follows up the same day.',
-        'contact.feat.commit.title': 'No Commitment',
+        'contact.feat.commit.title': 'No commitment',
         'contact.feat.commit.desc': "Free consultation with no obligation. We'll provide honest advice even if we're not the right fit",
-        'contact.feat.start.title': 'Quick Start',
+        'contact.feat.start.title': 'Quick start',
         'contact.feat.start.desc': "If we're a good match, we can start your project within 24-48 hours",
         // --- Contact selector (everything routes to WhatsApp → MatchBot) ---
         'contact.q.title': 'What do you need?',
@@ -477,12 +542,15 @@
         'contact.intent.ask': 'Quick question',
         'contact.when.title': 'When works for you?',
         'contact.when.note': 'Montevideo time (UTC-3). We confirm right there in the chat.',
+        'contact.when.day': 'Week',
+        'contact.when.slot': 'Time of day',
+        'contact.preview.title': "Here's what you'll send",
         'contact.day.this': 'This week',
         'contact.day.next': 'Next week',
         'contact.day.any': "I'm flexible",
-        'contact.time.morning': 'Morning (8-12)',
-        'contact.time.midday': 'Midday (12-3)',
-        'contact.time.afternoon': 'Afternoon (3-7)',
+        'contact.time.morning': 'Morning (8‑12)',
+        'contact.time.midday': 'Midday (12‑3)',
+        'contact.time.afternoon': 'Afternoon (3‑7)',
         'contact.time.any': 'Any time',
         'contact.topic.label': 'What about? (optional)',
         'contact.topic.ph': 'e.g. automating invoice entry',
@@ -513,12 +581,11 @@
         'footer.terms': 'Terms of Service',
         'footer.data_deletion': 'Data Deletion',
         'footer.matchbot': 'MatchBot ↗',
-        'footer.description': 'Building systems that scale your business through automation, AI, and web development',
+        'footer.description': 'We build process automation, artificial intelligence and custom software. We work for companies and we also develop our own products.',
         'footer.legal.title': 'Legal',
         'footer.location': 'Based in Uruguay',
         'footer.security': 'Security-first • ISO 9001 · PCI-DSS experience • Documented',
         'footer.contact.title': 'Contact',
-        'footer.contact.email': 'Email us',
         'footer.contact.whatsapp': 'WhatsApp',
         'footer.social.follow': 'Follow us on',
         'footer.signature.madeBy': 'Made by'
