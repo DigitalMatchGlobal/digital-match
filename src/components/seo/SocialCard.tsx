@@ -9,8 +9,10 @@ type SocialCardProps = {
   accentSecondary?: string;
 };
 
-// Componente exclusivo de ImageResponse. Mantiene la misma composición en la home,
-// el portfolio y cada caso para que las previews se reconozcan como una familia.
+// Componente exclusivo de ImageResponse. Replica la identidad CLARA de la marca madre:
+// aire, grafito, superficies neutras y el arco azul→violeta sólo como acento gráfico.
+// Los cuerpos están calibrados para seguir legibles cuando WhatsApp reduce la tarjeta
+// de 1200 px a ~650 px de ancho: titular 30–36 px y bajada 14–15 px efectivos.
 export default function SocialCard({
   eyebrow,
   title,
@@ -28,21 +30,51 @@ export default function SocialCard({
         height: '100%',
         display: 'flex',
         overflow: 'hidden',
-        color: '#FFFFFF',
-        background: '#0B0D14',
+        color: '#0B0E14',
+        backgroundColor: '#FFFFFF',
         padding: '62px 72px 58px',
         position: 'relative',
       }}
     >
+      {/* Satori (el renderer de ImageResponse) necesita al menos un hijo en flujo para
+          conservar el alto completo cuando el titular ocupa una sola línea. Sin este
+          sizing box, las piezas cortas podían perder cabecera y pie al rasterizarse. */}
+      <div
+        aria-hidden="true"
+        style={{ width: '100%', height: '100%', display: 'flex', flexShrink: 0 }}
+      />
+
+      {/* Retícula editorial: las guías del sitio llevadas a una pieza estática. */}
       <div
         style={{
           position: 'absolute',
-          top: -330,
-          right: -250,
-          width: 900,
-          height: 900,
-          borderRadius: 9999,
-          background: `radial-gradient(circle, ${accentSecondary}80 0%, ${accent}2E 44%, rgba(11,13,20,0) 72%)`,
+          top: 0,
+          right: 0,
+          width: 212,
+          height: '100%',
+          backgroundColor: '#F2F4F7',
+          display: 'flex',
+        }}
+      />
+      <div
+        style={{
+          position: 'absolute',
+          top: 0,
+          right: 211,
+          width: 1,
+          height: '100%',
+          background: '#E2E4E8',
+          display: 'flex',
+        }}
+      />
+      <div
+        style={{
+          position: 'absolute',
+          top: 154,
+          left: 72,
+          right: 72,
+          height: 1,
+          background: '#E2E4E8',
           display: 'flex',
         }}
       />
@@ -51,9 +83,9 @@ export default function SocialCard({
           position: 'absolute',
           left: 0,
           bottom: 0,
-          width: 12,
-          height: '100%',
-          background: `linear-gradient(180deg, ${accent}, ${accentSecondary})`,
+          width: '100%',
+          height: 8,
+          background: `linear-gradient(90deg, ${accent}, ${accentSecondary})`,
           display: 'flex',
         }}
       />
@@ -69,19 +101,32 @@ export default function SocialCard({
         }}
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={logoSrc} width={86} height={63} alt="" style={{ objectFit: 'contain' }} />
+        <img src={logoSrc} width={80} height={59} alt="" style={{ objectFit: 'contain' }} />
         <div
           style={{
             display: 'flex',
             flexDirection: 'column',
-            marginLeft: 22,
+            marginLeft: 20,
             lineHeight: 1,
           }}
         >
-          <span style={{ fontSize: 25, fontWeight: 800, letterSpacing: 0.5 }}>DIGITAL MATCH</span>
-          <span style={{ fontSize: 14, color: '#9CA6BC', letterSpacing: 5.6, marginTop: 8 }}>
+          <span style={{ fontSize: 24, fontWeight: 800, letterSpacing: 0.4 }}>DIGITAL MATCH</span>
+          <span style={{ fontSize: 13, color: '#4A5567', letterSpacing: 5.4, marginTop: 8 }}>
             GLOBAL
           </span>
+        </div>
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            marginLeft: 'auto',
+            color: '#3A4252',
+            fontSize: 14,
+            fontWeight: 700,
+            letterSpacing: 2,
+          }}
+        >
+          CONSULTORÍA · PRODUCTO · INGENIERÍA
         </div>
       </div>
 
@@ -92,25 +137,25 @@ export default function SocialCard({
           position: 'absolute',
           top: 205,
           left: 72,
-          right: 72,
-          maxWidth: 1056,
+          right: 250,
+          maxWidth: 878,
         }}
       >
         <div
           style={{
             display: 'flex',
             alignItems: 'center',
-            color: '#B9C2D4',
-            fontSize: 18,
+            color: '#3A4252',
+            fontSize: 17,
             fontWeight: 700,
-            letterSpacing: 2.3,
+            letterSpacing: 2.1,
             textTransform: 'uppercase',
           }}
         >
           <span
             style={{
               width: 42,
-              height: 4,
+              height: 3,
               marginRight: 16,
               background: `linear-gradient(90deg, ${accent}, ${accentSecondary})`,
               display: 'flex',
@@ -120,22 +165,22 @@ export default function SocialCard({
         </div>
         <div
           style={{
-            fontSize: title.length > 48 ? 55 : 64,
-            fontWeight: 850,
-            lineHeight: 1.03,
-            letterSpacing: -1.8,
-            marginTop: 20,
+            fontSize: title.length > 48 ? 54 : 62,
+            fontWeight: 750,
+            lineHeight: 1.04,
+            letterSpacing: -1.6,
+            marginTop: 22,
           }}
         >
           {title}
         </div>
         <div
           style={{
-            fontSize: 24,
-            lineHeight: 1.35,
-            color: '#AEB7C9',
-            marginTop: 22,
-            maxWidth: 970,
+            fontSize: 25,
+            lineHeight: 1.34,
+            color: '#4A5567',
+            marginTop: 24,
+            maxWidth: 850,
           }}
         >
           {description}
@@ -149,15 +194,38 @@ export default function SocialCard({
           alignItems: 'center',
           position: 'absolute',
           left: 72,
-          right: 72,
-          bottom: 58,
+          right: 250,
+          bottom: 50,
+          borderTop: '1px solid #E2E4E8',
+          paddingTop: 20,
         }}
       >
-        <span style={{ fontSize: 19, color: '#D7DCE7', fontWeight: 650 }}>
+        <span style={{ fontSize: 19, color: '#0B0E14', fontWeight: 700 }}>
           digitalmatchglobal.com
         </span>
-        <span style={{ fontSize: 16, color: '#7F899E', letterSpacing: 1.2 }}>
+        <span style={{ fontSize: 15, color: '#4A5567', letterSpacing: 1.1 }}>
           URUGUAY · LATAM · EE.UU.
+        </span>
+      </div>
+
+      {/* Marca de sistema en la columna lateral, visible sin competir con el copy. */}
+      <div
+        style={{
+          position: 'absolute',
+          right: 38,
+          top: 204,
+          width: 136,
+          display: 'flex',
+          flexDirection: 'column',
+        }}
+      >
+        <span style={{ fontSize: 13, color: '#4A5567', letterSpacing: 2.2 }}>PROCESO</span>
+        <span style={{ fontSize: 50, fontWeight: 750, color: '#0B0E14', marginTop: 10 }}>01</span>
+        <span
+          style={{ width: 48, height: 3, background: accent, display: 'flex', marginTop: 16 }}
+        />
+        <span style={{ fontSize: 15, lineHeight: 1.35, color: '#4A5567', marginTop: 18 }}>
+          DEL TRABAJO MANUAL AL SISTEMA
         </span>
       </div>
     </div>

@@ -2,7 +2,7 @@ import { ImageResponse } from 'next/og';
 import SocialCard from '@/components/seo/SocialCard';
 
 // Genera la imagen de previsualización social (WhatsApp, X, LinkedIn, etc.).
-// On-brand: fondo oscuro con glow azul→violeta del logo + monograma DM real.
+// On-brand: sistema claro institucional compartido con el sitio actual.
 export const runtime = 'nodejs';
 export const alt = 'Digital Match Global — Automatización, IA y desarrollo a medida';
 export const size = { width: 1200, height: 630 };
